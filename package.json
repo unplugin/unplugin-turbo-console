@@ -1,18 +1,18 @@
 {
-  "name": "pkg-name",
+  "name": "vite-plugin-turbo-console",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@8.1.1",
   "description": "",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/pkg-name#readme",
+  "funding": "https://github.com/sponsors/yuyinws",
+  "homepage": "https://github.com/yuyinws/vite-plugin-turbo-console#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/pkg-name.git"
+    "url": "git+https://github.com/yuyinws/vite-plugin-turbo-console.git"
   },
-  "bugs": "https://github.com/antfu/pkg-name/issues",
+  "bugs": "https://github.com/yuyinws/vite-plugin-turbo-console/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {
@@ -50,9 +50,9 @@
     "vite": "^4.0.0 || ^3.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.4",
-    "@antfu/ni": "^0.21.2",
-    "@antfu/utils": "^0.7.2",
+    "@yuyinws/eslint-config": "^0.38.4",
+    "@yuyinws/ni": "^0.21.2",
+    "@yuyinws/utils": "^0.7.2",
     "@types/node": "^18.15.11",
     "bumpp": "^9.1.0",
     "eslint": "^8.37.0",
