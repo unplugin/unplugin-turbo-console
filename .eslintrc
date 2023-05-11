@@ -1,0 +1,11 @@
+{
+  "extends": "@antfu",
+  "overrides": [
+    {
+      "files": "*.ts",
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off"
+      }
+    }
+  ]
+}
