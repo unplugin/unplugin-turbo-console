@@ -50,9 +50,9 @@
     "vite": "^4.0.0 || ^3.0.0"
   },
   "devDependencies": {
-    "@yuyinws/eslint-config": "^0.38.4",
-    "@yuyinws/ni": "^0.21.2",
-    "@yuyinws/utils": "^0.7.2",
+    "@antfu/eslint-config": "^0.38.4",
+    "@antfu/ni": "^0.21.2",
+    "@antfu/utils": "^0.7.2",
     "@types/node": "^18.15.11",
     "bumpp": "^9.1.0",
     "eslint": "^8.37.0",
@@ -71,10 +71,5 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
-  },
-  "dependencies": {
-    "@babel/generator": "^7.21.5",
-    "@babel/parser": "^7.21.8",
-    "@babel/types": "^7.21.5"
   }
 }

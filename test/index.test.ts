@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { transformCode } from '../src/transform'
 
-const code = 'console.log(foo)'
+const code = 'console.log(foo,bar)'
 
 const path = '/path/to/main.js'
 
