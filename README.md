@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/vite-plugin-turbo-console?color=a1b858&label=)](https://www.npmjs.com/package/vite-plugin-turbo-console)
 
-**Enhance `console.log` functionality for better code intuition**.
+**Enhance the readability of `console.log`**.
 
 ## Before
 
