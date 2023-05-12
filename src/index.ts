@@ -1,7 +1,7 @@
-import type { Plugin } from 'vite'
+import type { PluginOption } from 'vite'
 import { transformCode } from './transform'
 
-export default function plugin() {
+function VitePluginTurboConsole(): PluginOption {
   return {
     name: 'vite-plugin-turbo-console',
     enforce: 'pre',
@@ -9,5 +9,8 @@ export default function plugin() {
     transform(code, id) {
       return transformCode(code, id)
     },
-  } as Plugin
+  }
 }
+
+export default VitePluginTurboConsole
+export type { PluginOption }
