@@ -11,5 +11,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": "."
-  }
+  },
+  "exclude": ["dist","node_modules","playground"]
 }
