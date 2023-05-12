@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`transformCode > jsCode 1`] = `
+"console.log('%cmain.js:1 ~ foo,bar:', 'padding:4px; border-radius:5px; font-weight:600; color: #111827; background:#F7DF1E' ,foo,bar)
+"
+`;
+
+exports[`transformCode > tsCode 1`] = `
+"console.log('%cmain.ts:1 ~ foo,bar:', 'padding:4px; border-radius:5px; font-weight:600; color: #fff; background:#3178C6' ,foo,bar)
+"
+`;
+
+exports[`transformCode > vueCode 1`] = `
+"console.log('%cmain.vue:1 ~ foo,bar:', 'padding:4px; border-radius:5px; font-weight:600; color: #fff; background:#4FC08D' ,foo,bar)
+"
+`;

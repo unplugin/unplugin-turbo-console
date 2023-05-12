@@ -1,12 +1,31 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import { transformCode } from '../src/transform'
 
-const code = 'console.log(foo,bar)'
+const jsTest = {
+  code: 'console.log(foo,bar)',
+  path: '/path/to/main.js',
+}
 
-const path = '/path/to/main.js'
+const tsTest = {
+  code: 'console.log(foo,bar)',
+  path: '/path/to/main.ts',
+}
 
-describe('should', () => {
-  it('exported', () => {
-    expect(transformCode(code, path)).toEqual('console.log(\'🚀 ~ file: main.js ~ foo:\', foo)')
+const vueTest = {
+  code: 'console.log(foo,bar)',
+  path: '/path/to/main.vue',
+}
+
+describe('transformCode', () => {
+  test('jsCode', () => {
+    expect(transformCode(jsTest.code, jsTest.path)).toMatchSnapshot()
+  })
+
+  test('tsCode', () => {
+    expect(transformCode(tsTest.code, tsTest.path)).toMatchSnapshot()
+  })
+
+  test('vueCode', () => {
+    expect(transformCode(vueTest.code, vueTest.path)).toMatchSnapshot()
   })
 })
