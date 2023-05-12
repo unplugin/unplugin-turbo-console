@@ -4,7 +4,7 @@
   "version": "0.0.2-beta.8",
   "packageManager": "pnpm@8.1.1",
   "description": "",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "author": "yuyinws",
   "license": "MIT",
   "funding": "https://github.com/sponsors/yuyinws",
   "homepage": "https://github.com/yuyinws/vite-plugin-turbo-console#readme",

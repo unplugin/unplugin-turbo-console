@@ -1,9 +1,19 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import { hits } from './hits'
+import { hijs } from './hijs.js'
 
-const helloVue = "hello vue"
-console.log(helloVue)
+function hi() {
+  hits()
+  hijs()
+  hivue()
+}
+
+function hivue () {
+  const hivue = "hello vue"
+  console.log(hivue)
+}
 </script>
 
 <template>
@@ -13,6 +23,7 @@ console.log(helloVue)
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
+    <button @click="hi">hi</button>
   </header>
 
   <main>
