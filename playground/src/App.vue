@@ -11,6 +11,8 @@ function hi() {
 }
 
 function hivue () {
+  console.log("xxxxxx")
+  console.log('xxxxxx')
   const hivue = "hello vue"
   console.log(hivue)
 }

@@ -8,11 +8,14 @@ export function transformCode(code: string, path: string) {
     const lines = code.split('\n')
     for (let i = 0; i < lines.length; i++) {
       if (/^\s*console\.log\([^\)]*\)\s*;?\s*$/.test(lines[i])) {
-        const consoleContent = lines[i].match(/s*console\.log\((.+)\)/)
-        if (consoleContent)
-          newCode += `console.log('%c${basename(path)}:${i + 1} ~ ${consoleContent[1]}:', '${consoleStyle(extname(path))}' ,${consoleContent[1]})\n`
-        else
+        const consoleContentArray = lines[i].match(/s*console\.log\((.+)\)/)
+        if (consoleContentArray) {
+          const consoleContent = consoleContentArray[1]
+          newCode += `console.log('%c${basename(path)}:${i + 1} ~ ${consoleContent.replaceAll('\'', '"')}:', '${consoleStyle(extname(path))}' ,${consoleContent})\n`
+        }
+        else {
           newCode += `${lines[i]}\n`
+        }
       }
 
       else {
