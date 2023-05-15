@@ -16,7 +16,7 @@
 
 - Support for printing the file name, line number and variable name.
 
-- Support for background highlighting of different files. (Currently supporting .js(x), .ts(x), .vue, .svelte, and .astro)
+- Support for background highlighting of different files. (Currently supporting `.js(x)`, `.ts(x)`, `.vue`, `.svelte`, and `.astro`)
 
 
 ## Install
