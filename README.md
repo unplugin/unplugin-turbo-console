@@ -43,8 +43,5 @@ export default defineConfig({
 });
 ```
 
-> **Note**
-> The code line will only be transformed when there is only one `console.log` expression. Such as `const foo = 'bar';console.log(foo);` will be ignored.
-
 ## ❤️ Credits
 Inspired by [babel-plugin-enhance-log](https://github.com/baozouai/babel-plugin-enhance-log) and [turbo-console-log](https://github.com/Chakroun-Anas/turbo-console-log)
