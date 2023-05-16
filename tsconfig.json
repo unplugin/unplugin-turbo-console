@@ -9,8 +9,7 @@
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": "."
+    "skipDefaultLibCheck": true
   },
   "exclude": ["dist", "node_modules", "playground"]
 }

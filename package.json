@@ -38,8 +38,9 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "dev": "unbuild --stub",
+    "dev": "unbuild --stub && nr play",
     "lint": "eslint .",
+    "play": "vite playground",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
@@ -71,5 +72,10 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "acorn-walk": "^8.2.0",
+    "magic-string": "^0.30.0",
+    "source-map": "^0.7.4"
   }
 }
