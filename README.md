@@ -12,13 +12,13 @@ Enhance the readability of <code>console.log()</code>
 </a>
 </p>
 
-## Features
+## 🔥 Features
 
 - Support printing the file name, line number and variable name.
 
 - Support background highlighting of different files. (Currently supporting `.js(x)`, `.ts(x)`, `.vue`, `.svelte`, and `.astro`)
 
-## Install
+## 📦 Install
 
 ```shell
 # npm
@@ -29,7 +29,7 @@ yarn add -D vite-plugin-turbo-console
 pnpm i -D vite-plugin-turbo-console
 ```
 
-## Usage
+## 🦄 Usage
 
 **vite.config.ts**
 
@@ -45,3 +45,6 @@ export default defineConfig({
 
 > **Note**
 > The code line will only be transformed when there is only one `console.log` expression. Such as `const foo = 'bar';console.log(foo);` will be ignored.
+
+## ❤️ Credits
+Inspired by [babel-plugin-enhance-log](https://github.com/baozouai/babel-plugin-enhance-log) and [turbo-console-log](https://github.com/Chakroun-Anas/turbo-console-log)
