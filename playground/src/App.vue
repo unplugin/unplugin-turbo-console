@@ -11,11 +11,13 @@ function hi() {
 }
 
 function hivue () {
-  console.log("xxxxxx")
-  console.log('xxxxxx')
   const hivue = "hello vue"
   console.log(hivue)
 }
+
+const a = "1232133"
+const b = "1232133"
+console.log(a,b)
 </script>
 
 <template>

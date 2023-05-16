@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "naive-ui": "^2.34.3",
     "vue": "^3.2.47"
   },
   "devDependencies": {
