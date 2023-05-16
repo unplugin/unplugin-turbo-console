@@ -50,6 +50,11 @@
   "peerDependencies": {
     "vite": "^4.0.0 || ^3.0.0"
   },
+  "dependencies": {
+    "acorn-walk": "^8.2.0",
+    "magic-string": "^0.30.0",
+    "source-map": "^0.7.4"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.4",
     "@antfu/ni": "^0.21.2",
@@ -72,10 +77,5 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
-  },
-  "dependencies": {
-    "acorn-walk": "^8.2.0",
-    "magic-string": "^0.30.0",
-    "source-map": "^0.7.4"
   }
 }
