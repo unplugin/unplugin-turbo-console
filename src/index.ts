@@ -22,17 +22,17 @@ function VitePluginTurboConsole(): PluginOption {
 
         walk.simple(ast, {
           CallExpression: (node: any) => {
-            const { callee, arguments: args } = node
+            const { callee, arguments: args, loc, start, end } = node
             if (callee.type === 'MemberExpression'
                   && callee.object?.type === 'Identifier'
                   && callee.object?.name === 'console'
-                  && callee.property.type === 'Identifier'
+                  && callee.property?.type === 'Identifier'
                   && callee.property?.name === 'log'
             ) {
               const fileName = basename(id)
               const fileType = extname(id)
-              const argNames = args.map((item: any) => item.name)
-              const { line, column } = node.loc.start
+
+              const { line, column } = loc.start
 
               const rawSourcemap = this.getCombinedSourcemap()
 
@@ -42,10 +42,12 @@ function VitePluginTurboConsole(): PluginOption {
                   column,
                 })
 
+                const argsName = magicString.slice(args[0].start, args[args.length - 1].end).toString().replaceAll('`', '').replaceAll('\n', '')
+
                 const argumentStart = args[0].start
                 magicString.appendLeft(
                   argumentStart,
-                  `"%c${fileName}:${originalLine} ~ ${String(argNames)}","${getConsoleStyle(fileType)}",`)
+                  `"%c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`)
               })
 
               asyncOps.push(asyncOp)
