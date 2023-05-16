@@ -1,23 +1,22 @@
-# vite-plugin-turbo-console
+<p align='center'>
+  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/05/upgit_20230516_1684200691.png" >
+</p>
 
-[![NPM version](https://img.shields.io/npm/v/vite-plugin-turbo-console?color=a1b858&label=)](https://www.npmjs.com/package/vite-plugin-turbo-console)
+<p align='center'>
+Enhance the readability of <code>console.log()</code>
+</p>
 
-**Enhance the readability of `console.log()`**
-
-- Before
-
-![image-20230512134725034](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/05/upgit_20230512_1683870450.png)
-
-- After
-
-![image-20230512134909008](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/05/upgit_20230512_1683870549.png)
+<p align='center'>
+<a href="https://www.npmjs.com/package/vite-plugin-turbo-console">
+<img src="https://img.shields.io/npm/v/vite-plugin-turbo-console?color=a1b858&label=">
+</a>
+</p>
 
 ## Features
 
-- Support for printing the file name, line number and variable name.
+- Support printing the file name, line number and variable name.
 
-- Support for background highlighting of different files. (Currently supporting `.js(x)`, `.ts(x)`, `.vue`, `.svelte`, and `.astro`)
-
+- Support background highlighting of different files. (Currently supporting `.js(x)`, `.ts(x)`, `.vue`, `.svelte`, and `.astro`)
 
 ## Install
 
@@ -40,13 +39,9 @@ import TurboConsole from "vite-plugin-turbo-console";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    TurboConsole()
-  ]
+  plugins: [TurboConsole()],
 });
 ```
 
 > **Note**
 > The code line will only be transformed when there is only one `console.log` expression. Such as `const foo = 'bar';console.log(foo);` will be ignored.
-
-
