@@ -42,7 +42,10 @@ function VitePluginTurboConsole(): PluginOption {
                   column,
                 })
 
-                const argsName = magicString.slice(args[0].start, args[args.length - 1].end).toString().replaceAll('`', '').replaceAll('\n', '')
+                const argsName = magicString.slice(args[0].start, args[args.length - 1].end).toString()
+                  .replaceAll('`', '')
+                  .replaceAll('\n', '')
+                  .replaceAll('\"', '')
 
                 const argumentStart = args[0].start
                 magicString.appendLeft(

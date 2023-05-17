@@ -17,6 +17,10 @@ function hivue () {
 
 const a = "1232133"
 const b = "1232133"
+
+
+
+console.log("🚀 ~ file: App.vue:20 ~ b:", b)
 console.log(a,b)
 </script>
 
