@@ -22,7 +22,7 @@ function VitePluginTurboConsole(): PluginOption {
 
         simple(ast, {
           CallExpression: (node: any) => {
-            const { callee, arguments: args, loc, start, end } = node
+            const { callee, arguments: args, loc } = node
             if (callee.type === 'MemberExpression'
                   && callee.object?.type === 'Identifier'
                   && callee.object?.name === 'console'
