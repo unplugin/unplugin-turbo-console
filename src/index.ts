@@ -59,6 +59,7 @@ function VitePluginTurboConsole(): PluginOption {
 
         return {
           code: magicString.toString(),
+          map: magicString.generateMap({ source: id, includeContent: true }),
         }
       }
     },
