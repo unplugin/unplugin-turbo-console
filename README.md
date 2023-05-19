@@ -1,9 +1,5 @@
 <p align='center'>
-  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/05/upgit_20230516_1684200691.png" >
-</p>
-
-<p align='center'>
-Enhance the readability of <code>console.log()</code>
+  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/05/upgit_20230519_1684461689.png" >
 </p>
 
 <p align='center'>
