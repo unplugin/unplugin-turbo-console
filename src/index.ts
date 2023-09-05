@@ -10,10 +10,6 @@ interface TurboConsoleOptions {
   prefix?: string
   suffix?: string
 }
-const defaultOptions: TurboConsoleOptions = {
-  prefix: '🚀🚀🚀🚀🚀',
-  suffix: '🚀🚀🚀🚀🚀',
-}
 
 function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
   return {
@@ -61,8 +57,15 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
                 const _prefix = prefix ? `${prefix} \\n` : ''
                 const _suffix = suffix ? `\\n ${suffix}` : ''
                 const appendLeft = `"${_prefix} %c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`
-                magicString.appendLeft(argumentStart, appendLeft).appendRight(argumentEnd, `,"${_suffix}"`)
-                //   appendRight
+                magicString
+                  .appendLeft(
+                    argumentStart,
+                    appendLeft,
+                  )
+                  .appendRight(
+                    argumentEnd,
+                      `,"${_suffix}"`,
+                  )
               })
 
               asyncOps.push(asyncOp)
