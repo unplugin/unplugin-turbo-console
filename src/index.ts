@@ -56,11 +56,10 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
                 const { prefix, suffix } = option || {}
                 const _prefix = prefix ? `${prefix} \\n` : ''
                 const _suffix = suffix ? `\\n ${suffix}` : ''
-                const appendLeft = `"${_prefix} %c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`
                 magicString
                   .appendLeft(
                     argumentStart,
-                    appendLeft,
+                    `"${_prefix} %c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`,
                   )
                   .appendRight(
                     argumentEnd,
