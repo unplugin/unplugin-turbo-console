@@ -9,7 +9,10 @@ import inspect from 'vite-plugin-inspect'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),inspect(),TurboConsole()],
+  plugins: [vue(),inspect(),TurboConsole({
+    prefix:'🚀🚀🚀🚀🚀',
+    suffix:'🐷🐷🐷🐷🐷',
+  })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

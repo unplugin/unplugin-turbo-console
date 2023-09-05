@@ -6,7 +6,16 @@ import { SourceMapConsumer } from 'source-map'
 import type { RawSourceMap } from 'source-map'
 import { getConsoleStyle, transformFileTypes } from './utils'
 
-function VitePluginTurboConsole(): PluginOption {
+interface TurboConsoleOptions {
+  prefix?: string
+  suffix?: string
+}
+const defaultOptions: TurboConsoleOptions = {
+  prefix: '🚀🚀🚀🚀🚀',
+  suffix: '🚀🚀🚀🚀🚀',
+}
+
+function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
   return {
     name: 'vite-plugin-turbo-console',
     enforce: 'post',
@@ -46,11 +55,14 @@ function VitePluginTurboConsole(): PluginOption {
                   .replaceAll('`', '')
                   .replaceAll('\n', '')
                   .replaceAll('\"', '')
-
                 const argumentStart = args[0].start
-                magicString.appendLeft(
-                  argumentStart,
-                  `"%c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`)
+                const argumentEnd = args[args.length - 1].end
+                const { prefix, suffix } = option || {}
+                const _prefix = prefix ? `${prefix} \\n` : ''
+                const _suffix = suffix ? `\\n ${suffix}` : ''
+                const appendLeft = `"${_prefix} %c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`
+                magicString.appendLeft(argumentStart, appendLeft).appendRight(argumentEnd, `,"${_suffix}"`)
+                //   appendRight
               })
 
               asyncOps.push(asyncOp)
