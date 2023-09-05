@@ -6,7 +6,12 @@ import { SourceMapConsumer } from 'source-map'
 import type { RawSourceMap } from 'source-map'
 import { getConsoleStyle, transformFileTypes } from './utils'
 
-function VitePluginTurboConsole(): PluginOption {
+interface TurboConsoleOptions {
+  prefix?: string
+  suffix?: string
+}
+
+function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
   return {
     name: 'vite-plugin-turbo-console',
     enforce: 'post',
@@ -24,10 +29,10 @@ function VitePluginTurboConsole(): PluginOption {
           CallExpression: (node: any) => {
             const { callee, arguments: args, loc } = node
             if (callee.type === 'MemberExpression'
-                  && callee.object?.type === 'Identifier'
-                  && callee.object?.name === 'console'
-                  && callee.property?.type === 'Identifier'
-                  && callee.property?.name === 'log'
+                && callee.object?.type === 'Identifier'
+                && callee.object?.name === 'console'
+                && callee.property?.type === 'Identifier'
+                && callee.property?.name === 'log'
             ) {
               const fileName = basename(id)
               const fileType = extname(id)
@@ -46,11 +51,20 @@ function VitePluginTurboConsole(): PluginOption {
                   .replaceAll('`', '')
                   .replaceAll('\n', '')
                   .replaceAll('\"', '')
-
                 const argumentStart = args[0].start
-                magicString.appendLeft(
-                  argumentStart,
-                  `"%c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`)
+                const argumentEnd = args[args.length - 1].end
+                const { prefix, suffix } = option || {}
+                const _prefix = prefix ? `${prefix} \\n` : ''
+                const _suffix = suffix ? `\\n ${suffix}` : ''
+                magicString
+                  .appendLeft(
+                    argumentStart,
+                        `"${_prefix} %c${fileName}:${originalLine} ~ ${argsName}","${getConsoleStyle(fileType)}",`,
+                  )
+                  .appendRight(
+                    argumentEnd,
+                        `,"${_suffix}"`,
+                  )
               })
 
               asyncOps.push(asyncOp)
