@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-describe('should', () => {
-  it('exported', () => {
-    expect(1 + 1).toEqual(2)
+describe('index', () => {
+  it('hi vitest', () => {
+    expect(1).toBe(1)
   })
 })

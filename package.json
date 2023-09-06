@@ -1,73 +1,136 @@
 {
-  "name": "vite-plugin-turbo-console",
+  "name": "unplugin-starter",
   "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.6.12",
   "description": "",
-  "author": "yuyinws",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/yuyinws",
-  "homepage": "https://github.com/yuyinws/vite-plugin-turbo-console#readme",
+  "homepage": "https://github.com/antfu/unplugin-starter#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yuyinws/vite-plugin-turbo-console.git"
+    "url": "git+https://github.com/antfu/unplugin-starter.git"
   },
-  "bugs": "https://github.com/yuyinws/vite-plugin-turbo-console/issues",
-  "keywords": [],
-  "sideEffects": false,
+  "bugs": {
+    "url": "https://github.com/antfu/unplugin-starter/issues"
+  },
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rollup",
+    "transform"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "import": "./dist/vite.js",
+      "require": "./dist/vite.cjs"
+    },
+    "./webpack": {
+      "types": "./dist/webpack.d.ts",
+      "import": "./dist/webpack.js",
+      "require": "./dist/webpack.cjs"
+    },
+    "./rollup": {
+      "types": "./dist/rollup.d.ts",
+      "import": "./dist/rollup.js",
+      "require": "./dist/rollup.cjs"
+    },
+    "./esbuild": {
+      "types": "./dist/esbuild.d.ts",
+      "import": "./dist/esbuild.js",
+      "require": "./dist/esbuild.cjs"
+    },
+    "./nuxt": {
+      "types": "./dist/nuxt.d.ts",
+      "import": "./dist/nuxt.js",
+      "require": "./dist/nuxt.cjs"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs"
+    },
+    "./*": "./*"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
     }
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub && nr play",
+    "build": "tsup",
+    "dev": "tsup --watch src",
+    "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint .",
-    "play": "vite playground",
-    "prepublishOnly": "nr build",
+    "play": "npm -C playground run dev",
+    "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "test": "vitest"
   },
   "peerDependencies": {
-    "vite": "^4.0.0 || ^3.0.0"
+    "@nuxt/kit": "^3",
+    "@nuxt/schema": "^3",
+    "esbuild": "*",
+    "rollup": "^3",
+    "vite": ">=3",
+    "webpack": "^4 || ^5"
+  },
+  "peerDependenciesMeta": {
+    "webpack": {
+      "optional": true
+    },
+    "rollup": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "esbuild": {
+      "optional": true
+    },
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "@nuxt/schema": {
+      "optional": true
+    }
   },
   "dependencies": {
-    "acorn-walk": "^8.2.0",
-    "magic-string": "^0.30.0",
-    "source-map": "^0.7.4"
+    "unplugin": "^1.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.4",
-    "@antfu/ni": "^0.21.2",
-    "@antfu/utils": "^0.7.2",
-    "@types/node": "^18.15.11",
-    "bumpp": "^9.1.0",
-    "eslint": "^8.40.0",
-    "esno": "^0.16.3",
-    "lint-staged": "^13.2.0",
-    "pnpm": "^8.1.1",
-    "rimraf": "^4.4.1",
-    "simple-git-hooks": "^2.8.1",
-    "typescript": "^5.0.3",
-    "unbuild": "^1.2.0",
-    "vite": "^4.2.1",
-    "vitest": "^0.29.8"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
+    "@antfu/eslint-config": "^0.40.2",
+    "@nuxt/kit": "^3.6.5",
+    "@nuxt/schema": "^3.6.5",
+    "@types/node": "^20.5.2",
+    "bumpp": "^9.2.0",
+    "chalk": "^5.3.0",
+    "eslint": "^8.47.0",
+    "esno": "^0.17.0",
+    "fast-glob": "^3.3.1",
+    "nodemon": "^3.0.1",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.28.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.2",
+    "webpack": "^5.88.2"
   }
 }
