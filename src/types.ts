@@ -1,3 +1,4 @@
 export interface Options {
-  // define your plugin options here
+  prefix?: string
+  suffix?: string
 }

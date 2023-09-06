@@ -77,7 +77,7 @@
     "dev": "tsup --watch src",
     "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint .",
-    "play": "npm -C playground run dev",
+    "play:vite-vue": "pnpm run --filter vite-vue dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
@@ -112,6 +112,9 @@
     }
   },
   "dependencies": {
+    "@rollup/pluginutils": "^5.0.4",
+    "magic-string": "^0.30.3",
+    "typescript": "^5.1.6",
     "unplugin": "^1.4.0"
   },
   "devDependencies": {
@@ -128,7 +131,6 @@
     "rimraf": "^5.0.1",
     "rollup": "^3.28.1",
     "tsup": "^7.2.0",
-    "typescript": "^5.1.6",
     "vite": "^4.4.9",
     "vitest": "^0.34.2",
     "webpack": "^5.88.2"
