@@ -1,17 +1,17 @@
 {
-  "name": "unplugin-starter",
+  "name": "unplugin-turbo-console",
   "type": "module",
   "version": "0.1.0",
   "packageManager": "pnpm@8.6.12",
   "description": "",
   "license": "MIT",
-  "homepage": "https://github.com/antfu/unplugin-starter#readme",
+  "homepage": "https://github.com/yuyinws/unplugin-turbo-console#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-starter.git"
+    "url": "git+https://github.com/yuyinws/unplugin-turbo-console.git"
   },
   "bugs": {
-    "url": "https://github.com/antfu/unplugin-starter/issues"
+    "url": "https://github.com/yuyinws/unplugin-turbo-console/issues"
   },
   "keywords": [
     "unplugin",
@@ -89,6 +89,7 @@
     "esbuild": "*",
     "rollup": "^3",
     "vite": ">=3",
+    "vue": ">=3.2.13",
     "webpack": "^4 || ^5"
   },
   "peerDependenciesMeta": {
@@ -108,6 +109,9 @@
       "optional": true
     },
     "@nuxt/schema": {
+      "optional": true
+    },
+    "vue": {
       "optional": true
     }
   },
@@ -133,6 +137,7 @@
     "tsup": "^7.2.0",
     "vite": "^4.4.9",
     "vitest": "^0.34.2",
+    "vue": "^3.3.4",
     "webpack": "^5.88.2"
   }
 }

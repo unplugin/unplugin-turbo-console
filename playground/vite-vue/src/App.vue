@@ -1,7 +1,18 @@
-<script setup lang="ts">
-const foooooo = 'foooooo'
 
-console.log(foooooo)
+<script setup lang="ts">
+
+
+const foooooo:string = 'foooooo'
+
+console.log('foooooo1111', foooooo)
+</script>
+
+<script lang="ts">
+
+
+const bar:string = 'barrrrrrr'
+
+console.log('barrrrrrr', bar)
 </script>
 
 <template>
@@ -9,3 +20,4 @@ console.log(foooooo)
     Hi
   </div>
 </template>
+

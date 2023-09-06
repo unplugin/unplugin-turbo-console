@@ -27,3 +27,34 @@ export const js: TestObj = {
     suffix: '🐶',
   },
 }
+
+export const vue: TestObj = {
+  id: '/text/index.vue',
+  code: `
+
+  <script setup lang="ts">
+
+
+  const foooooo:string = 'foooooo'
+  
+  console.log('foooooo1111', foooooo)
+  </script>
+  
+  <script lang="ts">
+  
+  
+  const bar:string = 'barrrrrrr'
+  
+  console.log('barrrrrrr', bar)
+  </script>
+  
+  <template>
+    <div>
+      Hi
+    </div>
+  </template>
+  
+  
+  `,
+  options: {},
+}

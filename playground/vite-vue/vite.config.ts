@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import inspect from 'vite-plugin-inspect'
 // @ts-ignore
 import TurboConsole from '../../src/vite'
 
@@ -9,6 +10,7 @@ import TurboConsole from '../../src/vite'
 export default defineConfig({
   plugins: [
     vue(),
+    inspect(),
     TurboConsole()
   ],
   resolve: {
