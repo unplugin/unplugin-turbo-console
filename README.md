@@ -41,8 +41,28 @@ import TurboConsole from "vite-plugin-turbo-console";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [TurboConsole()],
+  plugins: [TurboConsole({
+    /* options here */
+  })],
 });
+```
+**options**
+```ts
+interface TurboConsoleOptions {
+  /**
+   * Add a string prefix to the console log.
+   */
+  prefix?: string
+  /**
+   * Add a string suffix to the console log.
+   */
+  suffix?: string
+  /**
+   * Whether to disable the launch editor feature.
+   * default: false
+   */
+  disableLaunchEditor?: boolean
+}
 ```
 
 ## ❤️ Credits
