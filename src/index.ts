@@ -97,7 +97,7 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
     },
     configureServer(server) {
       return () => {
-        server.middlewares.use(`${base}__tc`, sirv(resolve(__dirname, './client'), {
+        server.middlewares.use('/__tc', sirv(resolve(__dirname, './client'), {
           single: true,
           dev: true,
         }))
