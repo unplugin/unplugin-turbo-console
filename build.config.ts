@@ -1,4 +1,5 @@
 import { defineBuildConfig } from 'unbuild'
+import { copy } from 'fs-extra'
 
 export default defineBuildConfig({
   entries: [
@@ -8,5 +9,13 @@ export default defineBuildConfig({
   clean: true,
   rollup: {
     emitCJS: true,
+  },
+  hooks: {
+    'build:done': () => {
+      copy('./src/client', './dist/client', (err) => {
+        // eslint-disable-next-line no-console
+        console.log(err)
+      })
+    },
   },
 })

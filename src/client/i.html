@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>turbo console</title>
+</head>
+<script >
+ (async () => {
+   const filePath = new URL(window.location.href).searchParams.get('f')
+   const line = new URL(window.location.href).searchParams.get('l')
+   const column = new URL(window.location.href).searchParams.get('c')
+   const base = new URL(window.location.href).searchParams.get('b') || '/'
+   await fetch(`${base}__open-in-editor?file=${filePath}:${line}:${column}`)
+   window.close()
+ })()
+</script>
+</html>
