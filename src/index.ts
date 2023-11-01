@@ -5,17 +5,34 @@ import { simple } from 'acorn-walk'
 import { SourceMapConsumer } from 'source-map'
 import type { RawSourceMap } from 'source-map'
 import sirv from 'sirv'
-import { codeLaunchStyle, getConsoleStyle, transformFileTypes } from './utils'
+import { getConsoleStyle, launchEditorStyle, transformFileTypes } from './utils'
 
 interface TurboConsoleOptions {
+  /**
+   * Add a string prefix to the console log.
+   */
   prefix?: string
+  /**
+   * Add a string suffix to the console log.
+   */
   suffix?: string
+  /**
+   * Whether to disable the launch editor feature.
+   * default: false
+   */
+  disableLaunchEditor?: boolean
 }
 
 function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
   let port = 5173
   let protocol = ''
   let base = ''
+
+  const _option = {
+    prefix: option?.prefix || '',
+    suffix: option?.suffix || '',
+    disableLaunchEditor: option?.disableLaunchEditor || false,
+  }
   return {
     name: 'vite-plugin-turbo-console',
     enforce: 'post',
@@ -56,30 +73,37 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
                   column,
                 })
 
-                const argsName = magicString.slice(args[0].start, args[args.length - 1].end).toString()
+                const argsName = magicString.slice(args[0].start, args[args.length - 1].end)
+                  .toString()
                   .replaceAll('`', '')
                   .replaceAll('\n', '')
                   .replaceAll('\"', '')
                 const argumentStart = args[0].start
                 const argumentEnd = args[args.length - 1].end
-                const { prefix, suffix } = option || {}
+                const { prefix, suffix } = _option
                 const _prefix = prefix ? `${prefix} \\n` : ''
                 const _suffix = suffix ? `\\n ${suffix}` : ''
 
+                const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine} ~ ${argsName}`
+
                 const filePath = relative(process.cwd(), id)
-                let launchEditor = `${protocol}://localhost:${port}${base}__tc/i.html?f=${filePath}&l=${originalLine}&c=${originalColumn}`
+                let launchEditor = ''
+                launchEditor = `%c🔦 Jump to Editor ${protocol}://localhost:${port}${base}__tc/i.html?f=${filePath}&l=${originalLine}&c=${originalColumn}`
+
                 if (base !== '/')
                   launchEditor += `&b=${base}`
 
+                let appendLeftString = ''
+
+                if (!_option.disableLaunchEditor)
+                  appendLeftString = `"${lineInfo} %c\\n${launchEditor}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
+
+                else
+                  appendLeftString = `"${lineInfo} %c\\n","${getConsoleStyle(fileType)}","\\n",`
+
                 magicString
-                  .appendLeft(
-                    argumentStart,
-                        `"${_prefix}%c🚀 ${fileName}:${originalLine} ~ ${argsName} %c\\n%c🔦 Jump to Editor ${launchEditor}","${getConsoleStyle(fileType)}","","${codeLaunchStyle}","\\n",`,
-                  )
-                  .appendRight(
-                    argumentEnd,
-                        `,"${_suffix}"`,
-                  )
+                  .appendLeft(argumentStart, appendLeftString)
+                  .appendRight(argumentEnd, `,"${_suffix}"`)
               })
 
               asyncOps.push(asyncOp)

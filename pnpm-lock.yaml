@@ -48,9 +48,6 @@ importers:
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
-      launch-editor-middleware:
-        specifier: ^2.6.1
-        version: 2.6.1
       lint-staged:
         specifier: ^13.2.0
         version: 13.2.0
@@ -3960,19 +3957,6 @@ packages:
   /kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
-    dev: true
-
-  /launch-editor-middleware@2.6.1:
-    resolution: {integrity: sha512-Fg/xYhf7ARmRp40n18wIfJyuAMEjXo67Yull7uF7d0OJ3qA4EYJISt1XfPPn69IIJ5jKgQwzcg6DqHYo95LL/g==}
-    dependencies:
-      launch-editor: 2.6.1
-    dev: true
-
-  /launch-editor@2.6.1:
-    resolution: {integrity: sha512-eB/uXmFVpY4zezmGp5XtU21kwo7GBbKB+EQ+UZeWtGb9yAM5xt/Evk+lYH3eRNAtId+ej4u7TYPFZ07w4s7rRw==}
-    dependencies:
-      picocolors: 1.0.0
-      shell-quote: 1.8.1
     dev: true
 
   /levn@0.4.1:

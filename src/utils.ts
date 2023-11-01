@@ -17,4 +17,4 @@ export function getConsoleStyle(fileType: string): string {
   return consoleStyles[fileType] ?? consoleStyles.default
 }
 
-export const codeLaunchStyle = 'background: #22d3ee;padding:4px;border-radius:3px;color:#fff;margin-top:5px;margin-bottom:5px'
+export const launchEditorStyle = 'background: #22d3ee;padding:4px;border-radius:3px;color:#fff;margin-top:5px;margin-bottom:5px'
