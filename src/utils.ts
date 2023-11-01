@@ -1,6 +1,6 @@
 export const transformFileTypes = ['.js', '.jsx', '.ts', '.tsx', '.vue', '.svelte', '.astro']
 
-const commonStyle = 'padding:4px; border-radius:5px; font-weight:600; '
+const commonStyle = 'padding:4px; border-radius:3px; font-weight:500; '
 
 const consoleStyles: Record<string, string> = {
   '.js': `${commonStyle}color: #111827; background: #F7DF1E`,
@@ -16,3 +16,5 @@ const consoleStyles: Record<string, string> = {
 export function getConsoleStyle(fileType: string): string {
   return consoleStyles[fileType] ?? consoleStyles.default
 }
+
+export const codeLaunchStyle = 'background: #22d3ee;padding:4px;border-radius:3px;color:#fff;margin-top:3px'
