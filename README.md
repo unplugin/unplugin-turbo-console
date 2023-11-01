@@ -10,7 +10,7 @@
 
 ## 🎥 Screen Recording
 
-![video](https://github-production-user-asset-6210df.s3.amazonaws.com/38490578/279668417-b6ca9b85-0133-44c7-80ab-a5edc0e6389e.mp4)
+![gif](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/11/upgit_20231101_1698844263.gif)
 
 ## 🔥 Features
 
