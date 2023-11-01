@@ -78,6 +78,7 @@
     "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint .",
     "play:vite-vue": "pnpm run --filter vite-vue dev",
+    "play:webpack-vue": "pnpm run --filter webpack-vue serve",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
@@ -117,6 +118,7 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.0.4",
+    "lodash": "^4.17.21",
     "magic-string": "^0.30.3",
     "typescript": "^5.1.6",
     "unplugin": "^1.4.0"
