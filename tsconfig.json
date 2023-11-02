@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["esnext", "DOM"],
     "module": "esnext",
-    "lib": ["esnext"],
     "moduleResolution": "node",
-    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
   },
   "exclude": ["dist", "node_modules", "playground"]
 }
