@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-turbo-console",
   "type": "module",
-  "version": "0.2.2",
+  "version": "0.2.3-beta.0",
   "packageManager": "pnpm@8.1.1",
   "description": "🚀 Enhance the ability of console.log()",
   "author": "yuyinws",
@@ -12,7 +12,9 @@
     "url": "git+https://github.com/yuyinws/vite-plugin-turbo-console.git"
   },
   "bugs": "https://github.com/yuyinws/vite-plugin-turbo-console/issues",
-  "keywords": ["vite-plugin"],
+  "keywords": [
+    "vite-plugin"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
