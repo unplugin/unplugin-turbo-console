@@ -1,5 +1,5 @@
 import { basename, extname, relative } from 'node:path'
-import type { PluginOption } from 'vite'
+import type { Plugin } from 'vite'
 import MagicString from 'magic-string'
 import { simple } from 'acorn-walk'
 import { SourceMapConsumer } from 'source-map'
@@ -7,24 +7,9 @@ import type { RawSourceMap } from 'source-map'
 import sirv from 'sirv'
 import { getConsoleStyle, launchEditorStyle, transformFileTypes } from './utils'
 import { DIR_CLIENT } from './dir'
+import type { Extra, Options } from './types'
 
-interface TurboConsoleOptions {
-  /**
-   * Add a string prefix to the console log.
-   */
-  prefix?: string
-  /**
-   * Add a string suffix to the console log.
-   */
-  suffix?: string
-  /**
-   * Whether to disable the launch editor feature.
-   * default: false
-   */
-  disableLaunchEditor?: boolean
-}
-
-function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
+function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
   let port = 5173
   let protocol = ''
   let base = ''
@@ -39,9 +24,9 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
     enforce: 'post',
     apply: 'serve',
     configResolved(config) {
-      port = config.server.port || 5173
+      port = config.server.port || extra?.nuxtDevServerPort || 5173
       protocol = config.server.https ? 'https' : 'http'
-      base = config.base
+      base = config.base || '/'
     },
     async transform(code, id) {
       if (transformFileTypes.includes(extname(id)) && !id.includes('node_modules')) {
@@ -130,4 +115,3 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
 }
 
 export default VitePluginTurboConsole
-export type { PluginOption }
