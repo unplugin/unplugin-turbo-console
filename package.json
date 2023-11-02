@@ -66,6 +66,7 @@
     "@antfu/ni": "^0.21.2",
     "@antfu/utils": "^0.7.2",
     "@nuxt/kit": "^3.8.0",
+    "@nuxt/schema": "^3.8.0",
     "@types/fs-extra": "^11.0.3",
     "@types/node": "^18.15.11",
     "bumpp": "^9.1.0",

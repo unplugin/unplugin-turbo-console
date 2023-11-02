@@ -1,17 +1,20 @@
 export interface Options {
   /**
    * Add a string prefix to the console log.
-   * @default: ''
+   *
+   * @default ''
    */
   prefix?: string
   /**
    * Add a string suffix to the console log.
-   * @default: ''
+   *
+   * @default ''
    */
   suffix?: string
   /**
    * Whether to disable the launch editor feature.
-   * @default: false
+   *
+   * @default false
    */
   disableLaunchEditor?: boolean
 }

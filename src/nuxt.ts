@@ -1,4 +1,5 @@
 import { addVitePlugin, defineNuxtModule } from '@nuxt/kit'
+import type { NuxtModule } from '@nuxt/schema'
 import type { Options } from './types'
 import plugin from './index'
 
@@ -6,7 +7,7 @@ export {
   Options as ModuleOptions,
 }
 
-export default defineNuxtModule<Options>({
+const module: NuxtModule<Options> = defineNuxtModule<Options>({
   meta: {
     name: 'vite-plugin-turbo-console',
     configKey: 'turboConsole',
@@ -16,4 +17,6 @@ export default defineNuxtModule<Options>({
       nuxtDevServerPort: nuxt.options.devServer.port,
     }))
   },
-}) as any
+})
+
+export default module
