@@ -3,9 +3,10 @@
 </p>
 
 <p align='center'>
-<a href="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/11/upgit_20231101_1698841113.png">
+<a href="https://www.npmjs.com/package/vite-plugin-turbo-console">
 <img src="https://img.shields.io/npm/v/vite-plugin-turbo-console?color=a1b858&label=">
 </a>
+<img src="https://img.shields.io/npm/dm/vite-plugin-turbo-console">
 </p>
 
 ## 🎥 Screen Recording
@@ -33,6 +34,8 @@ pnpm i -D vite-plugin-turbo-console
 
 ## 🦄 Usage
 
+### Vite
+
 **vite.config.ts**
 
 ```ts
@@ -41,25 +44,51 @@ import TurboConsole from "vite-plugin-turbo-console";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [TurboConsole({
-    /* options here */
-  })],
+  plugins: [
+    TurboConsole({
+      /* options here */
+    })
+  ],
 });
 ```
-**options**
+
+### Nuxt
+
+**nuxt.config.ts**
+
 ```ts
-interface TurboConsoleOptions {
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  modules: [
+    'vite-plugin-turbo-console/nuxt'
+  ],
+  turboConsole: {
+    /* options here */
+  }
+})
+
+```
+
+**options**
+
+```ts
+export interface Options {
   /**
    * Add a string prefix to the console log.
+   *
+   * @default ''
    */
   prefix?: string
   /**
    * Add a string suffix to the console log.
+   *
+   * @default ''
    */
   suffix?: string
   /**
    * Whether to disable the launch editor feature.
-   * default: false
+   *
+   * @default false
    */
   disableLaunchEditor?: boolean
 }
@@ -70,6 +99,6 @@ Inspired by
 
 [babel-plugin-enhance-log](https://github.com/baozouai/babel-plugin-enhance-log)
 
- [turbo-console-log](https://github.com/Chakroun-Anas/turbo-console-log)
+[turbo-console-log](https://github.com/Chakroun-Anas/turbo-console-log)
 
 [vite-plugin-console-line](https://github.com/lq9958/vite-plugin-console-line)
