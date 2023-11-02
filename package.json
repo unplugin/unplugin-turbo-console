@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-turbo-console",
   "type": "module",
-  "version": "0.2.3-beta.1",
+  "version": "0.2.3-beta.2",
   "packageManager": "pnpm@8.1.1",
   "description": "🚀 Enhance the ability of console.log()",
   "author": "yuyinws",
