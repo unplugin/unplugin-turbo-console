@@ -12,5 +12,5 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "exclude": ["dist", "node_modules", "playground"]
+  "exclude": ["dist", "node_modules", "playground", "examples"]
 }
