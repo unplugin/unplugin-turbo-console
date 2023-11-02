@@ -3,11 +3,11 @@ import type { NuxtModule } from '@nuxt/schema'
 import type { Options } from './types'
 import plugin from './index'
 
-export {
-  Options as ModuleOptions,
+export interface ModuleOptions extends Options {
+
 }
 
-const module: NuxtModule<Options> = defineNuxtModule<Options>({
+const module: NuxtModule<ModuleOptions> = defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'vite-plugin-turbo-console',
     configKey: 'turboConsole',
