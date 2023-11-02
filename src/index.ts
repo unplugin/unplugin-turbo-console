@@ -1,4 +1,4 @@
-import { basename, extname, relative, resolve } from 'node:path'
+import { basename, extname, relative } from 'node:path'
 import type { PluginOption } from 'vite'
 import MagicString from 'magic-string'
 import { simple } from 'acorn-walk'
@@ -6,6 +6,7 @@ import { SourceMapConsumer } from 'source-map'
 import type { RawSourceMap } from 'source-map'
 import sirv from 'sirv'
 import { getConsoleStyle, launchEditorStyle, transformFileTypes } from './utils'
+import { DIR_CLIENT } from './dir'
 
 interface TurboConsoleOptions {
   /**
@@ -121,7 +122,7 @@ function VitePluginTurboConsole(option?: TurboConsoleOptions): PluginOption {
     },
     configureServer(server) {
       return () => {
-        server.middlewares.use('/__tc', sirv(resolve(__dirname, './client'), {
+        server.middlewares.use('/__tc', sirv(DIR_CLIENT, {
           single: true,
           dev: true,
         }))
