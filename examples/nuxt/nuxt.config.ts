@@ -6,6 +6,6 @@ export default defineNuxtConfig({
     '../../src/nuxt',
   ],
   turboConsole: {
-
+    prefix: 'xxxx',
   },
 })

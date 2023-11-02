@@ -33,6 +33,9 @@ importers:
       '@nuxt/kit':
         specifier: ^3.8.0
         version: 3.8.0(rollup@3.29.4)
+      '@nuxt/schema':
+        specifier: ^3.8.0
+        version: 3.8.0(rollup@3.29.4)
       '@types/fs-extra':
         specifier: ^11.0.3
         version: 11.0.3
@@ -85,10 +88,10 @@ importers:
         specifier: ^3.8.0
         version: 3.8.0(@types/node@18.15.11)(eslint@8.40.0)(rollup@3.29.4)(typescript@5.0.3)(vite@4.5.0)
       vite-plugin-inspect:
-        specifier: ^0.7.26
+        specifier: ^0.7.41
         version: 0.7.41(@nuxt/kit@3.8.0)(rollup@3.29.4)(vite@4.5.0)
       vite-plugin-turbo-console:
-        specifier: workspace:*
+        specifier: latest
         version: link:../..
       vue:
         specifier: ^3.3.7
