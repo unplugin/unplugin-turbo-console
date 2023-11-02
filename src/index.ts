@@ -74,7 +74,7 @@ function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
 
                 const filePath = relative(process.cwd(), id)
                 let launchEditor = ''
-                launchEditor = `%c🔦 Jump to Editor ${protocol}://localhost:${port}${base}__tc/i.html?f=${filePath}&l=${originalLine}&c=${originalColumn}`
+                launchEditor = `%c🔦 Jump to Editor ${protocol}://localhost:${port}${base}__tc/i.html?f=${filePath}&l=${originalLine}&c=${(originalColumn || 0) + 1}`
 
                 if (base !== '/')
                   launchEditor += `&b=${base}`
