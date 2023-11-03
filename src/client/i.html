@@ -5,14 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>turbo console</title>
 </head>
-<script >
+<style>
+  #error-info {
+    color: red;
+    font-size: 2rem;
+  }
+</style>
+<body>
+  <div id="error-info"></div>
+</body>
+<script>
  (async () => {
-   const filePath = new URL(window.location.href).searchParams.get('f')
-   const line = new URL(window.location.href).searchParams.get('l')
-   const column = new URL(window.location.href).searchParams.get('c')
-   const base = new URL(window.location.href).searchParams.get('b') || '/'
-   await fetch(`${base}__open-in-editor?file=${filePath}:${line}:${column}`)
-   window.close()
+   try {
+     const hash = window.location.hash
+     const encodeBase64 = window.atob(hash.slice(1))
+     const base = new URL(window.location.href).searchParams.get('b') || '/'
+     await fetch(`${base}__open-in-editor?file=${encodeBase64}`)
+     window.close()
+   }
+   catch (error) {
+     const errorInfo = document.getElementById('error-info')
+     errorInfo.innerText = String(error)
+   }
  })()
 </script>
 </html>

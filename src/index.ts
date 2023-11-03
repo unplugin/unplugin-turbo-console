@@ -1,4 +1,5 @@
 import { basename, extname, relative } from 'node:path'
+import { Buffer } from 'node:buffer'
 import type { Plugin } from 'vite'
 import MagicString from 'magic-string'
 import { simple } from 'acorn-walk'
@@ -72,17 +73,19 @@ function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
 
                 const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine} ~ ${argsName}`
 
-                const filePath = relative(process.cwd(), id)
-                let launchEditor = ''
-                launchEditor = `%c🔦 Jump to Editor ${protocol}://localhost:${port}${base}__tc/i.html?f=${filePath}&l=${originalLine}&c=${(originalColumn || 0) + 1}`
+                const codePosition = `${relative(process.cwd(), id)}:${originalLine}:${(originalColumn || 0) + 1}`
+                let launchEditorString = ''
+                launchEditorString = `%c🔦 Jump to Editor ${protocol}://localhost:${port}${base}__tc/i.html`
 
                 if (base !== '/')
-                  launchEditor += `&b=${base}`
+                  launchEditorString += `?b=${base}`
+
+                launchEditorString += `#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
 
                 let appendLeftString = ''
 
                 if (!_option.disableLaunchEditor)
-                  appendLeftString = `"${lineInfo} %c\\n${launchEditor}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
+                  appendLeftString = `"${lineInfo} %c\\n${launchEditorString}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
 
                 else
                   appendLeftString = `"${lineInfo} %c\\n","${getConsoleStyle(fileType)}","\\n",`
