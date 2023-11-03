@@ -9,6 +9,10 @@
 <img src="https://img.shields.io/npm/dm/vite-plugin-turbo-console">
 </p>
 
+<p align="center">
+<a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=vite.config.ts"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+</p>
+
 ## 🎥 Screen Recording
 
 ![gif](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/11/upgit_20231101_1698844263.gif)
