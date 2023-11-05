@@ -62,9 +62,10 @@ function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
 
                 const argsName = magicString.slice(args[0].start, args[args.length - 1].end)
                   .toString()
-                  .replaceAll('`', '')
-                  .replaceAll('\n', '')
-                  .replaceAll('\"', '')
+                  .replace(/`/g, '')
+                  .replace(/\n/g, '')
+                  .replace(/"/g, '')
+
                 const argumentStart = args[0].start
                 const argumentEnd = args[args.length - 1].end
                 const { prefix, suffix } = _option
