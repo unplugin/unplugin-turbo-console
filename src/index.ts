@@ -1,5 +1,6 @@
 import { basename, extname, relative } from 'node:path'
 import { Buffer } from 'node:buffer'
+import { cwd } from 'node:process'
 import type { Plugin } from 'vite'
 import MagicString from 'magic-string'
 import { simple } from 'acorn-walk'
@@ -74,7 +75,7 @@ function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
 
                 const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine} ~ ${argsName}`
 
-                const codePosition = `${relative(process.cwd(), id)}:${originalLine}:${(originalColumn || 0) + 1}`
+                const codePosition = `${relative(cwd(), id)}:${originalLine}:${(originalColumn || 0) + 1}`
                 let launchEditorString = ''
                 launchEditorString = `%c🔦 Jump to Editor ${protocol}://localhost:${port}${base}__tc/i.html`
 

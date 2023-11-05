@@ -19,13 +19,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
     "./nuxt": {
       "types": "./dist/nuxt.d.ts",
-      "require": "./dist/nuxt.cjs",
-      "import": "./dist/nuxt.mjs"
+      "import": "./dist/nuxt.mjs",
+      "require": "./dist/nuxt.cjs"
     },
     "./*": "./*"
   },
@@ -62,7 +62,7 @@
     "source-map": "^0.7.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.4",
+    "@antfu/eslint-config": "^1.1.0",
     "@antfu/ni": "^0.21.2",
     "@antfu/utils": "^0.7.2",
     "@nuxt/kit": "^3.8.0",
@@ -70,7 +70,7 @@
     "@types/fs-extra": "^11.0.3",
     "@types/node": "^18.15.11",
     "bumpp": "^9.1.0",
-    "eslint": "^8.40.0",
+    "eslint": "^8.53.0",
     "esno": "^0.16.3",
     "fs-extra": "^11.1.1",
     "lint-staged": "^13.2.0",
