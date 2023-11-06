@@ -13,8 +13,8 @@ import type { Extra, Options } from './types'
 
 function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
   let port = 5173
-  let protocol = ''
-  let base = ''
+  let protocol = 'http'
+  let base = '/'
 
   const _option = {
     prefix: option?.prefix || '',

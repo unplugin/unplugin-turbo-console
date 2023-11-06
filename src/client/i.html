@@ -20,7 +20,7 @@
      const hash = window.location.hash
      const encodeBase64 = window.atob(hash.slice(1))
      const base = new URL(window.location.href).searchParams.get('b') || '/'
-     await fetch(`${base}__open-in-editor?file=${encodeBase64}`)
+     await fetch(`${base}__open-in-editor?file=${encodeURIComponent(encodeBase64)}`)
      window.close()
    }
    catch (error) {
