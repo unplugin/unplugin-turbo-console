@@ -38,6 +38,7 @@
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub && nr play",
+    "clean": "find ./ -name node_modules -type d -exec rm -rf {} +",
     "lint": "eslint .",
     "play": "vite playground --port 5254",
     "dev:nuxt": "unbuild --stub && pnpm run --filter ./examples/nuxt dev",
