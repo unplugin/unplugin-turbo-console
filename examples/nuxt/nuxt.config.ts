@@ -3,7 +3,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    'vite-plugin-turbo-console/nuxt',
+    '../../src/nuxt',
   ],
   turboConsole: {
     prefix: 'xxxx',
