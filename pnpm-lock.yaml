@@ -91,7 +91,7 @@ importers:
         specifier: ^0.7.41
         version: 0.7.41(@nuxt/kit@3.8.0)(rollup@3.29.4)(vite@4.5.0)
       vite-plugin-turbo-console:
-        specifier: latest
+        specifier: workspace:*
         version: link:../..
       vue:
         specifier: ^3.3.7
@@ -132,6 +132,9 @@ importers:
       vite:
         specifier: ^4.4.2
         version: 4.5.0(@types/node@18.15.11)
+      vite-plugin-turbo-console:
+        specifier: workspace:*
+        version: link:../..
 
   playground:
     dependencies:
