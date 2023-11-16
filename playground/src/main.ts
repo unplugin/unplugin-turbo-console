@@ -5,7 +5,7 @@ import App from './App.vue'
 
 
 
-
+console.log()
 
 
 const foo = 'foo'

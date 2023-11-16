@@ -47,6 +47,7 @@ function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
                 && callee.object?.name === 'console'
                 && callee.property?.type === 'Identifier'
                 && callee.property?.name === 'log'
+                && args?.length > 0
             ) {
               const fileName = basename(id)
               const fileType = extname(id)
