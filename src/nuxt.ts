@@ -1,7 +1,7 @@
 import { addVitePlugin, defineNuxtModule } from '@nuxt/kit'
 import type { NuxtModule } from '@nuxt/schema'
 import type { Options } from './types'
-import plugin from './index'
+import plugin from './__index'
 
 export interface ModuleOptions extends Options {
 
