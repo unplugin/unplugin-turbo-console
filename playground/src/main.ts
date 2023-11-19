@@ -5,23 +5,8 @@ import App from './App.vue'
 
 
 
-console.log()
-
-
-const foo = 'foo'
-const bar = 'bar'
-console.log(`
-${foo},
-${bar}
-`);
-
-    console.log({foo,bar})
-
-console.log({
-  foo,
-  bar: {
-    foo,bar
-  }
-})
+console.log(123)
+console.log('aaa')
+console.log(App)
 
 createApp(App).mount('#app')

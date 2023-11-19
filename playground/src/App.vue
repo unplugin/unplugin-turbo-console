@@ -20,8 +20,8 @@ const b = "1232133"
 
 
 
-console.log("🚀 ~ file: App.vue:20 ~ b:", b)
-console.log(a,b)
+// console.log("🚀 ~ file: App.vue:20 ~ b:", b)
+// console.log(a,b)
 </script>
 
 <template>

@@ -19,6 +19,16 @@ export interface Options {
   disableLaunchEditor?: boolean
 }
 
+export interface Context {
+  pluginContext: any
+  option: Options
+  network: {
+    protocol: string
+    port: number
+    base: string
+  }
+}
+
 export interface Extra {
   nuxtDevServerPort: number
 }
