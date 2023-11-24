@@ -2,7 +2,7 @@ import type { Plugin } from 'vite'
 import sirv from 'sirv'
 import { createFilter } from 'vite'
 import { transformCode } from './transform'
-import { DIR_CLIENT } from './utils/dir'
+import { DIR_CLIENT } from './dir'
 import type { Context, Extra, Options } from './types'
 
 function VitePluginTurboConsole(option?: Options, extra?: Extra): Plugin {
