@@ -117,21 +117,18 @@
     }
   },
   "dependencies": {
-    "@koa/router": "^12.0.1",
     "@rollup/pluginutils": "^5.0.4",
+    "ast-kit": "^0.11.2",
     "h3": "^1.9.0",
-    "koa": "^2.14.2",
-    "koa-static": "^5.0.0",
-    "lodash": "^4.17.21",
+    "launch-editor": "^2.6.1",
     "magic-string": "^0.30.3",
-    "polka": "^0.5.2",
     "serve-static": "^1.15.0",
-    "sirv": "^2.0.3",
-    "typescript": "^5.1.6",
+    "source-map-js": "^1.0.2",
     "unplugin": "^1.4.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.1.2",
+    "@babel/types": "^7.23.5",
     "@nuxt/kit": "^3.6.5",
     "@nuxt/schema": "^3.6.5",
     "@types/fs-extra": "^11.0.4",
@@ -147,6 +144,7 @@
     "rimraf": "^5.0.1",
     "rollup": "^3.28.1",
     "tsup": "^7.2.0",
+    "typescript": "^5.3.2",
     "vite": "^4.4.9",
     "vitest": "^0.34.2",
     "vue": "^3.3.4",

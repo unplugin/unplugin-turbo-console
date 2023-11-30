@@ -1,7 +1,12 @@
 import { createServer } from 'node:http'
-import { readFile, stat } from 'node:fs/promises'
-import { createApp, eventHandler, serveStatic, toNodeListener } from 'h3'
-import { DIR_CLIENT } from './../dir'
+import { resolve } from 'node:path'
+import { cwd } from 'node:process'
+import { createApp, eventHandler, fromNodeMiddleware, getQuery, toNodeListener } from 'h3'
+import serveStatic from 'serve-static'
+
+// @ts-expect-error any
+import launch from 'launch-editor'
+import { DIR_CLIENT } from '../dir'
 
 export async function startServer() {
   try {
@@ -9,20 +14,8 @@ export async function startServer() {
   }
   catch (error) {
     const app = createApp()
-    app.use('/client', eventHandler(async (event) => {
-      await serveStatic(event, {
-        fallthrough: true,
-        getContents: () => readFile(DIR_CLIENT),
-        getMeta: async () => {
-          return {
-            type: 'text/html',
-            encoding: 'utf8',
-            size: (await stat(DIR_CLIENT)).size,
-          }
-        },
-        indexNames: [`${DIR_CLIENT}/index.html`],
-      })
-    }))
+
+    app.use('/client', fromNodeMiddleware(serveStatic(DIR_CLIENT)))
 
     app.use('/health', eventHandler(() => {
       return {
@@ -30,9 +23,18 @@ export async function startServer() {
       }
     }))
 
-    app.use('/__open-in-editor', eventHandler(async () => {
-      return {
-        body: 'ok',
+    app.use('/__open-in-editor', eventHandler(async (event) => {
+      try {
+        const { file } = getQuery(event) as { file: string }
+        launch(resolve(cwd(), file))
+        return {
+          message: 'ok',
+        }
+      }
+      catch (error) {
+        return {
+          message: 'error',
+        }
       }
     }))
     createServer(toNodeListener(app)).listen(3000)
