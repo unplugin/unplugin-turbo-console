@@ -1,16 +1,11 @@
-
 <script setup lang="ts">
-
-
-const foooooo:string = 'foooooo'
+const foooooo: string = 'foooooo'
 
 console.log('foooooo1111', foooooo)
 </script>
 
 <script lang="ts">
-
-
-const bar:string = 'barrrrrrr'
+const bar: string = 'barrrrrrr'
 
 console.log('barrrrrrr', bar)
 </script>
@@ -20,4 +15,3 @@ console.log('barrrrrrr', bar)
     Hi
   </div>
 </template>
-

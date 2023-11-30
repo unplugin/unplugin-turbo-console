@@ -1,8 +1,13 @@
-import { basename, dirname, resolve } from 'node:path'
+import path, { basename, dirname, resolve } from 'node:path'
 import { promises as fs } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import chalk from 'chalk'
+import { copy } from 'fs-extra'
+
+const DIR_DIST = typeof __dirname !== 'undefined'
+  ? __dirname
+  : dirname(fileURLToPath(import.meta.url))
 
 async function run() {
   // fix cjs exports
@@ -18,6 +23,11 @@ async function run() {
     code += 'exports.default = module.exports;'
     await fs.writeFile(file, code)
   }
+
+  const source = path.join(DIR_DIST, '../src/core/client')
+  const target = path.join(DIR_DIST, '../dist/client')
+
+  copy(source, target)
 }
 
 run()
