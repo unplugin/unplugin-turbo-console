@@ -2,9 +2,9 @@ import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Context, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
-import { filter } from './core/utils'
 import { startServer } from './core/server/index'
-import { viteTransform } from './core/transform'
+import { viteTransform, webpackTransform } from './core/transform'
+import { filter } from './core/utils'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = {}, meta) => {
   return {
@@ -21,7 +21,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
         id,
       }
       // return code
-      return viteTransform(context)
+      if (meta.framework === 'webpack')
+        return webpackTransform(context)
+      else
+        return viteTransform(context)
     },
     vite: {
       apply: 'serve',

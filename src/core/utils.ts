@@ -1,8 +1,8 @@
-import { createFilter } from '@rollup/pluginutils'
+import { createFilter } from 'vite'
 
 export const filter = createFilter(
-  [/\.vue$/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/],
-  [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/, /[\\/]\.vercel[\\/]/],
+  [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/],
+  [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
 )
 
 const commonStyle = 'padding:4px; border-radius:3px; font-weight:500; '
