@@ -1,13 +1,10 @@
 import { createFilter } from 'vite'
 
-<<<<<<<< HEAD:src/core/utils.ts
 export const filter = createFilter(
   [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/],
   [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
 )
 
-========
->>>>>>>> main:src/utils/style.ts
 const commonStyle = 'padding:4px; border-radius:3px; font-weight:500; '
 
 const consoleStyles: Record<string, string> = {
