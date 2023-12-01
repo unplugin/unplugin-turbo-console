@@ -1,12 +1,16 @@
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Context, Options } from './types'
-import { PLUGIN_NAME } from './core/constants'
+import { DETAULT_OPTIONS, PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
 import { transformer } from './core/transform/transformer'
 import { filter } from './core/utils'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = {}, meta) => {
+  const mergedOptions = {
+    ...DETAULT_OPTIONS,
+    ...options,
+  }
   return {
     name: PLUGIN_NAME,
     enforce: meta.framework === 'webpack' ? 'pre' : 'post',
@@ -15,7 +19,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     },
     transform(code, id) {
       const context: Context = {
-        options,
+        options: mergedOptions,
         pluginContext: this,
         code,
         id,
@@ -26,14 +30,16 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     },
     vite: {
       apply: 'serve',
-      configureServer() {
-        startServer()
+      async configureServer() {
+        startServer(mergedOptions.port)
       },
     },
     webpack(compiler) {
-      compiler.hooks.done.tap(PLUGIN_NAME, () => {
-        startServer()
-      })
+      if (compiler.options.mode === 'development') {
+        compiler.hooks.done.tap(PLUGIN_NAME, async () => {
+          startServer(mergedOptions.port)
+        })
+      }
     },
   }
 }

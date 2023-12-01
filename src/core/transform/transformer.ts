@@ -3,8 +3,14 @@ import { viteTransform } from './vite'
 import { webpackTransform } from './webpack'
 
 export function transformer(context: Context) {
-  if (context.meta.framework === 'webpack')
-    return webpackTransform(context)
-  else
+  const { code, meta } = context
+  if (meta.framework === 'webpack') {
+    // only works on webpack development mode
+    if (meta.webpack.compiler.options.mode === 'development')
+      return webpackTransform(context)
+    return code
+  }
+  else {
     return viteTransform(context)
+  }
 }

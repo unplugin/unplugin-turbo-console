@@ -22,7 +22,7 @@ export interface Options {
   /**
    * The specific service port of launch editor server.
    *
-   * @default undefined
+   * @default 3070
    */
   port?: number
 }

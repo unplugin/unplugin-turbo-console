@@ -8,9 +8,9 @@ import serveStatic from 'serve-static'
 import launch from 'launch-editor'
 import { DIR_CLIENT } from '../dir'
 
-export async function startServer() {
+export async function startServer(port: number = 3070) {
   try {
-    await fetch(`http://localhost:${3000}/health`)
+    await fetch(`http://localhost:${port}/health`)
   }
   catch (error) {
     const app = createApp()
@@ -37,6 +37,6 @@ export async function startServer() {
         }
       }
     }))
-    createServer(toNodeListener(app)).listen(3000)
+    createServer(toNodeListener(app)).listen(port)
   }
 }
