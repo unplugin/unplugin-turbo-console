@@ -1,12 +1,29 @@
-# unplugin-starter
+<p align='center'>
+  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/11/upgit_20231101_1698841113.png" >
+</p>
 
-[![NPM version](https://img.shields.io/npm/v/unplugin-starter?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-starter)
+<p align='center'>
+<a href="https://www.npmjs.com/package/vite-plugin-turbo-console">
+<img src="https://img.shields.io/npm/v/vite-plugin-turbo-console?color=a1b858&label=">
+</a>
+<img src="https://img.shields.io/npm/dm/vite-plugin-turbo-console">
+</p>
 
-Starter template for [unplugin](https://github.com/unjs/unplugin).
+<p align="center">
+<a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=vite.config.ts"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+</p>
+
+## 🎥 Screen Recording
+
+![gif](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/11/upgit_20231101_1698844263.gif)
+
+## 🔥 Features
 
 ## Template Usage
 
-To use this template, clone it down using:
+- Support background highlighting of different files. (Currently supporting `.js(x)`, `.ts(x)`, `.vue`, `.svelte`)
+
+- Support jump to editor from console by simple click.
 
 ```bash
 npx degit unplugin/unplugin-starter my-unplugin
@@ -14,19 +31,9 @@ npx degit unplugin/unplugin-starter my-unplugin
 
 And do a global replacement of `unplugin-starter` with your plugin name.
 
-Then you can start developing your unplugin 🔥
+### Vite
 
-To test your plugin, run: `pnpm run dev`
-To release a new version, run: `pnpm run release`
-
-## Install
-
-```bash
-npm i unplugin-starter
-```
-
-<details>
-<summary>Vite</summary><br>
+**vite.config.ts**
 
 ```ts
 // vite.config.ts
@@ -34,90 +41,59 @@ import Starter from 'unplugin-starter/vite'
 
 export default defineConfig({
   plugins: [
-    Starter({ /* options */ }),
+    TurboConsole({
+      /* options here */
+    })
   ],
 })
 ```
 
-Example: [`playground/`](./playground/)
+### Nuxt
 
-<br></details>
-
-<details>
-<summary>Rollup</summary><br>
+**nuxt.config.ts**
 
 ```ts
-// rollup.config.js
-import Starter from 'unplugin-starter/rollup'
-
-export default {
-  plugins: [
-    Starter({ /* options */ }),
-  ],
-}
-```
-
-<br></details>
-
-
-<details>
-<summary>Webpack</summary><br>
-
-```ts
-// webpack.config.js
-module.exports = {
-  /* ... */
-  plugins: [
-    require('unplugin-starter/webpack')({ /* options */ })
-  ]
-}
-```
-
-<br></details>
-
-<details>
-<summary>Nuxt</summary><br>
-
-```ts
-// nuxt.config.js
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    ['unplugin-starter/nuxt', { /* options */ }],
+    'vite-plugin-turbo-console/nuxt'
   ],
+  turboConsole: {
+    /* options here */
+  }
 })
 ```
 
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
-
-<br></details>
-
-<details>
-<summary>Vue CLI</summary><br>
+**options**
 
 ```ts
-// vue.config.js
-module.exports = {
-  configureWebpack: {
-    plugins: [
-      require('unplugin-starter/webpack')({ /* options */ }),
-    ],
-  },
+export interface Options {
+  /**
+   * Add a string prefix to the console log.
+   *
+   * @default ''
+   */
+  prefix?: string
+  /**
+   * Add a string suffix to the console log.
+   *
+   * @default ''
+   */
+  suffix?: string
+  /**
+   * Whether to disable the launch editor feature.
+   *
+   * @default false
+   */
+  disableLaunchEditor?: boolean
 }
 ```
 
-<br></details>
+## ❤️ Credits
+Inspired by 
 
-<details>
-<summary>esbuild</summary><br>
+[babel-plugin-enhance-log](https://github.com/baozouai/babel-plugin-enhance-log)
 
-```ts
-// esbuild.config.js
-import { build } from 'esbuild'
-import Starter from 'unplugin-starter/esbuild'
+[turbo-console-log](https://github.com/Chakroun-Anas/turbo-console-log)
 
-build({
-  plugins: [Starter()],
-})
-```
-
-<br></details>
+[vite-plugin-console-line](https://github.com/lq9958/vite-plugin-console-line)
