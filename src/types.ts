@@ -1,4 +1,4 @@
-import type { UnpluginBuildContext, UnpluginContext } from 'unplugin'
+import type { UnpluginBuildContext, UnpluginContext, UnpluginContextMeta } from 'unplugin'
 
 export interface Options {
   /**
@@ -32,4 +32,16 @@ export interface Context {
   options: Options
   code: string
   id: string
+  meta: UnpluginContextMeta
+}
+
+export interface GenContext {
+  options: Options
+  filePath: string
+  fileName: string
+  fileType: string
+  originalLine: number
+  originalColumn: number
+  argsName: string
+  argType: string
 }

@@ -3,13 +3,13 @@ import { createUnplugin } from 'unplugin'
 import type { Context, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
-import { viteTransform, webpackTransform } from './core/transform'
+import { transformer } from './core/transform/transformer'
 import { filter } from './core/utils'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = {}, meta) => {
   return {
     name: PLUGIN_NAME,
-    enforce: meta.framework === 'vite' ? 'post' : 'pre',
+    enforce: meta.framework === 'webpack' ? 'pre' : 'post',
     transformInclude(id) {
       return filter(id)
     },
@@ -19,12 +19,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
         pluginContext: this,
         code,
         id,
+        meta,
       }
-      // return code
-      if (meta.framework === 'webpack')
-        return webpackTransform(context)
-      else
-        return viteTransform(context)
+
+      return transformer(context)
     },
     vite: {
       apply: 'serve',

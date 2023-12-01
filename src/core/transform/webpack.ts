@@ -1,13 +1,11 @@
-import { basename, extname, relative } from 'node:path'
-import { cwd } from 'node:process'
-import { Buffer } from 'node:buffer'
+import { basename, extname } from 'node:path'
 import { parse } from '@vue/compiler-sfc'
 import type { WithScope } from 'ast-kit'
 import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import MagicString from 'magic-string'
 import type { Context } from '../../types'
-import { getConsoleStyle, launchEditorStyle } from '../utils'
+import { genConsoleString, isConsoleExpress } from './common'
 
 const vuePatterns = [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/]
 
@@ -54,27 +52,18 @@ export function webpackTransform(context: Context) {
 
   walkAST<WithScope<Node>>(program, {
     enter(node) {
-      if (node.type === 'CallExpression'
-        && node.callee.type === 'MemberExpression'
-        && node.callee.object.type === 'Identifier'
-        && node.callee.object.name === 'console'
-        && node.callee.property.type === 'Identifier'
-        && node.callee.property.name === 'log'
-        && node.arguments?.length > 0
-      ) {
+      if (isConsoleExpress(node)) {
         const urlObject = new URL(id, 'file://')
         const fileName = basename(urlObject.pathname)
         const fileType = extname(urlObject.pathname)
 
         const { line, column } = node.loc!.start
+        // @ts-expect-error any
         const args = node.arguments
 
         const argsStart = args[0].start! + sfcLocInfo.start.offset
         const argsEnd = args[args.length - 1].end! + sfcLocInfo.start.offset
         const argType = args[0].type
-        const { prefix, suffix, disableLaunchEditor } = options
-        const _prefix = prefix ? `${prefix} \\n` : ''
-        const _suffix = suffix ? `\\n ${suffix}` : ''
 
         const argsName = magicString.slice(argsStart, argsEnd)
           .toString()
@@ -85,21 +74,19 @@ export function webpackTransform(context: Context) {
         const originalLine = line + sfcLocInfo.start.line - 1
         const originalColumn = column
 
-        // not output when argtype is string or number
-        const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
-        const codePosition = `${relative(cwd(), urlObject.pathname)}:${originalLine}:${(originalColumn || 0) + 1}`
-
-        const launchEditorString = `%c🔦 Jump to Editor http://localhost:3000/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
-        let appendLeftString = ''
-
-        if (!disableLaunchEditor)
-          appendLeftString = `"${lineInfo} %c\\n${launchEditorString}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
-
-        else
-          appendLeftString = `"${lineInfo} %c\\n","${getConsoleStyle(fileType)}","\\n",`
+        const { consoleString, _suffix } = genConsoleString({
+          options,
+          fileName,
+          originalLine,
+          originalColumn,
+          argType,
+          filePath: urlObject.pathname,
+          argsName,
+          fileType,
+        })
 
         magicString
-          .appendLeft(argsStart, appendLeftString)
+          .appendLeft(argsStart, consoleString)
           .appendRight(argsEnd, `,"${_suffix}"`)
       }
     },
