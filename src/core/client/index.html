@@ -19,8 +19,7 @@
    try {
      const hash = window.location.hash
      const decodeBase64 = window.atob(hash.slice(1))
-     const base = new URL(window.location.href).searchParams.get('b') || '/'
-     await fetch(`${base}__open-in-editor?file=${encodeURIComponent(decodeBase64)}`)
+     await fetch(`/__open-in-editor?file=${encodeURIComponent(decodeBase64)}`)
      window.close()
    }
    catch (error) {

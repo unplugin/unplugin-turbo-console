@@ -9,4 +9,5 @@ export default <Options>{
   dts: true,
   splitting: true,
   onSuccess: 'npm run build:fix',
+  shims: true,
 }

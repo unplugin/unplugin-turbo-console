@@ -33,7 +33,7 @@ export async function startServer(port: number = 3070) {
       }
       catch (error) {
         return {
-          message: 'error',
+          error: String(error),
         }
       }
     }))

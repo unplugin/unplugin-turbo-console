@@ -28,11 +28,11 @@ export interface Options {
 }
 
 export interface Context {
-  pluginContext: UnpluginBuildContext & UnpluginContext
+  pluginContext?: UnpluginBuildContext & UnpluginContext
   options: Options
   code: string
   id: string
-  meta: UnpluginContextMeta
+  meta?: UnpluginContextMeta
 }
 
 export interface GenContext {
