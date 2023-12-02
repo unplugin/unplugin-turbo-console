@@ -4,7 +4,10 @@ module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
     plugins: [
-      require('unplugin-turbo-console/webpack')()
+      require('unplugin-turbo-console/webpack')({
+        prefix: 'xxxx',
+        suffix: 'yyy',
+      })
     ]
   }
 })
