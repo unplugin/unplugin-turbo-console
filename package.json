@@ -36,6 +36,11 @@
       "import": "./dist/webpack.js",
       "require": "./dist/webpack.cjs"
     },
+    "./rspack": {
+      "types": "./dist/rspack.d.ts",
+      "import": "./dist/rspack.js",
+      "require": "./dist/rspack.cjs"
+    },
     "./rollup": {
       "types": "./dist/rollup.d.ts",
       "import": "./dist/rollup.js",
@@ -82,6 +87,7 @@
     "play:nuxt": "pnpm run --filter nuxt-app dev",
     "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
     "play:next": "pnpm run --filter nextjs dev",
+    "play:rspack": "pnpm run --filter rspack-vue dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",

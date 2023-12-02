@@ -4,7 +4,7 @@ import type { Context, Options } from './types'
 import { DETAULT_OPTIONS, PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
 import { transformer } from './core/transform/transformer'
-import { filter } from './core/utils'
+import { filter, getEnforce } from './core/utils'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = {}, meta) => {
   const mergedOptions = {
@@ -13,9 +13,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
   }
   return {
     name: PLUGIN_NAME,
-    enforce: meta.framework === 'webpack' ? 'pre' : 'post',
+    enforce: getEnforce[meta.framework] || 'post',
     transformInclude(id) {
-      return filter(id)
+      return id.includes('App.vue')
     },
     transform(code, id) {
       const context: Context = {
@@ -35,6 +35,13 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
       },
     },
     webpack(compiler) {
+      if (compiler.options.mode === 'development') {
+        compiler.hooks.done.tap(PLUGIN_NAME, async () => {
+          startServer(mergedOptions.port)
+        })
+      }
+    },
+    rspack(compiler) {
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tap(PLUGIN_NAME, async () => {
           startServer(mergedOptions.port)

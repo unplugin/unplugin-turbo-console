@@ -23,3 +23,13 @@ export function getConsoleStyle(fileType: string): string {
 }
 
 export const launchEditorStyle = 'background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px'
+
+type Framework = 'rollup' | 'vite' | 'webpack' | 'esbuild' | 'rspack'
+
+export const getEnforce: Record<Framework, 'pre' | 'post'> = {
+  rollup: 'post',
+  vite: 'post',
+  webpack: 'pre',
+  esbuild: 'post',
+  rspack: 'pre',
+}
