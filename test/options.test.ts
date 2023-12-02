@@ -1,10 +1,11 @@
+import path from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
 import { optionWithDisableLaunchEditor, optionWithPrefix } from './fixtures/option'
 
 vi.mock('node:process', () => {
   return {
-    cwd: vi.fn(() => '/mock/path'),
+    cwd: vi.fn(() => path.join('/', 'mock', 'path')),
   }
 })
 
