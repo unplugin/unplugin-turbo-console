@@ -5,7 +5,7 @@ export const optionWithPrefix = {
     disableLaunchEditor: false,
   },
   code: `console.log('hello javascript')`,
-  id: 'index.js',
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
 
 export const optionWithDisableLaunchEditor = {
@@ -13,5 +13,5 @@ export const optionWithDisableLaunchEditor = {
     disableLaunchEditor: true,
   },
   code: `console.log('hello javascript')`,
-  id: 'index.js',
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }

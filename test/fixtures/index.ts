@@ -24,7 +24,7 @@ export default defineComponent({
 });
 </script>
 `,
-  id: 'App.vue',
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
 
 export const webpackVueScriptSetup = {
@@ -44,7 +44,7 @@ export const webpackVueScriptSetup = {
     </div>
   </template>
 `,
-  id: 'App.vue',
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
 
 export const webpackJS = {
@@ -55,5 +55,5 @@ export const webpackJS = {
     port: 3090,
   },
   code: `console.log('hello javascript')`,
-  id: 'index.js',
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }

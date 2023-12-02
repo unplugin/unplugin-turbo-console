@@ -2,13 +2,13 @@
 
 exports[`webpack js transform > script 1`] = `
 {
-  "code": "console.log(\\"%c🚀 index.js:1 %c\\\\n%c🔦 Jump to Editor http://localhost:3090/client#Li4vLi4vLi4vLi4vaW5kZXguanM6MTox\\",\\"padding:2px 5px; border-radius:3px;color: #111827; background: #F7DF1E\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\")",
+  "code": "console.log(\\"%c🚀 App.vue:1 %c\\\\n%c🔦 Jump to Editor http://localhost:3090/client#Li4vLi4vLi4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,gSAAY,qBAAkB",
+    "mappings": "AAAA,wVAAY,qBAAkB",
     "names": [],
     "sources": [
-      "index.js",
+      "/home/runner/work/unplugin-turbo-console/src/App.vue",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -27,7 +27,7 @@ exports[`webpack vue transform > script 1`] = `
 import { defineComponent } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 
-console.log(\\"%c🚀 App.vue:10 %c\\\\n%c🔦 Jump to Editor http://localhost:3070/client#Li4vLi4vLi4vLi4vQXBwLnZ1ZToxMDox\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'App.vue',\\"\\")
+console.log(\\"%c🚀 App.vue:10 %c\\\\n%c🔦 Jump to Editor http://localhost:3070/client#Li4vLi4vLi4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjEwOjE=\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'App.vue',\\"\\")
 
 export default defineComponent({
   name: 'App',
@@ -39,10 +39,10 @@ export default defineComponent({
 ",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA,6RAAY,YAAS;AACrB;AACA;AACA;AACA;AACA;AACA;AACA;AACA;",
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA,yVAAY,YAAS;AACrB;AACA;AACA;AACA;AACA;AACA;AACA;AACA;",
     "names": [],
     "sources": [
-      "App.vue",
+      "/home/runner/work/unplugin-turbo-console/src/App.vue",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -53,7 +53,7 @@ export default defineComponent({
 exports[`webpack vue transform > script setup 1`] = `
 {
   "code": "<script setup lang=\\"ts\\">
-  console.log(\\"%c🚀 App.vue:2 %c\\\\n%c🔦 Jump to Editor http://localhost:3090/client#Li4vLi4vLi4vLi4vQXBwLnZ1ZToyOjM=\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'script setup',\\"\\")
+  console.log(\\"%c🚀 App.vue:2 %c\\\\n%c🔦 Jump to Editor http://localhost:3090/client#Li4vLi4vLi4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjI6Mw==\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'script setup',\\"\\")
   </script>
   
   <template>
@@ -64,10 +64,10 @@ exports[`webpack vue transform > script setup 1`] = `
 ",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA;AACA,8RAAc,iBAAc;AAC5B;AACA;AACA;AACA;AACA;AACA;AACA;",
+    "mappings": "AAAA;AACA,0VAAc,iBAAc;AAC5B;AACA;AACA;AACA;AACA;AACA;AACA;",
     "names": [],
     "sources": [
-      "App.vue",
+      "/home/runner/work/unplugin-turbo-console/src/App.vue",
     ],
     "sourcesContent": undefined,
     "version": 3,
