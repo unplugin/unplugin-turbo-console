@@ -1,11 +1,11 @@
-import path from 'node:path'
+import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
 import { webpackJS, webpackVue, webpackVueScriptSetup } from './fixtures'
 
 vi.mock('node:process', () => {
   return {
-    cwd: vi.fn(() => path.join('/', 'mock', 'path')),
+    cwd: vi.fn(() => join('/', 'mock', 'path')),
   }
 })
 describe('webpack vue transform', () => {
