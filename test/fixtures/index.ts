@@ -1,60 +1,59 @@
-import type { Options } from '../../src/types'
-
-interface TestObj {
-  id: string
-  code: string
-  options: Options
-}
-
-export const ts: TestObj = {
-  id: '/text/index.ts',
-  code: `
-const foo:string = 'foo'
-console.log(foo)
-  `,
-  options: {},
-
-}
-
-export const js: TestObj = {
-  id: '/text/index.js',
-  code: `
-  const bar = 'bar'
-  console.log(bar)
-  `,
+export const webpackVue = {
   options: {
-    prefix: '🚀',
-    suffix: '🐶',
+    prefix: '',
+    suffix: '',
+    disableLaunchEditor: false,
+    port: 3070,
   },
+  code: `<template>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import HelloWorld from './components/HelloWorld.vue';
+
+console.log('App.vue')
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    HelloWorld
+  }
+});
+</script>
+`,
+  id: 'App.vue',
 }
 
-export const vue: TestObj = {
-  id: '/text/index.vue',
-  code: `
-
-  <script setup lang="ts">
-
-
-  const foooooo:string = 'foooooo'
-  
-  console.log('foooooo1111', foooooo)
-  </script>
-  
-  <script lang="ts">
-  
-  
-  const bar:string = 'barrrrrrr'
-  
-  console.log('barrrrrrr', bar)
+export const webpackVueScriptSetup = {
+  options: {
+    prefix: '',
+    suffix: '',
+    disableLaunchEditor: false,
+    port: 3090,
+  },
+  code: `<script setup lang="ts">
+  console.log('script setup')
   </script>
   
   <template>
     <div>
-      Hi
+      script setup
     </div>
   </template>
-  
-  
-  `,
-  options: {},
+`,
+  id: 'App.vue',
+}
+
+export const webpackJS = {
+  options: {
+    prefix: '',
+    suffix: '',
+    disableLaunchEditor: false,
+    port: 3090,
+  },
+  code: `console.log('hello javascript')`,
+  id: 'index.js',
 }

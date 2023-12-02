@@ -1,54 +1,25 @@
 import { describe, expect, it } from 'vitest'
-import { transformer } from '../src/core/transform'
-import { js, ts, vue } from './fixtures/index'
+import { webpackTransform } from '../src/core/transform/webpack'
+import { webpackJS, webpackVue, webpackVueScriptSetup } from './fixtures'
 
-describe('transformer', () => {
-  it('transform js', () => {
-    expect(transformer(js.code, js.id, js.options)).toMatchInlineSnapshot(`
-      "
-        const bar = 'bar'
-        console.log(\\"🚀 \\\\n %cindex.js:3 ~ bar\\",\\"padding:4px; border-radius:5px; font-weight:600; color: #111827; background: #F7DF1E\\",bar,\\"\\\\n 🐶\\")
-        "
-    `)
+describe('webpack vue transform', () => {
+  it('script', () => {
+    expect(
+      webpackTransform(webpackVue),
+    ).matchSnapshot()
   })
 
-  it('transform ts', () => {
-    expect(transformer(ts.code, ts.id, ts.options)).toMatchInlineSnapshot(`
-      "
-      const foo:string = 'foo'
-      console.log(\\" %cindex.ts:3 ~ foo\\",\\"padding:4px; border-radius:5px; font-weight:600; color: #fff; background: #3178C6\\",foo,\\"\\")
-        "
-    `)
+  it('script setup', () => {
+    expect(
+      webpackTransform(webpackVueScriptSetup),
+    ).matchSnapshot()
   })
+})
 
-  it('transform vue', () => {
-    expect(transformer(vue.code, vue.id, vue.options)).toMatchInlineSnapshot(`
-      "
-
-        <script setup lang=\\"ts\\">
-
-
-        const foooooo:string = 'foooooo'
-        
-        console.log(\\" %cindex.vue:8 ~ 'foooooo1111', foooooo\\",\\"padding:4px; border-radius:5px; font-weight:600; color: #fff; background: #4FC08D\\",'foooooo1111', foooooo,\\"\\")
-        </script>
-        
-        <script lang=\\"ts\\">
-        
-        
-        const bar:string = 'barrrrrrr'
-        
-        console.log(\\" %cindex.vue:16 ~ 'barrrrrrr', bar\\",\\"padding:4px; border-radius:5px; font-weight:600; color: #fff; background: #4FC08D\\",'barrrrrrr', bar,\\"\\")
-        </script>
-        
-        <template>
-          <div>
-            Hi
-          </div>
-        </template>
-        
-        
-        "
-    `)
+describe('webpack js transform', () => {
+  it('script', () => {
+    expect(
+      webpackTransform(webpackJS),
+    ).matchSnapshot()
   })
 })

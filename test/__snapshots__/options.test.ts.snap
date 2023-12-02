@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`options > disable launch editor 1`] = `
+{
+  "code": "console.log(\\"%c🚀 index.js:1 %c\\\\n\\",\\"padding:2px 5px; border-radius:3px;color: #111827; background: #F7DF1E\\",\\"\\\\n\\",'hello javascript',\\"\\")",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA,iHAAY,qBAAkB",
+    "names": [],
+    "sources": [
+      "index.js",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`options > perfix suffix 1`] = `
+{
+  "code": "console.log(\\"xxxx \\\\n%c🚀 index.js:1 %c\\\\n%c🔦 Jump to Editor http://localhost:undefined/client#Li4vLi4vLi4vLi4vaW5kZXguanM6MTox\\",\\"padding:2px 5px; border-radius:3px;color: #111827; background: #F7DF1E\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA,4SAAY,2BAAkB",
+    "names": [],
+    "sources": [
+      "index.js",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
