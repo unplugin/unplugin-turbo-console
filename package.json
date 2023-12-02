@@ -81,6 +81,7 @@
     "play:svelte-kit": "pnpm run --filter svelte-kit dev",
     "play:nuxt": "pnpm run --filter nuxt-app dev",
     "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
+    "play:next": "pnpm run --filter nextjs dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
