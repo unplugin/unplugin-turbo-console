@@ -1,4 +1,4 @@
-import { createFilter } from 'vite'
+import { createFilter } from '@rollup/pluginutils'
 
 export const filter = createFilter(
   [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/],
