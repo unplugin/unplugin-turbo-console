@@ -1,6 +1,12 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
 import { webpackJS, webpackVue, webpackVueScriptSetup } from './fixtures'
+
+vi.mock('node:process', () => {
+  return {
+    cwd: vi.fn(() => '/mock/path'),
+  }
+})
 
 describe('webpack vue transform', () => {
   it('script', () => {

@@ -18,10 +18,10 @@ exports[`options > disable launch editor 1`] = `
 
 exports[`options > perfix suffix 1`] = `
 {
-  "code": "console.log(\\"xxxx \\\\n%c🚀 App.vue:1 %c\\\\n%c🔦 Jump to Editor http://localhost:undefined/client#Li4vLi4vLi4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
+  "code": "console.log(\\"xxxx \\\\n%c🚀 App.vue:1 %c\\\\n%c🔦 Jump to Editor http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,oWAAY,2BAAkB",
+    "mappings": "AAAA,4VAAY,2BAAkB",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",

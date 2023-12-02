@@ -1,6 +1,12 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
 import { optionWithDisableLaunchEditor, optionWithPrefix } from './fixtures/option'
+
+vi.mock('node:process', () => {
+  return {
+    cwd: vi.fn(() => '/mock/path'),
+  }
+})
 
 describe('options', () => {
   it('perfix suffix', () => {
