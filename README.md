@@ -15,7 +15,9 @@
 
 ## 🎥 Screen Recording
 
-![gif](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/11/upgit_20231101_1698844263.gif)
+<p align='center'>
+  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/12/upgit_20231202_1701520681.gif" >
+</p>
 
 ## 🔥 Features
 
