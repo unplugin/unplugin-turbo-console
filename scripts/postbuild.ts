@@ -5,10 +5,6 @@ import fg from 'fast-glob'
 import chalk from 'chalk'
 import { copy } from 'fs-extra'
 
-const DIR_DIST = typeof __dirname !== 'undefined'
-  ? __dirname
-  : dirname(fileURLToPath(import.meta.url))
-
 async function run() {
   // fix cjs exports
   const files = await fg('*.cjs', {
@@ -24,8 +20,8 @@ async function run() {
     await fs.writeFile(file, code)
   }
 
-  const source = path.join(DIR_DIST, '../src/core/client')
-  const target = path.join(DIR_DIST, '../dist/client')
+  const source = path.join(dirname(fileURLToPath(import.meta.url)), '../src/core/client')
+  const target = path.join(dirname(fileURLToPath(import.meta.url)), '../dist/client')
 
   copy(source, target)
 }
