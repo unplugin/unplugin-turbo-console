@@ -40,6 +40,9 @@ pnpm i -D unplugin-turbo-console
 
 ## 🦄 Usage
 
+> [!TIP]
+> You can view all project examples [here](https://github.com/yuyinws/vite-plugin-turbo-console/tree/main/examples).
+
 <details>
 <summary>Vite</summary><br>
 
@@ -80,7 +83,23 @@ export default defineNuxtConfig({
 
 
 <details>
-<summary>Vue-cli</summary><br>
+<summary>Webpack</summary><br>
+
+```js
+// webpack.config.js
+module.exports = {
+  /* ... */
+  plugins: [
+    require('unplugin-turbo-console/webpack')({ /* options */ }),
+  ],
+}
+```
+
+<br></details>
+
+
+<details>
+<summary>Vue CLI</summary><br>
 
 ```js
 // vue.config.js
