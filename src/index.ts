@@ -15,7 +15,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     name: PLUGIN_NAME,
     enforce: getEnforce[meta.framework] || 'post',
     transformInclude(id) {
-      return id.includes('App.vue')
+      return filter(id)
     },
     transform(code, id) {
       const context: Context = {
