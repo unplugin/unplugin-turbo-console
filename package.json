@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@8.6.12",
-  "description": "",
+  "description": "Improve the Developer Experience of console.log()",
   "license": "MIT",
   "homepage": "https://github.com/yuyinws/unplugin-turbo-console#readme",
   "repository": {
