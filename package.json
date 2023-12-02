@@ -131,6 +131,7 @@
     "h3": "^1.9.0",
     "launch-editor": "^2.6.1",
     "magic-string": "^0.30.5",
+    "pathe": "^1.1.1",
     "serve-static": "^1.15.0",
     "source-map-js": "^1.0.2",
     "unplugin": "^1.5.1"
@@ -149,7 +150,6 @@
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
     "nodemon": "^3.0.1",
-    "pathe": "^1.1.1",
     "rimraf": "^5.0.5",
     "rollup": "^4.6.1",
     "tsup": "^8.0.1",

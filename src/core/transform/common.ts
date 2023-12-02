@@ -1,6 +1,6 @@
-import { relative } from 'node:path'
 import { cwd } from 'node:process'
 import { Buffer } from 'node:buffer'
+import { relative } from 'pathe'
 import type { Node } from '@babel/types'
 import type { GenContext } from '../../types'
 import { getConsoleStyle, launchEditorStyle } from '../utils'
