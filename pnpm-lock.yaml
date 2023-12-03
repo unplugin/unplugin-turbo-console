@@ -14,6 +14,9 @@ importers:
       ast-kit:
         specifier: ^0.11.2
         version: 0.11.2(rollup@4.6.1)
+      astro:
+        specifier: ^3
+        version: 3.6.4(@types/node@20.10.2)(typescript@5.3.2)
       esbuild:
         specifier: '*'
         version: 0.19.8
@@ -3706,7 +3709,7 @@ packages:
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
     dependencies:
       '@types/eslint': 8.44.8
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.5
     dev: true
 
   /@types/eslint@8.44.8:
@@ -14963,7 +14966,7 @@ packages:
       mlly: 1.4.2
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 5.0.4(@types/node@20.10.2)
+      vite: 4.5.0(@types/node@20.10.2)
     transitivePeerDependencies:
       - '@types/node'
       - less
