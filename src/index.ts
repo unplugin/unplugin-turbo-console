@@ -30,7 +30,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     },
     vite: {
       apply: 'serve',
-      async configureServer() {
+      configureServer() {
         if (options.disableLaunchEditor)
           return
 
@@ -41,7 +41,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
       if (options.disableLaunchEditor)
         return
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, async () => {
+        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
+          if (state.hasErrors())
+            return
           startServer(mergedOptions.port)
         })
       }
@@ -50,7 +52,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
       if (options.disableLaunchEditor)
         return
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, async () => {
+        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
+          if (state.hasErrors())
+            return
           startServer(mergedOptions.port)
         })
       }
