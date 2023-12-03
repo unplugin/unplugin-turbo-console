@@ -16,7 +16,7 @@
 ## 🎥 Screen Recording
 
 <p align='center'>
-  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/12/upgit_20231202_1701520681.gif" >
+  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/12/upgit_20231203_1701565919.gif" >
 </p>
 
 ## 🔥 Features
@@ -25,9 +25,9 @@
 
 - Support insert custom prefix and suffix.
 
-- Support background highlighting of different files. (Such as `.js(x)`, `.ts(x)`, `.vue`, `.svelte`)
+- Support highlight the console output based on different file types. (Such as `js(x)`, `ts(x)`, `vue`, `svelte`)
 
-- Support jump to editor source code from console by one click.
+- Support jump to the editor source code from the console output with one click.
 
 ## 📦 Install
 
