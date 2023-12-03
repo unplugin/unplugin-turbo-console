@@ -1,6 +1,7 @@
 <p align='center'>
-  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/12/upgit_20231202_1701506091.png" >
+  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/12/upgit_20231203_1701604926.png" >
 </p>
+
 
 <p align='center'>
 <a href="https://www.npmjs.com/package/unplugin-turbo-console">
@@ -12,6 +13,7 @@
 <p align="center">
 <a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=vite.config.ts"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
 </p>
+
 
 ## 🎥 Screen Recording
 
@@ -25,7 +27,7 @@
 
 - Support insert custom prefix and suffix.
 
-- Support highlight the console output based on different file types. (Such as `js(x)`, `ts(x)`, `vue`, `svelte`)
+- Support highlight the console output based on different file types. (such as `js(x)`, `ts(x)`, `vue`, `svelte`, `astro`)
 
 - Support jump to the editor source code from the console output with one click.
 
@@ -120,6 +122,25 @@ module.exports = defineConfig({
 ```
 
 <br></details>
+
+<details>
+<summary>Astro</summary><br>
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config'
+import TurboConsole from 'unplugin-turbo-console/astro'
+
+// https://astro.build/config
+export default defineConfig({
+  integrations: [
+    TurboConsole()
+  ]
+})
+```
+
+<br></details>
+
 
 
 <details>
