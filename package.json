@@ -26,6 +26,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./astro": {
+      "types": "./dist/astro.d.ts",
+      "import": "./dist/astro.js",
+      "require": "./dist/astro.cjs"
+    },
     "./vite": {
       "types": "./dist/vite.d.ts",
       "import": "./dist/vite.js",
@@ -96,6 +101,7 @@
   "peerDependencies": {
     "@nuxt/kit": "^3",
     "@nuxt/schema": "^3",
+    "astro": "^3",
     "esbuild": "*",
     "rollup": "^3",
     "vite": ">=3",
@@ -122,6 +128,9 @@
       "optional": true
     },
     "vue": {
+      "optional": true
+    },
+    "astro": {
       "optional": true
     }
   },

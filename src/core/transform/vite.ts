@@ -17,8 +17,9 @@ export function viteTransform(context: Context) {
   walkAST<WithScope<Node>>(program, {
     enter(node) {
       if (isConsoleExpress(node)) {
-        const fileName = basename(id)
-        const fileType = extname(id)
+        const urlObject = new URL(id, 'file://')
+        const fileName = basename(urlObject.pathname)
+        const fileType = extname(urlObject.pathname)
 
         const { line, column } = node.loc!.start
         // @ts-expect-error any
@@ -49,7 +50,7 @@ export function viteTransform(context: Context) {
           originalLine,
           originalColumn,
           argType,
-          filePath: id,
+          filePath: urlObject.pathname,
           argsName,
           fileType,
         })
