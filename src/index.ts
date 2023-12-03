@@ -31,10 +31,15 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     vite: {
       apply: 'serve',
       async configureServer() {
+        if (options.disableLaunchEditor)
+          return
+
         startServer(mergedOptions.port)
       },
     },
     webpack(compiler) {
+      if (options.disableLaunchEditor)
+        return
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tap(PLUGIN_NAME, async () => {
           startServer(mergedOptions.port)
@@ -42,6 +47,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
       }
     },
     rspack(compiler) {
+      if (options.disableLaunchEditor)
+        return
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tap(PLUGIN_NAME, async () => {
           startServer(mergedOptions.port)
