@@ -2,10 +2,10 @@
 
 exports[`options > disable launch editor 1`] = `
 {
-  "code": "console.log(\\"%c🚀 App.vue:1 %c\\\\n\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\\\n\\",'hello javascript',\\"\\")",
+  "code": "console.log(\\"%c🚀 App.vue:1 %c\\\\n\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;color: #fff; background: #4FC08D\\",\\"\\\\n\\",'hello javascript',\\"\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,6GAAY,qBAAkB",
+    "mappings": "AAAA,qHAAY,qBAAkB",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
@@ -18,10 +18,10 @@ exports[`options > disable launch editor 1`] = `
 
 exports[`options > perfix suffix 1`] = `
 {
-  "code": "console.log(\\"xxxx \\\\n%c🚀 App.vue:1 %c\\\\n%c🔦 Jump to Editor http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
+  "code": "console.log(\\"xxxx \\\\n%c🚀 App.vue:1 %c%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;color: #fff; background: #4FC08D\\",\\"\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,4VAAY,2BAAkB",
+    "mappings": "AAAA,4UAAY,2BAAkB",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
