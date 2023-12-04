@@ -213,11 +213,34 @@ export interface Options {
    */
   disableLaunchEditor?: boolean
   /**
+   * Whether to disable the highlight output feature.
+   *
+   * @default false
+   */
+  disableHighlight?: boolean
+  /**
    * The specific service port of launch editor server.
    *
    * @default 3070
    */
   port?: number
+}
+
+export interface Context {
+  pluginContext?: UnpluginBuildContext & UnpluginContext
+  options: Options
+  code: string
+  id: string
+  meta?: UnpluginContextMeta
+}
+
+export interface GenContext {
+  options: Options
+  originalLine: number
+  originalColumn: number
+  argsName: string
+  argType: string
+  id: string
 }
 ```
 
