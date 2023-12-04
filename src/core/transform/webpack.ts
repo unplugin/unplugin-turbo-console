@@ -1,4 +1,3 @@
-import { basename, extname } from 'node:path'
 import { parse } from '@vue/compiler-sfc'
 import type { WithScope } from 'ast-kit'
 import { babelParse, getLang, walkAST } from 'ast-kit'
