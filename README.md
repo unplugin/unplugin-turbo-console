@@ -225,23 +225,6 @@ export interface Options {
    */
   port?: number
 }
-
-export interface Context {
-  pluginContext?: UnpluginBuildContext & UnpluginContext
-  options: Options
-  code: string
-  id: string
-  meta?: UnpluginContextMeta
-}
-
-export interface GenContext {
-  options: Options
-  originalLine: number
-  originalColumn: number
-  argsName: string
-  argType: string
-  id: string
-}
 ```
 
 ## Migrate from `vite-plugin-turbo-console`
