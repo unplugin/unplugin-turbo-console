@@ -20,6 +20,12 @@ export interface Options {
    */
   disableLaunchEditor?: boolean
   /**
+   * Whether to disable the highlight output feature.
+   *
+   * @default false
+   */
+  disableHighlight?: boolean
+  /**
    * The specific service port of launch editor server.
    *
    * @default 3070

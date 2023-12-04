@@ -15,3 +15,26 @@ export const optionWithDisableLaunchEditor = {
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
+
+export const optionWithDisableHightlight = {
+  options: {
+    disableHighlight: true,
+  },
+  code: `console.log('hello javascript')`,
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
+}
+
+export const optionWithDisableAll = {
+  options: {
+    disableLaunchEditor: true,
+    disableHighlight: true,
+  },
+  code: `console.log('hello javascript')`,
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
+}
+
+export const emptyOption = {
+  options: {},
+  code: `console.log('hello javascript')`,
+  id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
+}

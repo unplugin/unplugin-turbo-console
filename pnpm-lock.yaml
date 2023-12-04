@@ -256,6 +256,9 @@ importers:
       vite:
         specifier: ^4.4.11
         version: 4.5.0(@types/node@18.19.1)
+      vite-plugin-inspect:
+        specifier: ^0.7.41
+        version: 0.7.42(@nuxt/kit@3.8.2)(rollup@4.6.1)(vite@4.5.0)
       vue-tsc:
         specifier: ^1.8.19
         version: 1.8.24(typescript@5.2.2)
@@ -15050,7 +15053,7 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       sirv: 2.0.3
-      vite: 4.5.0(@types/node@20.10.2)
+      vite: 4.5.0(@types/node@18.19.1)
     transitivePeerDependencies:
       - rollup
       - supports-color

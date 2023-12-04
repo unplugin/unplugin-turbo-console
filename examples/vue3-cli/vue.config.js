@@ -5,8 +5,7 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [
       require('unplugin-turbo-console/webpack')({
-        prefix: 'xxxx',
-        suffix: 'yyy',
+        disableHighlight: true
       })
     ]
   }

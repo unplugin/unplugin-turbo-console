@@ -8,8 +8,7 @@ import { getConsoleStyle, launchEditorStyle } from '../utils'
 export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
-  const { prefix, suffix, disableLaunchEditor, port } = options
-
+  const { prefix, suffix, disableLaunchEditor, port, disableHighlight } = options
   const _prefix = prefix ? `${prefix} \\n` : ''
   const _suffix = suffix ? `\\n ${suffix}` : ''
 
@@ -29,11 +28,14 @@ export function genConsoleString(genContext: GenContext) {
 
   let consoleString = ''
 
-  if (!disableLaunchEditor)
-    consoleString = `"${lineInfo} %c${launchEditorString}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
+  if (!disableHighlight && !disableHighlight)
+    consoleString = `"${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
 
-  else
-    consoleString = `"${lineInfo} %c\\n","${getConsoleStyle(fileType)}","\\n",`
+  if (disableHighlight && !disableLaunchEditor)
+    consoleString = `"${launchEditorString}","${launchEditorStyle}","\\n",`
+
+  if (!disableHighlight && disableLaunchEditor)
+    consoleString = `"${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
 
   return {
     consoleString,

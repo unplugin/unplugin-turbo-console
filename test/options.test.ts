@@ -1,7 +1,7 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
-import { optionWithDisableLaunchEditor, optionWithPrefix } from './fixtures/option'
+import { emptyOption, optionWithDisableAll, optionWithDisableHightlight, optionWithDisableLaunchEditor, optionWithPrefix } from './fixtures/option'
 
 vi.mock('node:process', () => {
   return {
@@ -10,6 +10,14 @@ vi.mock('node:process', () => {
 })
 
 describe('options', () => {
+  it('empty option', () => {
+    expect(
+      webpackTransform(
+        emptyOption,
+      ),
+    ).toMatchSnapshot()
+  })
+
   it('perfix suffix', () => {
     expect(
       webpackTransform(
@@ -22,6 +30,22 @@ describe('options', () => {
     expect(
       webpackTransform(
         optionWithDisableLaunchEditor,
+      ),
+    ).toMatchSnapshot()
+  })
+
+  it('disable highlight editor', () => {
+    expect(
+      webpackTransform(
+        optionWithDisableHightlight,
+      ),
+    ).toMatchSnapshot()
+  })
+
+  it('disable all', () => {
+    expect(
+      webpackTransform(
+        optionWithDisableAll,
       ),
     ).toMatchSnapshot()
   })
