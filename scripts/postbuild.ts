@@ -1,6 +1,6 @@
-import path, { basename, dirname, resolve } from 'pathe'
 import { promises as fs } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { basename, dirname, join, resolve } from 'pathe'
 import fg from 'fast-glob'
 import chalk from 'chalk'
 import { copy } from 'fs-extra'
@@ -20,8 +20,8 @@ async function run() {
     await fs.writeFile(file, code)
   }
 
-  const source = path.join(dirname(fileURLToPath(import.meta.url)), '../src/core/client')
-  const target = path.join(dirname(fileURLToPath(import.meta.url)), '../dist/client')
+  const source = join(dirname(fileURLToPath(import.meta.url)), '../src/core/client')
+  const target = join(dirname(fileURLToPath(import.meta.url)), '../dist/client')
 
   copy(source, target)
 }
