@@ -37,11 +37,9 @@ export interface Context {
 
 export interface GenContext {
   options: Options
-  filePath: string
-  fileName: string
-  fileType: string
   originalLine: number
   originalColumn: number
   argsName: string
   argType: string
+  id: string
 }

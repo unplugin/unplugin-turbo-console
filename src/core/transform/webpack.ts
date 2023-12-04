@@ -48,10 +48,6 @@ export function webpackTransform(context: Context) {
   walkAST<WithScope<Node>>(program, {
     enter(node) {
       if (isConsoleExpress(node)) {
-        const urlObject = new URL(id, 'file://')
-        const fileName = basename(urlObject.pathname)
-        const fileType = extname(urlObject.pathname)
-
         const { line, column } = node.loc!.start
         // @ts-expect-error any
         const args = node.arguments
@@ -71,13 +67,11 @@ export function webpackTransform(context: Context) {
 
         const { consoleString, _suffix } = genConsoleString({
           options,
-          fileName,
           originalLine,
           originalColumn,
           argType,
-          filePath: urlObject.pathname,
           argsName,
-          fileType,
+          id,
         })
 
         magicString

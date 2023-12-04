@@ -1,16 +1,21 @@
 import { cwd } from 'node:process'
 import { Buffer } from 'node:buffer'
-import { relative } from 'pathe'
+import { basename, extname, relative } from 'pathe'
 import type { Node } from '@babel/types'
 import type { GenContext } from '../../types'
 import { getConsoleStyle, launchEditorStyle } from '../utils'
 
 export function genConsoleString(genContext: GenContext) {
-  const { options, fileName, originalColumn, originalLine, argType, filePath, argsName, fileType } = genContext
+  const { options, originalColumn, originalLine, argType, argsName, id } = genContext
   const { prefix, suffix, disableLaunchEditor, port } = options
 
   const _prefix = prefix ? `${prefix} \\n` : ''
   const _suffix = suffix ? `\\n ${suffix}` : ''
+
+  const urlObject = new URL(id, 'file://')
+  const filePath = urlObject.pathname
+  const fileName = basename(filePath)
+  const fileType = extname(filePath)
 
   // not output when argtype is string or number
   const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
