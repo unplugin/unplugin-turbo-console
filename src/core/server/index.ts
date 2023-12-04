@@ -1,6 +1,6 @@
 import { createServer } from 'node:http'
-import { resolve } from 'node:path'
 import { cwd } from 'node:process'
+import { resolve } from 'pathe'
 import { createApp, eventHandler, fromNodeMiddleware, getQuery, toNodeListener } from 'h3'
 import serveStatic from 'serve-static'
 

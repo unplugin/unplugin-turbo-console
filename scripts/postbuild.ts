@@ -1,4 +1,4 @@
-import path, { basename, dirname, resolve } from 'node:path'
+import path, { basename, dirname, resolve } from 'pathe'
 import { promises as fs } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'

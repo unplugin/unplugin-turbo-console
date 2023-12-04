@@ -1,4 +1,4 @@
-import { dirname, resolve } from 'node:path'
+import { dirname, resolve } from 'pathe'
 import { fileURLToPath } from 'node:url'
 
 export const DIR_DIST = typeof __dirname !== 'undefined'
