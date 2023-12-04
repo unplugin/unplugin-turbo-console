@@ -5,7 +5,7 @@ export const filter = createFilter(
   [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
 )
 
-const commonStyle = 'padding:2px 5px; border-radius:3px;'
+const commonStyle = 'padding:2px 5px; border-radius:3px 0 0 3px;'
 
 const consoleStyles: Record<string, string> = {
   '.js': `${commonStyle}color: #111827; background: #F7DF1E`,
@@ -22,7 +22,7 @@ export function getConsoleStyle(fileType: string): string {
   return consoleStyles[fileType] ?? consoleStyles.default
 }
 
-export const launchEditorStyle = 'background: #00DC8220;padding:2px 5px;border-radius:3px;margin-top:5px;margin-bottom:5px'
+export const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px'
 
 type Framework = 'rollup' | 'vite' | 'webpack' | 'esbuild' | 'rspack'
 

@@ -2,7 +2,9 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 
-console.log('App.vue')
+const whatYouSeeIsWhatYouGetwhatYouSeeIsWhatYouGet = 'Hello World'
+
+console.log(whatYouSeeIsWhatYouGetwhatYouSeeIsWhatYouGet)
 </script>
 
 <template>

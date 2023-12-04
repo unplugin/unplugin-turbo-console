@@ -6,7 +6,8 @@ import type { GenContext } from '../../types'
 import { getConsoleStyle, launchEditorStyle } from '../utils'
 
 export function genConsoleString(genContext: GenContext) {
-  const { options, originalColumn, originalLine, argType, argsName, id } = genContext
+  const { options, originalColumn, originalLine, argType, id } = genContext
+  let { argsName } = genContext
   const { prefix, suffix, disableLaunchEditor, port } = options
 
   const _prefix = prefix ? `${prefix} \\n` : ''
@@ -17,16 +18,19 @@ export function genConsoleString(genContext: GenContext) {
   const fileName = basename(filePath)
   const fileType = extname(filePath)
 
+  if (argsName?.length > 30)
+    argsName = `${argsName.slice(0, 30)}...`
+
   // not output when argtype is string or number
   const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${relative(cwd(), filePath)}:${originalLine}:${(originalColumn || 0) + 1}`
 
-  const launchEditorString = `%c🔦 Jump to Editor http://localhost:${port}/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
+  const launchEditorString = `%c🔦 http://localhost:${port}/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
 
   let consoleString = ''
 
   if (!disableLaunchEditor)
-    consoleString = `"${lineInfo} %c\\n${launchEditorString}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
+    consoleString = `"${lineInfo} %c${launchEditorString}","${getConsoleStyle(fileType)}","","${launchEditorStyle}","\\n",`
 
   else
     consoleString = `"${lineInfo} %c\\n","${getConsoleStyle(fileType)}","\\n",`
