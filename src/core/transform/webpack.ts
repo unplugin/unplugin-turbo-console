@@ -1,4 +1,4 @@
-import { parse } from '@vue/compiler-sfc'
+import { parse } from 'vue/compiler-sfc'
 import type { WithScope } from 'ast-kit'
 import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
