@@ -2,7 +2,8 @@ export const optionWithPrefix = {
   options: {
     prefix: 'xxxx',
     suffix: 'yyy',
-    disableLaunchEditor: false,
+    disableLaunchEditor: true,
+    disableHighlight: true,
   },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',

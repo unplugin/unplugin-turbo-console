@@ -2,10 +2,10 @@
 
 exports[`options > disable all 1`] = `
 {
-  "code": "console.log('hello javascript',\\"\\")",
+  "code": "console.log(\\"\\",'hello javascript',\\"\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,YAAY,qBAAkB",
+    "mappings": "AAAA,eAAY,qBAAkB",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
@@ -66,10 +66,10 @@ exports[`options > empty option 1`] = `
 
 exports[`options > perfix suffix 1`] = `
 {
-  "code": "console.log(\\"xxxx \\\\n%c🚀 App.vue:1%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;color: #fff; background: #4FC08D\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
+  "code": "console.log(\\"xxxx \\\\n\\",'hello javascript',\\"\\\\n yyy\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,sUAAY,2BAAkB",
+    "mappings": "AAAA,sBAAY,2BAAkB",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",

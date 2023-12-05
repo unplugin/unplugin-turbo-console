@@ -21,7 +21,7 @@ export function genConsoleString(genContext: GenContext) {
     argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
-  const lineInfo = `${_prefix}%c🚀 ${fileName}:${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
+  const lineInfo = `%c🚀 ${fileName}:${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${relative(cwd(), filePath)}:${originalLine}:${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c🔦 http://localhost:${port}/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
@@ -29,13 +29,16 @@ export function genConsoleString(genContext: GenContext) {
   let consoleString = ''
 
   if (!disableHighlight && !disableHighlight)
-    consoleString = `"${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+    consoleString = `"${_prefix}${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
 
   if (disableHighlight && !disableLaunchEditor)
-    consoleString = `"${launchEditorString}","${launchEditorStyle}","\\n",`
+    consoleString = `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
 
   if (!disableHighlight && disableLaunchEditor)
-    consoleString = `"${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+    consoleString = `"${_prefix}${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+
+  if (disableHighlight && disableLaunchEditor)
+    consoleString = `"${_prefix}",`
 
   return {
     consoleString,
