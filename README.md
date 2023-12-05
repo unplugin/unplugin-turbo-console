@@ -5,13 +5,18 @@
 
 <p align='center'>
 <a href="https://www.npmjs.com/package/unplugin-turbo-console">
-<img src="https://img.shields.io/npm/v/unplugin-turbo-console?color=a1b858&label=">
+<img src="https://img.shields.io/npm/v/unplugin-turbo-console?style=flat&colorA=080f12&colorB=1fa669">
 </a>
-<img src="https://img.shields.io/npm/dm/unplugin-turbo-console">
-</p>
+<a href="https://www.npmjs.com/package/unplugin-turbo-console">
+<img src="https://img.shields.io/npm/dm/unplugin-turbo-console?style=flat&colorA=080f12&colorB=1fa669">
+</a>
+<a href="https://bundlephobia.com/result?p=unplugin-turbo-console">
+<img src="https://img.shields.io/bundlephobia/minzip/unplugin-turbo-console?style=flat&colorA=080f12&colorB=1fa669&label=minzip">
+</a>
+
 
 <p align="center">
-<a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=vite.config.ts"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
+<a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=vite.config.ts"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"></a>
 </p>
 
 
