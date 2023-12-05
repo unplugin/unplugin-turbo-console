@@ -17,7 +17,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     transformInclude(id) {
       return filter(id)
     },
-    transform(code, id) {
+    async transform(code, id) {
       const context: Context = {
         options: mergedOptions,
         pluginContext: this,
@@ -26,7 +26,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
         meta,
       }
 
-      return transformer(context)
+      const result = await transformer(context)
+
+      return result
     },
     vite: {
       apply: 'serve',

@@ -10,41 +10,41 @@ vi.mock('node:process', () => {
 })
 
 describe('options', () => {
-  it('empty option', () => {
+  it('empty option', async () => {
     expect(
-      webpackTransform(
+      await webpackTransform(
         emptyOption,
       ),
     ).toMatchSnapshot()
   })
 
-  it('perfix suffix', () => {
+  it('perfix suffix', async () => {
     expect(
-      webpackTransform(
+      await webpackTransform(
         optionWithPrefix,
       ),
     ).toMatchSnapshot()
   })
 
-  it('disable launch editor', () => {
+  it('disable launch editor', async () => {
     expect(
-      webpackTransform(
+      await webpackTransform(
         optionWithDisableLaunchEditor,
       ),
     ).toMatchSnapshot()
   })
 
-  it('disable highlight editor', () => {
+  it('disable highlight editor', async () => {
     expect(
-      webpackTransform(
+      await webpackTransform(
         optionWithDisableHightlight,
       ),
     ).toMatchSnapshot()
   })
 
-  it('disable all', () => {
+  it('disable all', async () => {
     expect(
-      webpackTransform(
+      await webpackTransform(
         optionWithDisableAll,
       ),
     ).toMatchSnapshot()

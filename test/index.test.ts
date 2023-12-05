@@ -9,23 +9,23 @@ vi.mock('node:process', () => {
   }
 })
 describe('webpack vue transform', () => {
-  it('script', () => {
+  it('script', async () => {
     expect(
-      webpackTransform(webpackVue),
+      await webpackTransform(webpackVue),
     ).matchSnapshot()
   })
 
-  it('script setup', () => {
+  it('script setup', async () => {
     expect(
-      webpackTransform(webpackVueScriptSetup),
+      await webpackTransform(webpackVueScriptSetup),
     ).matchSnapshot()
   })
 })
 
 describe('webpack js transform', () => {
-  it('script', () => {
+  it('script', async () => {
     expect(
-      webpackTransform(webpackJS),
+      await webpackTransform(webpackJS),
     ).matchSnapshot()
   })
 })

@@ -1,4 +1,3 @@
-import { parse } from 'vue/compiler-sfc'
 import type { WithScope } from 'ast-kit'
 import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
@@ -8,7 +7,7 @@ import { genConsoleString, isConsoleExpress } from './common'
 
 const vuePatterns = [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/]
 
-export function webpackTransform(context: Context) {
+export async function webpackTransform(context: Context) {
   const { id, code, options } = context
   let scriptString = code
   let scriptLang = getLang(context.id)
@@ -19,6 +18,9 @@ export function webpackTransform(context: Context) {
   }
   const magicString = new MagicString(code)
   if (vuePatterns.some(pattern => pattern.test(id))) {
+    // dynamic import
+    const { parse } = await import('vue/compiler-sfc')
+
     const { descriptor, errors } = parse(code, {
       filename: id,
     })
