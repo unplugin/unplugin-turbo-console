@@ -5,14 +5,12 @@
 
 <p align='center'>
 <a href="https://www.npmjs.com/package/unplugin-turbo-console">
-<img src="https://img.shields.io/npm/v/unplugin-turbo-console?style=flat&colorA=080f12&colorB=1fa669">
+<img src="https://img.shields.io/npm/v/unplugin-turbo-console?style=flat&colorA=3f3f46&colorB=ff7151">
 </a>
 <a href="https://www.npmjs.com/package/unplugin-turbo-console">
-<img src="https://img.shields.io/npm/dm/unplugin-turbo-console?style=flat&colorA=080f12&colorB=1fa669">
+<img src="https://img.shields.io/npm/dm/unplugin-turbo-console?style=flat&colorA=3f3f46&colorB=ff7151">
 </a>
-<a href="https://bundlephobia.com/result?p=unplugin-turbo-console">
-<img src="https://img.shields.io/bundlephobia/minzip/unplugin-turbo-console?style=flat&colorA=080f12&colorB=1fa669&label=minzip">
-</a>
+<a href="https://pkg-size.dev/unplugin-turbo-console"><img src="https://pkg-size.dev/badge/bundle/629859" title="Bundle size for unplugin-turbo-console"></a>
 
 
 <p align="center">
