@@ -11,7 +11,7 @@
 <img src="https://img.shields.io/npm/dm/unplugin-turbo-console?style=flat&colorA=3f3f46&colorB=ff7151">
 </a>
 <a href="https://pkg-size.dev/unplugin-turbo-console"><img src="https://pkg-size.dev/badge/bundle/629859" title="Bundle size for unplugin-turbo-console"></a>
-
+</p>
 
 <p align="center">
 <a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=vite.config.ts"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"></a>
