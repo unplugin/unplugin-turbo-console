@@ -5,7 +5,7 @@ export const filter = createFilter(
   [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
 )
 
-const commonStyle = 'padding:2px 5px; border-radius:3px 0 0 3px;'
+const commonStyle = 'padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;'
 
 const consoleStyles: Record<string, string> = {
   '.js': `${commonStyle}color: #111827; background: #F7DF1E`,

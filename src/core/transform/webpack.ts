@@ -75,9 +75,8 @@ export async function webpackTransform(context: Context) {
           id,
         })
 
-        magicString
-          .appendLeft(argsStart, consoleString)
-          .appendRight(argsEnd, `,"${_suffix}"`)
+        consoleString && magicString.appendLeft(argsStart, consoleString)
+        _suffix && magicString.appendRight(argsEnd, `,"${_suffix}"`)
       }
     },
   })

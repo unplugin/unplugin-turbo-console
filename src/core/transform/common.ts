@@ -9,8 +9,8 @@ export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
   const { prefix, suffix, disableLaunchEditor, port, disableHighlight } = options
-  const _prefix = prefix ? `${prefix} \\n` : ''
-  const _suffix = suffix ? `\\n ${suffix}` : ''
+  const _prefix = prefix ? `${prefix}\\n` : ''
+  const _suffix = suffix ? `\\n${suffix}` : ''
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
@@ -28,17 +28,29 @@ export function genConsoleString(genContext: GenContext) {
 
   let consoleString = ''
 
-  if (!disableHighlight && !disableHighlight)
-    consoleString = `"${_prefix}${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+  if (!disableHighlight && !disableHighlight) {
+    consoleString = _prefix
+      ? `"${_prefix}${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+      : `"${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+  }
 
-  if (disableHighlight && !disableLaunchEditor)
-    consoleString = `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
+  if (disableHighlight && !disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
+      : `"${launchEditorString}","${launchEditorStyle}","\\n",`
+  }
 
-  if (!disableHighlight && disableLaunchEditor)
-    consoleString = `"${_prefix}${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+  if (!disableHighlight && disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+      : `"${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+  }
 
-  if (disableHighlight && disableLaunchEditor)
-    consoleString = `"${_prefix}",`
+  if (disableHighlight && disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}","\\n",`
+      : ''
+  }
 
   return {
     consoleString,
