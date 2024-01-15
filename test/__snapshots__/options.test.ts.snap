@@ -19,7 +19,7 @@ console.groupEnd()",
 
 exports[`options > disable highlight editor 1`] = `
 {
-  "code": "console.group(\\"%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+  "code": "console.group("%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px")
 console.log('hello javascript')
 console.groupEnd()",
   "map": SourceMap {
@@ -37,7 +37,7 @@ console.groupEnd()",
 
 exports[`options > disable launch editor 1`] = `
 {
-  "code": "console.group(\\"%c🚀 App.vue:1\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\")
+  "code": "console.group("%c🚀 App.vue:1","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D")
 console.log('hello javascript')
 console.groupEnd()",
   "map": SourceMap {
@@ -55,7 +55,7 @@ console.groupEnd()",
 
 exports[`options > empty option 1`] = `
 {
-  "code": "console.group(\\"%c🚀 App.vue:1%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+  "code": "console.group("%c🚀 App.vue:1%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px")
 console.log('hello javascript')
 console.groupEnd()",
   "map": SourceMap {
@@ -73,10 +73,10 @@ console.groupEnd()",
 
 exports[`options > perfix suffix 1`] = `
 {
-  "code": "console.log(\\"xxxx\\")
+  "code": "console.log("xxxx")
 console.log('hello javascript')
 console.groupEnd()
-console.log(\\"yyy\\")",
+console.log("yyy")",
   "map": SourceMap {
     "file": undefined,
     "mappings": ";AAAA",

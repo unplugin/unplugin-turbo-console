@@ -2,7 +2,7 @@
 
 exports[`webpack js transform > script 1`] = `
 {
-  "code": "console.group(\\"%c🚀 main.js:1%c🔦 http://localhost:3090/client#Li4vLi4vbWFpbi5qczoxOjE=\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+  "code": "console.group("%c🚀 main.js:1%c🔦 http://localhost:3090/client#Li4vLi4vbWFpbi5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px")
 console.log('hello javascript')
 console.groupEnd()",
   "map": SourceMap {
@@ -21,15 +21,15 @@ console.groupEnd()",
 exports[`webpack vue transform > script 1`] = `
 {
   "code": "<template>
-  <img alt=\\"Vue logo\\" src=\\"./assets/logo.png\\">
-  <HelloWorld msg=\\"Welcome to Your Vue.js + TypeScript App\\"/>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
 </template>
 
-<script lang=\\"ts\\">
+<script lang="ts">
 import { defineComponent } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 
-console.group(\\"%c🚀 App.vue:10%c🔦 http://localhost:3070/client#Li4vLi4vQXBwLnZ1ZToxMDox\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+console.group("%c🚀 App.vue:10%c🔦 http://localhost:3070/client#Li4vLi4vQXBwLnZ1ZToxMDox","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px")
 console.log('App.vue')
 console.groupEnd()
 
@@ -56,8 +56,8 @@ export default defineComponent({
 
 exports[`webpack vue transform > script setup 1`] = `
 {
-  "code": "<script setup lang=\\"ts\\">
-  console.group(\\"%c🚀 App.vue:2%c🔦 http://localhost:3090/client#Li4vLi4vQXBwLnZ1ZToyOjM=\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+  "code": "<script setup lang="ts">
+  console.group("%c🚀 App.vue:2%c🔦 http://localhost:3090/client#Li4vLi4vQXBwLnZ1ZToyOjM=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px")
 console.log('script setup')
 console.groupEnd()
   </script>
