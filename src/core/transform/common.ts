@@ -9,8 +9,8 @@ export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
   const { prefix, suffix, disableLaunchEditor, port, disableHighlight } = options
-  const _prefix = prefix ? `${prefix}\\n` : ''
-  const _suffix = suffix ? `\\n${suffix}` : ''
+  const _prefix = prefix ? `console.log("${prefix}")\n` : ''
+  const consoleEndString = suffix ? `\nconsole.groupEnd()\nconsole.log("${suffix}")` : '\nconsole.groupEnd()'
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
@@ -25,40 +25,26 @@ export function genConsoleString(genContext: GenContext) {
   const codePosition = `${relative(cwd(), filePath)}:${originalLine}:${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c🔦 http://localhost:${port}/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
+  let consoleStartString = ''
 
-  let consoleString = ''
+  if (!disableHighlight && !disableHighlight)
+    consoleStartString = `console.group("${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}")\n`
 
-  if (!disableHighlight && !disableHighlight) {
-    consoleString = _prefix
-      ? `"${_prefix}${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
-      : `"${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
-  }
+  if (disableHighlight && !disableLaunchEditor)
+    consoleStartString = `console.group("${launchEditorString}","${launchEditorStyle}")\n`
 
-  if (disableHighlight && !disableLaunchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
-      : `"${launchEditorString}","${launchEditorStyle}","\\n",`
-  }
+  if (!disableHighlight && disableLaunchEditor)
+    consoleStartString = `console.group("${lineInfo}","${getConsoleStyle(fileType)}")\n`
 
-  if (!disableHighlight && disableLaunchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
-      : `"${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
-  }
-
-  if (disableHighlight && disableLaunchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}","\\n",`
-      : ''
-  }
+  _prefix && (consoleStartString = `${_prefix}${consoleStartString}`)
 
   return {
-    consoleString,
-    _suffix,
+    consoleStartString,
+    consoleEndString,
   }
 }
 
-export function isConsoleExpress(node: Node) {
+export function isConsoleExpression(node: Node) {
   return node.type === 'CallExpression'
     && node.callee.type === 'MemberExpression'
     && node.callee.object.type === 'Identifier'

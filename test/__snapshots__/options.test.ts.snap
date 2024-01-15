@@ -2,7 +2,8 @@
 
 exports[`options > disable all 1`] = `
 {
-  "code": "console.log('hello javascript')",
+  "code": "console.log('hello javascript')
+console.groupEnd()",
   "map": SourceMap {
     "file": undefined,
     "mappings": "AAAA",
@@ -18,10 +19,12 @@ exports[`options > disable all 1`] = `
 
 exports[`options > disable highlight editor 1`] = `
 {
-  "code": "console.log(\\"%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript')",
+  "code": "console.group(\\"%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+console.log('hello javascript')
+console.groupEnd()",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,mOAAY",
+    "mappings": ";AAAA",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
@@ -34,10 +37,12 @@ exports[`options > disable highlight editor 1`] = `
 
 exports[`options > disable launch editor 1`] = `
 {
-  "code": "console.log(\\"%c🚀 App.vue:1\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\",\\"\\\\n\\",'hello javascript')",
+  "code": "console.group(\\"%c🚀 App.vue:1\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\")
+console.log('hello javascript')
+console.groupEnd()",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,kIAAY",
+    "mappings": ";AAAA",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
@@ -50,10 +55,12 @@ exports[`options > disable launch editor 1`] = `
 
 exports[`options > empty option 1`] = `
 {
-  "code": "console.log(\\"%c🚀 App.vue:1%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\",\\"\\\\n\\",'hello javascript')",
+  "code": "console.group(\\"%c🚀 App.vue:1%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==\\",\\"padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D\\",\\"background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px\\")
+console.log('hello javascript')
+console.groupEnd()",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,iVAAY",
+    "mappings": ";AAAA",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
@@ -66,10 +73,13 @@ exports[`options > empty option 1`] = `
 
 exports[`options > perfix suffix 1`] = `
 {
-  "code": "console.log(\\"xxxx\\\\n\\",\\"\\\\n\\",'hello javascript',\\"\\\\nyyy\\")",
+  "code": "console.log(\\"xxxx\\")
+console.log('hello javascript')
+console.groupEnd()
+console.log(\\"yyy\\")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,0BAAY,0BAAkB",
+    "mappings": ";AAAA",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",

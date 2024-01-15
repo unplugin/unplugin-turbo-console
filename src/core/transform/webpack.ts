@@ -3,7 +3,7 @@ import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import MagicString from 'magic-string'
 import type { Context } from '../../types'
-import { genConsoleString, isConsoleExpress } from './common'
+import { genConsoleString, isConsoleExpression } from './common'
 
 const vuePatterns = [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/]
 
@@ -48,7 +48,7 @@ export async function webpackTransform(context: Context) {
 
   walkAST<WithScope<Node>>(program, {
     enter(node) {
-      if (isConsoleExpress(node)) {
+      if (isConsoleExpression(node)) {
         const { line, column } = node.loc!.start
         // @ts-expect-error any
         const args = node.arguments
@@ -56,6 +56,9 @@ export async function webpackTransform(context: Context) {
         const argsStart = args[0].start! + vueSfcLocStart.offset
         const argsEnd = args[args.length - 1].end! + vueSfcLocStart.offset
         const argType = args[0].type
+
+        const expressionStart = node.start! + vueSfcLocStart.offset
+        const expressionEnd = node.end! + vueSfcLocStart.offset
 
         const argsName = magicString.slice(argsStart, argsEnd)
           .toString()
@@ -66,7 +69,7 @@ export async function webpackTransform(context: Context) {
         const originalLine = line + vueSfcLocStart.line
         const originalColumn = column
 
-        const { consoleString, _suffix } = genConsoleString({
+        const { consoleStartString, consoleEndString } = genConsoleString({
           options,
           originalLine,
           originalColumn,
@@ -75,8 +78,8 @@ export async function webpackTransform(context: Context) {
           id,
         })
 
-        consoleString && magicString.appendLeft(argsStart, consoleString)
-        _suffix && magicString.appendRight(argsEnd, `,"${_suffix}"`)
+        consoleStartString && magicString.appendLeft(expressionStart, consoleStartString)
+        consoleEndString && magicString.appendRight(expressionEnd, `${consoleEndString}`)
       }
     },
   })

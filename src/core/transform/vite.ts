@@ -4,7 +4,7 @@ import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import { SourceMapConsumer } from 'source-map-js'
 import type { Context } from '../../types'
-import { genConsoleString, isConsoleExpress } from './common'
+import { genConsoleString, isConsoleExpression } from './common'
 
 export function viteTransform(context: Context) {
   const { code, id, pluginContext, options } = context
@@ -15,7 +15,7 @@ export function viteTransform(context: Context) {
 
   walkAST<WithScope<Node>>(program, {
     enter(node) {
-      if (isConsoleExpress(node)) {
+      if (isConsoleExpression(node)) {
         const { line, column } = node.loc!.start
         // @ts-expect-error any
         const args = node.arguments
@@ -29,6 +29,9 @@ export function viteTransform(context: Context) {
           column,
         })
 
+        const expressionStart = node.start!
+        const expressionEnd = node.end!
+
         const argsStart = args[0].start!
         const argsEnd = args[args.length - 1].end!
         const argType = args[0].type
@@ -39,7 +42,7 @@ export function viteTransform(context: Context) {
           .replace(/\n/g, '')
           .replace(/"/g, '')
 
-        const { consoleString, _suffix } = genConsoleString({
+        const { consoleStartString, consoleEndString } = genConsoleString({
           options,
           originalLine,
           originalColumn,
@@ -48,8 +51,8 @@ export function viteTransform(context: Context) {
           id,
         })
 
-        consoleString && magicString.appendLeft(argsStart, consoleString)
-        _suffix && magicString.appendRight(argsEnd, `,"${_suffix}"`)
+        consoleStartString && magicString.appendLeft(expressionStart, consoleStartString)
+        consoleEndString && magicString.appendRight(expressionEnd, `${consoleEndString}`)
       }
     },
   })

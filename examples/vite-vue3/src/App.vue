@@ -5,6 +5,8 @@ import TheWelcome from './components/TheWelcome.vue'
 const whatYouSeeIsWhatYouGetwhatYouSeeIsWhatYouGet = 'Hello World'
 
 console.log(whatYouSeeIsWhatYouGetwhatYouSeeIsWhatYouGet)
+
+console.log('%cLog Message', 'color: orange');
 </script>
 
 <template>

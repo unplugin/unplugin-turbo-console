@@ -11,9 +11,10 @@ export default defineConfig({
     vue(),
     inspect(),
     TurboConsole({
-      port: 3090,
+      prefix: '🚀🚀🚀🚀🚀🚀',
+      suffix: '💡💡💡💡💡',
       disableHighlight: true,
-      disableLaunchEditor: true,
+      disableLaunchEditor: true
     })
   ],
   resolve: {
