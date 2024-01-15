@@ -4,5 +4,6 @@ export default antfu({
   ignores: [
     'playground',
     'examples',
+    'README.md',
   ],
 })
