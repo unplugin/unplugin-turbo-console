@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`includes hightlight > script 1`] = `
+{
+  "code": "console.log('%cLog Message', 'color: orange');",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/App.vue",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;

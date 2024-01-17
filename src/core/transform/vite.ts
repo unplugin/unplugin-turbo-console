@@ -16,6 +16,14 @@ export function viteTransform(context: Context) {
   walkAST<WithScope<Node>>(program, {
     enter(node) {
       if (isConsoleExpression(node)) {
+        const expressionStart = node.start!
+        const expressionEnd = node.end!
+
+        const originalExpression = magicString.slice(expressionStart, expressionEnd)
+
+        if (originalExpression.includes('%c'))
+          return false
+
         const { line, column } = node.loc!.start
         // @ts-expect-error any
         const args = node.arguments
