@@ -1,7 +1,7 @@
 {
   "name": "unplugin-turbo-console",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1-beta.0",
   "packageManager": "pnpm@8.6.12",
   "description": "Improve the Developer Experience of console.log()",
   "license": "MIT",
