@@ -9,8 +9,8 @@ export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
   const { prefix, suffix, disableLaunchEditor, port, disableHighlight } = options
-  const _prefix = prefix ? `console.log("${prefix}")\n` : ''
-  const consoleEndString = suffix ? `\nconsole.groupEnd()\nconsole.log("${suffix}")` : '\nconsole.groupEnd()'
+  const _prefix = prefix ? `console.log("${prefix}");` : ''
+  const consoleEndString = suffix ? `;console.groupEnd();console.log("${suffix}")})()` : ';console.groupEnd()})()'
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
@@ -28,15 +28,15 @@ export function genConsoleString(genContext: GenContext) {
   let consoleStartString = ''
 
   if (!disableHighlight && !disableHighlight)
-    consoleStartString = `console.group("${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}")\n`
+    consoleStartString = `(()=>{${_prefix}console.group("${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}");`
 
-  if (disableHighlight && !disableLaunchEditor)
-    consoleStartString = `console.group("${launchEditorString}","${launchEditorStyle}")\n`
+  else if (disableHighlight && !disableLaunchEditor)
+    consoleStartString = `(()=>{${_prefix}console.group("${launchEditorString}","${launchEditorStyle}");`
 
-  if (!disableHighlight && disableLaunchEditor)
-    consoleStartString = `console.group("${lineInfo}","${getConsoleStyle(fileType)}")\n`
-
-  _prefix && (consoleStartString = `${_prefix}${consoleStartString}`)
+  else if (!disableHighlight && disableLaunchEditor)
+    consoleStartString = `(()=>{${_prefix}console.group("${lineInfo}","${getConsoleStyle(fileType)}");`
+  else
+    consoleStartString = `(()=>{${_prefix}console.group();`
 
   return {
     consoleStartString,
