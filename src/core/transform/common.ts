@@ -9,8 +9,8 @@ export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
   const { prefix, suffix, disableLaunchEditor, port, disableHighlight } = options
-  const _prefix = prefix ? `console.log("${prefix}");` : ''
-  const consoleEndString = suffix ? `;console.groupEnd();console.log("${suffix}")})()` : ';console.groupEnd()})()'
+  const _prefix = prefix ? `${prefix}\\n` : ''
+  const _suffix = suffix ? `\\n${suffix}` : ''
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
@@ -25,22 +25,36 @@ export function genConsoleString(genContext: GenContext) {
   const codePosition = `${relative(cwd(), filePath)}:${originalLine}:${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c🔦 http://localhost:${port}/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
-  let consoleStartString = ''
 
-  if (!disableHighlight && !disableHighlight)
-    consoleStartString = `-(()=>{${_prefix}console.group("${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}");`
+  let consoleString = ''
 
-  else if (disableHighlight && !disableLaunchEditor)
-    consoleStartString = `-(()=>{${_prefix}console.group("${launchEditorString}","${launchEditorStyle}");`
+  if (!disableHighlight && !disableHighlight) {
+    consoleString = _prefix
+      ? `"${_prefix}${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+      : `"${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+  }
 
-  else if (!disableHighlight && disableLaunchEditor)
-    consoleStartString = `-(()=>{${_prefix}console.group("${lineInfo}","${getConsoleStyle(fileType)}");`
-  else
-    consoleStartString = `-(()=>{${_prefix}console.group();`
+  if (disableHighlight && !disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
+      : `"${launchEditorString}","${launchEditorStyle}","\\n",`
+  }
+
+  if (!disableHighlight && disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+      : `"${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+  }
+
+  if (disableHighlight && disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}","\\n",`
+      : ''
+  }
 
   return {
-    consoleStartString,
-    consoleEndString,
+    consoleString,
+    _suffix,
   }
 }
 

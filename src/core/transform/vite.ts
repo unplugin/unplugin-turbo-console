@@ -29,9 +29,6 @@ export function viteTransform(context: Context) {
           column,
         })
 
-        const expressionStart = node.start!
-        const expressionEnd = node.end!
-
         const argsStart = args[0].start!
         const argsEnd = args[args.length - 1].end!
         const argType = args[0].type
@@ -42,7 +39,7 @@ export function viteTransform(context: Context) {
           .replace(/\n/g, '')
           .replace(/"/g, '')
 
-        const { consoleStartString, consoleEndString } = genConsoleString({
+        const { consoleString, _suffix } = genConsoleString({
           options,
           originalLine,
           originalColumn,
@@ -51,8 +48,8 @@ export function viteTransform(context: Context) {
           id,
         })
 
-        consoleStartString && magicString.appendLeft(expressionStart, consoleStartString)
-        consoleEndString && magicString.appendRight(expressionEnd, `${consoleEndString}`)
+        consoleString && magicString.appendLeft(argsStart, consoleString)
+        _suffix && magicString.appendRight(argsEnd, `,"${_suffix}"`)
       }
     },
   })

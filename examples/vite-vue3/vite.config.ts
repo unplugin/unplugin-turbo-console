@@ -13,8 +13,6 @@ export default defineConfig({
     TurboConsole({
       prefix: '🚀🚀🚀🚀🚀🚀',
       suffix: '💡💡💡💡💡',
-      disableHighlight: true,
-      disableLaunchEditor: true
     })
   ],
   resolve: {

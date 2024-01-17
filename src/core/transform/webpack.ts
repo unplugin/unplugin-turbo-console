@@ -57,9 +57,6 @@ export async function webpackTransform(context: Context) {
         const argsEnd = args[args.length - 1].end! + vueSfcLocStart.offset
         const argType = args[0].type
 
-        const expressionStart = node.start! + vueSfcLocStart.offset
-        const expressionEnd = node.end! + vueSfcLocStart.offset
-
         const argsName = magicString.slice(argsStart, argsEnd)
           .toString()
           .replace(/`/g, '')
@@ -69,7 +66,7 @@ export async function webpackTransform(context: Context) {
         const originalLine = line + vueSfcLocStart.line
         const originalColumn = column
 
-        const { consoleStartString, consoleEndString } = genConsoleString({
+        const { consoleString, _suffix } = genConsoleString({
           options,
           originalLine,
           originalColumn,
@@ -78,8 +75,8 @@ export async function webpackTransform(context: Context) {
           id,
         })
 
-        consoleStartString && magicString.appendLeft(expressionStart, consoleStartString)
-        consoleEndString && magicString.appendRight(expressionEnd, `${consoleEndString}`)
+        consoleString && magicString.appendLeft(argsStart, consoleString)
+        _suffix && magicString.appendRight(argsEnd, `,"${_suffix}"`)
       }
     },
   })
