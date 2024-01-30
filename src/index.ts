@@ -1,5 +1,6 @@
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
+import { checkPort, getRandomPort } from 'get-port-please'
 import type { Context, Options } from './types'
 import { DETAULT_OPTIONS, PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
@@ -11,6 +12,13 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     ...DETAULT_OPTIONS,
     ...options,
   }
+
+  async function detectPort() {
+    const isAvailable = await checkPort(mergedOptions.port!)
+    if (!isAvailable)
+      mergedOptions.port = await getRandomPort()
+  }
+
   return {
     name: PLUGIN_NAME,
     enforce: getEnforce[meta.framework] || 'post',
@@ -32,31 +40,40 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     },
     vite: {
       apply: 'serve',
-      configureServer() {
+      async configureServer() {
         if (options.disableLaunchEditor)
           return
+
+        await detectPort()
 
         startServer(mergedOptions.port)
       },
     },
-    webpack(compiler) {
+    async webpack(compiler) {
       if (options.disableLaunchEditor)
         return
+
+      await detectPort()
+
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
+        compiler.hooks.done.tap(PLUGIN_NAME, (state) => {
           if (state.hasErrors())
             return
           startServer(mergedOptions.port)
         })
       }
     },
-    rspack(compiler) {
+    async rspack(compiler) {
       if (options.disableLaunchEditor)
         return
+
+      await detectPort()
+
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
+        compiler.hooks.done.tap(PLUGIN_NAME, (state) => {
           if (state.hasErrors())
             return
+
           startServer(mergedOptions.port)
         })
       }
