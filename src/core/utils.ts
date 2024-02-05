@@ -33,3 +33,8 @@ export const getEnforce: Record<Framework, 'pre' | 'post'> = {
   esbuild: 'post',
   rspack: 'pre',
 }
+
+export function printInfo(port: number) {
+  // eslint-disable-next-line no-console
+  console.log('\x1B[32m%s\x1B[0m\x1B[1m%s\x1B[0m\x1B[36m%s\x1B[0m', '  ➜', `  TurboConsole:`, ` http://localhost:${port}/intro`)
+}
