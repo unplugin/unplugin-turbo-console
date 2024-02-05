@@ -6,7 +6,7 @@ import serveStatic from 'serve-static'
 
 // @ts-expect-error any
 import launch from 'launch-editor'
-import { DIR_CLIENT } from '../dir'
+import { DIR_CLIENT, DIR_INTRO } from '../dir'
 
 export async function startServer(port: number = 3070) {
   try {
@@ -16,7 +16,7 @@ export async function startServer(port: number = 3070) {
     const app = createApp()
 
     app.use('/client', fromNodeMiddleware(serveStatic(DIR_CLIENT)))
-
+    app.use('/intro', fromNodeMiddleware(serveStatic(DIR_INTRO)))
     app.use('/health', eventHandler(() => {
       return {
         message: 'ok',
