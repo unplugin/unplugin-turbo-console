@@ -48,7 +48,7 @@ export function genConsoleString(genContext: GenContext) {
 
   if (disableHighlight && disableLaunchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}","\\n",`
+      ? `"${_prefix}",`
       : ''
   }
 
@@ -64,6 +64,5 @@ export function isConsoleExpression(node: Node) {
     && node.callee.object.type === 'Identifier'
     && node.callee.object.name === 'console'
     && node.callee.property.type === 'Identifier'
-    && node.callee.property.name === 'log'
     && node.arguments?.length > 0
 }

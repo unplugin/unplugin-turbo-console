@@ -2,21 +2,19 @@ import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
 import type { Context, Options } from './types'
-import { DETAULT_OPTIONS, PLUGIN_NAME } from './core/constants'
+import { PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
 import { transformer } from './core/transform/transformer'
 import { filter, getEnforce, printInfo } from './core/utils'
+import { resolveOptions } from './core/options'
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = {}, meta) => {
-  const mergedOptions = {
-    ...DETAULT_OPTIONS,
-    ...options,
-  }
+export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}, meta) => {
+  const options = resolveOptions(rawOptions)
 
   async function detectPort() {
-    const isAvailable = await checkPort(mergedOptions.port!)
+    const isAvailable = await checkPort(options.port!)
     if (!isAvailable)
-      mergedOptions.port = await getRandomPort()
+      options.port = await getRandomPort()
   }
 
   return {
@@ -27,7 +25,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
     },
     async transform(code, id) {
       const context: Context = {
-        options: mergedOptions,
+        options,
         pluginContext: this,
         code,
         id,
@@ -39,7 +37,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
       return result
     },
     vite: {
-      apply: 'serve',
       async configureServer(server) {
         if (options.disableLaunchEditor)
           return
@@ -49,10 +46,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
         const _print = server.printUrls
         server.printUrls = () => {
           _print()
-          printInfo(mergedOptions.port!)
+          printInfo(options.port!)
         }
 
-        startServer(mergedOptions.port)
+        startServer(options.port)
       },
     },
     async webpack(compiler) {
@@ -66,8 +63,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
           if (state.hasErrors())
             return
 
-          printInfo(mergedOptions.port!)
-          startServer(mergedOptions.port)
+          printInfo(options.port!)
+          startServer(options.port)
         })
       }
     },
@@ -82,8 +79,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options = 
           if (state.hasErrors())
             return
 
-          printInfo(mergedOptions.port!)
-          startServer(mergedOptions.port)
+          printInfo(options.port!)
+          startServer(options.port)
         })
       }
     },
