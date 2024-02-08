@@ -66,10 +66,10 @@ exports[`options > empty option 1`] = `
 
 exports[`options > perfix suffix 1`] = `
 {
-  "code": "console.log("xxxx\\n","\\n",'hello javascript',"\\nyyy")",
+  "code": "console.log("xxxx\\n",'hello javascript',"\\nyyy")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,0BAAY,0BAAkB",
+    "mappings": "AAAA,qBAAY,0BAAkB",
     "names": [],
     "sources": [
       "/home/runner/work/unplugin-turbo-console/src/App.vue",
