@@ -31,6 +31,12 @@ export interface Options {
    * @default 3070
    */
   port?: number
+  /**
+   * Whether to show semantic path when the file name is index.xxx .
+   *
+   * @default false
+   */
+  showSemanticPath?: boolean
 }
 
 export interface Context {

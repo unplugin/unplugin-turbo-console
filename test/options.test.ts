@@ -1,7 +1,7 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
-import { emptyOption, optionWithDisableAll, optionWithDisableHightlight, optionWithDisableLaunchEditor, optionWithPrefix } from './fixtures/option'
+import { emptyOption, optionWithDisableAll, optionWithDisableHightlight, optionWithDisableLaunchEditor, optionWithPrefix, optionWithShowSemanticPath } from './fixtures/option'
 
 vi.mock('node:process', () => {
   return {
@@ -46,6 +46,14 @@ describe('options', () => {
     expect(
       await webpackTransform(
         optionWithDisableAll,
+      ),
+    ).toMatchSnapshot()
+  })
+
+  it('show semantic path', async () => {
+    expect(
+      await webpackTransform(
+        optionWithShowSemanticPath,
       ),
     ).toMatchSnapshot()
   })
