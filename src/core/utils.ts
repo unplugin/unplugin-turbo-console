@@ -1,3 +1,4 @@
+import { sep } from 'pathe'
 import { createFilter } from '@rollup/pluginutils'
 
 export const filter = createFilter(
@@ -37,4 +38,21 @@ export const getEnforce: Record<Framework, 'pre' | 'post'> = {
 export function printInfo(port: number) {
   // eslint-disable-next-line no-console
   console.log('\x1B[32m%s\x1B[0m\x1B[1m%s\x1B[0m\x1B[36m%s\x1B[0m', '  ➜', `  TurboConsole:`, ` http://localhost:${port}/intro`)
+}
+
+export function getSemanticPath(filePath: string, showSemanticPath?: boolean) {
+  const arr = filePath.split(sep)
+  let _basename = arr.pop()
+  if (showSemanticPath) {
+    let isEnd = false
+    if (_basename?.toLowerCase().includes('index')) {
+      while (!isEnd) {
+        const name = arr.pop()
+        _basename = `${name}/${_basename}`
+        if (!name?.toLowerCase().includes('index') || !name)
+          isEnd = true
+      }
+    }
+  }
+  return _basename
 }

@@ -1,27 +1,27 @@
 import { cwd } from 'node:process'
 import { Buffer } from 'node:buffer'
-import { basename, extname, relative } from 'pathe'
+import { extname, relative } from 'pathe'
 import type { Node } from '@babel/types'
 import type { GenContext } from '../../types'
-import { getConsoleStyle, launchEditorStyle } from '../utils'
+import { getConsoleStyle, getSemanticPath, launchEditorStyle } from '../utils'
 
 export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
-  const { prefix, suffix, disableLaunchEditor, port, disableHighlight } = options
+  const { prefix, suffix, disableLaunchEditor, port, disableHighlight, showSemanticPath } = options
   const _prefix = prefix ? `${prefix}\\n` : ''
   const _suffix = suffix ? `\\n${suffix}` : ''
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
-  const fileName = basename(filePath)
+  const fileName = getSemanticPath(filePath, showSemanticPath)
   const fileType = extname(filePath)
 
   if (argsName?.length > 30)
     argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
-  const lineInfo = `%c🚀 ${fileName}:${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
+  const lineInfo = `%c🚀 ${originalLine}:${fileName}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${relative(cwd(), filePath)}:${originalLine}:${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c🔦 http://localhost:${port}/client#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
