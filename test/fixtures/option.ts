@@ -39,3 +39,11 @@ export const emptyOption = {
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
+
+export const extendedPathOption = {
+  options: {
+    extendedPathFileNames: ['index'],
+  },
+  code: `console.log('hello javascript')`,
+  id: '/home/runner/work/unplugin-turbo-console/src/index.vue',
+}

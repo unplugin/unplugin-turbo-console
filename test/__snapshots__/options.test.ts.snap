@@ -64,6 +64,22 @@ exports[`options > empty option 1`] = `
 }
 `;
 
+exports[`options > extended path option 1`] = `
+{
+  "code": "console.log("%c🚀 src/index.vue·1%c🔦 http://localhost:undefined/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9pbmRleC52dWU6MTox","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA,uVAAY",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/index.vue",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
 exports[`options > perfix suffix 1`] = `
 {
   "code": "console.log("xxxx\\n",'hello javascript',"\\nyyy")",
