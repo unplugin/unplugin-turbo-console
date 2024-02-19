@@ -3,18 +3,18 @@ import { Buffer } from 'node:buffer'
 import { extname, relative } from 'pathe'
 import type { Node } from '@babel/types'
 import type { GenContext } from '../../types'
-import { getConsoleStyle, getSemanticPath, launchEditorStyle } from '../utils'
+import { getConsoleStyle, getExtendedPath, launchEditorStyle } from '../utils'
 
 export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
   let { argsName } = genContext
-  const { prefix, suffix, disableLaunchEditor, port, disableHighlight, showSemanticPath } = options
+  const { prefix, suffix, disableLaunchEditor, port, disableHighlight, extendedPathFileNames } = options
   const _prefix = prefix ? `${prefix}\\n` : ''
   const _suffix = suffix ? `\\n${suffix}` : ''
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
-  const fileName = getSemanticPath(filePath, showSemanticPath)
+  const fileName = getExtendedPath(filePath, extendedPathFileNames)
   const fileType = extname(filePath)
 
   if (argsName?.length > 30)

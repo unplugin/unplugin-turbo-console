@@ -40,19 +40,26 @@ export function printInfo(port: number) {
   console.log('\x1B[32m%s\x1B[0m\x1B[1m%s\x1B[0m\x1B[36m%s\x1B[0m', '  ➜', `  TurboConsole:`, ` http://localhost:${port}/intro`)
 }
 
-export function getSemanticPath(filePath: string, showSemanticPath?: boolean) {
+export function getFileNameWithoutExtension(fileName: string) {
+  if (!fileName)
+    return ''
+  return fileName.replace(/\.[^/.]+$/, '')
+}
+
+export function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
   const arr = filePath.split(sep)
-  let _basename = arr.pop()
-  if (showSemanticPath) {
+  let basename = arr.pop() || ''
+  const basenameWithoutExt = getFileNameWithoutExtension(basename).toLowerCase()
+  if (extendedPathFileNames && extendedPathFileNames?.length > 0) {
     let isEnd = false
-    if (_basename?.toLowerCase().includes('index')) {
+    if (extendedPathFileNames.some(name => basenameWithoutExt === name.toLowerCase())) {
       while (!isEnd) {
-        const name = arr.pop()
-        _basename = `${name}/${_basename}`
-        if (!name?.toLowerCase().includes('index') || !name)
+        const fileName = arr.pop()
+        basename = `${fileName}/${basename}`
+        if (extendedPathFileNames.every(name => name.toLowerCase() !== fileName?.toLowerCase()))
           isEnd = true
       }
     }
   }
-  return _basename
+  return basename
 }
