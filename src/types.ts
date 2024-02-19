@@ -32,11 +32,11 @@ export interface Options {
    */
   port?: number
   /**
-   * Whether to show semantic path when the file name is index.xxx .
+   * Whether to show extended path name when the file's (or folder's) name contains an element in the array.
    *
-   * @default false
+   * @default []
    */
-  showSemanticPath?: boolean
+  extendedPathFileNames?: string[]
 }
 
 export interface Context {

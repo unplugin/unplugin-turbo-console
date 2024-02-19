@@ -6,7 +6,7 @@ const DETAULT_OPTIONS: Options = {
   suffix: '',
   disableLaunchEditor: false,
   disableHighlight: false,
-  showSemanticPath: false,
+  extendedPathFileNames: [],
   port: 3070,
 }
 

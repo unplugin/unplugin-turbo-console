@@ -228,6 +228,12 @@ export interface Options {
    * @default 3070
    */
   port?: number
+  /**
+   * Whether to show extended path name when the file's (or folder's) name contains an element in the array.
+   *
+   * @default []
+   */
+  extendedPathFileNames?: string[]
 }
 ```
 
