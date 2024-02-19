@@ -201,37 +201,48 @@ export interface Options {
   /**
    * Add a string prefix to the console log.
    *
-   * @default ''
+   * @defaultValue ''
    */
   prefix?: string
   /**
    * Add a string suffix to the console log.
    *
-   * @default ''
+   * @defaultValue ''
    */
   suffix?: string
   /**
    * Whether to disable the launch editor feature.
    *
-   * @default false
+   * @defaultValue false
    */
   disableLaunchEditor?: boolean
   /**
    * Whether to disable the highlight output feature.
    *
-   * @default false
+   * @defaultValue false
    */
   disableHighlight?: boolean
   /**
    * The specific service port of launch editor server.
    *
-   * @default 3070
+   * @defaultValue 3070
    */
   port?: number
   /**
    * Whether to show extended path name when the file's (or folder's) name contains an element in the array.
    *
-   * @default []
+   * @remarks
+   *
+   * Consider a project includes these files:
+   *
+   * /views/Feature1/index.vue
+   *
+   * /views/Feature2/index.vue
+   *
+   * Set extendedPathFileNames as ['index'] can show the extended path name in the console output.
+   *
+   * @defaultValue `[]`
+   *
    */
   extendedPathFileNames?: string[]
 }
