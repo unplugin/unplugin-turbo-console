@@ -17,6 +17,14 @@ export function genConsoleString(genContext: GenContext) {
   const fileName = getExtendedPath(filePath, extendedPathFileNames)
   const fileType = extname(filePath)
 
+  // Parsing escaped unicode symbols
+  try {
+    argsName = JSON.parse(`"${argsName}"`)
+  }
+  catch (error) {
+
+  }
+
   if (argsName?.length > 30)
     argsName = `${argsName.slice(0, 30)}...`
 
