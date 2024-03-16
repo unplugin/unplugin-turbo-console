@@ -4,6 +4,7 @@ import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import { SourceMapConsumer } from 'source-map-js'
 import type { Context } from '../../types'
+import { isPluginDisable } from '../utils'
 import { genConsoleString, isConsoleExpression } from './common'
 
 export function viteTransform(context: Context) {
@@ -36,6 +37,12 @@ export function viteTransform(context: Context) {
           line,
           column,
         })
+
+        if (sourceMap.sourcesContent) {
+          const lineContentArr = sourceMap.sourcesContent[0].split('\n')
+          if (isPluginDisable({ lineContentArr, originalLine, id }))
+            return
+        }
 
         const argsStart = args[0].start!
         const argsEnd = args[args.length - 1].end!

@@ -3,6 +3,7 @@ import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import MagicString from 'magic-string'
 import type { Context } from '../../types'
+import { isPluginDisable } from '../utils'
 import { genConsoleString, isConsoleExpression } from './common'
 
 const vuePatterns = [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/]
@@ -41,7 +42,6 @@ export async function webpackTransform(context: Context) {
       vueSfcLocStart.line--
     }
   }
-
   const program = babelParse(scriptString, scriptLang, {
     sourceFilename: id,
   })
@@ -73,6 +73,12 @@ export async function webpackTransform(context: Context) {
 
         const originalLine = line + vueSfcLocStart.line
         const originalColumn = column
+
+        if (code) {
+          const lineContentArr = code.split('\n')
+          if (isPluginDisable({ lineContentArr, originalLine, id }))
+            return
+        }
 
         const { consoleString, _suffix } = genConsoleString({
           options,
