@@ -93,6 +93,7 @@
     "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
     "play:next": "pnpm run --filter nextjs dev",
     "play:rspack": "pnpm run --filter rspack-vue dev",
+    "play:astro": "pnpm run --filter astro dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",

@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.9.0",
     "vite-plugin-inspect": "^0.7.41",
     "unplugin-turbo-console": "workspace:*",
     "vue": "^3.3.7",
