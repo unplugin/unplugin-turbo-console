@@ -1,0 +1,109 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`disabled file highlight > script 1`] = `
+{
+  "code": "
+  /* turbo-console-disable */
+  console.log('disabled-highlight-1');
+  console.log('disabled-highlight-2');
+  console.log('disabled-highlight-3');
+  ",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/main.ts",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`disabled file highlight in a wrong way > script 1`] = `
+{
+  "code": "
+  console.log("%c🚀 main.ts·2%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjI6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-1');
+  /* turbo-console-disable */
+  console.log("%c🚀 main.ts·4%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjQ6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-2');
+  console.log("%c🚀 main.ts·5%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjU6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-3');
+  ",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA,8UAAc;AACd;AACA,8UAAc;AACd,8UAAc;AACd",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/main.ts",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`disabled lines > script 1`] = `
+{
+  "code": "
+  // turbo-console-disable-next-line
+  console.log('disabled-highlight-1');
+  console.log("%c🚀 main.ts·4%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjQ6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-2');
+  console.log('disabled-highlight-3'); // turbo-console-disable-line
+  console.log('disabled-highlight-3'); /* turbo-console-disable-line  */
+  ",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA,8UAAc;AACd;AACA;AACA",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/main.ts",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`disabled lines in a wrong way > script 1`] = `
+{
+  "code": "
+  // turbo-console-disable-next-line
+
+  console.log("%c🚀 main.ts·4%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjQ6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-1');
+  console.log("%c🚀 main.ts·5%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjU6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-2');
+  console.log('disabled-highlight-3'); // turbo-console-disable-line
+  ",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA,8UAAc;AACd,8UAAc;AACd;AACA",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/main.ts",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
+
+exports[`disabled next line > script 1`] = `
+{
+  "code": "
+  /* turbo-console-disable-next-line */
+  console.log('disabled-highlight-1');
+  console.log("%c🚀 main.ts·4%c🔦 http://localhost:3070/client#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9tYWluLnRzOjQ6Mw==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #3178C6","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'highlight-2');
+  // turbo-console-disable-next-line 
+  console.log('disabled-highlight-3');
+  ",
+  "map": SourceMap {
+    "file": undefined,
+    "mappings": "AAAA;AACA;AACA;AACA,8UAAc;AACd;AACA;AACA",
+    "names": [],
+    "sources": [
+      "/home/runner/work/unplugin-turbo-console/src/main.ts",
+    ],
+    "sourcesContent": undefined,
+    "version": 3,
+  },
+}
+`;
