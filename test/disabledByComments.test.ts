@@ -1,10 +1,7 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { webpackTransform } from '../src/core/transform/webpack'
-import { disabledFile, disabledNextLine, disabledFileInWrongWay, disabledLinesInWrongWay, disabledLines } from './fixtures/diabledByComments'
-
-
-console.log(await webpackTransform(disabledFile));
+import { disabledFile, disabledFileInWrongWay, disabledLines, disabledLinesInWrongWay, disabledNextLine } from './fixtures/disabledByComments'
 
 vi.mock('node:process', () => {
   return {
