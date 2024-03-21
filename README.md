@@ -194,7 +194,7 @@ module.exports = config
 
 <br></details>
 
-### options
+### Options
 
 ```ts
 export interface Options {
@@ -246,6 +246,26 @@ export interface Options {
    */
   extendedPathFileNames?: string[]
 }
+```
+
+### Disable plugin by comments
+
+From `v1.5.0`, you can use code comments to make the plugin ignore specific console statements.
+
+- One line disable
+
+```js
+// turbo-console-disable-next-line
+console.log('foo')
+console.log('bar') // turbo-console-disable-line
+```
+
+- Entire file disable
+
+```js
+/* turbo-console-disable (On top of file) */  
+console.log('foo')
+console.log('bar')
 ```
 
 ## Migrate from `vite-plugin-turbo-console`
