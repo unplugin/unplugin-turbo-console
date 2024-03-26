@@ -39,7 +39,7 @@ export function viteTransform(context: Context) {
         })
 
         if (sourceMap.sourcesContent) {
-          const lineContentArr = sourceMap.sourcesContent[0].split('\n')
+          const lineContentArr = sourceMap.sourcesContent[0]?.split('\n') || []
           if (isPluginDisable({ lineContentArr, originalLine, id }))
             return
         }
