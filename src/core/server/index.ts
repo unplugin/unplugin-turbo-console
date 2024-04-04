@@ -1,12 +1,12 @@
 import { createServer } from 'node:http'
 import { cwd } from 'node:process'
-import { resolve } from 'pathe'
-import { createApp, eventHandler, fromNodeMiddleware, getQuery, toNodeListener } from 'h3'
-import serveStatic from 'serve-static'
+import { readFile, stat } from 'node:fs/promises'
+import { join, resolve } from 'pathe'
+import { createApp, eventHandler, getQuery, serveStatic, toNodeListener } from 'h3'
 
 // @ts-expect-error any
 import launch from 'launch-editor'
-import { DIR_CLIENT, DIR_INTRO } from '../dir'
+import { CLIENT_DIR } from '../dir'
 
 export async function startServer(port: number = 3070) {
   try {
@@ -15,8 +15,6 @@ export async function startServer(port: number = 3070) {
   catch (error) {
     const app = createApp()
 
-    app.use('/client', fromNodeMiddleware(serveStatic(DIR_CLIENT)))
-    app.use('/intro', fromNodeMiddleware(serveStatic(DIR_INTRO)))
     app.use('/health', eventHandler(() => {
       return {
         message: 'ok',
@@ -37,6 +35,24 @@ export async function startServer(port: number = 3070) {
         }
       }
     }))
+
+    app.use('/', eventHandler((event) => {
+      return serveStatic(event, {
+        getContents: id => readFile(join(CLIENT_DIR, id)),
+        getMeta: async (id) => {
+          const stats = await stat(join(CLIENT_DIR, id)).catch(() => {})
+
+          if (!stats || !stats.isFile())
+            return
+
+          return {
+            size: stats.size,
+            mtime: stats.mtimeMs,
+          }
+        },
+      })
+    }))
+
     createServer(toNodeListener(app)).listen(port)
   }
 }
