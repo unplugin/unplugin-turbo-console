@@ -9,13 +9,13 @@
     "build": "rspack build"
   },
   "dependencies": {
-    "vue": "3.2.45"
+    "vue": "3.4.21"
   },
   "devDependencies": {
-    "@rspack/cli": "0.4.1",
-    "@rspack/core": "0.4.1",
-    "vue-loader": "^17.2.2",
-    "unplugin-turbo-console": "workspace:*"
+    "@rspack/cli": "0.5.9",
+    "@rspack/core": "0.5.9",
+    "unplugin-turbo-console": "workspace:*",
+    "vue-loader": "^17.4.2"
   },
   "keywords": [],
   "author": "",

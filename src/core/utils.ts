@@ -41,7 +41,7 @@ export function getFirstLineCommentRegex(fileType: string): RegExp {
 
 export const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px'
 
-type Framework = 'rollup' | 'vite' | 'webpack' | 'esbuild' | 'rspack'
+type Framework = 'rollup' | 'vite' | 'webpack' | 'esbuild' | 'rspack' | 'farm' | 'rolldown'
 
 export const getEnforce: Record<Framework, 'pre' | 'post'> = {
   rollup: 'post',
@@ -49,6 +49,8 @@ export const getEnforce: Record<Framework, 'pre' | 'post'> = {
   webpack: 'pre',
   esbuild: 'post',
   rspack: 'pre',
+  farm: 'post',
+  rolldown: 'post',
 }
 
 export function printInfo(port: number) {
