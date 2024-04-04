@@ -4,6 +4,7 @@ export const optionWithPrefix = {
     suffix: 'yyy',
     disableLaunchEditor: true,
     disableHighlight: true,
+    port: 3070,
   },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
@@ -12,6 +13,7 @@ export const optionWithPrefix = {
 export const optionWithDisableLaunchEditor = {
   options: {
     disableLaunchEditor: true,
+    port: 3070,
   },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
@@ -20,6 +22,7 @@ export const optionWithDisableLaunchEditor = {
 export const optionWithDisableHightlight = {
   options: {
     disableHighlight: true,
+    port: 3070,
   },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
@@ -29,13 +32,14 @@ export const optionWithDisableAll = {
   options: {
     disableLaunchEditor: true,
     disableHighlight: true,
+    port: 3070,
   },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
 
 export const emptyOption = {
-  options: {},
+  options: { port: 3070 },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/App.vue',
 }
@@ -43,6 +47,7 @@ export const emptyOption = {
 export const extendedPathOption = {
   options: {
     extendedPathFileNames: ['index'],
+    port: 3070,
   },
   code: `console.log('hello javascript')`,
   id: '/home/runner/work/unplugin-turbo-console/src/index.vue',
