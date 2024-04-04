@@ -104,7 +104,7 @@
     "@nuxt/schema": ">=3",
     "astro": ">=3",
     "esbuild": "*",
-    "rollup": "^3",
+    "rollup": ">=3",
     "vite": ">=3",
     "vue": ">=2.7 || >=3.2.13",
     "webpack": "^4 || ^5"
@@ -143,7 +143,6 @@
     "launch-editor": "^2.6.1",
     "magic-string": "^0.30.5",
     "pathe": "^1.1.2",
-    "serve-static": "^1.15.0",
     "source-map-js": "^1.0.2",
     "unplugin": "^1.6.0"
   },
