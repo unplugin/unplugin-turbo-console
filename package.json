@@ -105,6 +105,7 @@
     "astro": ">=3",
     "esbuild": "*",
     "rollup": ">=3",
+    "svelte": ">=4",
     "vite": ">=3",
     "vue": ">=2.7 || >=3.2.13",
     "webpack": "^4 || ^5"
@@ -123,6 +124,9 @@
       "optional": true
     },
     "rollup": {
+      "optional": true
+    },
+    "svelte": {
       "optional": true
     },
     "vite": {

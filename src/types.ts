@@ -66,3 +66,18 @@ export interface GenContext {
   argType: string
   id: string
 }
+
+export type Compiler = 'vanilla' | 'vue' | 'svelte'
+
+export interface NewContext {
+  code: string
+  id: string
+  options: Options
+}
+
+export interface CompileResult {
+  script: string
+  offset: number
+  column: number
+  line: number
+}

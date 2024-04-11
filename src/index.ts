@@ -1,14 +1,14 @@
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
-import type { Context, Options } from './types'
+import type { Context, NewContext, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
-import { transformer } from './core/transform/transformer'
-import { filter, getEnforce, printInfo } from './core/utils'
+import { filter, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
+import { transform } from './core/transform/index'
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}, meta) => {
+export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
 
   async function detectPort() {
@@ -19,22 +19,21 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
   return {
     name: PLUGIN_NAME,
-    enforce: getEnforce[meta.framework] || 'post',
+    enforce: 'pre',
     transformInclude(id) {
       return filter(id)
     },
     async transform(code, id) {
-      const context: Context = {
-        options,
-        pluginContext: this,
+      const context: NewContext = {
         code,
         id,
-        meta,
+        options,
       }
 
-      const result = await transformer(context)
+      const result = await transform(context)
 
-      return result
+      if (result)
+        return result
     },
     vite: {
       async configureServer(server) {
