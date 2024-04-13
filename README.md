@@ -191,6 +191,29 @@ module.exports = nextConfig
 <br></details>
 
 
+
+<details>
+<summary>Farm</summary><br>
+
+```ts
+// farm.config.ts
+import { defineConfig } from '@farmfe/core';
+import vue from '@vitejs/plugin-vue';
+import TurboConsole from 'unplugin-turbo-console/farm'
+
+export default defineConfig({
+  vitePlugins: [
+    vue(),
+  ],
+  plugins: [
+    TurboConsole()
+  ]
+});
+
+```
+
+<br></details>
+
 <details>
 <summary>Rspack (Experimental)</summary><br>
 
