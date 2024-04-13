@@ -10,7 +10,7 @@
 <a href="https://www.npmjs.com/package/unplugin-turbo-console">
 <img src="https://img.shields.io/npm/dm/unplugin-turbo-console?style=flat&colorA=3f3f46&colorB=ff7151">
 </a>
-<a href="https://pkg-size.dev/unplugin-turbo-console"><img src="https://pkg-size.dev/badge/bundle/629859" title="Bundle size for unplugin-turbo-console"></a>
+<a href="https://pkg-size.dev/unplugin-turbo-console"><img src="https://pkg-size.dev/badge/bundle/544318" title="Bundle size for unplugin-turbo-console"></a>
 </p>
 
 <p align="center">
@@ -128,6 +128,29 @@ module.exports = defineConfig({
 <br></details>
 
 <details>
+<summary>Sveltekit</summary><br>
+
+> [!IMPORTANT]
+> Please add TurboConsole plugin **before** Sveltekit plugin
+
+```js
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vite';
+import TurboConsole from 'unplugin-turbo-console/vite'
+
+export default defineConfig({
+	plugins: [
+		TurboConsole(),
+		sveltekit()
+	]
+});
+
+```
+
+<br></details>
+
+<details>
+
 <summary>Astro</summary><br>
 
 ```js
