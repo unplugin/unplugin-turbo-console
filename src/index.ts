@@ -1,7 +1,7 @@
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
-import type { Context, NewContext, Options } from './types'
+import type { Context, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
 import { startServer } from './core/server/index'
 import { filter, printInfo } from './core/utils'
@@ -24,7 +24,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       return filter(id)
     },
     async transform(code, id) {
-      const context: NewContext = {
+      const context: Context = {
         code,
         id,
         options,

@@ -1,7 +1,7 @@
-import type { CompileResult, NewContext } from '../../../types'
+import type { CompileResult, Context } from '../../../types'
 import { PLUGIN_NAME } from './../../constants'
 
-export async function svelteCompiler(context: NewContext): Promise<CompileResult> {
+export async function svelteCompiler(context: Context): Promise<CompileResult> {
   try {
     const { code } = context
 

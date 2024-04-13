@@ -1,6 +1,6 @@
-import type { CompileResult, NewContext } from '../../../types'
+import type { CompileResult, Context } from '../../../types'
 
-export async function vanillaCompiler(context: NewContext): Promise<CompileResult> {
+export async function vanillaCompiler(context: Context): Promise<CompileResult> {
   return {
     script: context.code,
     offset: 0,

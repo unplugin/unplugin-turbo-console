@@ -1,7 +1,7 @@
 import { PLUGIN_NAME } from '../../constants'
-import type { CompileResult, NewContext } from './../../../types'
+import type { CompileResult, Context } from './../../../types'
 
-export async function vueCompiler(context: NewContext): Promise<CompileResult> {
+export async function vueCompiler(context: Context): Promise<CompileResult> {
   try {
     const { code, id } = context
     const { parse } = await import('vue/compiler-sfc')

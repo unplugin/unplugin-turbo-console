@@ -2,7 +2,7 @@ import type { WithScope } from 'ast-kit'
 import { babelParse, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import MagicString from 'magic-string'
-import type { Compiler, NewContext } from './../../types'
+import type { Compiler, Context } from './../../types'
 import { compilers } from './compilers'
 import { genConsoleString, isConsoleExpression } from './common'
 
@@ -21,7 +21,7 @@ function getCompiler(id: string): Compiler | false {
   return false
 }
 
-export async function transform(context: NewContext) {
+export async function transform(context: Context) {
   const { code, id, options } = context
   const magicString = new MagicString(code)
 
