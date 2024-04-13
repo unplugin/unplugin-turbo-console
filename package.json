@@ -26,6 +26,11 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./farm": {
+      "types": "./dist/farm.d.ts",
+      "import": "./dist/farm.js",
+      "require": "./dist/farm.cjs"
+    },
     "./astro": {
       "types": "./dist/astro.d.ts",
       "import": "./dist/astro.js",
@@ -94,6 +99,7 @@
     "play:next": "pnpm run --filter nextjs dev",
     "play:rspack": "pnpm run --filter rspack-vue dev",
     "play:astro": "pnpm run --filter astro dev",
+    "play:farm": "pnpm run --filter farm-vue dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",

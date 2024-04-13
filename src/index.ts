@@ -51,6 +51,16 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         startServer(options.port)
       },
     },
+    farm: {
+      async  configureDevServer() {
+        if (options.disableLaunchEditor)
+          return
+
+        await detectPort()
+        printInfo(options.port!)
+        startServer(options.port)
+      },
+    },
     async webpack(compiler) {
       if (options.disableLaunchEditor)
         return
