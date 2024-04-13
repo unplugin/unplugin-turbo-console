@@ -1,3 +1,5 @@
+import type { ParseResult } from 'ast-kit'
+import type { Program } from '@babel/types'
 import type { UnpluginBuildContext, UnpluginContext, UnpluginContextMeta } from 'unplugin'
 
 export interface Options {
@@ -78,6 +80,5 @@ export interface NewContext {
 export interface CompileResult {
   script: string
   offset: number
-  column: number
   line: number
 }

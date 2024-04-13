@@ -42,7 +42,6 @@ export async function vueCompiler(context: NewContext): Promise<CompileResult> {
     return {
       script: '',
       offset: 0,
-      column: 0,
       line: 0,
     }
   }
