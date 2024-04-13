@@ -4,6 +4,7 @@ import { extname, relative } from 'pathe'
 import type { Node } from '@babel/types'
 import type { GenContext } from '../../types'
 import { getConsoleStyle, getExtendedPath, launchEditorStyle } from '../utils'
+import { PLUGIN_NAME } from '../constants'
 
 export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id } = genContext
@@ -22,7 +23,7 @@ export function genConsoleString(genContext: GenContext) {
     argsName = JSON.parse(`"${argsName}"`)
   }
   catch (error) {
-
+    console.error(`${PLUGIN_NAME}:${error}`)
   }
 
   if (argsName?.length > 30)

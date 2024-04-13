@@ -1,59 +1,70 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
-import { webpackTransform } from '../src/core/transform/webpack'
-import { emptyOption, extendedPathOption, optionWithDisableAll, optionWithDisableHightlight, optionWithDisableLaunchEditor, optionWithPrefix } from './fixtures/option'
+import { transform } from '../src/core/transform'
+import { resolveOptions } from '../src/core/options'
+import { DISABLE_ALL, DISABLE_HIGHLIGHT, DISABLE_LAUNCH_EDITOR, EMPTY, EXTENDED_PATH, WITH_PREFIX } from './fixtures/option'
 
 vi.mock('node:process', () => {
   return {
     cwd: vi.fn(() => join('/', 'mock', 'path')),
+    env: {
+      NODE_ENV: 'development',
+    },
   }
 })
 
-describe('options', () => {
+describe('transform options', () => {
   it('empty option', async () => {
+    EMPTY.options = resolveOptions(EMPTY.options)
+
     expect(
-      await webpackTransform(
-        emptyOption,
+      await transform(
+        EMPTY,
       ),
     ).toMatchSnapshot()
   })
 
-  it('perfix suffix', async () => {
+  it('with prefix suffix', async () => {
+    WITH_PREFIX.options = resolveOptions(WITH_PREFIX.options)
     expect(
-      await webpackTransform(
-        optionWithPrefix,
+      await transform(
+        WITH_PREFIX,
       ),
     ).toMatchSnapshot()
   })
 
   it('disable launch editor', async () => {
+    DISABLE_LAUNCH_EDITOR.options = resolveOptions(DISABLE_LAUNCH_EDITOR.options)
     expect(
-      await webpackTransform(
-        optionWithDisableLaunchEditor,
+      await transform(
+        DISABLE_LAUNCH_EDITOR,
       ),
     ).toMatchSnapshot()
   })
 
-  it('disable highlight editor', async () => {
+  it('disable highlight', async () => {
+    DISABLE_HIGHLIGHT.options = resolveOptions(DISABLE_HIGHLIGHT.options)
     expect(
-      await webpackTransform(
-        optionWithDisableHightlight,
+      await transform(
+        DISABLE_HIGHLIGHT,
       ),
     ).toMatchSnapshot()
   })
 
   it('disable all', async () => {
+    DISABLE_ALL.options = resolveOptions(DISABLE_ALL.options)
     expect(
-      await webpackTransform(
-        optionWithDisableAll,
+      await transform(
+        DISABLE_ALL,
       ),
     ).toMatchSnapshot()
   })
 
   it('extended path option', async () => {
+    EXTENDED_PATH.options = resolveOptions(EXTENDED_PATH.options)
     expect(
-      await webpackTransform(
-        extendedPathOption,
+      await transform(
+        EXTENDED_PATH,
       ),
     ).toMatchSnapshot()
   })

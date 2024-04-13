@@ -2,21 +2,31 @@ import type { WithScope } from 'ast-kit'
 import { babelParse, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import MagicString from 'magic-string'
+import { extname } from 'pathe'
 import type { Compiler, Context } from './../../types'
 import { compilers } from './compilers'
 import { genConsoleString, isConsoleExpression } from './common'
 
 function getCompiler(id: string): Compiler | false {
-  const vuePatterns = [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/]
-  const sveltePatterns = [/\.svelte$/]
-  const jsExpandPatterns = [/\.js$/, /\.jsx$/, /\.ts$/, /\.tsx$/]
+  const urlObject = new URL(id, 'file://')
+  const fileType = extname(urlObject.pathname)
 
-  if (vuePatterns.some(pattern => pattern.test(id)))
-    return 'vue'
-  else if (jsExpandPatterns.some(pattern => pattern.test(id)))
-    return 'vanilla'
-  else if (sveltePatterns.some(pattern => pattern.test(id)))
-    return 'svelte'
+  switch (fileType) {
+    case '.vue':
+      return 'vue'
+    case '.svelte':
+      return 'svelte'
+    case '.js':
+      return 'vanilla'
+    case '.jsx':
+      return 'vanilla'
+    case '.ts':
+      return 'vanilla'
+    case '.tsx':
+      return 'vanilla'
+    case '.astro':
+      return 'vanilla'
+  }
 
   return false
 }
@@ -26,6 +36,7 @@ export async function transform(context: Context) {
   const magicString = new MagicString(code)
 
   const compiler = getCompiler(id)
+
   if (!compiler)
     return false
 
