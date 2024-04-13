@@ -1,5 +1,3 @@
-import type { UnpluginBuildContext, UnpluginContext, UnpluginContextMeta } from 'unplugin'
-
 export interface Options {
   /**
    * Add a string prefix to the console log.
@@ -50,14 +48,6 @@ export interface Options {
   extendedPathFileNames?: string[]
 }
 
-export interface Context {
-  pluginContext?: UnpluginBuildContext & UnpluginContext
-  options: Options
-  code: string
-  id: string
-  meta?: UnpluginContextMeta
-}
-
 export interface GenContext {
   options: Options
   originalLine: number
@@ -65,4 +55,18 @@ export interface GenContext {
   argsName: string
   argType: string
   id: string
+}
+
+export type Compiler = 'vanilla' | 'vue' | 'svelte'
+
+export interface Context {
+  code: string
+  id: string
+  options: Options
+}
+
+export interface CompileResult {
+  script: string
+  offset: number
+  line: number
 }

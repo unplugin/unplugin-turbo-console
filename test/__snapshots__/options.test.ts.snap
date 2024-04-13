@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`options > disable all 1`] = `
+exports[`transform options > disable all 1`] = `
 {
   "code": "console.log('hello javascript')",
   "map": SourceMap {
@@ -8,7 +8,7 @@ exports[`options > disable all 1`] = `
     "mappings": "AAAA",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/App.vue",
+      "/home/runner/main.js",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -16,15 +16,15 @@ exports[`options > disable all 1`] = `
 }
 `;
 
-exports[`options > disable highlight editor 1`] = `
+exports[`transform options > disable highlight 1`] = `
 {
-  "code": "console.log("%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
+  "code": "console.log("%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvbWFpbi5qczoxOjE=","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,uNAAY",
+    "mappings": "AAAA,2KAAY",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/App.vue",
+      "/home/runner/main.js",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -32,15 +32,15 @@ exports[`options > disable highlight editor 1`] = `
 }
 `;
 
-exports[`options > disable launch editor 1`] = `
+exports[`transform options > disable launch editor 1`] = `
 {
-  "code": "console.log("%c🚀 App.vue·1","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","\\n",'hello javascript')",
+  "code": "console.log("%c🚀 main.js·1","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","\\n",'hello javascript')",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,kIAAY",
+    "mappings": "AAAA,qIAAY",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/App.vue",
+      "/home/runner/main.js",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -48,15 +48,15 @@ exports[`options > disable launch editor 1`] = `
 }
 `;
 
-exports[`options > empty option 1`] = `
+exports[`transform options > empty option 1`] = `
 {
-  "code": "console.log("%c🚀 App.vue·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9BcHAudnVlOjE6MQ==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
+  "code": "console.log("%c🚀 main.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvbWFpbi5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,qUAAY",
+    "mappings": "AAAA,4RAAY",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/App.vue",
+      "/home/runner/main.js",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -64,15 +64,15 @@ exports[`options > empty option 1`] = `
 }
 `;
 
-exports[`options > extended path option 1`] = `
+exports[`transform options > extended path option 1`] = `
 {
-  "code": "console.log("%c🚀 src/index.vue·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9pbmRleC52dWU6MTox","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
+  "code": "console.log("%c🚀 src/index.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9pbmRleC5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,2UAAY",
+    "mappings": "AAAA,6UAAY",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/index.vue",
+      "/home/runner/work/unplugin-turbo-console/src/index.js",
     ],
     "sourcesContent": undefined,
     "version": 3,
@@ -80,15 +80,15 @@ exports[`options > extended path option 1`] = `
 }
 `;
 
-exports[`options > perfix suffix 1`] = `
+exports[`transform options > with prefix suffix 1`] = `
 {
-  "code": "console.log("xxxx\\n",'hello javascript',"\\nyyy")",
+  "code": "console.log("-------\\n%c🚀 main.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvbWFpbi5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript',"\\n-------")",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,qBAAY,0BAAkB",
+    "mappings": "AAAA,qSAAY,8BAAkB",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/App.vue",
+      "/home/runner/main.js",
     ],
     "sourcesContent": undefined,
     "version": 3,
