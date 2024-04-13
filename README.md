@@ -130,8 +130,7 @@ module.exports = defineConfig({
 <details>
 <summary>Sveltekit</summary><br>
 
-> [!IMPORTANT]
-> Please add TurboConsole plugin **before** Sveltekit plugin
+⚠️ Please add TurboConsole plugin **before** Sveltekit plugin
 
 ```js
 import { sveltekit } from '@sveltejs/kit/vite';
