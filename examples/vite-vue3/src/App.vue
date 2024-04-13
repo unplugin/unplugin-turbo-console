@@ -1,57 +1,8 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-
-const a = '1111'
-
-console.log(a)
-
-// const whatYouSeeIsWhatYouGetwhatYouSeeIsWhatYouGet = 'Hello World'
-
-// console.log(whatYouSeeIsWhatYouGetwhatYouSeeIsWhatYouGet)
-
-// console.log('%cLog Message', 'color: orange');
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  Hello World
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<script setup lang="ts">
+  const msg: string = "Hello World"
+  console.log(msg) // turbo-console-disable-line
+</script>

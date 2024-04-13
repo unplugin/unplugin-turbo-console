@@ -1,6 +1,10 @@
-import { extname } from 'node:path'
-import { sep } from 'pathe'
+import { cwd } from 'node:process'
+import { Buffer } from 'node:buffer'
+import { extname, relative, sep } from 'pathe'
 import { createFilter } from '@rollup/pluginutils'
+import type { Comment, Node } from '@babel/types'
+import type { Compiler, GenContext } from '../types'
+import { PLUGIN_NAME } from './constants'
 
 export const filter = createFilter(
   [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
@@ -20,38 +24,11 @@ const consoleStyles: Record<string, string> = {
   'default': `${commonStyle}color: #111827; background: #F7DF1E`,
 }
 
-const firstLineCommentRegex: Record<string, RegExp> = {
-  '.js': /^\s*\/\*\s*(turbo-console-disable)\s*\*\/\s*$/,
-  '.jsx': /^\s*\/\*\s*(turbo-console-disable)\s*\*\/\s*$/,
-  '.ts': /^\s*\/\*\s*(turbo-console-disable)\s*\*\/\s*$/,
-  '.tsx': /^\s*\/\*\s*(turbo-console-disable)\s*\*\/\s*$/,
-  '.vue': /^\s*\<\!\-\-\s*(turbo-console-disable)\s*\-\-\>\s*$/,
-  '.svelte': /^\s*\<\!\-\-\s*(turbo-console-disable)\s*\-\-\>\s*$/,
-  '.astro': /^\s*\<\!\-\-\s*(turbo-console-disable)\s*\-\-\>\s*$/,
-  'default': /^\s*\/\*\s*(turbo-console-disable)\s*\*\/\s*$/,
-}
-
 export function getConsoleStyle(fileType: string): string {
   return consoleStyles[fileType] ?? consoleStyles.default
 }
 
-export function getFirstLineCommentRegex(fileType: string): RegExp {
-  return firstLineCommentRegex[fileType] ?? firstLineCommentRegex.default
-}
-
 export const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px'
-
-type Framework = 'rollup' | 'vite' | 'webpack' | 'esbuild' | 'rspack' | 'farm' | 'rolldown'
-
-export const getEnforce: Record<Framework, 'pre' | 'post'> = {
-  rollup: 'post',
-  vite: 'post',
-  webpack: 'pre',
-  esbuild: 'post',
-  rspack: 'pre',
-  farm: 'post',
-  rolldown: 'post',
-}
 
 export function printInfo(port: number) {
   // eslint-disable-next-line no-console
@@ -82,28 +59,127 @@ export function getExtendedPath(filePath: string, extendedPathFileNames?: string
   return basename
 }
 
-export function isPluginDisable({ lineContentArr, originalLine, id }: { lineContentArr: string[], originalLine: number, id: string }) {
+export function getCompiler(id: string): Compiler | undefined {
+  const urlObject = new URL(id, 'file://')
+  const fileType = extname(urlObject.pathname)
+
+  switch (fileType) {
+    case '.vue':
+      return 'vue'
+    case '.svelte':
+      return 'svelte'
+    case '.js':
+      return 'vanilla'
+    case '.jsx':
+      return 'vanilla'
+    case '.ts':
+      return 'vanilla'
+    case '.tsx':
+      return 'vanilla'
+    case '.astro':
+      return 'vanilla'
+    default:
+      return undefined
+  }
+}
+
+export function isPluginDisable(meta: {
+  comments: Comment[]
+  originalLine: number
+  id: string
+  type: 'top-file' | 'inline-file'
+}) {
+  const { comments, originalLine, id, type } = meta
+
+  if (comments?.length === 0)
+    return false
+
+  if (type === 'top-file') {
+    const compiler = getCompiler(id)
+    const startLine = compiler === 'vanilla' ? 1 : 2
+
+    const disablePluginComment = comments?.find(comment => comment.value.includes('turbo-console-disable'))
+
+    if (disablePluginComment && disablePluginComment.loc!.start.line <= startLine)
+      return true
+  }
+  else if (type === 'inline-file') {
+    const currentLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-line') && comment.loc!.start.line === originalLine)
+    const nextLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-next-line') && comment.loc!.start.line === originalLine - 1)
+
+    if (currentLineComment || nextLineComment)
+      return true
+  }
+
+  return false
+}
+
+export function genConsoleString(genContext: GenContext) {
+  const { options, originalColumn, originalLine, argType, id } = genContext
+  let { argsName } = genContext
+  const { prefix, suffix, disableLaunchEditor, port, disableHighlight, extendedPathFileNames } = options
+  const _prefix = prefix ? `${prefix}\\n` : ''
+  const _suffix = suffix ? `\\n${suffix}` : ''
+
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
+  const fileName = getExtendedPath(filePath, extendedPathFileNames)
   const fileType = extname(filePath)
 
-  // if the file starts with "/* turbo-console-disable */" then return
-  const firstLineRegex = getFirstLineCommentRegex(fileType)
-  const firstLineContent = lineContentArr.filter((i: string) => i)[0]
-  if (firstLineContent && firstLineRegex.test(firstLineContent))
-    return true
+  // Parsing escaped unicode symbols
+  try {
+    argsName = JSON.parse(`"${argsName}"`)
+  }
+  catch (error) {
+    console.error(`${PLUGIN_NAME}:${error}`)
+  }
 
-  // if the line above the console is "// turbo-console-disable-next-line" or "/* turbo-console-disable-next-line */" then return
-  const prevLineRegex1 = /^\s*\/\*\s*(turbo-console-disable-next-line)\s*\*\/\s*$/
-  const prevLineRegex2 = /^\s*\/\/\s*(turbo-console-disable-next-line)\s*$/
-  const prevLineContent = lineContentArr[originalLine - 1 - 1]
-  if (prevLineRegex1.test(prevLineContent) || prevLineRegex2.test(prevLineContent))
-    return true
+  if (argsName?.length > 30)
+    argsName = `${argsName.slice(0, 30)}...`
 
-  // if the line comment includes "// turbo-console-disable-line" or "/* turbo-console-disable-line */" then return
-  const lineRegex1 = /.*\/\*\s*(turbo-console-disable-line)\s*\*\/\s*$/
-  const lineRegex2 = /.*\/\/\s*(turbo-console-disable-line)\s*$/
-  const lineContent = lineContentArr[originalLine - 1]
-  if (lineRegex1.test(lineContent) || lineRegex2.test(lineContent))
-    return true
+  // not output when argtype is string or number
+  const lineInfo = `%c🚀 ${fileName}\u00B7${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
+  const codePosition = `${relative(cwd(), filePath)}:${originalLine}:${(originalColumn || 0) + 1}`
+
+  const launchEditorString = `%c🔦 http://localhost:${port}#${Buffer.from(codePosition, 'utf-8').toString('base64')}`
+
+  let consoleString = ''
+
+  if (!disableHighlight && !disableHighlight) {
+    consoleString = _prefix
+      ? `"${_prefix}${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+      : `"${lineInfo}${launchEditorString}","${getConsoleStyle(fileType)}","${launchEditorStyle}","\\n",`
+  }
+
+  if (disableHighlight && !disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
+      : `"${launchEditorString}","${launchEditorStyle}","\\n",`
+  }
+
+  if (!disableHighlight && disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+      : `"${lineInfo}","${getConsoleStyle(fileType)}","\\n",`
+  }
+
+  if (disableHighlight && disableLaunchEditor) {
+    consoleString = _prefix
+      ? `"${_prefix}",`
+      : ''
+  }
+
+  return {
+    consoleString,
+    _suffix,
+  }
+}
+
+export function isConsoleExpression(node: Node) {
+  return node.type === 'CallExpression'
+    && node.callee.type === 'MemberExpression'
+    && node.callee.object.type === 'Identifier'
+    && node.callee.object.name === 'console'
+    && node.callee.property.type === 'Identifier'
+    && node.arguments?.length > 0
 }

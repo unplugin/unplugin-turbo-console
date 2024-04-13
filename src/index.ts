@@ -62,8 +62,12 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (state.hasErrors())
             return
 
-          printInfo(options.port!)
-          startServer(options.port)
+          // avoid start server multiple times
+          // @ts-expect-error any
+          if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+            printInfo(options.port!)
+            startServer(options.port)
+          }
         })
       }
     },
@@ -78,8 +82,12 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (state.hasErrors())
             return
 
-          printInfo(options.port!)
-          startServer(options.port)
+          // avoid start server multiple times
+          // @ts-expect-error any
+          if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+            printInfo(options.port!)
+            startServer(options.port)
+          }
         })
       }
     },

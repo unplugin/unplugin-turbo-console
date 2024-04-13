@@ -53,6 +53,9 @@ export async function startServer(port: number = 3070) {
       })
     }))
 
+    // @ts-expect-error any
+    globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
+
     createServer(toNodeListener(app)).listen(port)
   }
 }

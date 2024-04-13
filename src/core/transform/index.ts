@@ -1,35 +1,10 @@
 import type { WithScope } from 'ast-kit'
-import { babelParse, walkAST } from 'ast-kit'
+import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
 import MagicString from 'magic-string'
-import { extname } from 'pathe'
-import type { Compiler, Context } from './../../types'
+import { genConsoleString, getCompiler, isConsoleExpression, isPluginDisable } from '../utils'
+import type { Context } from './../../types'
 import { compilers } from './compilers'
-import { genConsoleString, isConsoleExpression } from './common'
-
-function getCompiler(id: string): Compiler | false {
-  const urlObject = new URL(id, 'file://')
-  const fileType = extname(urlObject.pathname)
-
-  switch (fileType) {
-    case '.vue':
-      return 'vue'
-    case '.svelte':
-      return 'svelte'
-    case '.js':
-      return 'vanilla'
-    case '.jsx':
-      return 'vanilla'
-    case '.ts':
-      return 'vanilla'
-    case '.tsx':
-      return 'vanilla'
-    case '.astro':
-      return 'vanilla'
-  }
-
-  return false
-}
 
 export async function transform(context: Context) {
   const { code, id, options } = context
@@ -37,15 +12,26 @@ export async function transform(context: Context) {
 
   const compiler = getCompiler(id)
 
-  if (!compiler)
-    return false
+  if (!compiler) {
+    return {
+      code: magicString.toString(),
+      map: magicString.generateMap({ source: id }),
+    }
+  }
 
   const compileResult = await compilers[compiler](context)
 
-  const program = babelParse(compileResult.script, 'language', {
+  const program = babelParse(compileResult.script, getLang(id), {
     sourceFilename: id,
     plugins: ['jsx', 'typescript'],
   })
+
+  if (isPluginDisable({ comments: program.comments || [], originalLine: 1, id, type: 'top-file' })) {
+    return {
+      code: magicString.toString(),
+      map: magicString.generateMap({ source: id }),
+    }
+  }
 
   walkAST<WithScope<Node>>(program, {
     enter(node) {
@@ -59,6 +45,12 @@ export async function transform(context: Context) {
           return false
 
         const { line, column } = node.loc!.start
+        const originalLine = line + compileResult.line
+        const originalColumn = column
+
+        if (isPluginDisable({ comments: program.comments || [], originalLine: line, id, type: 'inline-file' }))
+          return false
+
         // @ts-expect-error any
         const args = node.arguments
 
@@ -71,9 +63,6 @@ export async function transform(context: Context) {
           .replace(/`/g, '')
           .replace(/\n/g, '')
           .replace(/"/g, '')
-
-        const originalLine = line + compileResult.line
-        const originalColumn = column
 
         const { consoleString, _suffix } = genConsoleString({
           options,
