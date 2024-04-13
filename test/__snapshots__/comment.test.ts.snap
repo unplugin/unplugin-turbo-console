@@ -2,12 +2,12 @@
 
 exports[`disable by comments > on current line 1`] = `
 {
-  "code": "console.log("%c🚀 comments.js·1%c🔦 http://localhost:3070#Li4vLi4vLi4vLi4vLi4vLi4vaG9tZS9ydW5uZXIvc3JjL2NvbW1lbnRzLmpzOjE6MQ==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')
+  "code": "console.log("%c🚀 comments.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvc3JjL2NvbW1lbnRzLmpzOjE6MQ==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')
   console.log('hello javascript2') // turbo-console-disable-line
   ",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,4TAAY;AACZ;AACA",
+    "mappings": "AAAA,4SAAY;AACZ;AACA",
     "names": [],
     "sources": [
       "/home/runner/src/comments.js",
@@ -20,13 +20,13 @@ exports[`disable by comments > on current line 1`] = `
 
 exports[`disable by comments > on next line 1`] = `
 {
-  "code": "console.log("%c🚀 comments.js·1%c🔦 http://localhost:3070#Li4vLi4vLi4vLi4vLi4vLi4vaG9tZS9ydW5uZXIvc3JjL2NvbW1lbnRzLmpzOjE6MQ==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')
+  "code": "console.log("%c🚀 comments.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvc3JjL2NvbW1lbnRzLmpzOjE6MQ==","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')
   // turbo-console-disable-next-line
   console.log('hello javascript2')
   ",
   "map": SourceMap {
     "file": undefined,
-    "mappings": "AAAA,4TAAY;AACZ;AACA;AACA",
+    "mappings": "AAAA,4SAAY;AACZ;AACA;AACA",
     "names": [],
     "sources": [
       "/home/runner/src/comments.js",
