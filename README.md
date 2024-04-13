@@ -192,7 +192,7 @@ module.exports = nextConfig
 
 
 <details>
-<summary>Rspack (⚠️ unstable)</summary><br>
+<summary>Rspack (Experimental)</summary><br>
 
 ```js
 // rspack.config.js
