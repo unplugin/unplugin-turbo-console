@@ -1,6 +1,6 @@
-import { antfu } from '@antfu/eslint-config'
+import eslintConfig from '@antfu/eslint-config'
 
-export default antfu({
+export default eslintConfig({
   ignores: [
     'playground',
     'examples',
