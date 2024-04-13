@@ -143,7 +143,6 @@
     "launch-editor": "^2.6.1",
     "magic-string": "^0.30.9",
     "pathe": "^1.1.2",
-    "source-map-js": "^1.2.0",
     "unplugin": "^1.10.1"
   },
   "devDependencies": {

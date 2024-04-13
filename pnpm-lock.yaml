@@ -35,9 +35,6 @@ importers:
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
-      source-map-js:
-        specifier: ^1.2.0
-        version: 1.2.0
       unplugin:
         specifier: ^1.10.1
         version: 1.10.1
