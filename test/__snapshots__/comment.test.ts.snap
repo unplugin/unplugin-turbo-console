@@ -6,13 +6,17 @@ exports[`disable by comments > on current line 1`] = `
   console.log('hello javascript2') // turbo-console-disable-line
   ",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,4SAAY;AACZ;AACA",
+    "file": "comments.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,iSAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChE,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/src/comments.js",
+      "comments.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')
+  console.log('hello javascript2') // turbo-console-disable-line
+  ",
+    ],
     "version": 3,
   },
 }
@@ -25,13 +29,18 @@ exports[`disable by comments > on next line 1`] = `
   console.log('hello javascript2')
   ",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,4SAAY;AACZ;AACA;AACA",
+    "file": "comments.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,iSAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClC,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/src/comments.js",
+      "comments.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')
+  // turbo-console-disable-next-line
+  console.log('hello javascript2')
+  ",
+    ],
     "version": 3,
   },
 }
@@ -49,13 +58,23 @@ exports[`disable by comments > on next line vue 1`] = `
 </script>
 ",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;",
+    "file": "comments.vue",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACX;AACA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACxB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
     "names": [],
     "sources": [
-      "/home/runner/src/comments.vue",
+      "comments.vue",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "<template>
+  Hello World
+</template>
+
+<script setup lang="ts">
+  const msg: string = "Hello World"
+  console.log(msg) // turbo-console-disable-line
+</script>
+",
+    ],
     "version": 3,
   },
 }

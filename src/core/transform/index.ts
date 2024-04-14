@@ -81,6 +81,11 @@ export async function transform(context: Context) {
 
   return {
     code: magicString.toString(),
-    map: magicString.generateMap({ source: id }),
+    map: magicString.generateMap({
+      source: id,
+      file: id,
+      includeContent: true,
+      hires: true,
+    }),
   }
 }

@@ -4,13 +4,15 @@ exports[`transform options > disable all 1`] = `
 {
   "code": "console.log('hello javascript')",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA",
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/main.js",
+      "main.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')",
+    ],
     "version": 3,
   },
 }
@@ -20,13 +22,15 @@ exports[`transform options > disable highlight 1`] = `
 {
   "code": "console.log("%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvbWFpbi5qczoxOjE=","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,2KAAY",
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,gKAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/main.js",
+      "main.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')",
+    ],
     "version": 3,
   },
 }
@@ -36,13 +40,15 @@ exports[`transform options > disable launch editor 1`] = `
 {
   "code": "console.log("%c🚀 main.js·1","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","\\n",'hello javascript')",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,qIAAY",
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,0HAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/main.js",
+      "main.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')",
+    ],
     "version": 3,
   },
 }
@@ -52,13 +58,15 @@ exports[`transform options > empty option 1`] = `
 {
   "code": "console.log("%c🚀 main.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvbWFpbi5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,4RAAY",
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,iRAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/main.js",
+      "main.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')",
+    ],
     "version": 3,
   },
 }
@@ -68,13 +76,15 @@ exports[`transform options > extended path option 1`] = `
 {
   "code": "console.log("%c🚀 src/index.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvd29yay91bnBsdWdpbi10dXJiby1jb25zb2xlL3NyYy9pbmRleC5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript')",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,6UAAY",
+    "file": "index.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,kUAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
-      "/home/runner/work/unplugin-turbo-console/src/index.js",
+      "index.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')",
+    ],
     "version": 3,
   },
 }
@@ -84,13 +94,15 @@ exports[`transform options > with prefix suffix 1`] = `
 {
   "code": "console.log("-------\\n%c🚀 main.js·1%c🔦 http://localhost:3070#Li4vLi4vaG9tZS9ydW5uZXIvbWFpbi5qczoxOjE=","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #111827; background: #F7DF1E","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",'hello javascript',"\\n-------")",
   "map": SourceMap {
-    "file": undefined,
-    "mappings": "AAAA,qSAAY,8BAAkB",
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,0RAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,aAAC",
     "names": [],
     "sources": [
-      "/home/runner/main.js",
+      "main.js",
     ],
-    "sourcesContent": undefined,
+    "sourcesContent": [
+      "console.log('hello javascript')",
+    ],
     "version": 3,
   },
 }
