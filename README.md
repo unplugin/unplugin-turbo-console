@@ -313,6 +313,18 @@ console.log('foo')
 console.log('bar')
 ```
 
+## Troubleshooting
+
+### Jump to editor does't work
+
+If you get errors like this:
+
+> Could not open xxxx in the editor.
+>
+> The editor process exited with an error: spawn code ENOENT.
+
+Please make sure the `code` command is installed. Check more details [here](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
+
 ## Migrate from `vite-plugin-turbo-console`
 
 `package.json`
