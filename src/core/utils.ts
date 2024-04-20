@@ -1,5 +1,4 @@
 import { cwd } from 'node:process'
-import { Buffer } from 'node:buffer'
 import { extname, relative, sep } from 'pathe'
 import { createFilter } from '@rollup/pluginutils'
 import type { Comment, Node } from '@babel/types'
