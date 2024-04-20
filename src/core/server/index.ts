@@ -21,17 +21,42 @@ export async function startServer(port: number = 3070) {
       }
     }))
 
+    app.use('/routeMap', eventHandler(() => {
+      const routeMap = globalThis.TurboConsoleRouteMap || new Map()
+      return Object.fromEntries(routeMap)
+    }))
+
     app.use('/__open-in-editor', eventHandler(async (event) => {
       try {
-        const { file } = getQuery(event) as { file: string }
-        launch(resolve(cwd(), file))
+        const { position } = getQuery(event) as { position: string }
+        const routeMap = globalThis.TurboConsoleRouteMap
+
+        if (!routeMap)
+          throw new Error('routeMap is undefined')
+
+        const parsed = position.split(',')
+        const routeMapString = parsed[0]
+        const line = parsed[1] || 1
+        const column = parsed[2] || 1
+
+        let filePath = ''
+
+        for (const [key, value] of routeMap) {
+          if (value === routeMapString) {
+            filePath = key
+            break
+          }
+        }
+
+        launch(resolve(cwd(), `${filePath}:${line}:${column}`))
         return {
-          message: 'ok',
+          status: 'success',
         }
       }
       catch (error) {
         return {
-          error: String(error),
+          status: 'error',
+          message: String(error),
         }
       }
     }))

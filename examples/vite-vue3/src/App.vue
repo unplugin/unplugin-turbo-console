@@ -4,5 +4,5 @@
 
 <script setup lang="ts">
   const msg: string = "Hello World"
-  console.log(msg) // turbo-console-disable-line
+  console.log(msg)
 </script>
