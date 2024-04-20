@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="icon" type="image/svg+xml" href="https://unplugin.unjs.io/logo.svg">
   <title>Launch Editor</title>
 </head>
 <style>
-  #error-info {
-    color: red;
-    font-size: 2rem;
-  }
-
-  body {
-    background-color: white;
-  }
-
   @media (prefers-color-scheme: dark) {
     body {
       background-color: black;
     }
   }
 </style>
+
 <body>
-  <div id="error-info"></div>
+  <main class="container">
+    <article>
+      <h4>Ops, It get some error when launch to the editor:</h4>
+      <div id="error-info" style="color: #EE402E">
+        
+      </div>
+        <small>You can report this issus at <a href="https://github.com/unplugin/unplugin-turbo-console/issues"
+            target="_blank">GitHub</a>.
+        </small>
+    </article>
+  </main>
 </body>
 <script>
- (async () => {
-   try {
-     const hash = window.location.hash
-     const decodeBase64 = window.atob(hash.slice(1))
-     await fetch(`/__open-in-editor?file=${encodeURIComponent(decodeBase64)}`)
-     window.close()
-   }
-   catch (error) {
-     const errorInfo = document.getElementById('error-info')
-     errorInfo.innerText = String(error)
-   }
- })()
+  ; (async () => {
+    try {
+      const position = window.location.hash.slice(1)
+      const raw = await fetch(`/__open-in-editor?position=${(position)}`)
+      const response = await raw.json()
+      if (response.status === 'error')
+        throw new Error(response.message)
+
+      window.close()
+    }
+    catch (error) {
+      const errorInfo = document.getElementById('error-info')
+      errorInfo.innerText = String(error)
+    }
+  })()
 </script>
+
 </html>
