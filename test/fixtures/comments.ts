@@ -6,7 +6,7 @@ export const COMMENT_TOP_FILE: Context = {
   console.log('hello javascript')
   console.log('hello javascript2')
   `,
-  id: '/home/runner/src/comments.js',
+  id: '/home/runner/comments.js',
 }
 
 export const COMMENT_TOP_FILE_VUE: Context = {
@@ -21,7 +21,7 @@ export const COMMENT_TOP_FILE_VUE: Context = {
   console.log(msg)
 </script>
 `,
-  id: '/home/runner/src/comments.vue',
+  id: '/home/runner/comments.vue',
 }
 
 export const COMMENT_TOP_FILE_SVELTE: Context = {
@@ -38,7 +38,7 @@ export const COMMENT_TOP_FILE_SVELTE: Context = {
   Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
 </p>
 `,
-  id: '/home/runner/src/comments.svelte',
+  id: '/home/runner/comments.svelte',
 }
 
 export const COMMENT_CURRENT_LINE: Context = {
@@ -46,7 +46,7 @@ export const COMMENT_CURRENT_LINE: Context = {
   code: `console.log('hello javascript')
   console.log('hello javascript2') // turbo-console-disable-line
   `,
-  id: '/home/runner/src/comments.js',
+  id: '/home/runner/comments.js',
 }
 
 export const COMMENT_NEXT_LINE: Context = {
@@ -55,7 +55,7 @@ export const COMMENT_NEXT_LINE: Context = {
   // turbo-console-disable-next-line
   console.log('hello javascript2')
   `,
-  id: '/home/runner/src/comments.js',
+  id: '/home/runner/comments.js',
 }
 
 export const COMMENT_CURRENT_FILE_VUE: Context = {
@@ -69,5 +69,5 @@ export const COMMENT_CURRENT_FILE_VUE: Context = {
   console.log(msg) // turbo-console-disable-line
 </script>
 `,
-  id: '/home/runner/src/comments.vue',
+  id: '/home/runner/comments.vue',
 }

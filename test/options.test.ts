@@ -13,6 +13,12 @@ vi.mock('node:process', () => {
   }
 })
 
+const mockRouteMap = new Map()
+mockRouteMap.set('../../home/runner/main.js', 'fgsss')
+mockRouteMap.set('../../home/runner/index.js', 'sfgha')
+
+globalThis.TurboConsoleRouteMap = mockRouteMap
+
 describe('transform options', () => {
   it('empty option', async () => {
     EMPTY.options = resolveOptions(EMPTY.options)

@@ -10,8 +10,16 @@ vi.mock('node:process', () => {
     env: {
       NODE_ENV: 'development',
     },
+
   }
 })
+
+const mockRouteMap = new Map()
+mockRouteMap.set('../../home/runner/comments.js', 'commsx')
+mockRouteMap.set('../../home/runner/comments.vue', 'zsdgg')
+mockRouteMap.set('../../home/runner/comments.svelte', 'xcvgg')
+
+globalThis.TurboConsoleRouteMap = mockRouteMap
 
 describe('disable by comments', () => {
   it ('on top of file', async () => {

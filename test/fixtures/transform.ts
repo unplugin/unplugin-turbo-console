@@ -11,7 +11,7 @@ export const VUE_SCRIPT_SETUP = {
   console.log(msg)
 </script>
 `,
-  id: 'App.vue',
+  id: '/home/runner/App.vue',
 }
 
 export const VUE_OPTIONS = {
@@ -34,7 +34,7 @@ export const VUE_OPTIONS = {
     <p class="greeting">{{ greeting }}</p>
   </template>
 `,
-  id: 'App.vue',
+  id: '/home/runner/App.vue',
 }
 
 export const TYPESCRIPT = {
@@ -42,7 +42,7 @@ export const TYPESCRIPT = {
   code: `const msg: string = "hello TypeScript"
   console.log(msg)
   `,
-  id: 'main.ts',
+  id: '/home/runner/main.ts',
 }
 
 export const TSX = {
@@ -58,7 +58,7 @@ export const TSX = {
     return <main>page.tsx</main>;
   }
   `,
-  id: 'page.tsx',
+  id: '/home/runner/page.tsx',
 }
 
 export const SVELTE = {
@@ -73,7 +73,7 @@ export const SVELTE = {
 <p>
   Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
 </p>`,
-  id: '+page.svelte',
+  id: '/home/runner/+page.svelte',
 }
 
 export const INCLUDES_HIGHLIGHT: Context = {
@@ -84,5 +84,5 @@ export const INCLUDES_HIGHLIGHT: Context = {
     port: 3070,
   },
   code: `console.log('%cLog Message', 'color: orange');`,
-  id: '/home/runner/src/main.js',
+  id: '/home/runner/main.js',
 }
