@@ -13,6 +13,15 @@ vi.mock('node:process', () => {
   }
 })
 
+const mockRouteMap = new Map()
+mockRouteMap.set('../../home/runner/App.vue', 'appvue')
+mockRouteMap.set('../../home/runner/main.ts', 'maints')
+mockRouteMap.set('../../home/runner/main.js', 'mainjs')
+mockRouteMap.set('../../home/runner/+page.svelte', 'pagtsx')
+mockRouteMap.set('../../home/runner/page.tsx', 'svelte')
+
+globalThis.TurboConsoleRouteMap = mockRouteMap
+
 describe('vue transform', () => {
   it ('script setup', async () => {
     VUE_SCRIPT_SETUP.options = resolveOptions(VUE_SCRIPT_SETUP.options)

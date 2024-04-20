@@ -54,5 +54,5 @@ export const EXTENDED_PATH: Context = {
     port: 3070,
   },
   code: `console.log('hello javascript')`,
-  id: '/home/runner/work/unplugin-turbo-console/src/index.js',
+  id: '/home/runner/index.js',
 }
