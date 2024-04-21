@@ -3,7 +3,7 @@ import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
 import type { Context, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
-import { startServer } from './core/server/index'
+import { createServer } from './core/server/index'
 import { filter, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
@@ -48,7 +48,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           printInfo(options.port!)
         }
 
-        startServer(options.port)
+        createServer(options.port)
       },
     },
     farm: {
@@ -58,7 +58,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
         await detectPort()
         printInfo(options.port!)
-        startServer(options.port)
+        createServer(options.port)
       },
     },
     async webpack(compiler) {
@@ -73,10 +73,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
             return
 
           // avoid start server multiple times
-          // @ts-expect-error any
           if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
             printInfo(options.port!)
-            startServer(options.port)
+            createServer(options.port)
           }
         })
       }
@@ -93,10 +92,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
             return
 
           // avoid start server multiple times
-          // @ts-expect-error any
           if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
             printInfo(options.port!)
-            startServer(options.port)
+            createServer(options.port)
           }
         })
       }

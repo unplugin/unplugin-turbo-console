@@ -1,86 +1,24 @@
-import { createServer } from 'node:http'
-import { cwd } from 'node:process'
-import { readFile, stat } from 'node:fs/promises'
-import { join, resolve } from 'pathe'
-import { createApp, eventHandler, getQuery, serveStatic, toNodeListener } from 'h3'
+import { createServer as _createServer } from 'node:http'
+import { createApp, toNodeListener } from 'h3'
+import serveStatic from './serveStatic'
+import launchEditor from './launchEditor'
+import filePathMap from './filePathMap'
+import health from './health'
 
-// @ts-expect-error any
-import launch from 'launch-editor'
-import { CLIENT_DIR } from '../dir'
-
-export async function startServer(port: number = 3070) {
+export async function createServer(port: number = 3070) {
   try {
     await fetch(`http://localhost:${port}/health`)
   }
   catch (error) {
     const app = createApp()
 
-    app.use('/health', eventHandler(() => {
-      return {
-        message: 'ok',
-      }
-    }))
+    app.use('/health', health)
+      .use('/filePathMap', filePathMap)
+      .use('/launchEditor', launchEditor)
+      .use('/', serveStatic)
 
-    app.use('/filePathMap', eventHandler(() => {
-      const filePathMap = globalThis.TurboConsoleFilePathMap || new Map()
-      return Object.fromEntries(filePathMap)
-    }))
-
-    app.use('/__open-in-editor', eventHandler(async (event) => {
-      try {
-        const { position } = getQuery(event) as { position: string }
-        const filePathMap = globalThis.TurboConsoleFilePathMap
-
-        if (!filePathMap)
-          throw new Error('filePathMap is undefined')
-
-        const parsed = position.split(',')
-        const filePathMapString = parsed[0]
-        const line = parsed[1] || 1
-        const column = parsed[2] || 1
-
-        let filePath = ''
-
-        for (const [key, value] of filePathMap) {
-          if (value === filePathMapString) {
-            filePath = key
-            break
-          }
-        }
-
-        launch(resolve(cwd(), `${filePath}:${line}:${column}`))
-        return {
-          status: 'success',
-        }
-      }
-      catch (error) {
-        return {
-          status: 'error',
-          message: String(error),
-        }
-      }
-    }))
-
-    app.use('/', eventHandler((event) => {
-      return serveStatic(event, {
-        getContents: id => readFile(join(CLIENT_DIR, id)),
-        getMeta: async (id) => {
-          const stats = await stat(join(CLIENT_DIR, id)).catch(() => {})
-
-          if (!stats || !stats.isFile())
-            return
-
-          return {
-            size: stats.size,
-            mtime: stats.mtimeMs,
-          }
-        },
-      })
-    }))
-
-    // @ts-expect-error any
     globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
 
-    createServer(toNodeListener(app)).listen(port)
+    _createServer(toNodeListener(app)).listen(port)
   }
 }

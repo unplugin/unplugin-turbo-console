@@ -33,7 +33,7 @@
   ; (async () => {
     try {
       const position = window.location.hash.slice(1)
-      const raw = await fetch(`/__open-in-editor?position=${(position)}`)
+      const raw = await fetch(`/launchEditor?position=${(position)}`)
       const response = await raw.json()
       if (response.status === 'error')
         throw new Error(response.message)
