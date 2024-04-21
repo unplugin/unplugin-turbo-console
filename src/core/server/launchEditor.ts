@@ -3,6 +3,7 @@ import { defineEventHandler, getQuery } from 'h3'
 // @ts-expect-error no types
 import launch from 'launch-editor'
 import { resolve } from 'pathe'
+import { version } from '../../../package.json'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -29,11 +30,13 @@ export default defineEventHandler(async (event) => {
     launch(resolve(cwd(), `${filePath}:${line}:${column}`))
     return {
       status: 'success',
+      version,
     }
   }
   catch (error) {
     return {
       status: 'error',
+      version,
       message: String(error),
     }
   }

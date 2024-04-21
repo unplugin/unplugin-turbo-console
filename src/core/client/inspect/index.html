@@ -33,6 +33,10 @@
     </article>
 
     <footer>
+      <small id="version" style="color: #777777">
+
+      </small>
+      <br>
       <a target="_blank" href="https://github.com/unplugin/unplugin-turbo-console" class="secondary">Star On GitHub</a>
     </footer>
   </main>
@@ -42,7 +46,11 @@
   import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
 
   const raw = await fetch('/filePathMap')
-  const filePathMap = await raw.json()
+  const response = await raw.json()
+  const filePathMap = response.filePathMap
+
+  const versionEl = document.getElementById('version')
+  versionEl.innerText = `version: ${response.version}`
 
   let index = 0
   Object.entries(filePathMap).forEach(([key, value]) => {

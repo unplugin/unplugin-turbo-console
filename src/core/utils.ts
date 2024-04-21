@@ -31,7 +31,7 @@ export const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-r
 
 export function printInfo(port: number) {
   // eslint-disable-next-line no-console
-  console.log('\x1B[32m%s\x1B[0m\x1B[1m%s\x1B[0m\x1B[36m%s\x1B[0m', '  ➜', `  TurboConsole:`, ` http://localhost:${port}/inspect`)
+  console.log(`  \x1B[32m➜\x1B[39m  \x1B[1mTurboConsole\x1B[22m: \x1B[36mhttp://localhost:\x1B[1m${port}\x1B[22m/inspect\x1B[39m`)
 }
 
 export function getFileNameWithoutExtension(fileName: string) {
