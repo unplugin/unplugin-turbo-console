@@ -21,28 +21,28 @@ export async function startServer(port: number = 3070) {
       }
     }))
 
-    app.use('/routeMap', eventHandler(() => {
-      const routeMap = globalThis.TurboConsoleRouteMap || new Map()
-      return Object.fromEntries(routeMap)
+    app.use('/filePathMap', eventHandler(() => {
+      const filePathMap = globalThis.TurboConsoleFilePathMap || new Map()
+      return Object.fromEntries(filePathMap)
     }))
 
     app.use('/__open-in-editor', eventHandler(async (event) => {
       try {
         const { position } = getQuery(event) as { position: string }
-        const routeMap = globalThis.TurboConsoleRouteMap
+        const filePathMap = globalThis.TurboConsoleFilePathMap
 
-        if (!routeMap)
-          throw new Error('routeMap is undefined')
+        if (!filePathMap)
+          throw new Error('filePathMap is undefined')
 
         const parsed = position.split(',')
-        const routeMapString = parsed[0]
+        const filePathMapString = parsed[0]
         const line = parsed[1] || 1
         const column = parsed[2] || 1
 
         let filePath = ''
 
-        for (const [key, value] of routeMap) {
-          if (value === routeMapString) {
+        for (const [key, value] of filePathMap) {
+          if (value === filePathMapString) {
             filePath = key
             break
           }

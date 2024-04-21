@@ -113,19 +113,19 @@ export function isPluginDisable(meta: {
   return false
 }
 
-export function setRouteMap(filePath: string): string {
-  let routeMap = globalThis.TurboConsoleRouteMap
+export function setFilePathMap(filePath: string): string {
+  let filePathMap = globalThis.TurboConsoleFilePathMap
 
-  if (typeof routeMap === 'undefined')
-    routeMap = new Map<string, string>()
+  if (typeof filePathMap === 'undefined')
+    filePathMap = new Map<string, string>()
 
-  if (routeMap.has(filePath))
-    return routeMap.get(filePath)!
+  if (filePathMap.has(filePath))
+    return filePathMap.get(filePath)!
 
   function getRandomString() {
     const randomString = Math.random().toString(20).substring(2, 6)
 
-    for (const [_, value] of routeMap) {
+    for (const [_, value] of filePathMap) {
       if (value === randomString)
         return getRandomString()
     }
@@ -134,8 +134,8 @@ export function setRouteMap(filePath: string): string {
   }
 
   const randomString = getRandomString()
-  routeMap.set(filePath, randomString)
-  globalThis.TurboConsoleRouteMap = routeMap
+  filePathMap.set(filePath, randomString)
+  globalThis.TurboConsoleFilePathMap = filePathMap
 
   return randomString
 }
@@ -153,7 +153,7 @@ export function genConsoleString(genContext: GenContext) {
   const fileType = extname(filePath)
 
   const relativePath = relative(cwd(), filePath)
-  const routeMapString = setRouteMap(relativePath)
+  const filePathMapString = setFilePathMap(relativePath)
 
   // Parsing escaped unicode symbols
   try {
@@ -168,7 +168,7 @@ export function genConsoleString(genContext: GenContext) {
 
   // not output when argtype is string or number
   const lineInfo = `%c🚀 ${fileName}\u00B7${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
-  const codePosition = `${routeMapString},${originalLine},${(originalColumn || 0) + 1}`
+  const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c🔦 http://localhost:${port}#${codePosition}`
 

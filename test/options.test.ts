@@ -13,11 +13,11 @@ vi.mock('node:process', () => {
   }
 })
 
-const mockRouteMap = new Map()
-mockRouteMap.set('../../home/runner/main.js', 'fgsss')
-mockRouteMap.set('../../home/runner/index.js', 'sfgha')
+const mockFilePathMap = new Map()
+mockFilePathMap.set('../../home/runner/main.js', 'fgsss')
+mockFilePathMap.set('../../home/runner/index.js', 'sfgha')
 
-globalThis.TurboConsoleRouteMap = mockRouteMap
+globalThis.TurboConsoleFilePathMap = mockFilePathMap
 
 describe('transform options', () => {
   it('empty option', async () => {

@@ -14,12 +14,12 @@ vi.mock('node:process', () => {
   }
 })
 
-const mockRouteMap = new Map()
-mockRouteMap.set('../../home/runner/comments.js', 'commsx')
-mockRouteMap.set('../../home/runner/comments.vue', 'zsdgg')
-mockRouteMap.set('../../home/runner/comments.svelte', 'xcvgg')
+const mockFilePathMap = new Map()
+mockFilePathMap.set('../../home/runner/comments.js', 'commsx')
+mockFilePathMap.set('../../home/runner/comments.vue', 'zsdgg')
+mockFilePathMap.set('../../home/runner/comments.svelte', 'xcvgg')
 
-globalThis.TurboConsoleRouteMap = mockRouteMap
+globalThis.TurboConsoleFilePathMap = mockFilePathMap
 
 describe('disable by comments', () => {
   it ('on top of file', async () => {

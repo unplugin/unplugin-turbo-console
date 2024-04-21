@@ -13,14 +13,14 @@ vi.mock('node:process', () => {
   }
 })
 
-const mockRouteMap = new Map()
-mockRouteMap.set('../../home/runner/App.vue', 'appvue')
-mockRouteMap.set('../../home/runner/main.ts', 'maints')
-mockRouteMap.set('../../home/runner/main.js', 'mainjs')
-mockRouteMap.set('../../home/runner/+page.svelte', 'pagtsx')
-mockRouteMap.set('../../home/runner/page.tsx', 'svelte')
+const mockFilePathMap = new Map()
+mockFilePathMap.set('../../home/runner/App.vue', 'appvue')
+mockFilePathMap.set('../../home/runner/main.ts', 'maints')
+mockFilePathMap.set('../../home/runner/main.js', 'mainjs')
+mockFilePathMap.set('../../home/runner/+page.svelte', 'pagtsx')
+mockFilePathMap.set('../../home/runner/page.tsx', 'svelte')
 
-globalThis.TurboConsoleRouteMap = mockRouteMap
+globalThis.TurboConsoleFilePathMap = mockFilePathMap
 
 describe('vue transform', () => {
   it ('script setup', async () => {
