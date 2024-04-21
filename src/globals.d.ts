@@ -3,5 +3,5 @@
 export interface global {}
 
 declare global {
-  var TurboConsoleRouteMap: Map<string, string>
+  var TurboConsoleFilePathMap: Map<string, string>
 }
