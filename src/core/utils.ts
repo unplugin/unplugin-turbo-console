@@ -31,7 +31,7 @@ export const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-r
 
 export function printInfo(port: number) {
   // eslint-disable-next-line no-console
-  console.log('\x1B[32m%s\x1B[0m\x1B[1m%s\x1B[0m\x1B[36m%s\x1B[0m', '  ➜', `  TurboConsole:`, ` http://localhost:${port}/intro`)
+  console.log('\x1B[32m%s\x1B[0m\x1B[1m%s\x1B[0m\x1B[36m%s\x1B[0m', '  ➜', `  TurboConsole:`, ` http://localhost:${port}/inspect`)
 }
 
 export function getFileNameWithoutExtension(fileName: string) {
@@ -153,7 +153,7 @@ export function genConsoleString(genContext: GenContext) {
   const fileType = extname(filePath)
 
   const relativePath = relative(cwd(), filePath)
-  const filePathMapString = setFilePathMap(relativePath)
+  const filePathMapString = disableLaunchEditor ? '' : setFilePathMap(relativePath)
 
   // Parsing escaped unicode symbols
   try {
