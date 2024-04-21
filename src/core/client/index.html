@@ -18,15 +18,40 @@
 
 <body>
   <main class="container">
-    <article>
+    <h3>Launch Editor</h3>
+    <article id="error" style="display: none;">
       <h4>Ops, It get some error when launch to the editor:</h4>
-      <div id="error-info" style="color: #EE402E">
-        
-      </div>
-        <small>You can report this issus at <a href="https://github.com/unplugin/unplugin-turbo-console/issues"
-            target="_blank">GitHub</a>.
+      <code id="error-info" style="color: #EE402E">
+
+      </code>
+      <hr />
+      <p>
+        <small>
+          You can checkout <a href="https://github.com/unplugin/unplugin-turbo-console#troubleshooting"
+            target="_blank">troubleshooting</a> and <a
+            href="https://github.com/unplugin/unplugin-turbo-console/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed">closed
+            issues</a> first.
         </small>
+
+        <br>
+
+        <small>If the problem is still not solved. Please open a <a
+            href="https://github.com/unplugin/unplugin-turbo-console/issues/new?assignees=&labels=pending+triage&projects=&template=bug_report.yml"
+            target="_blank">new issue</a>.
+        </small>
+      </p>
+
     </article>
+
+    <article id="success" style="display: block;">
+      <p>🎉 Everything is normal</p>
+    </article>
+
+    <footer>
+      <small id="version" style="color: #777777">
+ 
+      </small>
+    </footer>
   </main>
 </body>
 <script>
@@ -35,8 +60,15 @@
       const position = window.location.hash.slice(1)
       const raw = await fetch(`/launchEditor?position=${(position)}`)
       const response = await raw.json()
-      if (response.status === 'error')
+      const versionEl = document.getElementById('version')
+      versionEl.innerText = `version: ${response.version}`
+      if (response.status === 'error') {
+        const error = document.getElementById('error')
+        error.style.display = 'block'
+        const success = document.getElementById('success')
+        success.style.display = 'none'
         throw new Error(response.message)
+      }
 
       window.close()
     }
