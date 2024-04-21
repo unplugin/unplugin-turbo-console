@@ -30,10 +30,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         options,
       }
 
-      const result = await transform(context)
-
-      if (result)
-        return result
+      return await transform(context)
     },
     vite: {
       async configureServer(server) {
@@ -41,18 +38,17 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           return
 
         await detectPort()
+        createServer(options.port)
 
         const _print = server.printUrls
         server.printUrls = () => {
           _print()
           printInfo(options.port!)
         }
-
-        createServer(options.port)
       },
     },
     farm: {
-      async  configureDevServer() {
+      async configureDevServer() {
         if (options.disableLaunchEditor)
           return
 
@@ -61,38 +57,36 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         createServer(options.port)
       },
     },
-    async webpack(compiler) {
+    webpack(compiler) {
       if (options.disableLaunchEditor)
         return
 
-      await detectPort()
-
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, (state) => {
+        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
           if (state.hasErrors())
             return
 
           // avoid start server multiple times
           if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+            await detectPort()
             printInfo(options.port!)
             createServer(options.port)
           }
         })
       }
     },
-    async rspack(compiler) {
+    rspack(compiler) {
       if (options.disableLaunchEditor)
         return
 
-      await detectPort()
-
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, (state) => {
+        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
           if (state.hasErrors())
             return
 
           // avoid start server multiple times
           if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+            await detectPort()
             printInfo(options.port!)
             createServer(options.port)
           }

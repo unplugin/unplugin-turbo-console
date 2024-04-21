@@ -34,7 +34,12 @@ export async function transform(context: Context) {
   if (isPluginDisable({ comments: program.comments || [], originalLine: 1, id, type: 'top-file' })) {
     return {
       code: magicString.toString(),
-      map: magicString.generateMap({ source: id }),
+      map: magicString.generateMap({
+        source: id,
+        file: id,
+        includeContent: true,
+        hires: true,
+      }),
     }
   }
 

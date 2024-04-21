@@ -8,7 +8,6 @@ export async function vueCompiler(context: Context): Promise<CompileResult> {
 
     const compileResults = {
       script: '',
-      column: 0,
       line: 0,
       offset: 0,
     }
@@ -20,16 +19,14 @@ export async function vueCompiler(context: Context): Promise<CompileResult> {
     if (errors.length === 0) {
       if (descriptor.script) {
         compileResults.script = descriptor.script.content
-        const { column, line, offset } = descriptor.script.loc.start
-        compileResults.column = column
+        const { line, offset } = descriptor.script.loc.start
         compileResults.line = line - 1
         compileResults.offset = offset
       }
 
       else if (descriptor.scriptSetup) {
         compileResults.script = descriptor.scriptSetup.content
-        const { column, line, offset } = descriptor.scriptSetup.loc.start
-        compileResults.column = column
+        const { line, offset } = descriptor.scriptSetup.loc.start
         compileResults.line = line - 1
         compileResults.offset = offset
       }
