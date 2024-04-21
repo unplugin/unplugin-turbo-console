@@ -12,5 +12,5 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*d.ts"],
-  "exclude": ["node_modules", "dist", "playground", "eslint.config.js", "examples"]
+  "exclude": ["node_modules", "dist", "playground", "examples"]
 }
