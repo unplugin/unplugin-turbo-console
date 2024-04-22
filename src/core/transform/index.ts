@@ -10,7 +10,7 @@ export async function transform(context: Context) {
   const { code, id, options } = context
   const magicString = new MagicString(code)
 
-  const compiler = getCompiler(id)
+  const compiler = await getCompiler(id)
 
   if (!compiler) {
     return {
@@ -31,7 +31,13 @@ export async function transform(context: Context) {
     plugins: ['jsx', 'typescript'],
   })
 
-  if (isPluginDisable({ comments: program.comments || [], originalLine: 1, id, type: 'top-file' })) {
+  if (isPluginDisable({
+    comments: program.comments || [],
+    originalLine: 1,
+    id,
+    type: 'top-file',
+    compiler,
+  })) {
     return {
       code: magicString.toString(),
       map: magicString.generateMap({
@@ -58,7 +64,13 @@ export async function transform(context: Context) {
         const originalLine = line + compileResult.line
         const originalColumn = column
 
-        if (isPluginDisable({ comments: program.comments || [], originalLine: line, id, type: 'inline-file' }))
+        if (isPluginDisable({
+          comments: program.comments || [],
+          originalLine: line,
+          id,
+          type: 'inline-file',
+          compiler,
+        }))
           return false
 
         // @ts-expect-error any

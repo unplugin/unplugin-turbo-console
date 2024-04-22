@@ -57,7 +57,7 @@ export interface GenContext {
   id: string
 }
 
-export type Compiler = 'vanilla' | 'vue' | 'svelte'
+export type Compiler = 'vanilla' | 'vue3' | 'vue2' | 'svelte'
 
 export interface Context {
   code: string

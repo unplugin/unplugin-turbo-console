@@ -58,13 +58,28 @@ export function getExtendedPath(filePath: string, extendedPathFileNames?: string
   return basename
 }
 
-export function getCompiler(id: string): Compiler | undefined {
+export async function getCompiler(id: string): Promise<Compiler | undefined> {
   const urlObject = new URL(id, 'file://')
   const fileType = extname(urlObject.pathname)
 
   switch (fileType) {
-    case '.vue':
-      return 'vue'
+    case '.vue': {
+      const Vue = await import('vue')
+      if (!Vue || typeof Vue.version !== 'string') {
+        console.warn(`[${PLUGIN_NAME}]: Vue is not installed`)
+        return undefined
+      }
+      else if (Vue.version.startsWith('2.')) {
+        return 'vue2'
+      }
+      else if (Vue.version.startsWith('3.')) {
+        return 'vue3'
+      }
+      else {
+        console.warn(`[${PLUGIN_NAME}]: Unsupported Vue version: ${Vue.version}`)
+        return undefined
+      }
+    }
     case '.svelte':
       return 'svelte'
     case '.js':
@@ -87,14 +102,14 @@ export function isPluginDisable(meta: {
   originalLine: number
   id: string
   type: 'top-file' | 'inline-file'
+  compiler: Compiler
 }) {
-  const { comments, originalLine, id, type } = meta
+  const { comments, originalLine, type, compiler } = meta
 
   if (comments?.length === 0)
     return false
 
   if (type === 'top-file') {
-    const compiler = getCompiler(id)
     const startLine = compiler === 'vanilla' ? 1 : 2
 
     const disablePluginComment = comments?.find(comment => comment.value.includes('turbo-console-disable'))
