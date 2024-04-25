@@ -29,7 +29,22 @@ export function launchEditor(specifiedEditor: Options['specifiedEditor']) {
         }
       }
 
-      launch(resolve(cwd(), `${filePath}:${line}:${column}`), specifiedEditor)
+      launch(resolve(cwd(), `${filePath}:${line}:${column}`), specifiedEditor, (fileName: any, errorMsg: any) => {
+        if (errorMsg) {
+          return {
+            status: 'error',
+            version,
+            message: String(errorMsg),
+          }
+        }
+        else if (fileName) {
+          return {
+            status: 'error',
+            version,
+            message: `Could not open ${fileName}`,
+          }
+        }
+      })
       return {
         status: 'success',
         version,
