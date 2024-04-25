@@ -30,31 +30,21 @@ export function launchEditor(specifiedEditor: Options['specifiedEditor']) {
       }
 
       launch(resolve(cwd(), `${filePath}:${line}:${column}`), specifiedEditor, (fileName: any, errorMsg: any) => {
-        if (errorMsg) {
-          return {
-            status: 'error',
-            version,
-            message: String(errorMsg),
-          }
-        }
-        else if (fileName) {
-          return {
-            status: 'error',
-            version,
-            message: `Could not open ${fileName}`,
-          }
-        }
+        if (errorMsg)
+          throw new Error(errorMsg)
+        else if (fileName)
+          throw new Error(`Could not open ${fileName}`)
       })
       return {
         status: 'success',
         version,
       }
     }
-    catch (error) {
+    catch (error: any) {
       return {
         status: 'error',
         version,
-        message: String(error),
+        message: error.message,
       }
     }
   })
