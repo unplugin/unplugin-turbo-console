@@ -38,7 +38,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           return
 
         await detectPort()
-        createServer(options.port)
+        createServer(options)
 
         const _print = server.printUrls
         server.printUrls = () => {
@@ -54,7 +54,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
         await detectPort()
         printInfo(options.port!)
-        createServer(options.port)
+        createServer(options)
       },
     },
     webpack(compiler) {
@@ -70,7 +70,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
             await detectPort()
             printInfo(options.port!)
-            createServer(options.port)
+            createServer(options)
           }
         })
       }
@@ -88,7 +88,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
             await detectPort()
             printInfo(options.port!)
-            createServer(options.port)
+            createServer(options)
           }
         })
       }

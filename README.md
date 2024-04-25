@@ -274,25 +274,10 @@ export interface Options {
    * @defaultValue 3070
    */
   port?: number
-  /**
-   * Whether to show extended path name when the file's (or folder's) name contains an element in the array.
-   *
-   * @remarks
-   *
-   * Consider a project includes these files:
-   *
-   * /views/Feature1/index.vue
-   *
-   * /views/Feature2/index.vue
-   *
-   * Set extendedPathFileNames as ['index'] can show the extended path name in the console output.
-   *
-   * @defaultValue `[]`
-   *
-   */
-  extendedPathFileNames?: string[]
 }
 ```
+
+> Refer all [options](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/types.ts#L1).
 
 ### Disable plugin by comments
 
@@ -325,35 +310,6 @@ If you get errors like this:
 > The editor process exited with an error: spawn code ENOENT.
 
 Please make sure the `code` command is installed. Check more details [here](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
-
-## Migrate from `vite-plugin-turbo-console`
-
-`package.json`
-
-```diff
-{
-  "devDependencies": {
--   "vite-plugin-turbo-console": "*",
-+   "unplugin-turbo-console": "*",
-  }
-}
-```
-
-`vite.config.js`
-```diff
-import { defineConfig } from "vite";
-- import TurboConsole from "vite-plugin-turbo-console";
-+ import TurboConsole from 'unplugin-turbo-console/vite'
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    TurboConsole({
-      /* options here */
-    })
-  ],
-});
-```
 
 ## ❤️ Credits
 

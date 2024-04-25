@@ -46,6 +46,17 @@ export interface Options {
    *
    */
   extendedPathFileNames?: string[]
+  /**
+   * The specific editor to launch.
+   *
+   * All available editors: https://github.com/yyx990803/launch-editor#supported-editors
+   *
+   * Linked issues:#33
+   *
+   * @defaultValue undefined
+   *
+   */
+  specifiedEditor?: string | undefined
 }
 
 export interface GenContext {
