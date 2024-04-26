@@ -227,3 +227,13 @@ export function isConsoleExpression(node: Node) {
     && node.callee.property.type === 'Identifier'
     && node.arguments?.length > 0
 }
+
+export async function loadPkg(pkg: string) {
+  try {
+    await import(pkg)
+    return true
+  }
+  catch (error) {
+    return false
+  }
+}

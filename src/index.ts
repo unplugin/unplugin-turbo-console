@@ -4,7 +4,7 @@ import { checkPort, getRandomPort } from 'get-port-please'
 import type { Context, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
 import { createServer } from './core/server/index'
-import { filter, printInfo } from './core/utils'
+import { filter, loadPkg, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
 
@@ -52,7 +52,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
           const _print = server.printUrls
 
-          const NuxtKit = await import('@nuxt/kit')
+          const NuxtKit = await loadPkg('@nuxt/kit')
           if (NuxtKit) {
             printInfo(options.port!)
           }
