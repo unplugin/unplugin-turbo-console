@@ -1,5 +1,5 @@
 <script setup>
-console.log('test')
+console.log('test222')
 </script>
 
 <template>

@@ -3,7 +3,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    'unplugin-turbo-console/nuxt',
+    '../../src/nuxt',
   ],
   turboConsole: {
   },

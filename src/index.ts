@@ -17,6 +17,15 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       options.port = await getRandomPort()
   }
 
+  async function startLaunchServer() {
+    // avoid start server multiple times
+    if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+      await detectPort()
+      printInfo(options.port!)
+      createServer(options)
+    }
+  }
+
   return {
     name: PLUGIN_NAME,
     enforce: 'pre',
@@ -37,24 +46,31 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         if (options.disableLaunchEditor)
           return
 
-        await detectPort()
-        createServer(options)
+        if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+          await detectPort()
+          createServer(options)
 
-        const _print = server.printUrls
-        server.printUrls = () => {
-          _print()
-          printInfo(options.port!)
+          const _print = server.printUrls
+
+          const NuxtKit = await import('@nuxt/kit')
+          if (NuxtKit) {
+            printInfo(options.port!)
+          }
+          else {
+            server.printUrls = () => {
+              _print()
+              printInfo(options.port!)
+            }
+          }
         }
       },
     },
     farm: {
-      async configureDevServer() {
+      configureDevServer() {
         if (options.disableLaunchEditor)
           return
 
-        await detectPort()
-        printInfo(options.port!)
-        createServer(options)
+        startLaunchServer()
       },
     },
     webpack(compiler) {
@@ -66,12 +82,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (state.hasErrors())
             return
 
-          // avoid start server multiple times
-          if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
-            await detectPort()
-            printInfo(options.port!)
-            createServer(options)
-          }
+          startLaunchServer()
         })
       }
     },
@@ -84,12 +95,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (state.hasErrors())
             return
 
-          // avoid start server multiple times
-          if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
-            await detectPort()
-            printInfo(options.port!)
-            createServer(options)
-          }
+          startLaunchServer()
         })
       }
     },
