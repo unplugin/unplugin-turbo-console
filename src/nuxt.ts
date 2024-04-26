@@ -1,4 +1,4 @@
-import { addVitePlugin, addWebpackPlugin, defineNuxtModule, logger } from '@nuxt/kit'
+import { addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
 import vite from './vite'
 import webpack from './webpack'
 import type { Options } from './types'
