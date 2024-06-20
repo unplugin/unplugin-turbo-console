@@ -11,18 +11,18 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "vue": "^3.4.29"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",
-    "@types/node": "^20.12.4",
-    "@vitejs/plugin-vue": "^5.0.4",
+    "@types/node": "^20.14.6",
+    "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
-    "npm-run-all2": "^6.1.2",
-    "typescript": "~5.4.3",
+    "npm-run-all2": "^6.2.0",
+    "typescript": "~5.4.5",
     "unplugin-turbo-console": "workspace:*",
-    "vite": "^5.2.8",
-    "vite-plugin-inspect": "^0.8.3",
-    "vue-tsc": "^2.0.7"
+    "vite": "^5.3.1",
+    "vite-plugin-inspect": "^0.8.4",
+    "vue-tsc": "^2.0.21"
   }
 }
