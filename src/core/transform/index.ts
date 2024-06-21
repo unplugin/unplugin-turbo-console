@@ -70,8 +70,9 @@ export async function transform(context: Context) {
           id,
           type: 'inline-file',
           compiler,
-        }))
+        })) {
           return false
+        }
 
         // @ts-expect-error any
         const args = node.arguments
