@@ -28,7 +28,7 @@ export async function transform(context: Context) {
 
   const program = babelParse(compileResult.script, getLang(id), {
     sourceFilename: id,
-    plugins: ['jsx', 'typescript'],
+    plugins: ['jsx', 'typescript', 'importAttributes'],
   })
 
   if (isPluginDisable({
