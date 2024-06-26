@@ -7,6 +7,7 @@ const DETAULT_OPTIONS: Options = {
   disableLaunchEditor: false,
   disableHighlight: false,
   extendedPathFileNames: [],
+  babelParserPlugins: ['typescript', 'jsx'],
   port: 3070,
 }
 
@@ -16,6 +17,14 @@ export const BUILD_OPTIONS: Options = {
 }
 
 export function resolveOptions(options: Options): Options {
+  // merge babel parser plugins
+  if (options.babelParserPlugins) {
+    options.babelParserPlugins = [
+      ...DETAULT_OPTIONS.babelParserPlugins!,
+      ...options.babelParserPlugins,
+    ]
+  }
+
   let resolved = {
     ...DETAULT_OPTIONS,
     ...options,

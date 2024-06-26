@@ -1,3 +1,5 @@
+import type { ParserPlugin } from '@babel/parser'
+
 export interface Options {
   /**
    * Add a string prefix to the console log.
@@ -57,6 +59,15 @@ export interface Options {
    *
    */
   specifiedEditor?: string | undefined
+
+  /**
+   * Babel parser plugins. `typescript` and `jsx` are enabled by default.
+   *
+   * https://babeljs.io/docs/en/babel-parser#plugins
+   *
+   * @defaultValue ['typescript', 'jsx']
+   */
+  babelParserPlugins?: ParserPlugin[]
 }
 
 export interface GenContext {
