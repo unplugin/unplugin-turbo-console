@@ -1,6 +1,8 @@
+import { cwd } from 'node:process'
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
+import { relative } from 'pathe'
 import type { Context, Options } from './types'
 import { PLUGIN_NAME } from './core/constants'
 import { createServer } from './core/server/index'
@@ -33,13 +35,19 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       return filter(id)
     },
     async transform(code, id) {
-      const context: Context = {
-        code,
-        id,
-        options,
-      }
+      try {
+        const context: Context = {
+          code,
+          id,
+          options,
+        }
 
-      return await transform(context)
+        return await transform(context)
+      }
+      catch (error) {
+        console.error(`[${PLUGIN_NAME}]`, `Transform ${relative(cwd(), id)} error:`, error)
+        return code
+      }
     },
     vite: {
       async configureServer(server) {
