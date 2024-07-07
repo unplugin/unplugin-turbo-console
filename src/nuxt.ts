@@ -1,9 +1,11 @@
 import { addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
+import { checkPort, getRandomPort } from 'get-port-please'
 import vite from './vite'
 import webpack from './webpack'
 import type { Options } from './types'
 import '@nuxt/schema'
 import { NUXT_CONFIG_KEY, PLUGIN_NAME } from './core/constants'
+import { virtualFileGenerator } from './core/virtualFile'
 
 export default defineNuxtModule<Options>({
   meta: {
@@ -11,12 +13,21 @@ export default defineNuxtModule<Options>({
     configKey: NUXT_CONFIG_KEY,
   },
   defaults: {
-    // ...default options
+    port: 3070,
   },
-  setup(options, _nuxt) {
+  async setup(options, nuxt) {
+    options.port ||= 3070
+    const isAvailable = await checkPort(options.port!)
+    if (!isAvailable)
+      options.port = await getRandomPort()
+
+    nuxt.hook('nitro:config', (nitroConfig) => {
+      nitroConfig.virtual = nitroConfig.virtual || {}
+      nitroConfig.virtual['#task']
+        = virtualFileGenerator(options.port!)
+    })
+
     addVitePlugin(() => vite(options))
     addWebpackPlugin(() => webpack(options))
-
-    // ...
   },
 })
