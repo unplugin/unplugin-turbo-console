@@ -4,11 +4,12 @@ import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
 import { relative } from 'pathe'
 import type { Context, Options } from './types'
-import { PLUGIN_NAME } from './core/constants'
+import { PLUGIN_NAME, resolvedVirtualModuleId, virtualModuleId } from './core/constants'
 import { createServer } from './core/server/index'
 import { filter, loadPkg, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
+import { virtualFileGenerator } from './core/virtualFile'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -33,6 +34,16 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     enforce: 'pre',
     transformInclude(id) {
       return filter(id)
+    },
+    resolveId(id) {
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId
+      }
+    },
+    load(id) {
+      if (id === resolvedVirtualModuleId) {
+        return virtualFileGenerator(options.port!)
+      }
     },
     async transform(code, id) {
       try {
