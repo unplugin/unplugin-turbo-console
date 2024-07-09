@@ -18,7 +18,7 @@
 </p>
 
 
-## 🎥 Screen Recording
+## 🎥 Demo
 
 <p align='center'>
   <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2024/04/upgit_20240421_1713682760.gif" >
@@ -27,13 +27,15 @@
 
 ## 🔥 Features
 
-- Support printing the file name, line number and variable name.
+- Printing the file name, line number and variable name.
 
-- Support insert custom prefix and suffix.
+- Support inserting custom prefix and suffix strings in the console output.
 
 - Support highlight the console output based on different file types. (such as `js(x)`, `ts(x)`, `vue`, `svelte`, `astro`)
 
-- Support jump to the editor source code from the console output with one click.
+- Allow jumping to the editor source code from the console output with one click.
+
+- Pass server logs to client.
 
 ## 📦 Install
 
@@ -298,6 +300,62 @@ console.log('bar') // turbo-console-disable-line
 console.log('foo')
 console.log('bar')
 ```
+
+### Pass server logs to client
+
+#### TypeSciprt
+
+Add `unplugin-turbo-console/client` to your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "types": [
+      "unplugin-turbo-console/client"
+    ],
+  },
+}
+```
+
+#### Client
+
+Add it at your client app entrance (Nuxt usage):
+
+```vue
+<script setup lang="ts">
+# app.vue
+import { initWebSocket } from '~console'
+
+// Make sure initWebSocket() run on client environment.
+if (import.meta.client)
+  initWebSocket()
+</script>
+```
+
+#### Server
+
+On the server side, use `tConsole` instead of `console`
+
+```ts
+import { tConsole } from '~console'
+
+export default defineEventHandler(async (event) => {
+  const raw = await fetch('https://jsonplaceholder.typicode.com/users')
+  const data = await raw.json()
+  
+  tConsole.log({data})
+  tConsole.warn('A warning message from server!!')
+  tConsole.error('An error message from server!!')
+  
+  return {
+    data
+  }
+})
+
+```
+
+And These logs will be printed on your browser.
 
 ## Troubleshooting
 
