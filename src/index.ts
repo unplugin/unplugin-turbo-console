@@ -24,7 +24,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     // avoid start server multiple times
     if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
       await detectPort()
-      printInfo(options.port!)
+      printInfo(options)
       createServer(options)
     }
   }
@@ -62,9 +62,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     vite: {
       async configureServer(server) {
-        if (options.disableLaunchEditor)
-          return
-
         if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
           await detectPort()
           createServer(options)
@@ -73,12 +70,12 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
           const NuxtKit = await loadPkg('@nuxt/kit')
           if (NuxtKit) {
-            printInfo(options.port!)
+            printInfo(options)
           }
           else {
             server.printUrls = () => {
               _print()
-              printInfo(options.port!)
+              printInfo(options)
             }
           }
         }
@@ -86,16 +83,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     farm: {
       configureDevServer() {
-        if (options.disableLaunchEditor)
-          return
-
         startLaunchServer()
       },
     },
     webpack(compiler) {
-      if (options.disableLaunchEditor)
-        return
-
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
           if (state.hasErrors())
@@ -106,9 +97,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       }
     },
     rspack(compiler) {
-      if (options.disableLaunchEditor)
-        return
-
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
           if (state.hasErrors())

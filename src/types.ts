@@ -68,6 +68,15 @@ export interface Options {
    * @defaultValue ['typescript', 'jsx']
    */
   babelParserPlugins?: ParserPlugin[]
+
+  /**
+   * Whether to pass server logs to the client.
+   *
+   * Set it to `false` to disable.
+   *
+   * @defaultValue true
+   */
+  passServerLogs?: boolean
 }
 
 export interface GenContext {

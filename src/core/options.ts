@@ -9,11 +9,13 @@ const DETAULT_OPTIONS: Options = {
   extendedPathFileNames: [],
   babelParserPlugins: ['typescript', 'jsx'],
   port: 3070,
+  passServerLogs: true,
 }
 
 export const BUILD_OPTIONS: Options = {
   disableLaunchEditor: true,
   disableHighlight: true,
+  passServerLogs: false,
 }
 
 export function resolveOptions(options: Options): Options {
