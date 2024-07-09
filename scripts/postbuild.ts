@@ -23,11 +23,7 @@ async function run() {
   const source = join(dirname(fileURLToPath(import.meta.url)), '../src/core/client')
   const target = join(dirname(fileURLToPath(import.meta.url)), '../dist/client')
 
-  const clientDts = join(dirname(fileURLToPath(import.meta.url)), '../client.d.ts')
-  const clientDtsTarget = join(dirname(fileURLToPath(import.meta.url)), '../dist/client.d.ts')
-
   copy(source, target)
-  copy(clientDts, clientDtsTarget)
 }
 
 run()
