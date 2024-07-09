@@ -9,7 +9,7 @@ import { createServer } from './core/server/index'
 import { filter, loadPkg, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
-import { virtualFileGenerator } from './core/virtualFile'
+import { virtualModulesGenerator } from './core/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -42,7 +42,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     load(id) {
       if (id === resolvedVirtualModuleId) {
-        return virtualFileGenerator(options.port!)
+        return virtualModulesGenerator(options.port!)
       }
     },
     async transform(code, id) {

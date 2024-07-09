@@ -4,8 +4,8 @@ import vite from './vite'
 import webpack from './webpack'
 import type { Options } from './types'
 import '@nuxt/schema'
-import { NUXT_CONFIG_KEY, PLUGIN_NAME } from './core/constants'
-import { virtualFileGenerator } from './core/virtualFile'
+import { NUXT_CONFIG_KEY, PLUGIN_NAME, virtualModuleId } from './core/constants'
+import { virtualModulesGenerator } from './core/virtualModules'
 
 export default defineNuxtModule<Options>({
   meta: {
@@ -23,8 +23,8 @@ export default defineNuxtModule<Options>({
 
     nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.virtual = nitroConfig.virtual || {}
-      nitroConfig.virtual['#task']
-        = virtualFileGenerator(options.port!)
+      nitroConfig.virtual[virtualModuleId]
+        = virtualModulesGenerator(options.port!)
     })
 
     addVitePlugin(() => vite(options))
