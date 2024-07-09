@@ -18,12 +18,24 @@ export async function createServer(options: Options) {
   catch (error) {
     const app = createApp()
 
+    if (options.passServerLogs === false && options.disableLaunchEditor === true)
+      return false
+
+    // health
     app.use('/health', health)
-      .use('/filePathMap', filePathMap)
-      .use('/launchEditor', launchEditor(specifiedEditor))
-      .use('/ws', ws)
-      .use('/send', send)
-      .use('/', serveStatic)
+
+    if (options.passServerLogs) {
+    // Pass server log route
+      app.use('/ws', ws)
+        .use('/send', send)
+    }
+
+    // Launch Editor server
+    if (!options.disableLaunchEditor) {
+      app.use('/filePathMap', filePathMap)
+        .use('/launchEditor', launchEditor(specifiedEditor))
+        .use('/', serveStatic)
+    }
 
     globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
 
