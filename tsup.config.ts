@@ -4,7 +4,7 @@ export default defineConfig({
   entryPoints: [
     'src/*.ts',
   ],
-  clean: true,
+  clean: false,
   format: ['cjs', 'esm'],
   dts: true,
   splitting: true,
