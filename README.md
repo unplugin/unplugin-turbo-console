@@ -371,10 +371,14 @@ Please make sure the `code` command is installed. Check more details [here](http
 
 ## ❤️ Credits
 
-Inspired by 
+Thanks these awesome project:
 
 [babel-plugin-enhance-log](https://github.com/baozouai/babel-plugin-enhance-log)
 
 [turbo-console-log](https://github.com/Chakroun-Anas/turbo-console-log)
 
 [vite-plugin-console-line](https://github.com/lq9958/vite-plugin-console-line)
+
+[vite-plugin-terminal](https://github.com/patak-dev/vite-plugin-terminal)
+
+[Nuxt's server logs feature](https://nuxt.com/blog/v3-11#better-logging)
