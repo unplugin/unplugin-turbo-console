@@ -320,7 +320,7 @@ Add `unplugin-turbo-console/client` to your `tsconfig.json`:
 
 #### Client
 
-Add it at your client app entrance (Nuxt usage):
+Add it at your client entrance (Nuxt usage):
 
 ```vue
 <script setup lang="ts">
@@ -338,7 +338,7 @@ if (import.meta.client)
 On the server side, use `tConsole` instead of `console`
 
 ```ts
-import { tConsole } from '~console'
+import { tConsole } from 'unplugin-turbo-console/helper'
 
 export default defineEventHandler(async (event) => {
   const raw = await fetch('https://jsonplaceholder.typicode.com/users')
