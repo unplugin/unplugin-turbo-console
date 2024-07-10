@@ -1,4 +1,5 @@
 import { createServer as _createServer } from 'node:http'
+import { env } from 'node:process'
 import { createApp, toNodeListener } from 'h3'
 import wsAdapter from 'crossws/adapters/node'
 import type { Options } from '../../types'
@@ -37,13 +38,13 @@ export async function createServer(options: Options) {
         .use('/', serveStatic)
     }
 
-    globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
-
     const server = _createServer(toNodeListener(app))
 
     const { handleUpgrade } = wsAdapter(app.websocket)
 
     server.on('upgrade', handleUpgrade)
+
+    env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = _port.toString()
 
     server.listen(_port)
   }

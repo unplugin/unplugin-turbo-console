@@ -20,9 +20,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       options.port = await getRandomPort()
   }
 
-  async function startLaunchServer() {
-    // avoid start server multiple times
+  async function startTurboConsoleServer() {
+    // Avoid start server multiple times
     if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+      globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
       await detectPort()
       printInfo(options)
       createServer(options)
@@ -62,7 +63,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     vite: {
       async configureServer(server) {
+        // Avoid start server multiple times
         if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
+          globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
           await detectPort()
           createServer(options)
 
@@ -83,7 +86,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     farm: {
       configureDevServer() {
-        startLaunchServer()
+        startTurboConsoleServer()
       },
     },
     webpack(compiler) {
@@ -92,7 +95,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (state.hasErrors())
             return
 
-          startLaunchServer()
+          startTurboConsoleServer()
         })
       }
     },
@@ -102,7 +105,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           if (state.hasErrors())
             return
 
-          startLaunchServer()
+          startTurboConsoleServer()
         })
       }
     },

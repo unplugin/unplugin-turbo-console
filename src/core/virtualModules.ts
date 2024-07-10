@@ -17,18 +17,5 @@ export function virtualModulesGenerator(port: number) {
       console.error('[unplugin-turbo-console]: Please run initWebSocket in browser environment')
     }
   }
-  
-  const generateFetchUrl = (args, method) => {
-    return 'http://localhost:${port}/send?m=' + JSON.stringify(args) + '&t=' + method
-  }
-  
-  export const tConsole = {};
-  
-  ['log', 'error', 'warn', 'info'].forEach((method) => {
-    tConsole[method] = (...args) => {
-      console[method](...args)
-      fetch(generateFetchUrl(args, method))
-    }
-  })
 `
 }

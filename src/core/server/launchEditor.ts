@@ -1,5 +1,6 @@
 import { cwd } from 'node:process'
 import { defineEventHandler, getQuery } from 'h3'
+// @ts-expect-error missing types
 import launch from 'launch-editor'
 import { resolve } from 'pathe'
 import { version } from '../../../package.json'
