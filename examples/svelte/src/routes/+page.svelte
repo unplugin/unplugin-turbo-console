@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { initWebSocket } from '~console'
+
+  initWebSocket()
+
   // xxxx
   const a: string = 'Hello'
   console.log(a)
