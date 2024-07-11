@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { Peer } from 'crossws'
 import { defineWebSocketHandler } from 'h3'
 import { PLUGIN_NAME } from '../constants'
@@ -9,6 +10,17 @@ if (globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET === undefined) {
 export default defineWebSocketHandler({
   open(peer) {
     globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET!.add(peer)
+  },
+  message(_peer, message) {
+    try {
+      const { m, t } = JSON.parse(message.toString())
+      // eslint-disable-next-line ts/ban-ts-comment, ts/prefer-ts-expect-error
+      // @ts-ignore
+      console[t]('\x1B[106m Client Log \x1B[49m', ...JSON.parse(m))
+    }
+    catch (error) {
+      console.error(error)
+    }
   },
   error(peer, error) {
     console.error(`${PLUGIN_NAME}: ${peer} connection error ${error}`)

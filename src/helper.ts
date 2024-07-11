@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import { env } from 'node:process'
 import { PLUGIN_NAME } from './core/constants'
-
-type TCMethod = 'log' | 'error' | 'warn' | 'info'
+import type { TCMethod } from './types'
 
 function generateFetchUrl(args: any[], method: TCMethod) {
   const port = env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT
