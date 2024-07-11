@@ -80,3 +80,5 @@ dist
 # IDE
 .idea
 .DS_Store
+
+docs/.vitepress/cache
