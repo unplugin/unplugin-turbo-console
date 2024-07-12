@@ -4,12 +4,12 @@ import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
 import { relative } from 'pathe'
 import type { Context, Options } from './types'
-import { PLUGIN_NAME, clientVirtualModuleId, helperVirtualModuleId, resolvedClientVirtualModuleId, resolvedHelperVirtualModuleId } from './core/constants'
+import { PLUGIN_NAME, resolvedVirtualModuleId, virtualModuleId } from './core/constants'
 import { createServer } from './core/server/index'
 import { filter, loadPkg, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
-import { clientVirtualModulesGenerator, helperVirtualModulesGenerator } from './core/virtualModules'
+import { virtualModulesGenerator } from './core/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -37,20 +37,13 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       return filter(id)
     },
     resolveId(id) {
-      if (id === clientVirtualModuleId) {
-        return resolvedClientVirtualModuleId
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId
       }
-
-      if (id === helperVirtualModuleId)
-        return resolvedHelperVirtualModuleId
     },
     load(id) {
-      if (id === resolvedClientVirtualModuleId) {
-        return clientVirtualModulesGenerator(options.port!)
-      }
-
-      if (id === resolvedHelperVirtualModuleId) {
-        return helperVirtualModulesGenerator()
+      if (id === resolvedVirtualModuleId) {
+        return virtualModulesGenerator(options.port!)
       }
     },
     async transform(code, id) {
