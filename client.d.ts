@@ -1,6 +1,3 @@
-declare module '~console/client' {
-  import type { TCMethod } from './types'
+declare module '~console' {
 
-  export const initWebSocket: () => void
-  export const tConsole: Record<TCMethod, (...args: any[]) => void>
 }

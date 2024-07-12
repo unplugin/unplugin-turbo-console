@@ -20,6 +20,11 @@ async function run() {
     await fs.writeFile(file, code)
   }
 
+  const helperFile = join(dirname(fileURLToPath(import.meta.url)), '../dist/helper.js')
+  let helperCode = await fs.readFile(helperFile, 'utf8')
+  helperCode = `// turbo-console-disable\n${helperCode}`
+  await fs.writeFile(helperFile, helperCode)
+
   const source = join(dirname(fileURLToPath(import.meta.url)), '../src/core/client')
   const target = join(dirname(fileURLToPath(import.meta.url)), '../dist/client')
 

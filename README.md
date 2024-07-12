@@ -301,7 +301,7 @@ console.log('foo')
 console.log('bar')
 ```
 
-### Pass server logs to client
+### Shared logs between client and server
 
 #### TypeSciprt
 
@@ -318,35 +318,32 @@ Add `unplugin-turbo-console/client` to your `tsconfig.json`:
 }
 ```
 
-#### Client
+#### Init
 
 Add it at your client entrance (Nuxt usage):
 
+app.vue
+
 ```vue
 <script setup lang="ts">
-# app.vue
-import { initWebSocket } from '~console'
-
-// Make sure initWebSocket() run on client environment.
-if (import.meta.client)
-  initWebSocket()
+import '~console'
 </script>
 ```
 
-#### Server
+#### Server logs to client
 
-On the server side, use `tConsole` instead of `console`
+On the server side, use `ClientConsole` instead of `console`
 
 ```ts
-import { tConsole } from 'unplugin-turbo-console/helper'
+import { ClientConsole } from 'unplugin-turbo-console/helper'
 
 export default defineEventHandler(async (event) => {
   const raw = await fetch('https://jsonplaceholder.typicode.com/users')
   const data = await raw.json()
   
-  tConsole.log({data})
-  tConsole.warn('A warning message from server!!')
-  tConsole.error('An error message from server!!')
+  ClientConsole.log({data})
+  ClientConsole.warn('A warning message from server!!')
+  ClientConsole.error('An error message from server!!')
   
   return {
     data
@@ -355,7 +352,20 @@ export default defineEventHandler(async (event) => {
 
 ```
 
-And These logs will be printed on your browser.
+#### Client logs to server
+
+On the client, use `ServerConsole` instead of `console`
+
+```vue
+
+<script setup lang="ts">
+import { ServerConsole } from 'unplugin-turbo-console/helper'
+
+ServerConsole.log('A log message from client!')
+
+</script>
+
+```
 
 ## Troubleshooting
 

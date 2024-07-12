@@ -5,9 +5,8 @@ export default defineConfig({
     'src/*.ts',
   ],
   clean: true,
-  format: ['cjs', 'esm'],
+  format: ['esm', 'cjs'],
   dts: true,
   splitting: true,
   onSuccess: 'npm run build:fix',
-  shims: true,
 })

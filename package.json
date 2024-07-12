@@ -1,7 +1,7 @@
 {
   "name": "unplugin-turbo-console",
   "type": "module",
-  "version": "1.9.3-beta.1",
+  "version": "1.9.3",
   "description": "Improve the Developer Experience of console.log()",
   "license": "MIT",
   "homepage": "https://github.com/unplugin/unplugin-turbo-console#readme",
