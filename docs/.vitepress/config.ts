@@ -1,28 +1,25 @@
 import { defineConfig } from 'vitepress'
+import { zhCN } from './zhCN'
+import { enUS } from './enUS'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Unplugin Turbo Console',
-  description: 'The documentation for Unplugin Turbo Console',
+  locales: {
+    'root': {
+      label: 'English',
+      lang: 'en-US',
+      ...enUS,
+    },
+    'zh-CN': {
+      label: '简体中文',
+      lang: 'zh-CN',
+      link: '/zh-CN/',
+      ...zhCN,
+    },
+  },
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
-    ],
-
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-        ],
-      },
-    ],
-
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/unplugin/unplugin-turbo-console' },
     ],
   },
 })
