@@ -73,7 +73,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
           const NuxtKit = await loadPkg('@nuxt/kit')
           if (NuxtKit) {
-            printInfo(options)
+            printInfo(options, ' ')
           }
           else {
             server.printUrls = () => {

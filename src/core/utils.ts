@@ -29,11 +29,11 @@ export function getConsoleStyle(fileType: string): string {
 
 export const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px'
 
-export function printInfo(options: Options) {
-  if (options.disableLaunchEditor)
+export function printInfo(options: Options, spacing: string = '  ') {
+  if (options.disableLaunchEditor || options.silent)
     return false
   // eslint-disable-next-line no-console
-  console.log(`  \x1B[32m➜\x1B[39m  \x1B[1mTurboConsole\x1B[22m: \x1B[36mhttp://localhost:\x1B[1m${options.port}\x1B[22m/inspect\x1B[39m`)
+  console.log(`  \x1B[32m➜\x1B[39m${spacing}\x1B[1mTurboConsole\x1B[22m: \x1B[36mhttp://localhost:\x1B[1m${options.port}\x1B[22m/inspect\x1B[39m`)
 }
 
 export function getFileNameWithoutExtension(fileName: string) {

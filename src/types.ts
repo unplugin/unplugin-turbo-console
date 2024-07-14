@@ -77,6 +77,15 @@ export interface Options {
    * @defaultValue true
    */
   passServerLogs?: boolean
+
+  /**
+   * Whether to print plugin server url to the console.
+   *
+   * Set it to `false` to disable.
+   *
+   * @defaultValue true
+   */
+  silent?: false
 }
 
 export interface GenContext {

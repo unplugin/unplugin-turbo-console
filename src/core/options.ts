@@ -10,6 +10,7 @@ const DETAULT_OPTIONS: Options = {
   babelParserPlugins: ['typescript', 'jsx'],
   port: 3070,
   passServerLogs: true,
+  silent: false,
 }
 
 export const BUILD_OPTIONS: Options = {

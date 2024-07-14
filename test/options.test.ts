@@ -90,6 +90,7 @@ describe('resolve options', () => {
         "passServerLogs": true,
         "port": 3070,
         "prefix": "",
+        "silent": false,
         "suffix": "",
       }
     `)
@@ -117,6 +118,7 @@ describe('resolve options', () => {
         "passServerLogs": true,
         "port": 3070,
         "prefix": "",
+        "silent": false,
         "suffix": "",
       }
     `)
