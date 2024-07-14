@@ -40,27 +40,30 @@ export const ClientConsole: Record<TCMethod, (...args: any[]) => void> = {
   },
 }
 
-const socket = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
 export const ServerConsole: Record<TCMethod, (...args: any[]) => void> = {
   log: (...args: any[]) => {
+    const socket = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
     console.log(...args)
     if (socket) {
       socket.send(JSON.stringify({ m: JSON.stringify(args), t: 'log' }))
     }
   },
   error: (...args: any[]) => {
+    const socket = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
     console.error(...args)
     if (socket) {
       socket.send(JSON.stringify({ m: JSON.stringify(args), t: 'error' }))
     }
   },
   warn: (...args: any[]) => {
+    const socket = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
     console.warn(...args)
     if (socket) {
       socket.send(JSON.stringify({ m: JSON.stringify(args), t: 'warn' }))
     }
   },
   info: (...args: any[]) => {
+    const socket = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
     console.info(...args)
     if (socket) {
       socket.send(JSON.stringify({ m: JSON.stringify(args), t: 'info' }))

@@ -1,8 +1,11 @@
 <template>
-  Hello World
+  <button @click="test">222</button>
 </template>
 
 <script setup lang="ts">
-  const msg: string = "Hello World"
-  console.log(msg)
+import { ServerConsole } from 'unplugin-turbo-console/helper'
+
+  function test() {
+    ServerConsole.log('xxx')
+  }
 </script>

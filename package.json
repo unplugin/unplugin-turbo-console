@@ -2,7 +2,7 @@
   "name": "unplugin-turbo-console",
   "type": "module",
   "version": "1.9.3",
-  "description": "Improve the Developer Experience of console.log()",
+  "description": "Improve the Developer Experience of console",
   "license": "MIT",
   "homepage": "https://github.com/unplugin/unplugin-turbo-console#readme",
   "repository": {
@@ -109,6 +109,9 @@
     "play:astro": "pnpm run --filter astro dev",
     "play:farm": "pnpm run --filter farm-vue dev",
     "play:solid": "pnpm run --filter solid-start dev",
+    "docs:dev": "pnpm run -C ./docs dev",
+    "docs:preview": "pnpm run -C ./docs preview",
+    "docs:build": "pnpm run -C ./docs build",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "tsx src/index.ts",

@@ -1,0 +1,19 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "case-check": "case-police '**/*.md' --fix"
+  },
+  "devDependencies": {
+    "@shikijs/vitepress-twoslash": "^1.10.3",
+    "case-police": "^0.6.1",
+    "unocss": "^0.61.3",
+    "unplugin-turbo-console": "workspace:*",
+    "vitepress": "^1.3.0"
+  }
+}

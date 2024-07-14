@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import '~console'
-import { ServerConsole,ClientConsole } from 'unplugin-turbo-console/helper'
+import { ServerConsole } from 'unplugin-turbo-console/helper'
+import { ref } from 'vue'
 
-if (import.meta.server)
-  ClientConsole.log('From Server')
+const count = ref(0)
 
-if (import.meta.client)
-  ServerConsole.log('From Clien22t')
-
+function increment() {
+  count.value++
+  ServerConsole.log(count.value)
+}
 </script>
 
 <template>
   <div>
-    <NuxtWelcome />
+    {{ count }}
   </div>
+  <button @click="increment">
+    +
+  </button>
 </template>
