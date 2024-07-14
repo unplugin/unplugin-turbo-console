@@ -1,17 +1,19 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
   name: "Unplugin Turbo Console"
   tagline: "Improve the Developer Experience of Console"
+  image:
+    src: /logo.svg
+    alt: Vue Macros
   actions:
     - theme: brand
       text: Getting Started
-      link: /guide
+      link: /guide/getting-started
     - theme: alt
       text: Try it Online
-      link: /api-examples
+      link: https://stackblitz.com/github/yuyinws/stackblitz-demo?file=src%2FApp.vue
     - theme: alt
       text: GitHub
       link: https://github.com/unplugin/unplugin-turbo-console
@@ -19,14 +21,14 @@ hero:
 features:
   - icon: 🎨
     title: Highlight Output
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: Highlight console output based on file type
   - icon: 📝
     title: Prefix and Suffix
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - icon: 🚀
+    details: Customizing prefix and suffix in Ccnsole Output
+  - icon: 🔦
     title: Launch Editor
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - icon: 🖇️
-    title: Shared Logs
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: Click console output to jump to editor source code
+  - icon: 🚚
+    title: Pass Logs
+    details: Pass console logs between server and client
 ---

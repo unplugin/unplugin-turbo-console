@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-# 入门
+# Getting Started
 
-**Unplugin Torbo Console** 是一个通用型插件，旨在增强前端开发人员在使用 `console` 时的开发者体验(DX)。它拥有许多实用的功能与灵活的可配置项，得益于[Unplugin](https://unplugin.unjs.io)，它几乎适用于所有现代前端框架。你可以从下面的动图中看到它的部分功能：
+**Unplugin Torbo Console** is a universal plugin designed to enhance the **Developer Experience** for front-end developers when using `console`. It offers many practical features and flexible options. Thanks to [Unplugin](https://unplugin.unjs.io), it is compatible with almost all modern front-end frameworks. You can see some of its features in the GIF below:
 
 <!-- TODO 重新录制-->
 ![Demo](https://cdn.jsdelivr.net/gh/yuyinws/static@master/2024/04/upgit_20240421_1713682760.gif)
@@ -21,9 +21,9 @@ outline: deep
 </a>
 </p>
 
-## 使用
+## Usage
 
-### 安装
+### Install
 
 ::: code-group
 
@@ -45,9 +45,9 @@ bun add unplugin-turbo-console -d
 
 :::
 
-### 集成
+### Integration
 
-#### 打包工具
+#### Build tools
 
 ::: code-group
 
@@ -133,7 +133,7 @@ export default defineConfig({
 
 :::
 
-#### 元框架（Meta-Framework）
+#### Meta-Framework
 
 ::: code-group
 

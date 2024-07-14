@@ -6,7 +6,7 @@ export const zhCN = defineConfig({
   description: '增强 Console 的开发者体验',
   themeConfig: {
     nav: [
-      { text: '指南', link: '/zh-CN/guide/', activeMatch: '/zh-CN/guide' },
+      { text: '指南', link: '/zh-CN/guide/getting-started', activeMatch: '/zh-CN/guide' },
       { text: '特性', link: '/zh-CN/features/hightlight', activeMatch: '/zh-CN/features' },
     ],
     sidebar: [

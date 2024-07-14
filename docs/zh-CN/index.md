@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: 立即开始
-      link: /zh-CN/guide
+      link: /zh-CN/guide/getting-started
     - theme: alt
       text: 在线体验
       link: https://stackblitz.com/github/yuyinws/stackblitz-demo?file=src%2FApp.vue
@@ -27,8 +27,8 @@ features:
     details: 在 Console 输出中自定义前后缀字符串
   - icon: 🔦
     title: 编辑器跳转
-    details: 从 Console 输出中点击跳转到编辑器源代码中
+    details: 点击 Console 输出跳转到编辑器源代码
   - icon: 🚚
     title: 传递日志
-    details: 在服务端和客户端之间传递 Console 输出
+    details: 在服务端和客户端之间传递 Console 日志
 ---

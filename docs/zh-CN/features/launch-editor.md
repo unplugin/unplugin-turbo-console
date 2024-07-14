@@ -25,7 +25,7 @@ http://localhost:3070#3abe,6,3
 
 - `#3abe,6,3`: 一个包含在URL中的hash属性，其中`3abe`是一个随机生成字符串，对应项目中的一个具体文件，`6`与`3`分别代表`console`源代码所在的行号和列号。
 
-- `http://localhost:3070`: 一个Node.js服务，底层依赖 [launch-editor](https://github.com/yyx990803/launch-editor) 这个包，通过 hash 属性获取到具体的文件名和行列号，即可打开编辑器并跳转到对应源代码所在行。
+- `http://localhost:3070`: 一个[静态页面](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/client/index.html)，它的作用是将 hash 属性发送给 Node.js 服务，Node.js 服务获取到具体的文件路径和行列号，再通过[launch-editor](https://github.com/yyx990803/launch-editor)打开编辑器。
 
 ::: tip 提示
 

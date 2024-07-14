@@ -1,10 +1,10 @@
-# 传递日志
+# Pass Logs
 
-此功能可以让你在服务端和客户端之间传递日志内容。
+The feature allows you to pass log content between server and client.
 
-## TypeSciprt 配置
+## TypeSciprt Configuration
 
-在你项目中的`tsconfig.json`中增加以下配置：
+Add the following configurations to `tsconfig.json`:
 
 ```json
 {
@@ -16,9 +16,9 @@
 }
 ```
 
-## 初始化
+## Initialization
 
-在项目的入口文件中引入`~console`进行初始化，以下是在一些框架中的示例：
+Introduce `~console` in the entry file for initialization. The following are examples in some frameworks:
 
 ::: code-group
 
@@ -46,11 +46,11 @@ mount(() => <StartClient />, document.getElementById('app')!)
 
 :::
 
-## 服务端 → 客户端
+## Server → Client
 
-在服务端，用 `ClientConsole` 来替换`console`。
+On the server side, replace `console` with `ClientConsole`.
 
-以下是在`Nuxt`中的示例：
+Here's an example in `Nuxt`:
 
 ```ts{2,9-11} twoslash
 // server/api/test.ts
@@ -73,11 +73,11 @@ export default defineEventHandler(async (event) => {
 
 ![server-client](/features/server-client.gif)
 
-## 客户端 → 服务端
+## Client → Server
 
-在客户端，用 `ServerConsole` 来替换`console`。
+On the client side, replace `console` with `ServerConsole`.
 
-示例：
+For example:
 
 ```vue{2,9} twoslash
 <script setup lang="ts">

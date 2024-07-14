@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import TurboConsole from '../../src/vite'
+import TurboConsole from 'unplugin-turbo-console/vite'
 import inspect from 'vite-plugin-inspect'
 
 // https://vitejs.dev/config/
