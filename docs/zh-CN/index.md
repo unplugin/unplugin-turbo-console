@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -26,10 +25,10 @@ features:
   - icon: 📝
     title: 自定义前后缀
     details: 在 Console 输出中自定义前后缀字符串
-  - icon: 🚀
+  - icon: 🔦
     title: 编辑器跳转
     details: 从 Console 输出中点击跳转到编辑器源代码中
-  - icon: 🖇️
-    title: 共享日志
-    details: 在服务端和客户端之间共享 Console 输出
+  - icon: 🚚
+    title: 传递日志
+    details: 在服务端和客户端之间传递 Console 输出
 ---

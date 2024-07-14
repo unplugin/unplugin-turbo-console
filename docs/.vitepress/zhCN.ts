@@ -6,15 +6,24 @@ export const zhCN = defineConfig({
   description: '增强 Console 的开发者体验',
   themeConfig: {
     nav: [
-      { text: '指南', link: '/zh-CN/guide/', activeMatch: '/zh-CN/guide/' },
-      { text: '功能', link: '/zh-CN/features/', activeMatch: '/zh-CN/features/' },
+      { text: '指南', link: '/zh-CN/guide/', activeMatch: '/zh-CN/guide' },
+      { text: '特性', link: '/zh-CN/features/hightlight', activeMatch: '/zh-CN/features' },
     ],
     sidebar: [
       {
         text: '指南',
         items: [
-          { text: '入门', link: '/zh-CN/guide' },
-          { text: '特性', link: '/zh-CN/features' },
+          { text: '入门', link: '/zh-CN/guide/getting-started' },
+          { text: '配置', link: '/zh-CN/guide/configurations' },
+        ],
+      },
+      {
+        text: '特性',
+        items: [
+          { text: '高亮输出', link: '/zh-CN/features/highlight' },
+          { text: '自定义前后缀', link: '/zh-CN/features/custom-prefix' },
+          { text: '编辑器跳转', link: '/zh-CN/features/launch-editor' },
+          { text: '传递日志', link: '/zh-CN/features/pass-logs' },
         ],
       },
       {

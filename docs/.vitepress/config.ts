@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { zhCN } from './zhCN'
 import { enUS } from './enUS'
 
@@ -21,5 +22,13 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/unplugin/unplugin-turbo-console' },
     ],
+  },
+  markdown: {
+    codeTransformers: [
+      transformerTwoslash(),
+    ],
+    image: {
+      lazyLoading: true,
+    },
   },
 })

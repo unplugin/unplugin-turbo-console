@@ -1,8 +1,5 @@
 // @refresh reload
 import { mount, StartClient } from "@solidjs/start/client";
-import { initWebSocket } from "~console";
+import "~console";
 
-mount(() => {
-  initWebSocket();
-  return <StartClient />;
-}, document.getElementById("app")!);
+mount(() => <StartClient />, document.getElementById("app")!);
