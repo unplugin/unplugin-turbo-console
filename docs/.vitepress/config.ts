@@ -3,6 +3,8 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { zhCN } from './zhCN'
 import { enUS } from './enUS'
 
+const docsLink = 'https://utc.yuy1n.io'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   locales: {
@@ -34,4 +36,15 @@ export default defineConfig({
       lazyLoading: true,
     },
   },
+  head: [
+    ['meta', { property: 'og:title', content: 'Unplugin Turbo Console' }],
+    ['meta', { property: 'og:description', content: 'Improve the Developer Experience of console' }],
+    ['meta', { property: 'og:image', content: `${docsLink}/og.png` }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:url', content: docsLink }],
+    ['meta', { property: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { property: 'twitter:image', content: `${docsLink}/og.png` }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['meta', { name: 'theme-color', content: '#4FC08D' }],
+  ],
 })

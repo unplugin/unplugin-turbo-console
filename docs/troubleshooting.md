@@ -51,7 +51,6 @@ export default defineConfig({
   plugins: [
     TurboConsole({
       babelParserPlugins: ['importAttributes'],
-   // ^?
     }),
   ],
 })
