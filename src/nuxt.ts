@@ -1,4 +1,4 @@
-import { addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
+import { addImports, addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
 import vite from './vite'
 import webpack from './webpack'
 import type { Options } from './types'
@@ -10,10 +10,22 @@ export default defineNuxtModule<Options>({
     name: PLUGIN_NAME,
     configKey: NUXT_CONFIG_KEY,
   },
-  defaults: {
-    port: 3070,
-  },
-  async setup(options, _nuxt) {
+  defaults: {},
+  async setup(options, nuxt) {
+    addImports({
+      name: 'ServerConsole',
+      from: 'unplugin-turbo-console/helper',
+    })
+
+    nuxt.hook('nitro:config', (config) => {
+      config.imports = config.imports || {}
+      config.imports.imports = config.imports.imports || []
+      config.imports.imports.push({
+        name: 'ClientConsole',
+        from: 'unplugin-turbo-console/helper',
+      })
+    })
+
     addVitePlugin(() => vite(options))
     addWebpackPlugin(() => webpack(options))
   },
