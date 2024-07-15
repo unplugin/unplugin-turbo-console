@@ -1,21 +1,49 @@
 <script setup lang="ts">
-import '~console'
+import "~console";
 import { ServerConsole } from 'unplugin-turbo-console/helper'
-import { ref } from 'vue'
 
-const count = ref(0)
+function makeFetch() {
+  fetch("/api/test");
+}
 
-function increment() {
-  count.value++
-  ServerConsole.log(count.value)
+function vueLog() {
+  console.log("Hello Vue");
+}
+
+function clientToServer() {
+  ServerConsole.log("Hello Client");
 }
 </script>
 
 <template>
-  <div>
-    {{ count }}
-  </div>
-  <button @click="increment">
-    +
-  </button>
+  <main>
+    <h1>
+      <span>Unplugin Turbo Conosle</span>
+      Playgroud
+    </h1>
+
+    <h2>Highlight & Launch Editor</h2>
+
+    <div>
+      <button @click="jsLog">From JavaScript</button>
+      <button @click="tsLog">From TypeScript</button>
+      <button @click="vueLog">From Vue</button>
+    </div>
+
+    <h2>Pass Logs</h2>
+
+    <div>
+      <button @click="makeFetch">Server -> Client</button>
+      <button @click="clientToServer">Client -> Server</button>
+    </div>
+  </main>
 </template>
+
+<style>
+@media (prefers-color-scheme: dark) {
+  body {
+    color: white;
+    background: black;
+  }
+}
+</style>

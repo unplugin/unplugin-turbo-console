@@ -12,8 +12,6 @@
     "@nuxt/devtools": "latest",
     "nuxt": "^3.12.2",
     "unplugin-turbo-console": "workspace:*",
-    "vite-plugin-inspect": "^0.8.4",
-    "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vite-plugin-inspect": "^0.8.4"
   }
 }
