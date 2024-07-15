@@ -1,6 +1,6 @@
 # Pass Logs
 
-The feature allows you to pass log content between server and client.
+The feature allows you to pass logs between server and client.
 
 ## TypeSciprt Configuration
 

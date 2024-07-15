@@ -155,7 +155,7 @@ import TurboConsole from 'unplugin-turbo-console/vite'
 
 export default defineConfig({
   plugins: [
-    TurboConsole(), // 请把本插件放在 sveltekit() 之前
+    TurboConsole(), // Please add this plugin before sveltekit
     sveltekit()
   ]
 })

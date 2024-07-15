@@ -35,7 +35,7 @@ You might notice an extra link printed in the terminal when starting the project
 ➜  TurboConsole: http://localhost:3070/inspect
 ```
 
-You can open this link to see the current mapping between randomly generated strings and files. You can also test whether the navigation feature is working properly by clicking the links.
+You can open this link to see the current mapping between randomly generated strings and files. You can also test whether the launch editor feature is working properly by clicking the links.
 
 ![inspect](/features/inspect.png)
 
