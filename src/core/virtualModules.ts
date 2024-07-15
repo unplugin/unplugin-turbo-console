@@ -1,4 +1,7 @@
-export function virtualModulesGenerator(port: number) {
+export function virtualModulesGenerator(port: number, isProd: boolean) {
+  if (isProd)
+    return /* js */`;(() => {})()`
+
   return /* js */`
   ;(() => {
     if (globalThis.window) {

@@ -1,4 +1,4 @@
-import { cwd } from 'node:process'
+import { cwd, env } from 'node:process'
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
@@ -43,7 +43,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     load(id) {
       if (id === resolvedVirtualModuleId) {
-        return virtualModulesGenerator(options.port!)
+        return virtualModulesGenerator(options.port!, env.NODE_ENV === 'production')
       }
     },
     async transform(code, id) {

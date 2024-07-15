@@ -13,9 +13,10 @@ function generateFetchUrl(args: any[], method: TCMethod) {
 
 function handleClientConsole(method: TCMethod, ...args: any[]) {
   (console as any)[method](...args)
-  if (globalThis.window)
+  if (globalThis.window || env.NODE_ENV === 'production')
     return
-  fetch(generateFetchUrl(args, method))
+
+  fetch(generateFetchUrl(args, method)).catch(() => {})
 }
 
 export const ClientConsole: TConsole = {
@@ -29,8 +30,8 @@ export const ClientConsole: TConsole = {
 
 function handleServerConsole(method: TCMethod, ...args: any[]) {
   (console as any)[method](...args)
-  const socket = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
-  if (socket) {
+  const socket: WebSocket | undefined = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
+  if (socket && socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify({ m: JSON.stringify(args), t: method }))
   }
 }
