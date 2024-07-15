@@ -23,10 +23,7 @@
 </a>
 </p>
 
-
-<p align='center'>
-  <video controls src="https://raw.githubusercontent.com/unplugin/unplugin-turbo-console/main/docs/public/demo.mp4" >
-</p>
+https://github.com/user-attachments/assets/767fd181-4122-49c8-8a01-72d3d43dbe94
 
 ## Features
 
