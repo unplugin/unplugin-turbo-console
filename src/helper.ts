@@ -19,7 +19,7 @@ function handleClient(method: TCMethod, ...args: any[]) {
   fetch(generateFetchUrl(args, method)).catch(() => {})
 }
 
-export const Client: TConsole = {
+export const client: TConsole = {
   log: (...args: any[]) => handleClient('log', ...args),
   error: (...args: any[]) => handleClient('error', ...args),
   warn: (...args: any[]) => handleClient('warn', ...args),
@@ -36,7 +36,7 @@ function handleServer(method: TCMethod, ...args: any[]) {
   }
 }
 
-export const Server: TConsole = {
+export const server: TConsole = {
   log: (...args: any[]) => handleServer('log', ...args),
   error: (...args: any[]) => handleServer('error', ...args),
   warn: (...args: any[]) => handleServer('warn', ...args),

@@ -13,7 +13,7 @@ export default defineNuxtModule<Options>({
   defaults: {},
   async setup(options, nuxt) {
     addImports({
-      name: 'Server',
+      name: 'server',
       from: 'unplugin-turbo-console/helper',
     })
 
@@ -21,7 +21,7 @@ export default defineNuxtModule<Options>({
       config.imports = config.imports || {}
       config.imports.imports = config.imports.imports || []
       config.imports.imports.push({
-        name: 'Client',
+        name: 'client',
         from: 'unplugin-turbo-console/helper',
       })
     })

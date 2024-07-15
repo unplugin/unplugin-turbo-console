@@ -10,7 +10,7 @@ function vueLog() {
 }
 
 function clientToServer() {
-  Server.log("Hello Client");
+  server.log("Hello Client");
 }
 </script>
 

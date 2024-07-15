@@ -58,22 +58,22 @@ More details can be found in [source code](https://github.com/unplugin/unplugin-
 
 ## Server → Client
 
-On the server side, replace `console` with `Client`.
+On the server side, replace `console` with `client`.
 
 Here's an example in `Nuxt`:
 
 ```ts{2,9-11} twoslash
 // server/api/test.ts
-import { Client } from 'unplugin-turbo-console/helper'
+import { client } from 'unplugin-turbo-console/helper'
 import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => {
   const raw = await fetch('https://jsonplaceholder.typicode.com/users')
   const data = await raw.json()
 
-  Client.log({ data })
-  Client.warn('A warning message from server!!')
-  Client.error('An error message from server!!')
+  client.log({ data })
+  client.warn('A warning message from server!!')
+  client.error('An error message from server!!')
 
   return {
     data
@@ -85,20 +85,20 @@ export default defineEventHandler(async (event) => {
 
 ## Client → Server
 
-On the client side, replace `console` with `Server`.
+On the client side, replace `console` with `server`.
 
 For example:
 
 ```vue{2,9} twoslash
 <script setup lang="ts">
-import { Server } from 'unplugin-turbo-console/helper'
+import { server } from 'unplugin-turbo-console/helper'
 import { ref } from 'vue'
 
 const count = ref(0)
 
 function increment() {
   count.value++
-  Server.log(count.value)
+  server.log(count.value)
 }
 </script>
 
@@ -115,7 +115,7 @@ function increment() {
 ![server-client](/features/client-server.gif)
 
 ::: tip For Nuxt User
-If you are using Nuxt, `Client` and `Server` is auto-imported. So you don't need to import them manually.
+If you are using Nuxt, `client` and `server` is auto-imported. So you don't need to import them manually.
 :::
 
 <!-- ## 深入：它是如何工作的
