@@ -25,7 +25,7 @@
 
 
 <p align='center'>
-  <img src="https://raw.githubusercontent.com/unplugin/unplugin-turbo-console/main/docs/public/demo.mp4" >
+  <video controls src="https://raw.githubusercontent.com/unplugin/unplugin-turbo-console/main/docs/public/demo.mp4" >
 </p>
 
 ## Features
