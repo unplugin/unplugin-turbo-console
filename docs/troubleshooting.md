@@ -2,7 +2,7 @@
 
 ## Launch Editor Not Working
 
-If you encounter the following error and are using VSCode:
+If you encounter the following error and are using VS Code:
 
 ```
 Could not open xxxx in the editor.

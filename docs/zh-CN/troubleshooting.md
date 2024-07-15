@@ -2,7 +2,7 @@
 
 ## 编辑器跳转无法正常工作
 
-如果你遇到了以下错误并且正在使用VSCode:
+如果你遇到了以下错误并且正在使用VS Code:
 
 ```
 Could not open xxxx in the editor.

@@ -18,7 +18,9 @@ Add the following configurations to `tsconfig.json`:
 
 ## Initialization
 
-Introduce `~console` in the entry file for initialization. The following are examples in some frameworks:
+Add `~console` to your project entry file.
+
+Here are examples in some frameworks:
 
 ::: code-group
 
@@ -43,6 +45,14 @@ import '~console'
 
 mount(() => <StartClient />, document.getElementById('app')!)
 ```
+
+:::
+
+::: details What is `~console`?
+
+Pass logs feature is based on `WebSocket` implementation. `~console` is a virtual module, it will establish a websocket connection between client and server.
+
+More details can be found in [source code](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/virtualModules.ts).
 
 :::
 
@@ -103,6 +113,10 @@ function increment() {
 ```
 
 ![server-client](/features/client-server.gif)
+
+::: tip For Nuxt User
+If you are using Nuxt, `ClientConsole` and `ServerConsole` is auto-imported. So you don't need to import them manually.
+:::
 
 <!-- ## 深入：它是如何工作的
 

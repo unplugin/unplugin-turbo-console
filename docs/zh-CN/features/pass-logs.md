@@ -46,6 +46,12 @@ mount(() => <StartClient />, document.getElementById('app')!)
 
 :::
 
+::: details `~console` 是什么？
+
+传递日志的功能是基于 `WebSocket` 实现的，`~console` 则是一个虚拟模块，它的作用是让客户端与服务端之间建立 websocket 连接。你可以查看[源代码](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/virtualModules.ts)了解更多细节。
+
+:::
+
 ## 服务端 → 客户端
 
 在服务端，用 `ClientConsole` 来替换`console`。
@@ -104,8 +110,6 @@ function increment() {
 
 ![server-client](/features/client-server.gif)
 
-<!-- ## 深入：它是如何工作的
-
-服务端与客户端之间的通信是通过 `WebSocket` 实现的，在项目启动时，插件会启动一个WebSocket服务。
-
-在第一步中引入的 `~console` 是一个虚拟模块，它是一个[IIFE](https://developer.mozilla.org/zh-CN/docs/Glossary/IIFE)，作用就是让客户端与服务端的`WebSocket`服务建立连接。[源代码](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/virtualModules.ts) -->
+::: tip Nuxt 用户
+如果你在使用 Nuxt ，`ClientConsole` 和 `ServerConsole` 是自动导入的。因此，您无需手动导入它们。
+:::
