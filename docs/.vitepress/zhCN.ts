@@ -7,7 +7,7 @@ export const zhCN = defineConfig({
   themeConfig: {
     nav: [
       { text: '指南', link: '/zh-CN/guide/getting-started', activeMatch: '/zh-CN/guide' },
-      { text: '特性', link: '/zh-CN/features/hightlight', activeMatch: '/zh-CN/features' },
+      { text: '特性', link: '/zh-CN/features/highlight', activeMatch: '/zh-CN/features' },
     ],
     sidebar: [
       {

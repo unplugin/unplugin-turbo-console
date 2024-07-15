@@ -7,7 +7,7 @@ export const enUS = defineConfig({
   themeConfig: {
     nav: [
       { text: 'Guide', link: '/guide/getting-started', activeMatch: '/guide' },
-      { text: 'Features', link: '/features/hightlight', activeMatch: '/features' },
+      { text: 'Features', link: '/features/highlight', activeMatch: '/features' },
     ],
     sidebar: [
       {
