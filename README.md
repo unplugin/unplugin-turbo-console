@@ -1,5 +1,5 @@
 <p align='center'>
-  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2023/12/upgit_20231203_1701604926.png" >
+  <img src="https://utc.yuy1n.io/og.png" >
 </p>
 
 <p align='center'>
@@ -25,7 +25,7 @@
 
 
 <p align='center'>
-  <img src="https://cdn.jsdelivr.net/gh/yuyinws/static@master/2024/04/upgit_20240421_1713682760.gif" >
+  <img src="https://raw.githubusercontent.com/unplugin/unplugin-turbo-console/main/docs/public/demo.mp4" >
 </p>
 
 ## Features
