@@ -11,7 +11,7 @@ function generateFetchUrl(args: any[], method: TCMethod) {
   return `http://localhost:${port || 3070}/send?m=${JSON.stringify(args)}&t=${method}`
 }
 
-function handleClientConsole(method: TCMethod, ...args: any[]) {
+function handleClient(method: TCMethod, ...args: any[]) {
   (console as any)[method](...args)
   if (globalThis.window || env.NODE_ENV === 'production')
     return
@@ -19,16 +19,16 @@ function handleClientConsole(method: TCMethod, ...args: any[]) {
   fetch(generateFetchUrl(args, method)).catch(() => {})
 }
 
-export const ClientConsole: TConsole = {
-  log: (...args: any[]) => handleClientConsole('log', ...args),
-  error: (...args: any[]) => handleClientConsole('error', ...args),
-  warn: (...args: any[]) => handleClientConsole('warn', ...args),
-  info: (...args: any[]) => handleClientConsole('info', ...args),
-  table: (...args: any[]) => handleClientConsole('table', ...args),
-  dir: (...args: any[]) => handleClientConsole('dir', ...args),
+export const Client: TConsole = {
+  log: (...args: any[]) => handleClient('log', ...args),
+  error: (...args: any[]) => handleClient('error', ...args),
+  warn: (...args: any[]) => handleClient('warn', ...args),
+  info: (...args: any[]) => handleClient('info', ...args),
+  table: (...args: any[]) => handleClient('table', ...args),
+  dir: (...args: any[]) => handleClient('dir', ...args),
 }
 
-function handleServerConsole(method: TCMethod, ...args: any[]) {
+function handleServer(method: TCMethod, ...args: any[]) {
   (console as any)[method](...args)
   const socket: WebSocket | undefined = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
   if (socket && socket.readyState === WebSocket.OPEN) {
@@ -36,11 +36,11 @@ function handleServerConsole(method: TCMethod, ...args: any[]) {
   }
 }
 
-export const ServerConsole: TConsole = {
-  log: (...args: any[]) => handleServerConsole('log', ...args),
-  error: (...args: any[]) => handleServerConsole('error', ...args),
-  warn: (...args: any[]) => handleServerConsole('warn', ...args),
-  info: (...args: any[]) => handleServerConsole('info', ...args),
-  table: (...args: any[]) => handleServerConsole('table', ...args),
-  dir: (...args: any[]) => handleServerConsole('dir', ...args),
+export const Server: TConsole = {
+  log: (...args: any[]) => handleServer('log', ...args),
+  error: (...args: any[]) => handleServer('error', ...args),
+  warn: (...args: any[]) => handleServer('warn', ...args),
+  info: (...args: any[]) => handleServer('info', ...args),
+  table: (...args: any[]) => handleServer('table', ...args),
+  dir: (...args: any[]) => handleServer('dir', ...args),
 }

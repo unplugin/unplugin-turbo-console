@@ -1,5 +1,5 @@
 export default defineEventHandler((event) => {
-  ClientConsole.log('fff')
+  Client.log('fff')
   return {
     test: 'test',
   }

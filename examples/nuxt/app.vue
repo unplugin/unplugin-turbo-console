@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import "~console";
-import { ServerConsole } from 'unplugin-turbo-console/helper'
 
 function makeFetch() {
   fetch("/api/test");
@@ -11,7 +10,7 @@ function vueLog() {
 }
 
 function clientToServer() {
-  ServerConsole.log("Hello Client");
+  Server.log("Hello Client");
 }
 </script>
 

@@ -54,22 +54,22 @@ mount(() => <StartClient />, document.getElementById('app')!)
 
 ## 服务端 → 客户端
 
-在服务端，用 `ClientConsole` 来替换`console`。
+在服务端，用 `Client` 来替换`console`。
 
 以下是在`Nuxt`中的示例：
 
 ```ts{2,9-11} twoslash
 // server/api/test.ts
-import { ClientConsole } from 'unplugin-turbo-console/helper'
+import { Client } from 'unplugin-turbo-console/helper'
 import { defineEventHandler } from 'h3'
 
 export default defineEventHandler(async (event) => {
   const raw = await fetch('https://jsonplaceholder.typicode.com/users')
   const data = await raw.json()
 
-  ClientConsole.log({ data })
-  ClientConsole.warn('A warning message from server!!')
-  ClientConsole.error('An error message from server!!')
+  Client.log({ data })
+  Client.warn('A warning message from server!!')
+  Client.error('An error message from server!!')
 
   return {
     data
@@ -81,20 +81,20 @@ export default defineEventHandler(async (event) => {
 
 ## 客户端 → 服务端
 
-在客户端，用 `ServerConsole` 来替换`console`。
+在客户端，用 `Server` 来替换`console`。
 
 示例：
 
 ```vue{2,9} twoslash
 <script setup lang="ts">
-import { ServerConsole } from 'unplugin-turbo-console/helper'
+import { Server } from 'unplugin-turbo-console/helper'
 import { ref } from 'vue'
 
 const count = ref(0)
 
 function increment() {
   count.value++
-  ServerConsole.log(count.value)
+  Server.log(count.value)
 }
 </script>
 
@@ -111,5 +111,5 @@ function increment() {
 ![server-client](/features/client-server.gif)
 
 ::: tip Nuxt 用户
-如果你在使用 Nuxt ，`ClientConsole` 和 `ServerConsole` 是自动导入的。因此，您无需手动导入它们。
+如果你在使用 Nuxt ，`Client` 和 `Server` 是自动导入的。因此，您无需手动导入它们。
 :::

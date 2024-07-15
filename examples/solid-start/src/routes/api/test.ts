@@ -1,7 +1,7 @@
-import { ClientConsole } from 'unplugin-turbo-console/helper'
+import { Client } from 'unplugin-turbo-console/helper'
 
 export function GET() {
-  ClientConsole.log('xxx')
+  Client.log('xxx')
   return {
     body: 'test'
   }
