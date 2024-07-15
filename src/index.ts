@@ -41,6 +41,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         return resolvedVirtualModuleId
       }
     },
+    loadInclude(id) {
+      return id === resolvedVirtualModuleId
+    },
     load(id) {
       if (id === resolvedVirtualModuleId) {
         return virtualModulesGenerator(options.port!, env.NODE_ENV === 'production')
