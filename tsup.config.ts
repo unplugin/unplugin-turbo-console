@@ -8,5 +8,6 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   dts: true,
   splitting: true,
+  shims: true,
   onSuccess: 'npm run build:fix',
 })

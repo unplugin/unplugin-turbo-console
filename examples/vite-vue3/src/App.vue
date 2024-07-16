@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { Server } from 'unplugin-turbo-console/helper'
+import { server } from 'unplugin-turbo-console/helper'
 
   function test() {
-    Server.log('xxx')
+    server.log('xxx')
   }
 </script>

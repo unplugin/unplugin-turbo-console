@@ -71,9 +71,7 @@
       "require": "./dist/types.cjs"
     },
     "./helper": {
-      "types": "./dist/helper.d.ts",
-      "import": "./dist/helper.js",
-      "require": "./dist/helper.cjs"
+      "import": "./helper.js"
     },
     "./*": "./*",
     "./client": {
@@ -93,7 +91,8 @@
   },
   "files": [
     "client.d.ts",
-    "dist"
+    "dist",
+    "helper.js"
   ],
   "scripts": {
     "build": "rimraf dist && tsup",
