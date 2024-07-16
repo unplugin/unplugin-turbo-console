@@ -2,7 +2,7 @@
 const nextConfig = {
   webpack(config) {
     config.plugins.push(
-      require('unplugin-turbo-console/webpack')()
+      require('unplugin-turbo-console/webpack').default()
     )
 
     return config
