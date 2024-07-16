@@ -4,7 +4,7 @@
   "version": "1.9.10-beta.1",
   "description": "Improve the Developer Experience of console",
   "license": "MIT",
-  "homepage": "https://github.com/unplugin/unplugin-turbo-console#readme",
+  "homepage": "https://utc.yuy1n.io",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/unplugin/unplugin-turbo-console.git"
@@ -123,6 +123,9 @@
     "webpack": "^4 || ^5"
   },
   "peerDependenciesMeta": {
+    "@farmfe/core": {
+      "optional": true
+    },
     "@nuxt/kit": {
       "optional": true
     },
@@ -133,9 +136,6 @@
       "optional": true
     },
     "esbuild": {
-      "optional": true
-    },
-    "farmfe/core": {
       "optional": true
     },
     "rollup": {
