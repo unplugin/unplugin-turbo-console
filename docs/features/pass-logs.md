@@ -81,7 +81,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-![server-client](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/server-client.gif)
+![server-client](https://static.yuy1n.io/server-client.gif)
 
 ## Client → Server
 
@@ -112,14 +112,8 @@ function increment() {
 </template>
 ```
 
-![server-client](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/client-server.gif)
+![server-client](https://static.yuy1n.io/client-server.gif)
 
 ::: tip For Nuxt User
 If you are using Nuxt, `client` and `server` is auto-imported. So you don't need to import them manually.
 :::
-
-<!-- ## 深入：它是如何工作的
-
-服务端与客户端之间的通信是通过 `WebSocket` 实现的，在项目启动时，插件会启动一个WebSocket服务。
-
-在第一步中引入的 `~console` 是一个虚拟模块，它是一个[IIFE](https://developer.mozilla.org/zh-CN/docs/Glossary/IIFE)，作用就是让客户端与服务端的`WebSocket`服务建立连接。[源代码](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/virtualModules.ts) -->

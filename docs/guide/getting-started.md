@@ -6,7 +6,7 @@ outline: deep
 
 **Unplugin Torbo Console** is a universal plugin designed to enhance the **Developer Experience** for front-end developers when using `console`. It offers many practical features and flexible options. Thanks to [Unplugin](https://unplugin.unjs.io), it is compatible with almost all modern front-end frameworks. You can see some of its features in the video below:
 
-<video src="https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/demo.mp4" controls />
+<video src="https://static.yuy1n.io/demo.mp4" controls />
 
 <p align='center' flex gap-4 items-center>
 <a href="https://www.npmjs.com/package/unplugin-turbo-console">

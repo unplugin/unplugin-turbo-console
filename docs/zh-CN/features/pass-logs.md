@@ -77,7 +77,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-![server-client](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/server-client.gif)
+![server-client](https://static.yuy1n.io/server-client.gif)
 
 ## 客户端 → 服务端
 
@@ -108,7 +108,7 @@ function increment() {
 </template>
 ```
 
-![server-client](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/client-server.gif)
+![server-client](https://static.yuy1n.io/client-server.gif)
 
 ::: tip Nuxt 用户
 如果你在使用 Nuxt ，`client` 和 `server` 是自动导入的。因此，您无需手动导入它们。
