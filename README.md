@@ -12,7 +12,7 @@
 </p>
 
 <p align='center'>
-<a href="https://stackblitz.com/github/yuyinws/stackblitz-demo?file=src%2FApp.vue">
+<a href="https://stackblitz.com/github/yuyinws/unplugin-turbo-console-online?file=src%2FApp.vue">
 <img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg">
 </a>
 </p>

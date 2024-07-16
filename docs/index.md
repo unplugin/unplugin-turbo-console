@@ -13,7 +13,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: Try it Online
-      link: https://stackblitz.com/github/yuyinws/stackblitz-demo?file=src%2FApp.vue
+      link: https://stackblitz.com/github/yuyinws/unplugin-turbo-console-online?file=src%2FApp.vue
     - theme: alt
       text: GitHub
       link: https://github.com/unplugin/unplugin-turbo-console
