@@ -112,6 +112,7 @@
     "test": "vitest"
   },
   "peerDependencies": {
+    "@babel/parser": "*",
     "@farmfe/core": ">=1",
     "@nuxt/kit": ">=3",
     "@nuxt/schema": ">=3",
