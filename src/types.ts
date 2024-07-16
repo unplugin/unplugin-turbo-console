@@ -110,7 +110,3 @@ export interface CompileResult {
   offset: number
   line: number
 }
-
-export type TCMethod = 'log' | 'error' | 'warn' | 'info' | 'table' | 'dir'
-
-export type TConsole = Record<TCMethod, (...args: any[]) => void>
