@@ -2,7 +2,7 @@
 
 By clicking the links in the log output, you can automatically open the code editor and jump to the line of the console statement in the source code:
 
-![launch-editor](/features/launch-editor.gif)
+![launch-editor](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/launch-editor.gif)
 
 > You can disable this feature by setting `disableLaunchEditor: true`.
 >

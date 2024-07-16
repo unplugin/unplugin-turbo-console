@@ -81,7 +81,7 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-![server-client](/features/server-client.gif)
+![server-client](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/server-client.gif)
 
 ## Client → Server
 
@@ -112,7 +112,7 @@ function increment() {
 </template>
 ```
 
-![server-client](/features/client-server.gif)
+![server-client](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/client-server.gif)
 
 ::: tip For Nuxt User
 If you are using Nuxt, `client` and `server` is auto-imported. So you don't need to import them manually.

@@ -2,7 +2,7 @@
 
 通过点击日志输出中的链接，可以自动打开代码编辑器并跳转到`console`源代码所在行：
 
-![launch-editor](/features/launch-editor.gif)
+![launch-editor](https://pub-bdb09f95de1146ed89704863f954c1c3.r2.dev/launch-editor.gif)
 
 > 可以通过配置项 `disableLaunchEditor: true` 来禁用此功能。
 >
