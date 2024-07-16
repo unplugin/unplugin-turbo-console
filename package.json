@@ -112,8 +112,7 @@
     "test": "vitest"
   },
   "peerDependencies": {
-    "@babel/parser": "*",
-    "@farmfe/core": ">=1",
+    "@babel/parser": ">=7",
     "@nuxt/kit": ">=3",
     "@nuxt/schema": ">=3",
     "astro": ">=3",
@@ -124,7 +123,7 @@
     "webpack": "^4 || ^5"
   },
   "peerDependenciesMeta": {
-    "@farmfe/core": {
+    "@babel/parser": {
       "optional": true
     },
     "@nuxt/kit": {
