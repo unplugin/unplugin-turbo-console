@@ -113,6 +113,7 @@
   },
   "peerDependencies": {
     "@babel/parser": ">=7",
+    "@farmfe/core": ">=1",
     "@nuxt/kit": ">=3",
     "@nuxt/schema": ">=3",
     "astro": ">=3",
@@ -124,6 +125,9 @@
   },
   "peerDependenciesMeta": {
     "@babel/parser": {
+      "optional": true
+    },
+    "@farmfe/core": {
       "optional": true
     },
     "@nuxt/kit": {
