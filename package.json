@@ -22,65 +22,60 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./farm": {
       "types": "./dist/farm.d.ts",
-      "import": "./dist/farm.js",
+      "import": "./dist/farm.mjs",
       "require": "./dist/farm.cjs"
     },
     "./astro": {
       "types": "./dist/astro.d.ts",
-      "import": "./dist/astro.js",
+      "import": "./dist/astro.mjs",
       "require": "./dist/astro.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
-      "import": "./dist/vite.js",
+      "import": "./dist/vite.mjs",
       "require": "./dist/vite.cjs"
     },
     "./webpack": {
       "types": "./dist/webpack.d.ts",
-      "import": "./dist/webpack.js",
+      "import": "./dist/webpack.mjs",
       "require": "./dist/webpack.cjs"
     },
     "./rspack": {
       "types": "./dist/rspack.d.ts",
-      "import": "./dist/rspack.js",
+      "import": "./dist/rspack.mjs",
       "require": "./dist/rspack.cjs"
     },
     "./rollup": {
       "types": "./dist/rollup.d.ts",
-      "import": "./dist/rollup.js",
+      "import": "./dist/rollup.mjs",
       "require": "./dist/rollup.cjs"
     },
     "./esbuild": {
       "types": "./dist/esbuild.d.ts",
-      "import": "./dist/esbuild.js",
+      "import": "./dist/esbuild.mjs",
       "require": "./dist/esbuild.cjs"
     },
     "./nuxt": {
       "types": "./dist/nuxt.d.ts",
-      "import": "./dist/nuxt.js",
+      "import": "./dist/nuxt.mjs",
       "require": "./dist/nuxt.cjs"
     },
-    "./types": {
-      "types": "./dist/types.d.ts",
-      "import": "./dist/types.js",
-      "require": "./dist/types.cjs"
-    },
     "./helper": {
-      "types": "./runtime/helper.d.ts",
-      "import": "./runtime/helper.js"
+      "types": "./dist/helper.d.ts",
+      "import": "./dist/helper.mjs",
+      "require": "./dist/helper.cjs"
     },
-    "./*": "./*",
     "./client": {
       "types": "./client.d.ts"
     }
   },
   "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -92,12 +87,11 @@
   },
   "files": [
     "client.d.ts",
-    "dist",
-    "runtime"
+    "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsup",
-    "dev": "tsup --watch src",
+    "build": "unbuild",
+    "dev": "unbuild --watch",
     "build:fix": "tsx scripts/postbuild.ts",
     "lint": "eslint .",
     "play:vue3-cli": "pnpm run --filter vue3-cli serve",
@@ -118,6 +112,7 @@
     "test": "vitest"
   },
   "peerDependencies": {
+    "@farmfe/core": ">=1",
     "@nuxt/kit": ">=3",
     "@nuxt/schema": ">=3",
     "astro": ">=3",
@@ -138,6 +133,9 @@
       "optional": true
     },
     "esbuild": {
+      "optional": true
+    },
+    "farmfe/core": {
       "optional": true
     },
     "rollup": {
@@ -178,9 +176,9 @@
     "fs-extra": "^11.2.0",
     "rimraf": "^6.0.0",
     "rollup": "^4.18.1",
-    "tsup": "^8.1.0",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",
+    "unbuild": "3.0.0-rc.6",
     "vite": "^5.3.3",
     "vite-plugin-inspect": "^0.8.4",
     "vitest": "^2.0.1",
