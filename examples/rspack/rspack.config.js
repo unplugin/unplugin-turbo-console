@@ -9,7 +9,7 @@ const config = {
 		main: "./src/main.js"
 	},
 	plugins: [
-		require('unplugin-turbo-console/rspack')(),
+		require('unplugin-turbo-console/rspack').default(),
 		new VueLoaderPlugin(),
 		new rspack.HtmlRspackPlugin({
 			template: "./index.html"

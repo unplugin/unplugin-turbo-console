@@ -103,7 +103,7 @@ const config = {
     new rspack.HtmlRspackPlugin({
       template: './index.html'
     }),
-    require('unplugin-turbo-console/rspack')({
+    require('unplugin-turbo-console/rspack').default({
         /* options here */
     }),
   ],
