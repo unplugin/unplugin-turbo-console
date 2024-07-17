@@ -2,6 +2,8 @@
 
 The feature allows you to pass logs between server and client.
 
+> You can disable this feature by setting `disablePassLogs: true`.
+
 ## TypeSciprt Configuration
 
 Add the following configurations to `tsconfig.json`:

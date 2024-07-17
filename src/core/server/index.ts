@@ -19,13 +19,13 @@ export async function createServer(options: Options) {
   catch (error) {
     const app = createApp()
 
-    if (options.passServerLogs === false && options.disableLaunchEditor === true)
+    if (options.disablePassLogs === true && options.disableLaunchEditor === true)
       return false
 
     // health
     app.use('/health', health)
 
-    if (options.passServerLogs) {
+    if (!options.disablePassLogs) {
     // Pass server log route
       app.use('/ws', ws)
         .use('/send', send)

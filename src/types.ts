@@ -70,13 +70,11 @@ export interface Options {
   babelParserPlugins?: ParserPlugin[]
 
   /**
-   * Whether to pass server logs to the client.
+   * Whether to disable pass logs feature.
    *
-   * Set it to `false` to disable.
-   *
-   * @defaultValue true
+   * @defaultValue false
    */
-  passServerLogs?: boolean
+  disablePassLogs?: boolean
 
   /**
    * Whether to print plugin server url to the console.

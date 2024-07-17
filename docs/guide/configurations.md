@@ -11,4 +11,5 @@
 | port | `number` | `3070` | Specify the plugin's service port number |
 | extendedPathFileNames | `string[]` | `[]` | [Extended path file names](/features/highlight.html#expand-path-file-name) |
 | babelParserPlugins | `ParserPlugin[]` | `["typescript", "jsx"]` | The incoming value will be automatically merged with the default value. [All babel parser plugins](https://babeljs.io/docs/en/babel-parser#plugins) |
+| disablePassLogs      |   `boolean`   | `false` | Wheather to disable [Pass Logs](/features/pass-logs) feature |
 | silent | `boolean` | `false` | Avoid the plugin's terminal output at project startup |

@@ -2,6 +2,8 @@
 
 此功能可以让你在服务端和客户端之间传递日志内容。
 
+> 可以通过配置项 `disablePassLogs: true` 来禁用此功能。
+
 ## TypeSciprt 配置
 
 在你项目中的`tsconfig.json`中增加以下配置：

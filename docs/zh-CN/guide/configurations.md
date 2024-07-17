@@ -11,4 +11,5 @@
 | port | `number` | `3070` | 指定插件的服务端口号 |
 | extendedPathFileNames | `string[]` | `[]` | [拓展路径文件名](/zh-CN/features/highlight.html#拓展路径文件名) |
 | babelParserPlugins | `ParserPlugin[]` | `["typescript", "jsx"]` | babel插件，传入的值会与默认值自动合并。[所有插件](https://babeljs.io/docs/en/babel-parser#plugins) |
+| disablePassLogs      |   `boolean`   | `false` | 是否禁用[传递日志](/zh-CN/features/pass-logs)功能 |
 | silent | `boolean` | `false` | 阻止项目启动时插件的终端输出 |
