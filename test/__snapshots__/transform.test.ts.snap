@@ -18,6 +18,40 @@ exports[`edge case > includes highlight 1`] = `
 }
 `;
 
+exports[`edge case > win path 1`] = `
+{
+  "code": "<template>
+  Hello World
+</template>
+
+<script setup lang="ts">
+  const msg: string = "Hello World"
+  console.log("%c🚀 App.vue·7 ~ msg%c🔦 http://localhost:3070#appvue,7,3","padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;color: #fff; background: #4FC08D","background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px","\\n",msg)
+</script>
+",
+  "map": SourceMap {
+    "file": "App.vue",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACX;AACA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACxB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,sPAAC,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
+    "names": [],
+    "sources": [
+      "App.vue",
+    ],
+    "sourcesContent": [
+      "<template>
+  Hello World
+</template>
+
+<script setup lang="ts">
+  const msg: string = "Hello World"
+  console.log(msg)
+</script>
+",
+    ],
+    "version": 3,
+  },
+}
+`;
+
 exports[`svelte transform > svelte 1`] = `
 {
   "code": "<script lang="ts">

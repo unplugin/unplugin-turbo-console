@@ -86,3 +86,17 @@ export const INCLUDES_HIGHLIGHT: Context = {
   code: `console.log('%cLog Message', 'color: orange');`,
   id: '/home/runner/main.js',
 }
+
+export const WIN_PATH = {
+  options: {},
+  code: `<template>
+  Hello World
+</template>
+
+<script setup lang="ts">
+  const msg: string = "Hello World"
+  console.log(msg)
+</script>
+`,
+  id: '\\home\\runner\\App.vue',
+}

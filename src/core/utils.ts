@@ -1,5 +1,5 @@
 import { cwd } from 'node:process'
-import { extname, relative, sep } from 'pathe'
+import { extname, relative } from 'pathe'
 import { createFilter } from '@rollup/pluginutils'
 import type { Comment, Node } from '@babel/types'
 import type { Compiler, GenContext, Options } from '../types'
@@ -43,6 +43,7 @@ export function getFileNameWithoutExtension(fileName: string) {
 }
 
 export function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
+  const sep = filePath.includes('\\') ? '\\' : '/'
   const arr = filePath.split(sep)
   let basename = arr.pop() || ''
   const basenameWithoutExt = getFileNameWithoutExtension(basename).toLowerCase()
