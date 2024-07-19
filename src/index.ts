@@ -16,7 +16,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
   async function detectPort() {
     // eslint-disable-next-line no-console
-    console.log('detect port')
+    console.log('detect port222')
     const isAvailable = await checkPort(options.port!)
     if (!isAvailable)
       options.port = await getRandomPort()
