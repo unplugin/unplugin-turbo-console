@@ -13,18 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
+      - name: Set node
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
 
       - name: Build
-        run: pnpm build
+        run: nr build
 
-      - run: pnpx pkg-pr-new publish
+      - run: nlx pkg-pr-new publish
