@@ -2,11 +2,12 @@ name: CR
 
 on:
   pull_request:
-  push:
-    branches:
-      - '**'
-    tags:
-      - '!**'
+    branches: [main]
+    paths-ignore:
+      - '.github/**'
+      - 'tests/**'
+      - 'docs/**'
+      - '*.md'
 
 jobs:
   build:
