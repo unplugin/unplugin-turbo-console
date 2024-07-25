@@ -5,25 +5,6 @@ import { PLUGIN_NAME } from '../constants'
 import type { FileExt } from './themes'
 import { builtInThemes, getStyleCode } from './themes'
 
-// const commonStyle = 'padding:2px 5px; border-radius:3px 0 0 3px;margin-bottom:5px;'
-
-// const consoleStyles: Record<string, string> = {
-//   '.js': `${commonStyle}color: #111827; background: #F7DF1E`,
-//   '.jsx': `${commonStyle}color: #111827; background: #F7DF1E`,
-//   '.ts': `${commonStyle}color: #fff; background: #3178C6`,
-//   '.tsx': `${commonStyle}color: #fff; background: #3178C6`,
-//   '.vue': `${commonStyle}color: #fff; background: #4FC08D`,
-//   '.svelte': `${commonStyle}color: #fff; background: #FF3E00`,
-//   '.astro': `${commonStyle}color: #fff; background: #FF5D01`,
-//   'default': `${commonStyle}color: #111827; background: #F7DF1E`,
-// }
-
-// function getStyleCode(fileType: string): string {
-//   return consoleStyles[fileType] ?? consoleStyles.default
-// }
-
-const launchEditorStyle = 'background: #00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin-bottom:5px'
-
 function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
   const sep = filePath.includes('\\') ? '\\' : '/'
   const arr = filePath.split(sep)
@@ -106,20 +87,20 @@ export function genConsoleString(genContext: GenContext) {
 
   if (!disableHighlight && !disableHighlight) {
     consoleString = _prefix
-      ? `"${_prefix}${lineInfo}${launchEditorString}","${getStyleCode(fileType)}","${launchEditorStyle}","\\n",`
-      : `"${lineInfo}${launchEditorString}","${getStyleCode(fileType)}","${launchEditorStyle}","\\n",`
+      ? `"${_prefix}${lineInfo}${launchEditorString}","${getStyleCode(fileType).highlight}","${getStyleCode(fileType).launchEditor}","\\n",`
+      : `"${lineInfo}${launchEditorString}","${getStyleCode(fileType).highlight}","${getStyleCode(fileType).launchEditor}","\\n",`
   }
 
   if (disableHighlight && !disableLaunchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}${launchEditorString}","${launchEditorStyle}","\\n",`
-      : `"${launchEditorString}","${launchEditorStyle}","\\n",`
+      ? `"${_prefix}${launchEditorString}","${getStyleCode(fileType).launchEditor}","\\n",`
+      : `"${launchEditorString}","${getStyleCode(fileType).launchEditor}","\\n",`
   }
 
   if (!disableHighlight && disableLaunchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}${lineInfo}","${getStyleCode(fileType)}","\\n",`
-      : `"${lineInfo}","${getStyleCode(fileType)}","\\n",`
+      ? `"${_prefix}${lineInfo}","${getStyleCode(fileType).highlight}","\\n",`
+      : `"${lineInfo}","${getStyleCode(fileType).highlight}","\\n",`
   }
 
   if (disableHighlight && disableLaunchEditor) {

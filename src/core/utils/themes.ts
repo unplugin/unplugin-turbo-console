@@ -15,7 +15,11 @@ interface Themes {
     icon?: string
   }
   launchEditor: {
-    icon?: string
+    'icon'?: string
+    'padding'?: string
+    'border-radius'?: string
+    'margin'?: string
+    'background'?: string
   }
 }
 
@@ -65,7 +69,11 @@ export const builtInThemes: Themes = {
     },
   },
   launchEditor: {
-    icon: '🔦',
+    'icon': '🔦',
+    'background': '#00DC8250',
+    'padding': '2px 5px',
+    'border-radius': '0 3px 3px 0',
+    'margin': '0 0 5px 0',
   },
 }
 
@@ -76,5 +84,14 @@ export function getStyleCode(fileType: FileExt) {
     return `${key}:${value};`
   }).join('')
 
-  return highlight
+  const launchEditor = Object.entries(builtInThemes.launchEditor).map(([key, value]) => {
+    if (key !== 'icon')
+      return `${key}:${value};`
+    return ''
+  }).join('')
+
+  return {
+    launchEditor,
+    highlight,
+  }
 }
