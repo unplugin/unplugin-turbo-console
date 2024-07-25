@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { getStyleCode } from '../src/core/utils/themes'
+import { getStyleCode } from '../src/core/utils'
 
 describe('themes', () => {
   it('get style code', () => {
