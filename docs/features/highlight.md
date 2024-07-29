@@ -25,7 +25,7 @@ Additionally, in every `index.vue`, there is a console statement. By default, th
 
 ![extend-name](/features/extend-name.png)
 
-## 黑暗模式
+## Dark Mode
 
 When the system is in dark mode, optimize the visual effect of the highlight output.
 
