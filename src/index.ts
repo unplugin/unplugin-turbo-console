@@ -9,7 +9,7 @@ import { createServer } from './core/server/index'
 import { filter, loadPkg, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
-import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/virtualModules'
+import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -56,7 +56,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         return initVirtualModulesGenerator(options.port!, env.NODE_ENV === 'production')
       }
       else if (id === VirtualModules.ThemeDetect) {
-        return themeDetectVirtualModule()
+        return themeDetectVirtualModule(env.NODE_ENV === 'production')
       }
     },
     async transform(code, id) {
