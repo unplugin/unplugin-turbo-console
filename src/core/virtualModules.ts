@@ -1,4 +1,4 @@
-export function virtualModulesGenerator(port: number, isProd: boolean) {
+export function initVirtualModulesGenerator(port: number, isProd: boolean) {
   if (isProd)
     return /* js */`;(() => {})()`
 
@@ -20,4 +20,14 @@ export function virtualModulesGenerator(port: number, isProd: boolean) {
     }
   })()
 `
+}
+
+export function themeDetectVirtualModule() {
+  return /* js */`
+  ;(() => {
+    if (globalThis.matchMedia) {
+      globalThis._UTC_DETECT_DARK = () => (globalThis.matchMedia('(prefers-color-scheme: dark)').matches)
+    }
+  })()
+  `
 }

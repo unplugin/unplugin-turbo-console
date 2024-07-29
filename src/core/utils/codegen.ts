@@ -84,23 +84,24 @@ export function genConsoleString(genContext: GenContext) {
   const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://localhost:${port}#${codePosition}`
 
   let consoleString = ''
+  const lineWrap = `"\\n"`
 
   if (!disableHighlight && !disableHighlight) {
     consoleString = _prefix
-      ? `"${_prefix}${lineInfo}${launchEditorString}","${getStyleCode(fileType).highlight}","${getStyleCode(fileType).launchEditor}","\\n",`
-      : `"${lineInfo}${launchEditorString}","${getStyleCode(fileType).highlight}","${getStyleCode(fileType).launchEditor}","\\n",`
+      ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
+      : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
   }
 
   if (disableHighlight && !disableLaunchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}${launchEditorString}","${getStyleCode(fileType).launchEditor}","\\n",`
-      : `"${launchEditorString}","${getStyleCode(fileType).launchEditor}","\\n",`
+      ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
+      : `"${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
   }
 
   if (!disableHighlight && disableLaunchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}${lineInfo}","${getStyleCode(fileType).highlight}","\\n",`
-      : `"${lineInfo}","${getStyleCode(fileType).highlight}","\\n",`
+      ? `"${_prefix}${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
+      : `"${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
   }
 
   if (disableHighlight && disableLaunchEditor) {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import "~console";
+import '~console/theme-detect';
 
 function makeFetch() {
   fetch("/api/test");
