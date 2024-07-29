@@ -4,20 +4,6 @@ The feature allows you to pass logs between server and client.
 
 > You can disable this feature by setting `disablePassLogs: true`.
 
-## TypeSciprt Configuration
-
-Add the following configurations to `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "types": [
-      "unplugin-turbo-console/client"
-    ]
-  }
-}
-```
-
 ## Initialization
 
 Add `~console` to your project entry file.
@@ -57,6 +43,8 @@ Pass logs feature is based on `WebSocket` implementation. `~console` is a virtua
 More details can be found in [source code](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/virtualModules.ts).
 
 :::
+
+> [TypeScript configuration](/guide/configurations.html#typescript)
 
 ## Server → Client
 

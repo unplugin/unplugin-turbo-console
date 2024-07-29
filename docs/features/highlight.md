@@ -24,3 +24,31 @@ pages
 Additionally, in every `index.vue`, there is a console statement. By default, the highlighted output will have the filename as `index.vue`, which can reduce the readability of the output. By configuring `extendedPathFileNames: ['index']`, the output can include the path information:
 
 ![extend-name](/features/extend-name.png)
+
+## 黑暗模式
+
+When the system is in dark mode, optimize the visual effect of the highlight output.
+
+![dark](/features/highlight-dark.png)
+
+### Setup
+
+Add `~console/theme-detect` to your project entry file. Example:
+
+::: code-group
+
+```ts [Vite]
+// main.ts
+import '~console/theme-detect'
+```
+
+```vue [Nuxt]
+<!-- app.vue -->
+<script setup lang="ts">
+import '~console/theme-detect'
+</script>
+```
+
+:::
+
+> [TypeScript configuration](/guide/configurations.html#typescript)
