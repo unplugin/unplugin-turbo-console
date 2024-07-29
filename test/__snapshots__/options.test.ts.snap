@@ -20,7 +20,7 @@ exports[`transform options > disable all 1`] = `
 
 exports[`transform options > disable highlight 1`] = `
 {
-  "code": "console.log("%c🔦 http://localhost:3070#fgsss,1,1","background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;","\\n",'hello javascript')",
+  "code": "console.log("%c🔦 http://localhost:3070#fgsss,1,1",\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'hello javascript')",
   "map": SourceMap {
     "file": "main.js",
     "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,gIAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
@@ -38,10 +38,10 @@ exports[`transform options > disable highlight 1`] = `
 
 exports[`transform options > disable launch editor 1`] = `
 {
-  "code": "console.log("%c🚀 main.js·1","padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;","\\n",'hello javascript')",
+  "code": "console.log("%c🚀 main.js·1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,"\\n",'hello javascript')",
   "map": SourceMap {
     "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,mHAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,sMAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
       "main.js",
@@ -56,10 +56,10 @@ exports[`transform options > disable launch editor 1`] = `
 
 exports[`transform options > empty option 1`] = `
 {
-  "code": "console.log("%c🚀 main.js·1%c🔦 http://localhost:3070#fgsss,1,1","padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;","background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;","\\n",'hello javascript')",
+  "code": "console.log("%c🚀 main.js·1%c🔦 http://localhost:3070#fgsss,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'hello javascript')",
   "map": SourceMap {
     "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,0OAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6TAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
       "main.js",
@@ -74,10 +74,10 @@ exports[`transform options > empty option 1`] = `
 
 exports[`transform options > extended path option 1`] = `
 {
-  "code": "console.log("%c🚀 runner/index.js·1%c🔦 http://localhost:3070#sfgha,1,1","padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;","background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;","\\n",'hello javascript')",
+  "code": "console.log("%c🚀 runner/index.js·1%c🔦 http://localhost:3070#sfgha,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'hello javascript')",
   "map": SourceMap {
     "file": "index.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,kPAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,qUAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
       "index.js",
@@ -92,10 +92,10 @@ exports[`transform options > extended path option 1`] = `
 
 exports[`transform options > with prefix suffix 1`] = `
 {
-  "code": "console.log("-------\\n%c🚀 main.js·1%c🔦 http://localhost:3070#fgsss,1,1","padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;","background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;","\\n",'hello javascript',"\\n-------")",
+  "code": "console.log("-------\\n%c🚀 main.js·1%c🔦 http://localhost:3070#fgsss,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'hello javascript',"\\n-------")",
   "map": SourceMap {
     "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,mPAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,aAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,sUAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,aAAC",
     "names": [],
     "sources": [
       "main.js",

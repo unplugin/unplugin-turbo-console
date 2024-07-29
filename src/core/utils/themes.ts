@@ -35,12 +35,12 @@ export const builtInThemes: Themes = {
     js: {
       ...commonStyle,
       color: '#fff',
-      background: '#4FC08D',
+      background: '#F7DF1E',
     },
     jsx: {
       ...commonStyle,
       color: '#fff',
-      background: '#4FC08D',
+      background: '#F7DF1E',
     },
     ts: {
       ...commonStyle,
@@ -81,6 +81,8 @@ export function getStyleCode(fileType: FileExt) {
   const theme = builtInThemes.highlight[fileType]!
 
   const highlight = Object.entries(theme).map(([key, value]) => {
+    if (key === 'background')
+      return `${key}:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '${value}90;' : '${value};'\}`
     return `${key}:${value};`
   }).join('')
 
@@ -91,7 +93,7 @@ export function getStyleCode(fileType: FileExt) {
   }).join('')
 
   return {
-    launchEditor,
-    highlight,
+    launchEditor: `\`${launchEditor}\``,
+    highlight: `\`${highlight}\``,
   }
 }

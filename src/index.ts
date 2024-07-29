@@ -4,12 +4,12 @@ import { createUnplugin } from 'unplugin'
 import { checkPort, getRandomPort } from 'get-port-please'
 import { relative } from 'pathe'
 import type { Context, Options } from './types'
-import { PLUGIN_NAME, resolvedVirtualModuleId, virtualModuleId } from './core/constants'
+import { PLUGIN_NAME, VirtualModules } from './core/constants'
 import { createServer } from './core/server/index'
 import { filter, loadPkg, printInfo } from './core/utils'
 import { resolveOptions } from './core/options'
 import { transform } from './core/transform/index'
-import { virtualModulesGenerator } from './core/virtualModules'
+import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -37,16 +37,26 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       return filter(id)
     },
     resolveId(id) {
-      if (id === virtualModuleId) {
-        return resolvedVirtualModuleId
+      if (Object.values(VirtualModules).includes(id)) {
+        return `\0${id}`
       }
     },
     loadInclude(id) {
-      return id === resolvedVirtualModuleId
+      if (!id.startsWith('\0'))
+        return false
+      id = id.slice(1)
+      return Object.values(VirtualModules).includes(id)
     },
     load(id) {
-      if (id === resolvedVirtualModuleId) {
-        return virtualModulesGenerator(options.port!, env.NODE_ENV === 'production')
+      if (!id.startsWith('\0'))
+        return
+      id = id.slice(1)
+
+      if (id === VirtualModules.Init) {
+        return initVirtualModulesGenerator(options.port!, env.NODE_ENV === 'production')
+      }
+      else if (id === VirtualModules.ThemeDetect) {
+        return themeDetectVirtualModule()
       }
     },
     async transform(code, id) {
