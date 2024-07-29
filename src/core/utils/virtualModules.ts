@@ -1,6 +1,6 @@
 export function initVirtualModulesGenerator(port: number, isProd: boolean) {
   if (isProd)
-    return /* js */`;(() => {})()`
+    return ''
 
   return /* js */`
   ;(() => {
@@ -22,7 +22,10 @@ export function initVirtualModulesGenerator(port: number, isProd: boolean) {
 `
 }
 
-export function themeDetectVirtualModule() {
+export function themeDetectVirtualModule(isProd: boolean) {
+  if (isProd)
+    return ''
+
   return /* js */`
   ;(() => {
     if (globalThis.matchMedia) {
