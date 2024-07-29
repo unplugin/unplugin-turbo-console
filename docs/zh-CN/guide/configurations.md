@@ -13,3 +13,25 @@
 | babelParserPlugins | `ParserPlugin[]` | `["typescript", "jsx"]` | babel插件，传入的值会与默认值自动合并。[所有插件](https://babeljs.io/docs/en/babel-parser#plugins) |
 | disablePassLogs      |   `boolean`   | `false` | 是否禁用[传递日志](/zh-CN/features/pass-logs)功能 |
 | silent | `boolean` | `false` | 阻止项目启动时插件的终端输出 |
+
+## TypeScript
+
+有两种方式来配置 TypeScript 类型：
+
+1. 在 `tsconfig.json` 文件中:
+
+```json
+{
+  "compilerOptions": {
+    "types": [
+      "unplugin-turbo-console/client"
+    ]
+  }
+}
+```
+
+2. 在 `.d.ts` 文件中:
+
+```ts
+/// <reference types="unplugin-turbo-console/client" />
+```

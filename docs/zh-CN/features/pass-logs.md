@@ -4,20 +4,6 @@
 
 > 可以通过配置项 `disablePassLogs: true` 来禁用此功能。
 
-## TypeSciprt 配置
-
-在你项目中的`tsconfig.json`中增加以下配置：
-
-```json
-{
-  "compilerOptions": {
-    "types": [
-      "unplugin-turbo-console/client"
-    ]
-  }
-}
-```
-
 ## 初始化
 
 在项目的入口文件中引入`~console`进行初始化，以下是在一些框架中的示例：
@@ -47,6 +33,8 @@ mount(() => <StartClient />, document.getElementById('app')!)
 ```
 
 :::
+
+> [TypeScript 配置](/zh-CN/guide/configurations.html#typescript)
 
 ::: details `~console` 是什么？
 

@@ -24,3 +24,31 @@ pages
 并且在每个`index.vue`中都有一个`console`语句，在默认情况下，高亮输出中的文件名都是`index.vue`，这会导致输出结果的可读性变差。通过设置`extendedPathFileNames: ['index']`，可以让输出的文件名带上路径信息：
 
 ![extend-name](/features/extend-name.png)
+
+## 黑暗模式
+
+当系统处于黑暗模式时，优化高亮输出的视觉效果。
+
+![dark](/features/highlight-dark.png)
+
+### 设置
+
+在你应用的入口文件中引入 `~console/theme-detect`，示例：
+
+::: code-group
+
+```ts [Vite]
+// main.ts
+import '~console/theme-detect'
+```
+
+```vue [Nuxt]
+<!-- app.vue -->
+<script setup lang="ts">
+import '~console/theme-detect'
+</script>
+```
+
+:::
+
+> [TypeScript 配置](/zh-CN/guide/configurations.html#typescript)
