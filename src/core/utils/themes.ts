@@ -27,6 +27,7 @@ const commonStyle = {
   'padding': '2px 5px',
   'border-radius': '3px 0 0 3px',
   'margin': '0 0 5px 0',
+  'color': '#fff',
 }
 
 export const builtInThemes: Themes = {
@@ -34,37 +35,32 @@ export const builtInThemes: Themes = {
     icon: '🚀',
     js: {
       ...commonStyle,
-      color: '#fff',
+      color: '#111827',
       background: '#F7DF1E',
     },
     jsx: {
       ...commonStyle,
-      color: '#fff',
+      color: '#111827',
       background: '#F7DF1E',
     },
     ts: {
       ...commonStyle,
-      color: '#fff',
       background: '#3178C6',
     },
     tsx: {
       ...commonStyle,
-      color: '#fff',
       background: '#3178C6',
     },
     svelte: {
       ...commonStyle,
-      color: '#fff',
       background: '#FF3E00',
     },
     astro: {
       ...commonStyle,
-      color: '#fff',
       background: '#FF5D01',
     },
     vue: {
       ...commonStyle,
-      color: '#fff',
       background: '#4FC08D',
     },
   },
