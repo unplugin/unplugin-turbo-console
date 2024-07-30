@@ -37,12 +37,12 @@ pages
 
 ::: code-group
 
-```ts [Vite]
+```ts [<group-name name="Vite" icon="i-logos:vitejs" />]
 // main.ts
 import '~console/theme-detect'
 ```
 
-```vue [Nuxt]
+```vue [<group-name name="Nuxt" icon="i-logos-nuxt-icon" />]
 <!-- app.vue -->
 <script setup lang="ts">
 import '~console/theme-detect'
