@@ -86,25 +86,22 @@ export function genConsoleString(genContext: GenContext) {
   let consoleString = ''
   const lineWrap = `"\\n"`
 
-  if (!disableHighlight && !disableHighlight) {
+  if (!disableHighlight && !disableLaunchEditor) {
     consoleString = _prefix
       ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
       : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
   }
-
-  if (disableHighlight && !disableLaunchEditor) {
+  else if (disableHighlight && !disableLaunchEditor) {
     consoleString = _prefix
       ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
       : `"${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
   }
-
-  if (!disableHighlight && disableLaunchEditor) {
+  else if (!disableHighlight && disableLaunchEditor) {
     consoleString = _prefix
       ? `"${_prefix}${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
       : `"${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
   }
-
-  if (disableHighlight && disableLaunchEditor) {
+  else if (disableHighlight && disableLaunchEditor) {
     consoleString = _prefix
       ? `"${_prefix}",`
       : ''
