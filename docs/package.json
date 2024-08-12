@@ -15,6 +15,7 @@
     "case-police": "^0.6.1",
     "unocss": "^0.61.3",
     "unplugin-turbo-console": "workspace:*",
-    "vitepress": "^1.3.1"
+    "vitepress": "^1.3.1",
+    "vitepress-plugin-group-icons": "^0.0.8"
   }
 }

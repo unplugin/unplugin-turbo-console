@@ -10,12 +10,6 @@ export default defineConfig({
         'display': 'inline-block',
         'vertical-align': 'middle',
       },
-      collections: {
-        custom: {
-          rspack: () => fs.readFile('./public/icons/rspack.svg', 'utf-8'),
-          farm: () => fs.readFile('./public/icons/farm.svg', 'utf-8'),
-        },
-      },
     }),
   ],
   transformers: [

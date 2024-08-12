@@ -4,7 +4,9 @@ import 'uno.css'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import '@shikijs/vitepress-twoslash/style.css'
 import type { EnhanceAppContext } from 'vitepress'
-import GroupName from '../components/GroupName.vue'
+import { GroupIconComponent } from 'vitepress-plugin-group-icons/client'
+import rspack from '../assets/icons/rspack.svg?raw'
+import farm from '../assets/icons/farm.svg?raw'
 import Layout from './Layout.vue'
 
 export default {
@@ -12,6 +14,9 @@ export default {
   Layout,
   enhanceApp({ app }: EnhanceAppContext) {
     app.use(TwoslashFloatingVue)
-    app.component('group-name', GroupName)
+    app.use(GroupIconComponent, {
+      rspack,
+      farm,
+    })
   },
 }

@@ -26,19 +26,19 @@ outline: deep
 
 ::: code-group
 
-```bash [<group-name name="pnpm" icon="i-logos:pnpm" />]
+```bash [pnpm]
 pnpm add -D unplugin-turbo-console
 ```
 
-```bash [<group-name name="yarn" icon="i-logos:yarn" />]
+```bash [yarn]
 yarn add unplugin-turbo-console -D
 ```
 
-```bash [<group-name name="npm" icon="i-logos:npm-icon" />]
+```bash [npm]
 npm i unplugin-turbo-console --save-dev
 ```
 
-```bash [<group-name name="bun" icon="i-logos:bun" />]
+```bash [bun]
 bun add unplugin-turbo-console -d
 ```
 
@@ -50,7 +50,7 @@ bun add unplugin-turbo-console -d
 
 ::: code-group
 
-```ts{3,7-9} twoslash [<group-name name="Vite" icon="i-logos:vitejs" />]
+```ts{3,7-9} twoslash [Vite]
 // vite.config.ts
 import { defineConfig } from 'vite'
 import TurboConsole from 'unplugin-turbo-console/vite'
@@ -64,7 +64,7 @@ export default defineConfig({
 })
 ```
 
-```js{5} [<group-name name="webpack" icon="i-logos:webpack" />]
+```js{5} [webpack]
 // webpack.config.js
 module.exports = {
   /* ... */
@@ -74,7 +74,7 @@ module.exports = {
 }
 ```
 
-```js{6,9-11} [<group-name name="Vue CLI" icon="i-logos:vue" />]
+```js{6,9-11} [Vue CLI]
 // vue.config.js
 const { defineConfig } = require('@vue/cli-service')
 
@@ -91,7 +91,7 @@ module.exports = defineConfig({
 })
 ```
 
-```js{12-14} [<group-name name="Rspack" icon="i-custom:rspack" />]
+```js{12-14} [Rspack]
 // rspack.config.js
 const rspack = require('@rspack/core')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -112,7 +112,7 @@ const config = {
 module.exports = config
 ```
 
-```ts{4,11-13} twoslash [<group-name name="Farm" icon="i-custom:farm" />]
+```ts{4,11-13} twoslash [Farm]
 // farm.config.ts
 import { defineConfig } from '@farmfe/core'
 import vue from '@vitejs/plugin-vue'
@@ -136,7 +136,7 @@ export default defineConfig({
 
 ::: code-group
 
-``` ts{4} [<group-name name="Nuxt" icon="i-logos-nuxt-icon" />]
+``` ts{4} [Nuxt]
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: [
@@ -148,7 +148,7 @@ export default defineNuxtConfig({
 })
 ```
 
-```ts{3,7} [<group-name name="SvelteKit" icon="i-logos-svelte-icon" />]
+```ts{3,7} [SvelteKit]
 import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 import TurboConsole from 'unplugin-turbo-console/vite'
@@ -161,7 +161,7 @@ export default defineConfig({
 })
 ```
 
-```js{3,8} [<group-name name="Astro" icon="i-logos-astro-icon" />]
+```js{3,8} [Astro]
 // astro.config.mjs
 import { defineConfig } from 'astro/config'
 import TurboConsole from 'unplugin-turbo-console/astro'
@@ -174,7 +174,7 @@ export default defineConfig({
 })
 ```
 
-```js{6} [<group-name name="Next.js" icon="i-logos-nextjs-icon" />]
+```js{6} [Next.js]
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -190,7 +190,7 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-```ts{2,7} twoslash [<group-name name="SolidStart" icon="i-logos-solidjs-icon" />]
+```ts{2,7} twoslash [SolidStart]
 import { defineConfig } from '@solidjs/start/config'
 import TurboConsole from 'unplugin-turbo-console/vite'
 

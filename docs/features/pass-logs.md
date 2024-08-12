@@ -12,21 +12,21 @@ Here are examples in some frameworks:
 
 ::: code-group
 
-```vue [<group-name name="Nuxt" icon="i-logos-nuxt-icon" />]
+```vue [Nuxt]
 <!-- app.vue -->
 <script setup lang="ts">
 import '~console'
 </script>
 ```
 
-```svelte [<group-name name="SvelteKit" icon="i-logos-svelte-icon" />]
+```svelte [SvelteKit]
 <!-- +page.svelte -->
 <script lang="ts">
 import '~console'
 </script>
 ```
 
-```tsx{3} [<group-name name="SolidStart" icon="i-logos-solidjs-icon" />]
+```tsx{3} [SolidStart]
 // entry-client.tsx
 import { StartClient, mount } from '@solidjs/start/client'
 import '~console'

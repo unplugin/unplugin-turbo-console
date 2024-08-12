@@ -37,12 +37,12 @@ Add `~console/theme-detect` to your project entry file. Example:
 
 ::: code-group
 
-```ts [<group-name name="Vite" icon="i-logos:vitejs" />]
+```ts [Vite]
 // main.ts
 import '~console/theme-detect'
 ```
 
-```vue [<group-name name="Nuxt" icon="i-logos-nuxt-icon" />]
+```vue [Nuxt]
 <!-- app.vue -->
 <script setup lang="ts">
 import '~console/theme-detect'

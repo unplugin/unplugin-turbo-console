@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import { groupIconPlugin } from 'vitepress-plugin-group-icons'
 import { zhCN } from './zhCN'
 import { enUS } from './enUS'
 
@@ -34,6 +35,9 @@ export default defineConfig({
     ],
     image: {
       lazyLoading: true,
+    },
+    config(md) {
+      md.use(groupIconPlugin as any)
     },
   },
   head: [
