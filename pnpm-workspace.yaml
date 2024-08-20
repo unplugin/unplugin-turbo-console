@@ -1,3 +1,6 @@
 packages:
   - examples/**
   - docs
+
+catalog:
+  vite: 5.4.1

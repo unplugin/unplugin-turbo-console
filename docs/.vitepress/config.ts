@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
-import { groupIconPlugin } from 'vitepress-plugin-group-icons'
+import Unocss from 'unocss/vite'
+import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
 import { zhCN } from './zhCN'
 import { enUS } from './enUS'
 
@@ -37,7 +38,7 @@ export default defineConfig({
       lazyLoading: true,
     },
     config(md) {
-      md.use(groupIconPlugin as any)
+      md.use(groupIconMdPlugin)
     },
   },
   head: [
@@ -51,4 +52,15 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['meta', { name: 'theme-color', content: '#4FC08D' }],
   ],
+  vite: {
+    plugins: [
+      groupIconVitePlugin({
+        customIcon: {
+          rspack: localIconLoader(import.meta.url, './assets/icons/rspack.svg'),
+          farm: localIconLoader(import.meta.url, './assets/icons/farm.svg'),
+        },
+      }),
+      Unocss(),
+    ],
+  },
 })
