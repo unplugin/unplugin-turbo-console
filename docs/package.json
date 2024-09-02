@@ -17,6 +17,6 @@
     "unplugin-turbo-console": "workspace:*",
     "vite-plugin-inspect": "^0.8.4",
     "vitepress": "^1.3.3",
-    "vitepress-plugin-group-icons": "1.0.0-beta.5"
+    "vitepress-plugin-group-icons": "1.1.0"
   }
 }
