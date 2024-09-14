@@ -52,8 +52,7 @@ On the server side, replace `console` with `client`.
 
 Here's an example in `Nuxt`:
 
-```ts{2,9-11} twoslash
-// server/api/test.ts
+```ts{2,9-11} [server/api/test.ts] twoslash
 import { client } from 'unplugin-turbo-console/helper'
 import { defineEventHandler } from 'h3'
 

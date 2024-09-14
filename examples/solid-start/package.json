@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@solidjs/meta": "^0.29.4",
-    "@solidjs/router": "^0.14.1",
-    "@solidjs/start": "^1.0.2",
-    "solid-js": "^1.8.17",
-    "vinxi": "^0.3.12",
-    "unplugin-turbo-console": "workspace:*"
+    "@solidjs/router": "^0.14.5",
+    "@solidjs/start": "^1.0.6",
+    "solid-js": "^1.8.22",
+    "unplugin-turbo-console": "workspace:*",
+    "vinxi": "^0.4.3"
   },
   "engines": {
     "node": ">=18"
