@@ -43,7 +43,7 @@ This experimental syntax requires enabling the parser plugin: "importAttributes"
 
 解决方法是将缺失的 babel parser 插件添加到`babelParserPlugins`中：
 
-```js{2,7} twoslash
+```js{2,7} twoslash [vite.config.ts]
 import { defineConfig } from 'vite'
 import TurboConsole from 'unplugin-turbo-console/vite'
 

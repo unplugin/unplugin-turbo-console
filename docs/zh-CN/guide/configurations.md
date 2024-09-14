@@ -18,9 +18,7 @@
 
 有两种方式来配置 TypeScript 类型：
 
-1. 在 `tsconfig.json` 文件中:
-
-```json
+```json [tsconfig.json]
 {
   "compilerOptions": {
     "types": [
@@ -30,8 +28,8 @@
 }
 ```
 
-2. 在 `.d.ts` 文件中:
+或者
 
-```ts
+```ts [*.d.ts]
 /// <reference types="unplugin-turbo-console/client" />
 ```

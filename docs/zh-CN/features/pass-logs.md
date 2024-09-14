@@ -48,8 +48,7 @@ mount(() => <StartClient />, document.getElementById('app')!)
 
 以下是在`Nuxt`中的示例：
 
-```ts{2,9-11} twoslash
-// server/api/test.ts
+```ts{1,8-10} [server/api/test.ts] twoslash
 import { client } from 'unplugin-turbo-console/helper'
 import { defineEventHandler } from 'h3'
 
