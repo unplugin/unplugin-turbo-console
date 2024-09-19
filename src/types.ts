@@ -79,11 +79,11 @@ export interface Options {
   /**
    * Whether to print plugin server url to the console.
    *
-   * Set it to `false` to disable.
+   * Set it to `true` to disable.
    *
-   * @defaultValue true
+   * @defaultValue false
    */
-  silent?: false
+  silent?: true
 }
 
 export interface GenContext {
