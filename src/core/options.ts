@@ -1,7 +1,7 @@
 import { env } from 'node:process'
 import type { Options } from '../types'
 
-const DETAULT_OPTIONS: Options = {
+const DEFAULT_OPTIONS: Options = {
   prefix: '',
   suffix: '',
   disableLaunchEditor: false,
@@ -23,13 +23,13 @@ export function resolveOptions(options: Options): Options {
   // merge babel parser plugins
   if (options.babelParserPlugins) {
     options.babelParserPlugins = [
-      ...DETAULT_OPTIONS.babelParserPlugins!,
+      ...DEFAULT_OPTIONS.babelParserPlugins!,
       ...options.babelParserPlugins,
     ]
   }
 
   let resolved = {
-    ...DETAULT_OPTIONS,
+    ...DEFAULT_OPTIONS,
     ...options,
   }
 
