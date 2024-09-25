@@ -1,9 +1,9 @@
+import type { Options } from './types'
 import { addImports, addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
+import { NUXT_CONFIG_KEY, PLUGIN_NAME } from './core/constants'
 import vite from './vite'
 import webpack from './webpack'
-import type { Options } from './types'
 import '@nuxt/schema'
-import { NUXT_CONFIG_KEY, PLUGIN_NAME } from './core/constants'
 
 export default defineNuxtModule<Options>({
   meta: {

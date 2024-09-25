@@ -1,7 +1,7 @@
-import { createFilter } from '@rollup/pluginutils'
-import { extname } from 'pathe'
 import type { Comment, Node } from '@babel/types'
 import type { Compiler, Options } from '../../types'
+import { createFilter } from '@rollup/pluginutils'
+import { extname } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
 
 export const filter = createFilter(
@@ -100,7 +100,7 @@ export async function loadPkg(pkg: string) {
     await import(pkg)
     return true
   }
-  catch (error) {
+  catch {
     return false
   }
 }

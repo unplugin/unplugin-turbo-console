@@ -1,14 +1,14 @@
+import type { Options } from '../../types'
 import { createServer as _createServer } from 'node:http'
 import { env } from 'node:process'
-import { createApp, toNodeListener } from 'h3'
 import wsAdapter from 'crossws/adapters/node'
-import type { Options } from '../../types'
-import serveStatic from './serveStatic'
-import { launchEditor } from './launchEditor'
+import { createApp, toNodeListener } from 'h3'
 import filePathMap from './filePathMap'
 import health from './health'
-import ws from './ws'
+import { launchEditor } from './launchEditor'
 import send from './send'
+import serveStatic from './serveStatic'
+import ws from './ws'
 
 export async function createServer(options: Options) {
   const { port, specifiedEditor } = options
@@ -16,7 +16,7 @@ export async function createServer(options: Options) {
   try {
     await fetch(`http://localhost:${_port}/health`)
   }
-  catch (error) {
+  catch {
     const app = createApp()
 
     if (options.disablePassLogs === true && options.disableLaunchEditor === true)

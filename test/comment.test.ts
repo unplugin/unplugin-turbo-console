@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from 'vitest'
 import { join } from 'pathe'
+import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options'
 import { transform } from '../src/core/transform'
 import { COMMENT_CURRENT_FILE_VUE, COMMENT_CURRENT_LINE, COMMENT_NEXT_LINE, COMMENT_TOP_FILE, COMMENT_TOP_FILE_SVELTE, COMMENT_TOP_FILE_VUE } from './fixtures/comments'

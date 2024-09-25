@@ -1,8 +1,8 @@
+import type { GenContext } from '../../types'
+import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
-import type { GenContext } from '../../types'
 import { PLUGIN_NAME } from '../constants'
-import type { FileExt } from './themes'
 import { builtInThemes, getStyleCode } from './themes'
 
 function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {

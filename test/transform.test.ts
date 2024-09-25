@@ -1,7 +1,7 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
-import { transform } from '../src/core/transform'
 import { resolveOptions } from '../src/core/options'
+import { transform } from '../src/core/transform'
 import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, VUE_OPTIONS, VUE_SCRIPT_SETUP, WIN_PATH } from './fixtures/transform'
 
 vi.mock('node:process', () => {

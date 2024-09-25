@@ -1,9 +1,9 @@
-import type { WithScope } from 'ast-kit'
-import { babelParse, getLang, walkAST } from 'ast-kit'
 import type { Node } from '@babel/types'
+import type { WithScope } from 'ast-kit'
+import type { Context } from './../../types'
+import { babelParse, getLang, walkAST } from 'ast-kit'
 import MagicString from 'magic-string'
 import { genConsoleString, getCompiler, isConsoleExpression, isPluginDisable } from '../utils'
-import type { Context } from './../../types'
 import { compilers } from './compilers'
 
 export async function transform(context: Context) {

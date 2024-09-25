@@ -1,5 +1,5 @@
-import { env } from 'node:process'
 import type { Options } from '../types'
+import { env } from 'node:process'
 
 const DEFAULT_OPTIONS: Options = {
   prefix: '',

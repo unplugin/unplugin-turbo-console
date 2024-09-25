@@ -1,10 +1,10 @@
+import type { Options } from './../../types'
 import { cwd } from 'node:process'
 import { defineEventHandler, getQuery } from 'h3'
 // @ts-expect-error missing types
 import launch from 'launch-editor'
 import { resolve } from 'pathe'
 import { version } from '../../../package.json'
-import type { Options } from './../../types'
 
 export function launchEditor(specifiedEditor: Options['specifiedEditor']) {
   return defineEventHandler(async (event) => {

@@ -1,6 +1,6 @@
 import type { Options } from './types'
-import { PLUGIN_NAME } from './core/constants'
 import unplugin from '.'
+import { PLUGIN_NAME } from './core/constants'
 
 export default function (options: Options) {
   return {

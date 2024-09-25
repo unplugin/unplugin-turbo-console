@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url'
-import { defineBuildConfig } from 'unbuild'
-import { dirname, join } from 'pathe'
 import { copy } from 'fs-extra'
+import { dirname, join } from 'pathe'
+import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
   declaration: true,

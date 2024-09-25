@@ -1,5 +1,5 @@
-import { PLUGIN_NAME } from '../../constants'
 import type { CompileResult, Context } from '../../../types'
+import { PLUGIN_NAME } from '../../constants'
 
 export async function vue3Compiler(context: Context): Promise<CompileResult> {
   try {

@@ -1,9 +1,9 @@
-import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import Unocss from 'unocss/vite'
+import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
-import { zhCN } from './zhCN'
 import { enUS } from './enUS'
+import { zhCN } from './zhCN'
 
 const docsLink = 'https://utc.yuy1n.io'
 

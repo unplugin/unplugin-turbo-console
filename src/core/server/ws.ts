@@ -14,7 +14,7 @@ export default defineWebSocketHandler({
   message(_peer, message) {
     try {
       const { m, t } = JSON.parse(message.toString())
-      // eslint-disable-next-line ts/ban-ts-comment, ts/prefer-ts-expect-error
+      // eslint-disable-next-line ts/ban-ts-comment
       // @ts-ignore
       console[t]('\x1B[30m\x1B[106m Client Log \x1B[49m\x1B[39m', ...JSON.parse(m))
     }

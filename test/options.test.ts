@@ -1,7 +1,7 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
-import { transform } from '../src/core/transform'
 import { resolveOptions } from '../src/core/options'
+import { transform } from '../src/core/transform'
 import { DISABLE_ALL, DISABLE_HIGHLIGHT, DISABLE_LAUNCH_EDITOR, EMPTY, EXTENDED_PATH, WITH_PREFIX } from './fixtures/option'
 
 vi.mock('node:process', () => {

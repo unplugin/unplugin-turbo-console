@@ -1,5 +1,5 @@
-import { PLUGIN_NAME } from './core/constants'
 import type { TCMethod, TConsole } from './types'
+import { PLUGIN_NAME } from './core/constants'
 
 async function generateFetchUrl(args: any[], method: TCMethod) {
   const { env } = await import('node:process')
