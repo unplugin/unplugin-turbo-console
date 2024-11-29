@@ -1,7 +1,7 @@
 {
   "name": "unplugin-turbo-console",
   "type": "module",
-  "version": "1.10.5",
+  "version": "1.10.6",
   "description": "Improve the Developer Experience of console",
   "license": "MIT",
   "homepage": "https://utc.yuy1n.io",
