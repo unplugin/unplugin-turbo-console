@@ -81,7 +81,7 @@ export function genConsoleString(genContext: GenContext) {
   const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
-  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://localhost:${port}#${codePosition}`
+  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://127.1:${port}#${codePosition}`
 
   let consoleString = ''
   const lineWrap = `"\\n"`
