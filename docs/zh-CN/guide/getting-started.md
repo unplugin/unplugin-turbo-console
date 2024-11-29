@@ -190,7 +190,7 @@ const nextConfig = {
 module.exports = nextConfig
 ```
 
-```ts{2,7} twoslash [SolidStart]
+```ts{2,7} [SolidStart]
 import { defineConfig } from '@solidjs/start/config'
 import TurboConsole from 'unplugin-turbo-console/vite'
 
