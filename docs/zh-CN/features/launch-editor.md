@@ -17,15 +17,17 @@
 <span class="bg-#00DC8250 px-5px py-2px rd-5px">
 🔦
 <a href="">
-http://localhost:3070#3abe,6,3
+http://127.1:3070#3abe,6,3
 </a>
 </span>
+
+> `127.1` 是 `127.0.0.1` 的缩写
 
 它由以下几部分组成：
 
 - `#3abe,6,3`: 一个包含在URL中的hash属性，其中`3abe`是一个随机生成字符串，对应项目中的一个具体文件，`6`与`3`分别代表`console`源代码所在的行号和列号。
 
-- `http://localhost:3070`: 一个[静态页面](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/client/index.html)，它的作用是将 hash 属性发送给 Node.js 服务，Node.js 服务获取到具体的文件路径和行列号，再通过[launch-editor](https://github.com/yyx990803/launch-editor)打开编辑器。
+- `http://127.1:3070`: 一个[静态页面](https://github.com/unplugin/unplugin-turbo-console/blob/main/src/core/client/index.html)，它的作用是将 hash 属性发送给 Node.js 服务，Node.js 服务获取到具体的文件路径和行列号，再通过[launch-editor](https://github.com/yyx990803/launch-editor)打开编辑器。
 
 ::: tip 提示
 
