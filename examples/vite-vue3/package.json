@@ -22,7 +22,7 @@
     "typescript": "~5.4.5",
     "unplugin-turbo-console": "workspace:*",
     "vite": "catalog:",
-    "vite-plugin-inspect": "^0.8.4",
+    "vite-plugin-inspect": "catalog:",
     "vue-tsc": "^2.0.21"
   }
 }
