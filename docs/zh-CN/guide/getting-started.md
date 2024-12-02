@@ -4,7 +4,7 @@ outline: deep
 
 # 入门
 
-**Unplugin Torbo Console** 是一个通用型插件，旨在增强前端开发人员在使用 `console` 时的开发者体验(DX)。它拥有许多实用的功能与灵活的可配置项，得益于[Unplugin](https://unplugin.unjs.io)，它几乎适用于所有现代前端框架。你可以从下面的视频中看到它的部分功能：
+**Unplugin Turbo Console** 是一个通用型插件，旨在增强前端开发人员在使用 `console` 时的开发者体验(DX)。它拥有许多实用的功能与灵活的可配置项，得益于[Unplugin](https://unplugin.unjs.io)，它几乎适用于所有现代前端框架。你可以从下面的视频中看到它的部分功能：
 
 <video src="https://static.yuy1n.io/demo.mp4" controls />
 
