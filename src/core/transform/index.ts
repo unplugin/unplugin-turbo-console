@@ -1,9 +1,9 @@
-import type { Node } from '@babel/types'
-import type { WithScope } from 'ast-kit'
+import type { Expression } from 'oxc-parser'
 import type { Context } from './../../types'
-import { babelParse, getLang, walkAST } from 'ast-kit'
+import { walk } from 'estree-walker'
 import MagicString from 'magic-string'
-import { genConsoleString, getCompiler, isConsoleExpression, isPluginDisable } from '../utils'
+import { parseSync } from 'oxc-parser'
+import { genConsoleString, getCompiler, getLineAndColumn, isConsoleExpression, isPluginDisable } from '../utils'
 import { compilers } from './compilers'
 
 export async function transform(context: Context) {
@@ -26,14 +26,14 @@ export async function transform(context: Context) {
 
   const compileResult = await compilers[compiler](context)
 
-  const program = babelParse(compileResult.script, getLang(id), {
-    sourceFilename: id,
-    plugins: options.babelParserPlugins,
+  const ast = parseSync(compileResult.script, {
+    sourceFilename: id + (compileResult.scriptLang ? `.${compileResult.scriptLang}` : ''),
   })
 
   if (isPluginDisable({
-    comments: program.comments || [],
+    comments: ast.comments || [],
     originalLine: 1,
+    script: compileResult.script,
     id,
     type: 'top-file',
     compiler,
@@ -49,23 +49,26 @@ export async function transform(context: Context) {
     }
   }
 
-  walkAST<WithScope<Node>>(program, {
-    enter(node) {
+  // @ts-expect-error fix types
+  walk(ast.program as unknown as Expression, {
+    enter(node: Expression) {
       if (isConsoleExpression(node)) {
-        const expressionStart = node.start!
-        const expressionEnd = node.end!
+        const expressionStart = node.start
+        const expressionEnd = node.end
 
         const originalExpression = magicString.slice(expressionStart, expressionEnd)
 
         if (originalExpression.includes('%c'))
           return false
 
-        const { line, column } = node.loc!.start
+        const { line, column } = getLineAndColumn(compileResult.script, expressionStart)
+
         const originalLine = line + compileResult.line
         const originalColumn = column
 
         if (isPluginDisable({
-          comments: program.comments || [],
+          comments: ast.comments || [],
+          script: compileResult.script,
           originalLine: line,
           id,
           type: 'inline-file',

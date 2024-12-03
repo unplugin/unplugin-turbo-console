@@ -1,4 +1,4 @@
-import type { Comment, Node } from '@babel/types'
+import type { Comment, Expression } from 'oxc-parser'
 import type { Compiler, Options } from '../../types'
 import { createFilter } from '@rollup/pluginutils'
 import { extname } from 'pathe'
@@ -60,9 +60,10 @@ export function isPluginDisable(meta: {
   originalLine: number
   id: string
   type: 'top-file' | 'inline-file'
+  script: string
   compiler: Compiler
 }) {
-  const { comments, originalLine, type, compiler } = meta
+  const { comments, originalLine, type, compiler, script } = meta
 
   if (comments?.length === 0)
     return false
@@ -72,12 +73,14 @@ export function isPluginDisable(meta: {
 
     const disablePluginComment = comments?.find(comment => comment.value.includes('turbo-console-disable'))
 
-    if (disablePluginComment && disablePluginComment.loc!.start.line <= startLine)
+    const disableLine = getLineAndColumn(script, disablePluginComment?.start || 0).line
+
+    if (disablePluginComment && disableLine <= startLine)
       return true
   }
   else if (type === 'inline-file') {
-    const currentLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-line') && comment.loc!.start.line === originalLine)
-    const nextLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-next-line') && comment.loc!.start.line === originalLine - 1)
+    const currentLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-line') && getLineAndColumn(script, comment.start).line === originalLine)
+    const nextLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-next-line') && getLineAndColumn(script, comment.start).line === originalLine - 1)
 
     if (currentLineComment || nextLineComment)
       return true
@@ -86,12 +89,12 @@ export function isPluginDisable(meta: {
   return false
 }
 
-export function isConsoleExpression(node: Node) {
+export function isConsoleExpression(node: Expression) {
   return node.type === 'CallExpression'
-    && node.callee.type === 'MemberExpression'
-    && node.callee.object.type === 'Identifier'
-    && node.callee.object.name === 'console'
-    && node.callee.property.type === 'Identifier'
+    && node.callee.type === 'StaticMemberExpression' as unknown as string
+    && (node.callee as any).object.type === 'Identifier'
+    && (node.callee as any).object.name === 'console'
+    && (node.callee as any).property.type === 'Identifier'
     && node.arguments?.length > 0
 }
 
@@ -103,4 +106,21 @@ export async function loadPkg(pkg: string) {
   catch {
     return false
   }
+}
+
+export function getLineAndColumn(code: string, start: number) {
+  let line = 1
+  let column = 0
+
+  for (let i = 0; i < start; i++) {
+    if (code[i] === '\n') {
+      line++
+      column = 0
+    }
+    else {
+      column++
+    }
+  }
+
+  return { line, column }
 }

@@ -104,6 +104,7 @@ export interface Context {
 
 export interface CompileResult {
   script: string
+  scriptLang?: string
   offset: number
   line: number
 }

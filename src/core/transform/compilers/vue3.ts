@@ -10,6 +10,7 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
       script: '',
       line: 0,
       offset: 0,
+      scriptLang: '',
     }
 
     const { descriptor, errors } = parse(code, {
@@ -19,6 +20,7 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
     if (errors.length === 0) {
       if (descriptor.script) {
         compileResults.script = descriptor.script.content
+        compileResults.scriptLang = descriptor.script.lang || 'js'
         const { line, offset } = descriptor.script.loc.start
         compileResults.line = line - 1
         compileResults.offset = offset
@@ -27,6 +29,7 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
       else if (descriptor.scriptSetup) {
         compileResults.script = descriptor.scriptSetup.content
         const { line, offset } = descriptor.scriptSetup.loc.start
+        compileResults.scriptLang = descriptor.scriptSetup.lang || 'js'
         compileResults.line = line - 1
         compileResults.offset = offset
       }

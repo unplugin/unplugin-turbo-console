@@ -157,19 +157,20 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.1.2",
-    "ast-kit": "^1.2.0",
+    "estree-walker": "^3.0.3",
     "get-port-please": "^3.1.2",
     "h3": "1.12.0",
     "launch-editor": "^2.9.1",
     "magic-string": "^0.30.11",
+    "oxc-parser": "^0.38.0",
     "pathe": "^1.1.2",
     "unplugin": "^1.14.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.1",
-    "@babel/types": "^7.25.6",
     "@nuxt/kit": "^3.13.2",
     "@nuxt/schema": "^3.13.2",
+    "@oxc-project/types": "^0.38.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.7.0",
     "@vitest/ui": "^2.1.1",
