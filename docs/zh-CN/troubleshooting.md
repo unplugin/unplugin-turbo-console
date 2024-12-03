@@ -31,29 +31,3 @@ console.log('bar') // turbo-console-disable-line
 console.log('foo')
 console.log('bar')
 ```
-
-## 编译语法错误
-
-如果你使用了一些未稳定的ECMAScript语法，你可能会在终端看到类似错误：
-
-```
-[unplugin-turbo-console] Transform src/App.vue error: SyntaxError:
-This experimental syntax requires enabling the parser plugin: "importAttributes". (5:39)
-```
-
-解决方法是将缺失的 babel parser 插件添加到`babelParserPlugins`中：
-
-```js{2,7} twoslash [vite.config.ts]
-import { defineConfig } from 'vite'
-import TurboConsole from 'unplugin-turbo-console/vite'
-
-export default defineConfig({
-  plugins: [
-    TurboConsole({
-      babelParserPlugins: ['importAttributes'],
-    }),
-  ],
-})
-```
-
-> 相关 [issus](https://github.com/unplugin/unplugin-turbo-console/issues/35)

@@ -31,29 +31,3 @@ console.log('bar') // turbo-console-disable-line
 console.log('foo')
 console.log('bar')
 ```
-
-## Compilation Syntax Errors
-
-If you use some unstable ECMAScript syntax, you might see errors like the following in the terminal:
-
-```
-[unplugin-turbo-console] Transform src/App.vue error: SyntaxError:
-This experimental syntax requires enabling the parser plugin: "importAttributes". (5:39)
-```
-
-To resolve this, add the missing Babel parser plugin to `babelParserPlugins`:
-
-```js{2,7} twoslash [vite.config.ts]
-import { defineConfig } from 'vite'
-import TurboConsole from 'unplugin-turbo-console/vite'
-
-export default defineConfig({
-  plugins: [
-    TurboConsole({
-      babelParserPlugins: ['importAttributes'],
-    }),
-  ],
-})
-```
-
-> Related [issus](https://github.com/unplugin/unplugin-turbo-console/issues/35)
