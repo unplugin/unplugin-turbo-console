@@ -80,38 +80,6 @@ describe('resolve options', () => {
   it('empty', () => {
     expect(resolveOptions({})).toMatchInlineSnapshot(`
       {
-        "babelParserPlugins": [
-          "typescript",
-          "jsx",
-        ],
-        "disableHighlight": false,
-        "disableLaunchEditor": false,
-        "disablePassLogs": false,
-        "extendedPathFileNames": [],
-        "port": 3070,
-        "prefix": "",
-        "silent": false,
-        "suffix": "",
-      }
-    `)
-  })
-
-  it('babel parser plugins', () => {
-    expect(resolveOptions({
-      babelParserPlugins: ['importAttributes', ['optionalChainingAssign', { version: '2023-07' }]],
-    })).toMatchInlineSnapshot(`
-      {
-        "babelParserPlugins": [
-          "typescript",
-          "jsx",
-          "importAttributes",
-          [
-            "optionalChainingAssign",
-            {
-              "version": "2023-07",
-            },
-          ],
-        ],
         "disableHighlight": false,
         "disableLaunchEditor": false,
         "disablePassLogs": false,

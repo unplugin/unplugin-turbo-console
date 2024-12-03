@@ -4,6 +4,10 @@ import { logTs } from './tsLog'
 import { server } from 'unplugin-turbo-console/helper'
 
 function logVue() {
+  console.log('from vue')
+}
+
+function serverLog() {
   server.log('from vue')
 }
 </script>
@@ -27,7 +31,7 @@ function logVue() {
   </h2>
 
   <div style="display: flex; gap: 10px;">
-    <button @click="logVue">Client -> Server</button>
+    <button @click="serverLog">Client -> Server</button>
   </div>
 </template>
 

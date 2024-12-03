@@ -78,7 +78,7 @@ export function genConsoleString(genContext: GenContext) {
     argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
-  const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['StringLiteral', 'NumericLiteral'].includes(argType) ? '' : ` ~ ${argsName}`}`
+  const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://127.1:${port}#${codePosition}`
