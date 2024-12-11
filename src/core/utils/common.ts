@@ -1,5 +1,6 @@
-import type { Comment, Node } from '@babel/types'
+import type { Comment, MagicString } from 'oxc-parser'
 import type { Compiler, Options } from '../../types'
+import type { Node } from '../utils/walker'
 import { createFilter } from '@rollup/pluginutils'
 import { extname } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
@@ -61,8 +62,9 @@ export function isPluginDisable(meta: {
   id: string
   type: 'top-file' | 'inline-file'
   compiler: Compiler
+  oxcMs: MagicString
 }) {
-  const { comments, originalLine, type, compiler } = meta
+  const { comments, originalLine, type, compiler, oxcMs } = meta
 
   if (comments?.length === 0)
     return false
@@ -70,14 +72,21 @@ export function isPluginDisable(meta: {
   if (type === 'top-file') {
     const startLine = compiler === 'vanilla' ? 1 : 2
 
-    const disablePluginComment = comments?.find(comment => comment.value.includes('turbo-console-disable'))
+    const disablePluginComment = comments?.find(comment => comment.value.includes('turbo-console-disable') && !comment.value.includes('turbo-console-disable-'))
 
-    if (disablePluginComment && disablePluginComment.loc!.start.line <= startLine)
+    const disableLine = oxcMs.getLineColumnNumber(disablePluginComment?.start || 0).line
+    if (disablePluginComment && disableLine <= startLine)
       return true
   }
   else if (type === 'inline-file') {
-    const currentLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-line') && comment.loc!.start.line === originalLine)
-    const nextLineComment = comments?.find(comment => comment.value.includes('turbo-console-disable-next-line') && comment.loc!.start.line === originalLine - 1)
+    const currentLineComment = comments?.find((comment) => {
+      const { line } = oxcMs.getLineColumnNumber(comment.start)
+      return comment.value.includes('turbo-console-disable-line') && line === originalLine
+    })
+    const nextLineComment = comments?.find((comment) => {
+      const { line } = oxcMs.getLineColumnNumber(comment.start)
+      return comment.value.includes('turbo-console-disable-next-line') && line === originalLine - 1
+    })
 
     if (currentLineComment || nextLineComment)
       return true
@@ -88,10 +97,10 @@ export function isPluginDisable(meta: {
 
 export function isConsoleExpression(node: Node) {
   return node.type === 'CallExpression'
-    && node.callee.type === 'MemberExpression'
-    && node.callee.object.type === 'Identifier'
-    && node.callee.object.name === 'console'
-    && node.callee.property.type === 'Identifier'
+    && node.callee.type === 'StaticMemberExpression' as unknown as string
+    && (node.callee as any).object.type === 'Identifier'
+    && (node.callee as any).object.name === 'console'
+    && (node.callee as any).property.type === 'Identifier'
     && node.arguments?.length > 0
 }
 
@@ -103,4 +112,22 @@ export async function loadPkg(pkg: string) {
   catch {
     return false
   }
+}
+
+export function calculateStart(
+  source: string,
+  position: { line: number, column: number },
+): number {
+  const lines = source.split('\n')
+  let start = 0
+
+  // 计算之前所有完整行的长度（包括换行符）
+  for (let i = 0; i < position.line; i++) {
+    start += lines[i].length + 1 // +1 是为了计入换行符
+  }
+
+  // 加上当前行的列偏移
+  start += position.column
+
+  return start
 }

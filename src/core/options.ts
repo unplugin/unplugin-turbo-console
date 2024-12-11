@@ -8,7 +8,6 @@ const DEFAULT_OPTIONS: Options = {
   disableHighlight: false,
   disablePassLogs: false,
   extendedPathFileNames: [],
-  babelParserPlugins: ['typescript', 'jsx'],
   port: 3070,
   silent: false,
 }
@@ -20,14 +19,6 @@ export const BUILD_OPTIONS: Options = {
 }
 
 export function resolveOptions(options: Options): Options {
-  // merge babel parser plugins
-  if (options.babelParserPlugins) {
-    options.babelParserPlugins = [
-      ...DEFAULT_OPTIONS.babelParserPlugins!,
-      ...options.babelParserPlugins,
-    ]
-  }
-
   let resolved = {
     ...DEFAULT_OPTIONS,
     ...options,

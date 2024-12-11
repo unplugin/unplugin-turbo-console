@@ -2,7 +2,7 @@ import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options'
 import { transform } from '../src/core/transform'
-import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, VUE_OPTIONS, VUE_SCRIPT_SETUP, WIN_PATH } from './fixtures/transform'
+import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, WIN_PATH } from './fixtures/transform'
 
 vi.mock('node:process', () => {
   return {
@@ -62,5 +62,12 @@ describe('edge case', () => {
   it('win path', async () => {
     WIN_PATH.options = resolveOptions(WIN_PATH.options)
     expect(await transform(WIN_PATH)).matchSnapshot()
+  })
+})
+
+describe('utf-8', () => {
+  it('includes utf-8', async () => {
+    UTF_8.options = resolveOptions(UTF_8.options)
+    expect(await transform(UTF_8)).toMatchSnapshot()
   })
 })

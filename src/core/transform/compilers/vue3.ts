@@ -1,4 +1,4 @@
-import type { CompileResult, Context } from '../../../types'
+import type { CompileResult, Context, Lang } from '../../../types'
 import { PLUGIN_NAME } from '../../constants'
 
 export async function vue3Compiler(context: Context): Promise<CompileResult> {
@@ -6,10 +6,11 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
     const { code, id } = context
     const { parse } = await import('vue/compiler-sfc')
 
-    const compileResults = {
+    const compileResults: CompileResult = {
       script: '',
       line: 0,
       offset: 0,
+      lang: 'js',
     }
 
     const { descriptor, errors } = parse(code, {
@@ -19,6 +20,7 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
     if (errors.length === 0) {
       if (descriptor.script) {
         compileResults.script = descriptor.script.content
+        compileResults.lang = (descriptor.script.lang as Lang)
         const { line, offset } = descriptor.script.loc.start
         compileResults.line = line - 1
         compileResults.offset = offset
@@ -27,6 +29,7 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
       else if (descriptor.scriptSetup) {
         compileResults.script = descriptor.scriptSetup.content
         const { line, offset } = descriptor.scriptSetup.loc.start
+        compileResults.lang = (descriptor.scriptSetup.lang as Lang)
         compileResults.line = line - 1
         compileResults.offset = offset
       }
@@ -38,6 +41,7 @@ export async function vue3Compiler(context: Context): Promise<CompileResult> {
     console.error(`[${PLUGIN_NAME}]`, error)
     return {
       script: '',
+      lang: 'js',
       offset: 0,
       line: 0,
     }
