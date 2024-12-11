@@ -97,9 +97,11 @@ export interface Context {
   options: Options
 }
 
+export type Lang = 'js' | 'jsx' | 'ts' | 'tsx' | undefined
+
 export interface CompileResult {
   script: string
-  scriptLang?: string
+  lang: Lang
   offset: number
   line: number
 }

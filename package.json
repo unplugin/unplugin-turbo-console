@@ -162,7 +162,7 @@
     "h3": "1.12.0",
     "launch-editor": "^2.9.1",
     "magic-string": "^0.30.11",
-    "oxc-parser": "^0.38.0",
+    "oxc-parser": "^0.40.1",
     "pathe": "^1.1.2",
     "unplugin": "^1.14.1"
   },

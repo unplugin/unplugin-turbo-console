@@ -1,9 +1,8 @@
-import type { Expression } from 'oxc-parser'
 import type { Context } from './../../types'
-import { walk } from 'estree-walker'
 import MagicString from 'magic-string'
 import { parseSync } from 'oxc-parser'
 import { genConsoleString, getCompiler, getLineAndColumn, isConsoleExpression, isPluginDisable } from '../utils'
+import { walk } from '../utils/walker'
 import { compilers } from './compilers'
 
 export async function transform(context: Context) {
@@ -26,8 +25,9 @@ export async function transform(context: Context) {
 
   const compileResult = await compilers[compiler](context)
 
-  const ast = parseSync(compileResult.script, {
-    sourceFilename: id + (compileResult.scriptLang ? `.${compileResult.scriptLang}` : ''),
+  const ast = parseSync(id, compileResult.script, {
+    lang: (compileResult.lang || 'js') as 'js' | 'jsx' | 'ts' | 'tsx' | undefined,
+    sourceType: 'module',
   })
 
   if (isPluginDisable({
@@ -49,9 +49,8 @@ export async function transform(context: Context) {
     }
   }
 
-  // @ts-expect-error fix types
-  walk(ast.program as unknown as Expression, {
-    enter(node: Expression) {
+  walk(ast.program, {
+    enter(node) {
       if (isConsoleExpression(node)) {
         const expressionStart = node.start
         const expressionEnd = node.end

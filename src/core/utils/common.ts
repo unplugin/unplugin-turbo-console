@@ -1,5 +1,6 @@
-import type { Comment, Expression } from 'oxc-parser'
+import type { Comment } from 'oxc-parser'
 import type { Compiler, Options } from '../../types'
+import type { Node } from '../utils/walker'
 import { createFilter } from '@rollup/pluginutils'
 import { extname } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
@@ -89,7 +90,7 @@ export function isPluginDisable(meta: {
   return false
 }
 
-export function isConsoleExpression(node: Expression) {
+export function isConsoleExpression(node: Node) {
   return node.type === 'CallExpression'
     && node.callee.type === 'StaticMemberExpression' as unknown as string
     && (node.callee as any).object.type === 'Identifier'

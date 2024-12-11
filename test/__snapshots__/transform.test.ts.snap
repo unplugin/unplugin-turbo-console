@@ -88,6 +88,24 @@ exports[`svelte transform > svelte 1`] = `
 }
 `;
 
+exports[`utf-8 > on top of file 1`] = `
+{
+  "code": "console.log("%c🚀 main.js·1%c🔦 http://127.1:3070#mainjs,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'你好，世界！')",
+  "map": SourceMap {
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6TAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
+    "names": [],
+    "sources": [
+      "main.js",
+    ],
+    "sourcesContent": [
+      "console.log('你好，世界！')",
+    ],
+    "version": 3,
+  },
+}
+`;
+
 exports[`vanilla transform > tsx 1`] = `
 {
   "code": ""use client";

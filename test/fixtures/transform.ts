@@ -100,3 +100,9 @@ export const WIN_PATH = {
 `,
   id: '\\home\\runner\\App.vue',
 }
+
+export const UTF_8 = {
+  options: {},
+  code: `console.log('你好，世界！')`,
+  id: '/home/runner/main.js',
+}
