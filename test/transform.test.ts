@@ -2,7 +2,6 @@ import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options'
 import { transform } from '../src/core/transform'
-import { COMMENT_TOP_FILE } from './fixtures/comments'
 import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, WIN_PATH } from './fixtures/transform'
 
 vi.mock('node:process', () => {
