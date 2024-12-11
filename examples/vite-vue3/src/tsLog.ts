@@ -1,3 +1,4 @@
 export function logTs() {
-  console.log('from ts')
+  const a = '你好'
+  console.log(a)
 }

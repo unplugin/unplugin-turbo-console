@@ -66,7 +66,7 @@ describe('edge case', () => {
 })
 
 describe('utf-8', () => {
-  it('on top of file', async () => {
+  it('includes utf-8', async () => {
     UTF_8.options = resolveOptions(UTF_8.options)
     expect(await transform(UTF_8)).toMatchSnapshot()
   })

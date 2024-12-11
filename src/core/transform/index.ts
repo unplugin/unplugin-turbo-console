@@ -1,7 +1,7 @@
 import type { Context } from './../../types'
 import MagicString from 'magic-string'
 import { parseSync } from 'oxc-parser'
-import { genConsoleString, getCompiler, getLineAndColumn, isConsoleExpression, isPluginDisable } from '../utils'
+import { calculateStart, genConsoleString, getCompiler, isConsoleExpression, isPluginDisable } from '../utils'
 import { walk } from '../utils/walker'
 import { compilers } from './compilers'
 
@@ -25,18 +25,20 @@ export async function transform(context: Context) {
 
   const compileResult = await compilers[compiler](context)
 
-  const ast = parseSync(id, compileResult.script, {
+  const oxcParsedResult = parseSync(id, compileResult.script, {
     lang: (compileResult.lang || 'js') as 'js' | 'jsx' | 'ts' | 'tsx' | undefined,
     sourceType: 'module',
   })
 
+  const { program, comments = [], magicString: oxcMs } = oxcParsedResult
+
   if (isPluginDisable({
-    comments: ast.comments || [],
+    comments,
     originalLine: 1,
-    script: compileResult.script,
     id,
     type: 'top-file',
     compiler,
+    oxcMs,
   })) {
     return {
       code: magicString.toString(),
@@ -49,41 +51,38 @@ export async function transform(context: Context) {
     }
   }
 
-  walk(ast.program, {
+  walk(program, {
     enter(node) {
       if (isConsoleExpression(node)) {
-        const expressionStart = node.start
-        const expressionEnd = node.end
-
-        const originalExpression = magicString.slice(expressionStart, expressionEnd)
+        const originalExpression = oxcMs.getSourceText(node.start, node.end)
 
         if (originalExpression.includes('%c'))
           return false
 
-        const { line, column } = getLineAndColumn(compileResult.script, expressionStart)
+        const { line, column } = oxcMs.getLineColumnNumber(node.start)
 
-        const originalLine = line + compileResult.line
+        const originalLine = line + compileResult.line + 1
         const originalColumn = column
 
         if (isPluginDisable({
-          comments: ast.comments || [],
-          script: compileResult.script,
+          comments,
           originalLine: line,
           id,
           type: 'inline-file',
           compiler,
+          oxcMs,
         })) {
           return false
         }
 
-        // @ts-expect-error any
-        const args = node.arguments
+        const args = (node as any).arguments
 
-        const argsStart = args[0].start! + compileResult.offset
-        const argsEnd = args[args.length - 1].end! + compileResult.offset
+        const argsStart = calculateStart(compileResult.script, oxcMs.getLineColumnNumber(args[0].start))
+        const argsEnd = calculateStart(compileResult.script, oxcMs.getLineColumnNumber(args[args.length - 1].end))
+
         const argType = args[0].type
 
-        const argsName = magicString.slice(argsStart, argsEnd)
+        const argsName = oxcMs.getSourceText(args[0].start, args[args.length - 1].end)
           .toString()
           .replace(/`/g, '')
           .replace(/\n/g, '')
@@ -98,8 +97,8 @@ export async function transform(context: Context) {
           id,
         })
 
-        consoleString && magicString.appendLeft(argsStart, consoleString)
-        _suffix && magicString.appendRight(argsEnd, `,"${_suffix}"`)
+        consoleString && magicString.appendLeft(argsStart + compileResult.offset, consoleString)
+        _suffix && magicString.appendRight(argsEnd + compileResult.offset, `,"${_suffix}"`)
       }
     },
   })

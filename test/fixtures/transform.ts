@@ -103,6 +103,7 @@ export const WIN_PATH = {
 
 export const UTF_8 = {
   options: {},
-  code: `console.log('你好，世界！')`,
+  code: `const a = '你好' 
+console.log(a)`,
   id: '/home/runner/main.js',
 }

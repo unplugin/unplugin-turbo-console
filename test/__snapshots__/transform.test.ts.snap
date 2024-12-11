@@ -88,18 +88,20 @@ exports[`svelte transform > svelte 1`] = `
 }
 `;
 
-exports[`utf-8 > on top of file 1`] = `
+exports[`utf-8 > includes utf-8 1`] = `
 {
-  "code": "console.log("%c🚀 main.js·1%c🔦 http://127.1:3070#mainjs,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'你好，世界！')",
+  "code": "const a = '你好' 
+console.log("%c🚀 main.js·2 ~ a%c🔦 http://127.1:3070#mainjs,2,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",a)",
   "map": SourceMap {
     "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6TAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,iUAAC,CAAC",
     "names": [],
     "sources": [
       "main.js",
     ],
     "sourcesContent": [
-      "console.log('你好，世界！')",
+      "const a = '你好' 
+console.log(a)",
     ],
     "version": 3,
   },
