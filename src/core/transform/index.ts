@@ -51,7 +51,7 @@ export async function transform(context: Context) {
     }
   }
 
-  walk(program, {
+  await walk(program, {
     enter(node) {
       if (isConsoleExpression(node)) {
         const originalExpression = oxcMs.getSourceText(node.start, node.end)
