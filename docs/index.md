@@ -25,7 +25,7 @@ features:
     link: /features/highlight
   - icon: 📝
     title: Prefix and Suffix
-    details: Customizing prefix and suffix in Ccnsole Output
+    details: Customizing prefix and suffix in Console Output
     link: /features/custom-prefix
   - icon: 🔦
     title: Launch Editor
