@@ -101,6 +101,7 @@ export function isConsoleExpression(node: Node) {
     && (node.callee as any).object.type === 'Identifier'
     && (node.callee as any).object.name === 'console'
     && (node.callee as any).property.type === 'Identifier'
+    && ['log', 'warn', 'error', 'info', 'debug'].includes((node.callee as any).property.name)
     && node.arguments?.length > 0
 }
 
