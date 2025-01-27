@@ -1,7 +1,6 @@
 packages:
   - examples/**
   - docs
-
 catalog:
-  vite: 6.0.1
-  vite-plugin-inspect: 0.10.1
+  vite: ^6.0.11
+  vite-plugin-inspect: ^10.1.0
