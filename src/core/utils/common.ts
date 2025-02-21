@@ -6,7 +6,7 @@ import { extname } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
 
 export const filter = createFilter(
-  [/\.vue$/, /\.vue\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
+  [/\.vue$/, /\.vue(\.[t|j]sx?)?\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
   [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
 )
 
