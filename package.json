@@ -2,6 +2,7 @@
   "name": "unplugin-turbo-console",
   "type": "module",
   "version": "1.11.3",
+  "packageManager": "pnpm@10.5.2",
   "description": "Improve the Developer Experience of console",
   "license": "MIT",
   "homepage": "https://utc.yuy1n.io",
@@ -89,6 +90,9 @@
     "client.d.ts",
     "dist"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --watch",
@@ -119,8 +123,8 @@
     "esbuild": "*",
     "rollup": ">=3",
     "vite": ">=3",
-    "vue": ">=2.7 || >=3.2.13",
-    "webpack": "^4 || ^5"
+    "vue": ">=3",
+    "webpack": ">=5"
   },
   "peerDependenciesMeta": {
     "@farmfe/core": {
@@ -185,5 +189,10 @@
     "vitest": "^3.0.4",
     "vue": "^3.5.13",
     "webpack": "^5.97.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@sveltejs/kit"
+    ]
   }
 }

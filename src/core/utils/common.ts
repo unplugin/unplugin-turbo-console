@@ -22,23 +22,8 @@ export async function getCompiler(id: string): Promise<Compiler | undefined> {
   const fileType = extname(urlObject.pathname)
 
   switch (fileType) {
-    case '.vue': {
-      const Vue = await import('vue')
-      if (!Vue || typeof Vue.version !== 'string') {
-        console.warn(`[${PLUGIN_NAME}]: Vue is not installed`)
-        return undefined
-      }
-      else if (Vue.version.startsWith('2.')) {
-        return 'vue2'
-      }
-      else if (Vue.version.startsWith('3.')) {
-        return 'vue3'
-      }
-      else {
-        console.warn(`[${PLUGIN_NAME}]: Unsupported Vue version: ${Vue.version}`)
-        return undefined
-      }
-    }
+    case '.vue':
+      return 'vue'
     case '.svelte':
       return 'svelte'
     case '.js':
