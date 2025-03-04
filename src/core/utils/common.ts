@@ -3,7 +3,6 @@ import type { Compiler, Options } from '../../types'
 import type { Node } from '../utils/walker'
 import { createFilter } from '@rollup/pluginutils'
 import { extname } from 'pathe'
-import { PLUGIN_NAME } from '../constants'
 
 export const filter = createFilter(
   [/\.vue$/, /\.vue(\.[tj]sx?)?\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
