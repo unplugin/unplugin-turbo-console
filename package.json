@@ -94,10 +94,10 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "unbuild && nuxi build",
-    "build:client": "nuxi build",
+    "build": "unbuild && pnpm run build:client",
+    "build:client": "pnpm run --filter client build",
     "dev": "unbuild --watch",
-    "dev:client": "nuxi dev",
+    "dev:client": "pnpm run --filter client dev",
     "build:fix": "tsx scripts/postbuild.ts",
     "lint": "eslint .",
     "play:vue3-cli": "pnpm run --filter vue3-cli serve",
@@ -183,8 +183,6 @@
     "eslint": "^9.19.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
-    "nuxt": "catalog:",
-    "reka-ui": "^2.0.2",
     "rimraf": "^6.0.1",
     "rollup": "^4.32.0",
     "tsx": "^4.19.2",
@@ -198,7 +196,10 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@sveltejs/kit"
+      "@sveltejs/kit",
+      "esbuild",
+      "sharp",
+      "vue-demi"
     ]
   }
 }

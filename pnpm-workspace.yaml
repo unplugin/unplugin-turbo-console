@@ -1,6 +1,7 @@
 packages:
   - examples/**
   - docs
+  - client
 catalog:
   vite: ^6.0.11
   vite-plugin-inspect: ^10.1.0
