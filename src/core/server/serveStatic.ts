@@ -1,5 +1,6 @@
 import { readFile, stat } from 'node:fs/promises'
 import { defineEventHandler, serveStatic } from 'h3'
+import { lookup } from 'mrmime'
 import { join } from 'pathe'
 import { CLIENT_DIR } from '../dir'
 
@@ -15,6 +16,7 @@ export default defineEventHandler((event) => {
       return {
         size: stats.size,
         mtime: stats.mtimeMs,
+        type: lookup(id),
       }
     },
   })

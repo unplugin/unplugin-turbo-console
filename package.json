@@ -94,8 +94,10 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "unbuild",
+    "build": "unbuild && nuxi build",
+    "build:client": "nuxi build",
     "dev": "unbuild --watch",
+    "dev:client": "nuxi dev",
     "build:fix": "tsx scripts/postbuild.ts",
     "lint": "eslint .",
     "play:vue3-cli": "pnpm run --filter vue3-cli serve",
@@ -162,6 +164,7 @@
     "h3": "1.12.0",
     "launch-editor": "^2.9.1",
     "magic-string": "^0.30.17",
+    "mrmime": "^2.0.1",
     "oxc-parser": "^0.48.1",
     "pathe": "^2.0.2",
     "unplugin": "^2.1.2"
@@ -171,6 +174,7 @@
     "@nuxt/kit": "^3.15.3",
     "@nuxt/schema": "^3.15.3",
     "@oxc-project/types": "^0.48.1",
+    "@tailwindcss/vite": "^4.0.9",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.10.10",
     "@vitest/ui": "^3.0.4",
@@ -179,6 +183,8 @@
     "eslint": "^9.19.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.3.0",
+    "nuxt": "catalog:",
+    "reka-ui": "^2.0.2",
     "rimraf": "^6.0.1",
     "rollup": "^4.32.0",
     "tsx": "^4.19.2",
