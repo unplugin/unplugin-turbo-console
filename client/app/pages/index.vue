@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="">
 // ; (async () => {
 //   try {
 //     const position = window.location.hash.slice(1)
