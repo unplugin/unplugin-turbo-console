@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.12.2",
+    "nuxt": "catalog:",
     "unplugin-turbo-console": "workspace:*",
     "vite-plugin-inspect": "catalog:"
   }

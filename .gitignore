@@ -83,3 +83,5 @@ dist
 
 docs/.vitepress/cache
 .vercel
+
+.output

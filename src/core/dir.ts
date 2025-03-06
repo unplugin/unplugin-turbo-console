@@ -5,4 +5,4 @@ export const DIR_DIST = typeof __dirname !== 'undefined'
   ? __dirname
   : dirname(fileURLToPath(import.meta.url))
 
-export const CLIENT_DIR = resolve(DIR_DIST, './client')
+export const CLIENT_DIR = resolve(DIR_DIST, './client/public')
