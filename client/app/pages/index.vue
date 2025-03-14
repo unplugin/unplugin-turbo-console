@@ -1,51 +1,75 @@
-<script setup lang="">
-// ; (async () => {
-//   try {
-//     const position = window.location.hash.slice(1)
-//     const raw = await fetch(`/launchEditor?position=${(position)}`)
-//     const response = await raw.json()
-//     const versionEl = document.getElementById('version')
-//     versionEl.textContent = `version: ${response.version}`
-//     if (response.status === 'error') {
-//       const error = document.getElementById('error')
-//       error.style.display = 'block'
-//       const success = document.getElementById('success')
-//       success.style.display = 'none'
-//       throw new Error(response.message)
-//     }
+<script setup lang="ts">
+interface LaunchEditorServerResponse {
+  status: 'success' | 'error'
+  version: string
+  message: string
+}
 
-//     window.close()
-//   }
-//   catch (error) {
-//     const errorInfo = document.getElementById('error-info')
-//     errorInfo.textContent = String(error)
-//   }
-// })()
-
-// const route = useRoute()
-// const hash = route.hash
-// const position = window.location.hash.slice(1)
-// const raw = await fetch(`/launchEditor?position=${(position)}`)
-// const response = await raw.json()
-
-const { data, error } = await useAsyncData(async () => {
-  const position = window.location.hash.slice(1)
-  const raw = await fetch(`/launchEditor?position=${(position)}`)
-  const response = await raw.json()
-  return response
+const requestState = ref<{
+  status: 'pending' | 'error' | 'success'
+  errorMessage: string
+  version: string
+}>({
+  status: 'pending',
+  errorMessage: '',
+  version: '',
 })
+const launchEditorServerResponse = ref<LaunchEditorServerResponse>()
+
+async function init() {
+  try {
+    const position = window.location.hash.slice(1)
+    const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?position=${(position)}`)
+    if (response.status !== 'success') {
+      throw new Error(response.message || 'Unknown error')
+    }
+    launchEditorServerResponse.value = response
+    requestState.value.status = 'success'
+    requestState.value.version = response.version
+    window.close()
+  }
+  catch (error: any) {
+    console.error(error)
+    requestState.value = {
+      status: 'error',
+      errorMessage: error,
+      version: '',
+    }
+  }
+}
+
+init()
 </script>
 
 <template>
-  <Suspense>
-    <template #default>
-      <div v-if="error" class="text-red-500">
-        {{ data }}
-        {{ error }}
+  <main class="h-screen w-screen p-8">
+    <div v-if="requestState.status === 'pending'" class="flex h-full justify-center">
+      <div class="flex flex-col items-center gap-2">
+        <Icon name="uil:spinner" class="text-2xl animate-spin" />
+        <span class="text-gray-500 dark:text-gray-400">Loading...</span>
       </div>
-    </template>
-    <template #fallback>
-      Loading...
-    </template>
-  </Suspense>
+    </div>
+    <div v-else-if="requestState.status === 'error'" class="flex pt-64 px-8">
+      <div class="text-red-500 dark:text-red-400 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 w-full">
+        <div class="flex items-center gap-2 mb-2">
+          <Icon name="uil:exclamation-triangle" class="text-xl" />
+          <span class="font-medium">Error</span>
+        </div>
+        <div class="text-sm">
+          {{ requestState.errorMessage }}
+        </div>
+      </div>
+    </div>
+    <div v-else-if="requestState.status === 'success'">
+      <div class="text-green-500 dark:text-green-400 p-4 rounded-lg bg-green-50 dark:bg-green-900/20">
+        <div class="flex items-center gap-2 mb-2">
+          <Icon name="uil:check-circle" class="text-xl" />
+          <span class="font-medium">Success</span>
+        </div>
+        <div class="text-sm">
+          🎉 Launch to editor trigger success!
+        </div>
+      </div>
+    </div>
+  </main>
 </template>

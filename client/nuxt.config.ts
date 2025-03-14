@@ -15,7 +15,12 @@ export default defineNuxtConfig({
       dir: '../dist/client',
     },
   },
-  modules: ['reka-ui/nuxt'],
+  modules: [
+    'reka-ui/nuxt',
+    '@nuxtjs/color-mode',
+    'unplugin-turbo-console/nuxt',
+    '@nuxt/icon',
+  ],
   vite: {
     plugins: [
       tailwindcss(),
