@@ -87,6 +87,7 @@ export interface GenContext {
   argsName: string
   argType: string
   id: string
+  consoleMethod: string
 }
 
 export type Compiler = 'vanilla' | 'vue' | 'svelte'

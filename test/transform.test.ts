@@ -2,7 +2,7 @@ import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options'
 import { transform } from '../src/core/transform'
-import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, WIN_PATH } from './fixtures/transform'
+import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, VUE_SETUP_NO_LANG, WIN_PATH } from './fixtures/transform'
 
 vi.mock('node:process', () => {
   return {
@@ -31,6 +31,11 @@ describe('vue transform', () => {
   it('options', async () => {
     VUE_OPTIONS.options = resolveOptions(VUE_OPTIONS.options)
     expect(await transform(VUE_OPTIONS)).matchSnapshot()
+  })
+
+  it('script setup no lang', async () => {
+    VUE_SETUP_NO_LANG.options = resolveOptions(VUE_SETUP_NO_LANG.options)
+    expect(await transform(VUE_SETUP_NO_LANG)).matchSnapshot()
   })
 })
 

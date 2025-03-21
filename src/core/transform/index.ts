@@ -75,6 +75,7 @@ export async function transform(context: Context) {
           return false
         }
 
+        const consoleMethod = (node as any).callee.property.name
         const args = (node as any).arguments
 
         const argsStart = calculateStart(compileResult.script, oxcMs.getLineColumnNumber(args[0].start))
@@ -90,6 +91,7 @@ export async function transform(context: Context) {
 
         const { consoleString, _suffix } = genConsoleString({
           options,
+          consoleMethod,
           originalLine,
           originalColumn,
           argType,

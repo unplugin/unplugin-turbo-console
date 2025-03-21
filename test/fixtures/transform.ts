@@ -14,6 +14,20 @@ export const VUE_SCRIPT_SETUP = {
   id: '/home/runner/App.vue',
 }
 
+export const VUE_SETUP_NO_LANG = {
+  options: {},
+  code: `<template>
+  Hello World
+</template>
+
+<script setup>
+  const msg = "Hello World"
+  console.log(msg)
+</script>
+`,
+  id: '/home/runner/App.vue',
+}
+
 export const VUE_OPTIONS = {
   options: {},
   code: `<script>

@@ -19,6 +19,9 @@ const launchEditorServerResponse = ref<LaunchEditorServerResponse>()
 async function init() {
   try {
     const position = window.location.hash.slice(1)
+    if (!position) {
+      throw new Error('No position provided')
+    }
     const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?position=${(position)}`)
     if (response.status !== 'success') {
       throw new Error(response.message || 'Unknown error')
@@ -42,7 +45,7 @@ init()
 </script>
 
 <template>
-  <main class="h-screen w-screen p-8">
+  <main class="w-screen p-8">
     <div v-if="requestState.status === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
         <Icon name="uil:spinner" class="text-2xl animate-spin" />

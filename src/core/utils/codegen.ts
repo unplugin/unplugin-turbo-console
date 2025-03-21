@@ -1,3 +1,4 @@
+import type { ExpressionMeta } from '../../../global'
 import type { GenContext } from '../../types'
 import type { FileExt } from './themes'
 import { cwd } from 'node:process'
@@ -52,7 +53,7 @@ export function setFilePathMap(filePath: string): string {
 }
 
 export function genConsoleString(genContext: GenContext) {
-  const { options, originalColumn, originalLine, argType, id } = genContext
+  const { options, originalColumn, originalLine, argType, id, consoleMethod } = genContext
   let { argsName } = genContext
   const { prefix, suffix, disableLaunchEditor, port, disableHighlight, extendedPathFileNames } = options
   const _prefix = prefix ? `${prefix}\\n` : ''
@@ -65,6 +66,17 @@ export function genConsoleString(genContext: GenContext) {
 
   const relativePath = relative(cwd(), filePath)
   const filePathMapString = disableLaunchEditor ? '' : setFilePathMap(relativePath)
+
+  const expressionMeta: ExpressionMeta = {
+    code: argsName,
+    method: consoleMethod,
+    line: originalLine,
+    column: originalColumn,
+  }
+
+  const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map<string, ExpressionMeta[]>()
+  expressionsMap.set(relativePath, [...(expressionsMap.get(relativePath) || []), expressionMeta])
+  globalThis.TurboConsoleExpressionsMap = expressionsMap
 
   // Parsing escaped unicode symbols
   try {

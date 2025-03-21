@@ -122,6 +122,22 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         })
       }
     },
+    watchChange(id, change) {
+      const urlObject = new URL(id, 'file://')
+      const filePath = urlObject.pathname
+      const relativePath = relative(cwd(), filePath)
+
+      if (change.event === 'update') {
+        const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map()
+        expressionsMap.set(relativePath, [])
+        globalThis.TurboConsoleExpressionsMap = expressionsMap
+      }
+      else if (change.event === 'delete') {
+        const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map()
+        expressionsMap.delete(relativePath)
+        globalThis.TurboConsoleExpressionsMap = expressionsMap
+      }
+    },
   }
 }
 
