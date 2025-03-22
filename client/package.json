@@ -17,8 +17,10 @@
     "@iconify/icons-uil": "^1.2.3",
     "@nuxt/icon": "^1.11.0",
     "@nuxtjs/color-mode": "^3.5.2",
+    "@radix-ui/colors": "^3.0.0",
     "nuxt": "catalog:",
     "reka-ui": "^2.0.2",
+    "shiki": "^3.2.1",
     "unplugin-turbo-console": "workspace:*"
   }
 }

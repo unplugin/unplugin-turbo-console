@@ -1,5 +1,4 @@
-import type { ExpressionMeta } from '../../../global'
-import type { GenContext } from '../../types'
+import type { ExpressionMeta, ExpressionsMap, GenContext } from '../../types'
 import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
@@ -74,8 +73,11 @@ export function genConsoleString(genContext: GenContext) {
     column: originalColumn,
   }
 
-  const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map<string, ExpressionMeta[]>()
-  expressionsMap.set(relativePath, [...(expressionsMap.get(relativePath) || []), expressionMeta])
+  const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map<string, ExpressionsMap>()
+  expressionsMap.set(relativePath, {
+    filePath,
+    expressions: [...(expressionsMap.get(relativePath)?.expressions || []), expressionMeta],
+  })
   globalThis.TurboConsoleExpressionsMap = expressionsMap
 
   // Parsing escaped unicode symbols

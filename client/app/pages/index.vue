@@ -45,7 +45,7 @@ init()
 </script>
 
 <template>
-  <main class="w-screen p-8">
+  <div class="w-screen p-8">
     <div v-if="requestState.status === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
         <Icon name="uil:spinner" class="text-2xl animate-spin" />
@@ -74,5 +74,5 @@ init()
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>

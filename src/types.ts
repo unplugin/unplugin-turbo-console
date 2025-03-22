@@ -110,3 +110,15 @@ export interface CompileResult {
 export type TCMethod = 'log' | 'error' | 'warn' | 'info' | 'table' | 'dir'
 
 export type TConsole = Record<TCMethod, (...args: any[]) => void>
+
+export interface ExpressionMeta {
+  code: string
+  method: string
+  line: number
+  column: number
+}
+
+export interface ExpressionsMap {
+  filePath: string
+  expressions: ExpressionMeta[]
+}
