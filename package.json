@@ -201,5 +201,8 @@
       "sharp",
       "vue-demi"
     ]
+  },
+  "overrides": {
+    "crossws": "0.2.4"
   }
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-console.log('script setup')
+console.log('script setupxxxx')
 </script>
 
 <template>

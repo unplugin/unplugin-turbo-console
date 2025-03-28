@@ -74,11 +74,15 @@ export function genConsoleString(genContext: GenContext) {
   }
 
   const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map<string, ExpressionsMap>()
-  expressionsMap.set(relativePath, {
-    filePath,
-    expressions: [...(expressionsMap.get(relativePath)?.expressions || []), expressionMeta],
-  })
-  globalThis.TurboConsoleExpressionsMap = expressionsMap
+  const expressions = expressionsMap.get(relativePath)?.expressions || []
+
+  if (!expressions.some((item: ExpressionMeta) => item.code === expressionMeta.code && item.method === expressionMeta.method && item.line === expressionMeta.line && item.column === expressionMeta.column)) {
+    expressionsMap.set(relativePath, {
+      filePath,
+      expressions: [...(expressionsMap.get(relativePath)?.expressions || []), expressionMeta],
+    })
+    globalThis.TurboConsoleExpressionsMap = expressionsMap
+  }
 
   // Parsing escaped unicode symbols
   try {

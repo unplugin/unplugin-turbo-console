@@ -14,11 +14,14 @@
     "build": "nuxi build"
   },
   "devDependencies": {
-    "@iconify/icons-uil": "^1.2.3",
+    "@iconify-json/carbon": "^1.2.8",
+    "@iconify-json/uil": "^1.2.3",
     "@nuxt/icon": "^1.11.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@radix-ui/colors": "^3.0.0",
+    "add": "^2.0.6",
     "nuxt": "catalog:",
+    "pnpm": "^10.7.0",
     "reka-ui": "^2.0.2",
     "shiki": "^3.2.1",
     "unplugin-turbo-console": "workspace:*"

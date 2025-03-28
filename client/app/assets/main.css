@@ -27,3 +27,11 @@ body {
   background-color: #f1e7d0;
   color: #433422;
 }
+
+.i-btn {
+  @apply py-2 px-3 text-sm rounded-lg border border-gray-200 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-200 cursor-pointer text-gray-600;
+}
+
+.i-active-btn {
+  @apply px-4 py-1 text-sm rounded-sm border border-gray-200 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-200 cursor-pointer text-gray-600;
+}
