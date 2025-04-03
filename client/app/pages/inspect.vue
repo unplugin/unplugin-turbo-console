@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ExpressionsMapResponse } from '~~/shared/types'
+import type { ExpressionsMap, ExpressionsMapResponse } from '~~/shared/types'
 
 const { data, status, error } = useFetch<ExpressionsMapResponse>('/expressionsMap')
 
@@ -20,12 +20,38 @@ const collapseAll = ref<boolean>()
 
 const activeConsoleMethod = ref<Array<'info' | 'log' | 'warn' | 'error'>>(['info', 'log', 'warn', 'error'])
 
+const searchKeyword = ref('')
+
+const filterExpression = computed(() => {
+  if (!data.value?.expressionsMap)
+    return {}
+
+  const filteredMap: ExpressionsMap = {}
+
+  Object.entries(data.value.expressionsMap).forEach(([key, value]) => {
+    const filteredExpressions = value.expressions.filter((item) => {
+      const method = item.method as 'info' | 'log' | 'warn' | 'error'
+      return activeConsoleMethod.value.includes(method) && (item.code.includes(searchKeyword.value) || key.includes(searchKeyword.value))
+    })
+
+    if (filteredExpressions.length > 0) {
+      filteredMap[key] = {
+        ...value,
+        expressions: filteredExpressions,
+      }
+    }
+  })
+
+  return filteredMap
+})
+
 function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
-  if (activeConsoleMethod.value.includes(method)) {
-    activeConsoleMethod.value = activeConsoleMethod.value.filter(m => m !== method)
+  const index = activeConsoleMethod.value.indexOf(method)
+  if (index === -1) {
+    activeConsoleMethod.value.push(method)
   }
   else {
-    activeConsoleMethod.value.push(method)
+    activeConsoleMethod.value.splice(index, 1)
   }
 }
 </script>
@@ -73,37 +99,66 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
         </span>
       </div>
 
-      <div class="flex gap-2 my-4">
-        <button
-          class="i-active-btn" :class="[activeConsoleMethod.includes('info') ? 'bg-blue-50 border-blue-300! hover:bg-blue-50! text-blue-600! dark:text-blue-400! dark:bg-blue-900! dark:border-blue-700! dark:hover:bg-blue-900!' : '']"
-          @click="handleActiveConsoleMethod('info')"
-        >
-          info
-        </button>
-
-        <button
-          class="i-active-btn" :class="[activeConsoleMethod.includes('log') ? 'bg-emerald-50 border-emerald-300! hover:bg-emerald-50! text-emerald-600! dark:text-emerald-400! dark:bg-emerald-900! dark:border-emerald-700! dark:hover:bg-emerald-900!' : '']"
-          @click="handleActiveConsoleMethod('log')"
-        >
-          log
-        </button>
-
-        <button
-          class="i-active-btn" :class="[activeConsoleMethod.includes('warn') ? 'bg-amber-50 border-amber-300! hover:bg-amber-50! text-amber-600! dark:text-amber-400! dark:bg-amber-900! dark:border-amber-700! dark:hover:bg-amber-900!' : '']"
-          @click="handleActiveConsoleMethod('warn')"
-        >
-          warn
-        </button>
-
-        <button
-          class="i-active-btn" :class="[activeConsoleMethod.includes('error') ? 'bg-red-50 border-red-300! hover:bg-red-50! text-red-600! dark:text-red-400! dark:bg-red-900! dark:border-red-700! dark:hover:bg-red-900!' : '']"
-          @click="handleActiveConsoleMethod('error')"
-        >
-          error
-        </button>
+      <div class="relative">
+        <input v-model="searchKeyword" placeholder="Search by file name or console statement" type="text" class="font-mono w-full rounded-full mt-[10px] p-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex items-center gap-1 cursor-input pl-10 focus:outline-none">
+        <Icon name="ph:magnifying-glass-duotone" class="text-xl text-gray-500 dark:text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
       </div>
 
-      <input placeholder="Search by file name or console statement" type="text" class="w-full rounded-full mt-[10px] p-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex items-center gap-1 cursor-input pl-5 focus:outline-none">
+      <div class="flex items-center gap-4">
+        <div class="opacity-50 text-sm">
+          Methods
+        </div>
+
+        <div class="flex gap-2 my-4">
+          <button
+            class="i-filter-btn"
+            :class="[activeConsoleMethod.includes('info') ? 'i-filter-btn-active' : '']"
+            @click="handleActiveConsoleMethod('info')"
+          >
+            <Icon
+              name="ph:info" class="text-gray-500 dark:text-gray-400 text-[16px]"
+              :class="{ 'text-blue-500! dark:text-blue-400!': activeConsoleMethod.includes('info') }"
+            />
+            info
+          </button>
+
+          <button
+            class="i-filter-btn"
+            :class="[activeConsoleMethod.includes('log') ? 'i-filter-btn-active' : '']"
+            @click="handleActiveConsoleMethod('log')"
+          >
+            <Icon
+              name="ph:terminal-window-light" class="text-gray-500 dark:text-gray-400 text-[16px]"
+              :class="{ 'text-emerald-500! dark:text-emerald-400!': activeConsoleMethod.includes('log') }"
+            />
+            log
+          </button>
+
+          <button
+            class="i-filter-btn"
+            :class="[activeConsoleMethod.includes('warn') ? 'i-filter-btn-active' : '']"
+            @click="handleActiveConsoleMethod('warn')"
+          >
+            <Icon
+              name="ph:warning" class="text-gray-500 dark:text-gray-400 text-[16px]"
+              :class="{ 'text-yellow-500! dark:text-yellow-400!': activeConsoleMethod.includes('warn') }"
+            />
+            warn
+          </button>
+
+          <button
+            class="i-filter-btn"
+            :class="[activeConsoleMethod.includes('error') ? 'i-filter-btn-active' : '']"
+            @click="handleActiveConsoleMethod('error')"
+          >
+            <Icon
+              name="ph:x" class="text-gray-500 dark:text-gray-400 text-[16px]"
+              :class="{ 'text-red-500! dark:text-red-400!': activeConsoleMethod.includes('error') }"
+            />
+            error
+          </button>
+        </div>
+      </div>
 
       <div class="flex justify-end gap-2 my-4">
         <button
@@ -127,17 +182,17 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
         </button>
       </div>
 
-      <div v-for="(items, key) in data?.expressionsMap" :key="key">
+      <div v-for="(items, key) in filterExpression" :key="key">
         <ui-collapsible :expanded="expandAll" :collapsed="collapseAll">
           <template #trigger="{ open }">
             <div class="flex items-center gap-2">
               <Icon name="uil:angle-right-b" class="text-gray-500 text-[16px] transition-transform duration-300" :class="{ 'rotate-90': open }" />
-              <span class="text-gray-500 dark:text-gray-400 leading-[25px]">{{ key }}</span>
+              <span class="opacity-50 leading-[25px]">{{ key }}</span>
               <ui-tooltip>
                 <template #trigger>
                   <div class="flex items-center">
                     <Icon
-                      name="carbon:launch" class="text-gray-500 dark:text-gray-400 text-[16px] cursor-pointer" @click.stop="handleLaunchEditor(items.filePath)"
+                      name="carbon:launch" class="opacity-50 hover:opacity-70 text-[16px] cursor-pointer" @click.stop="handleLaunchEditor(items.filePath)"
                     />
                   </div>
                 </template>
@@ -147,7 +202,7 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
           <template #content>
             <div class="flex gap-4 h-full px-4 overflow-x-auto">
               <div class="py-4  flex flex-col gap-2">
-                <div v-for="item in items.expressions" :key="item.code" class="text-gray-500 dark:text-gray-400" @click="handleLaunchEditor(items.filePath)">
+                <div v-for="item in items.expressions" :key="item.line + item.column" class="text-gray-500 dark:text-gray-400" @click="handleLaunchEditor(items.filePath)">
                   {{ item.line }}
                 </div>
               </div>
@@ -155,18 +210,18 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
               <div class="min-h-full flex-shrink-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
 
               <div class="py-4 flex flex-col gap-2">
-                <div v-for="item in items.expressions" :key="item.code" class="flex">
+                <div v-for="item in items.expressions" :key="item.line + item.column" class="flex">
                   <shiki :code="`console.${item.method}(${item.code})`" />
                 </div>
               </div>
 
               <div class="py-4 flex flex-col gap-2">
-                <div v-for="item in items.expressions" :key="item.code" class="flex items-center">
+                <div v-for="item in items.expressions" :key="item.line + item.column" class="flex items-center">
                   <div class="relative top-[2px]">
                     <ui-tooltip>
                       <template #trigger>
                         <Icon
-                          name="carbon:launch" class="text-gray-500 dark:text-gray-400 text-[16px] cursor-pointer" @click.stop="handleLaunchEditor(items.filePath, item.line, item.column)"
+                          name="carbon:launch" class="opacity-50 hover:opacity-70 text-[16px] cursor-pointer" @click.stop="handleLaunchEditor(items.filePath, item.line, item.column)"
                         />
                       </template>
                     </ui-tooltip>

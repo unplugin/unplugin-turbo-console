@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unplugin Turbo Console</title>
+  <link rel="stylesheet" href="/css/pico.min.css">
+  <link rel="icon" type="image/svg+xml" href="https://utc.yuy1n.io/logo.svg">
+</head>
+<style>
+  pre>code {
+    background: var(--pico-code-background-color);
+  }
+</style>
+
+<body>
+<main class="container">
+    <h2>Unplugin Turbo Console</h2>
+    <article>
+      <p>🎉 Congratulations! Launch editor server is running ...</p>
+      <p>You can click the links below to test it：</p>
+      <ul id="links">
+      </ul>
+
+    </article>
+
+    <article>
+      <details>
+        <summary>Inspect all file path map</summary>
+        <div id="map"></div>
+      </details>
+    </article>
+
+    <footer>
+      <small id="version" style="color: #777777">
+
+      </small>
+      <br>
+      <a target="_blank" href="https://github.com/unplugin/unplugin-turbo-console" class="secondary">Star On GitHub</a>
+    </footer>
+  </main>
+</body>
+
+<script type="module">
+  import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+
+  const raw = await fetch('/filePathMap')
+  const response = await raw.json()
+  const filePathMap = response.filePathMap
+
+  const versionEl = document.getElementById('version')
+  versionEl.innerText = `version: ${response.version}`
+
+  let index = 0
+  Object.entries(filePathMap).forEach(([key, value]) => {
+    if (index >= 5) {
+      return
+    }
+    const link = document.createElement('li')
+    link.innerHTML = `<a href="/#${value}" target="_blank">${key}</a>`
+    document.getElementById('links').appendChild(link)
+    index++
+  })
+
+  const mapEl = document.getElementById('map')
+  mapEl.innerHTML = await codeToHtml(JSON.stringify(filePathMap, null, 2), {
+    lang: 'json',
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    }
+  })
+</script>
+
+</html>
