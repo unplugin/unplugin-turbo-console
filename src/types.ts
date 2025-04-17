@@ -119,6 +119,7 @@ export interface ExpressionMeta {
 }
 
 export interface ExpressionsMap {
+  id: string
   filePath: string
   expressions: ExpressionMeta[]
 }

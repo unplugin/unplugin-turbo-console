@@ -14,16 +14,21 @@ export default defineNuxtConfig({
     output: {
       dir: '../dist/client',
     },
+    experimental: {
+      websocket: true,
+    },
   },
   modules: [
     'reka-ui/nuxt',
     '@nuxtjs/color-mode',
     'unplugin-turbo-console/nuxt',
     '@nuxt/icon',
+    '@vueuse/nuxt',
   ],
   vite: {
     plugins: [
       tailwindcss(),
     ],
   },
+
 })

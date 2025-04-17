@@ -1,8 +1,9 @@
-import type { ExpressionMeta, ExpressionsMap, GenContext } from '../../types'
+import type { ExpressionMeta, GenContext } from '../../types'
 import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
+import { addExpression, filePathMapState } from './state'
 import { builtInThemes, getStyleCode } from './themes'
 
 function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
@@ -25,18 +26,15 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
 }
 
 export function setFilePathMap(filePath: string): string {
-  let filePathMap = globalThis.TurboConsoleFilePathMap
+  // 获取文件路径映射
 
-  if (typeof filePathMap === 'undefined')
-    filePathMap = new Map<string, string>()
-
-  if (filePathMap.has(filePath))
-    return filePathMap.get(filePath)!
+  if (filePathMapState().has(filePath))
+    return filePathMapState().get(filePath)!
 
   function getRandomString() {
     const randomString = Math.random().toString(20).substring(2, 6)
 
-    for (const [_, value] of filePathMap) {
+    for (const [_, value] of filePathMapState()) {
       if (value === randomString)
         return getRandomString()
     }
@@ -45,8 +43,8 @@ export function setFilePathMap(filePath: string): string {
   }
 
   const randomString = getRandomString()
-  filePathMap.set(filePath, randomString)
-  globalThis.TurboConsoleFilePathMap = filePathMap
+
+  filePathMapState(filePathMapState().set(filePath, randomString))
 
   return randomString
 }
@@ -73,16 +71,7 @@ export function genConsoleString(genContext: GenContext) {
     column: originalColumn,
   }
 
-  const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map<string, ExpressionsMap>()
-  const expressions = expressionsMap.get(relativePath)?.expressions || []
-
-  if (!expressions.some((item: ExpressionMeta) => item.code === expressionMeta.code && item.method === expressionMeta.method && item.line === expressionMeta.line && item.column === expressionMeta.column)) {
-    expressionsMap.set(relativePath, {
-      filePath,
-      expressions: [...(expressionsMap.get(relativePath)?.expressions || []), expressionMeta],
-    })
-    globalThis.TurboConsoleExpressionsMap = expressionsMap
-  }
+  addExpression(relativePath, expressionMeta)
 
   // Parsing escaped unicode symbols
   try {

@@ -7,11 +7,13 @@ export interface ExpressionItem {
 
 export interface ExpressionsMap {
   [key: string]: {
+    id: string
     filePath: string
     expressions: ExpressionItem[]
   }
 }
 export interface ExpressionsMapResponse {
+  timestamp: number
   status: 'success' | 'error'
   expressionsMap: ExpressionsMap
   version: string

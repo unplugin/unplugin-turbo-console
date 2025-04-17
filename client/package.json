@@ -20,6 +20,8 @@
     "@nuxt/icon": "^1.11.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@radix-ui/colors": "^3.0.0",
+    "@vueuse/core": "^13.0.0",
+    "@vueuse/nuxt": "^13.0.0",
     "add": "^2.0.6",
     "nuxt": "catalog:",
     "pnpm": "^10.7.0",

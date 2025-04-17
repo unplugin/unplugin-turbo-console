@@ -13,7 +13,7 @@ export function printInfo(options: Options, spacing: string = '  ') {
   if (options.disableLaunchEditor || options.silent)
     return false
   // eslint-disable-next-line no-console
-  console.log(`  \x1B[32m➜\x1B[39m${spacing}\x1B[1mTurboConsole\x1B[22m: \x1B[36mhttp://localhost:\x1B[1m${options.port}\x1B[22m/inspect\x1B[39m`)
+  console.log(`  \x1B[32m➜\x1B[39m${spacing}\x1B[1mTurboConsole\x1B[22m: \x1B[36mhttp://localhost:\x1B[1m${options.port}\x1B[22m/inspector\x1B[39m`)
 }
 
 export async function getCompiler(id: string): Promise<Compiler | undefined> {

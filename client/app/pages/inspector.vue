@@ -1,7 +1,35 @@
 <script setup lang="ts">
 import type { ExpressionsMap, ExpressionsMapResponse } from '~~/shared/types'
 
-const { data, status, error } = useFetch<ExpressionsMapResponse>('/expressionsMap')
+const data = ref<ExpressionsMapResponse>()
+const wsStatus = ref<'pending' | 'error' | 'success'>('pending')
+const wsError = ref<string>()
+let ws: WebSocket | null = null
+
+const lastUpdate = computed(() => {
+  if (!data.value?.timestamp)
+    return 'Never'
+  return useTimeAgo(data.value.timestamp)
+})
+
+function initWebSocket() {
+  wsStatus.value = 'pending'
+  ws = new WebSocket(`ws://${window.location.host}/_ws/inspector`)
+  ws.onopen = () => {
+    wsStatus.value = 'success'
+  }
+  ws.onerror = (error) => {
+    wsStatus.value = 'error'
+    wsError.value = String(error)
+  }
+  ws.onmessage = (event) => {
+    data.value = JSON.parse(event.data)
+  }
+}
+
+onMounted(() => {
+  initWebSocket()
+})
 
 const totalConsoleCount = computed(() => {
   return Object.values(data?.value?.expressionsMap || {}).reduce((acc, curr) => acc + curr.expressions.length, 0)
@@ -54,6 +82,10 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
     activeConsoleMethod.value.splice(index, 1)
   }
 }
+
+function test() {
+  ws?.send('test')
+}
 </script>
 
 <template>
@@ -75,27 +107,31 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
       <HeaderInfo />
     </div>
 
-    <div v-if="status === 'pending'" class="flex h-full justify-center">
+    <button @click="test">
+      test
+    </button>
+
+    <div v-if="wsStatus === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
         <Icon name="uil:spinner" class="text-2xl animate-spin" />
         <span class="text-gray-500 dark:text-gray-400">Loading...</span>
       </div>
     </div>
 
-    <div v-else-if="status === 'error'">
+    <div v-else-if="wsStatus === 'error'">
       <div class="text-red-500 dark:text-red-400 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 w-full">
         <div class="flex items-center gap-2 mb-2">
           <Icon name="uil:exclamation-triangle" class="text-xl" />
           <span class="font-medium">Error</span>
-          {{ error }}
+          {{ wsError }}
         </div>
       </div>
     </div>
 
-    <div v-else-if="status === 'success'" class="py-4">
+    <div v-else-if="wsStatus === 'success'" class="py-4">
       <div class="text-sm">
         <span class="text-gray-400 dark:text-gray-400">
-          Find <span class="text-gray-600 dark:text-gray-300">{{ totalConsoleCount }}</span> console statements, updated <span class="text-gray-600 dark:text-gray-300">4 hours ago</span>
+          Find <span class="text-gray-600 dark:text-gray-300">{{ totalConsoleCount }}</span> console statements, updated <span class="text-gray-600 dark:text-gray-300">{{ lastUpdate }}</span>
         </span>
       </div>
 
@@ -182,8 +218,12 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
         </button>
       </div>
 
-      <div v-for="(items, key) in filterExpression" :key="key">
-        <ui-collapsible :expanded="expandAll" :collapsed="collapseAll">
+      <div v-for="(items, key) in filterExpression" :key="items.id">
+        <ui-collapsible
+          :expanded="expandAll"
+          :collapsed="collapseAll"
+          :path="key"
+        >
           <template #trigger="{ open }">
             <div class="flex items-center gap-2">
               <Icon name="uil:angle-right-b" class="text-gray-500 text-[16px] transition-transform duration-300" :class="{ 'rotate-90': open }" />

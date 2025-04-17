@@ -3,7 +3,7 @@ import { createServer as _createServer } from 'node:http'
 import { env } from 'node:process'
 import wsAdapter from 'crossws/adapters/node'
 import { createApp, toNodeListener } from 'h3'
-import expressionsMap from './expressionsMap'
+import inspector from './_ws/inspector'
 import filePathMap from './filePathMap'
 import health from './health'
 import { launchEditor } from './launchEditor'
@@ -26,6 +26,8 @@ export async function createServer(options: Options) {
     // health
     app.use('/health', health)
 
+    app.use('/_ws/inspector', inspector)
+
     if (!options.disablePassLogs) {
     // Pass server log route
       app.use('/ws', ws)
@@ -35,7 +37,6 @@ export async function createServer(options: Options) {
     // Launch Editor server
     if (!options.disableLaunchEditor) {
       app.use('/filePathMap', filePathMap)
-        .use('/expressionsMap', expressionsMap)
         .use('/launchEditor', launchEditor(specifiedEditor))
         .use('/', serveStatic)
     }

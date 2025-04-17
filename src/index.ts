@@ -4,11 +4,13 @@ import { cwd, env } from 'node:process'
 import { checkPort, getRandomPort } from 'get-port-please'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
+import { v4 as uuidv4 } from 'uuid'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
 import { resolveOptions } from './core/options'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
 import { filter, loadPkg, printInfo } from './core/utils'
+import { expressionsMapState } from './core/utils/state'
 import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
@@ -128,14 +130,20 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       const relativePath = relative(cwd(), filePath)
 
       if (change.event === 'update') {
-        const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map()
-        expressionsMap.set(relativePath, [])
-        globalThis.TurboConsoleExpressionsMap = expressionsMap
+        const currentMap = expressionsMapState()
+        const newMap = new Map(currentMap)
+        newMap.set(relativePath, {
+          id: uuidv4(),
+          filePath: relativePath,
+          expressions: [],
+        })
+        expressionsMapState(newMap)
       }
       else if (change.event === 'delete') {
-        const expressionsMap = globalThis.TurboConsoleExpressionsMap || new Map()
-        expressionsMap.delete(relativePath)
-        globalThis.TurboConsoleExpressionsMap = expressionsMap
+        const currentMap = expressionsMapState()
+        const newMap = new Map(currentMap)
+        newMap.delete(relativePath)
+        expressionsMapState(newMap)
       }
     },
   }
