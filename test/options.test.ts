@@ -2,6 +2,7 @@ import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options'
 import { transform } from '../src/core/transform'
+import { filePathMapState } from '../src/core/utils/state'
 import { DISABLE_ALL, DISABLE_HIGHLIGHT, DISABLE_LAUNCH_EDITOR, EMPTY, EXTENDED_PATH, WITH_PREFIX } from './fixtures/option'
 
 vi.mock('node:process', () => {
@@ -17,7 +18,7 @@ const mockFilePathMap = new Map()
 mockFilePathMap.set('../../home/runner/main.js', 'fgsss')
 mockFilePathMap.set('../../home/runner/index.js', 'sfgha')
 
-globalThis.TurboConsoleFilePathMap = mockFilePathMap
+filePathMapState(mockFilePathMap)
 
 describe('transform options', () => {
   it('empty option', async () => {
