@@ -12,5 +12,4 @@ export default defineBuildConfig({
       exports: 'named',
     },
   },
-  externals: ['crossws'],
 })
