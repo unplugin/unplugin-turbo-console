@@ -82,10 +82,6 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
     activeConsoleMethod.value.splice(index, 1)
   }
 }
-
-function test() {
-  ws?.send('test')
-}
 </script>
 
 <template>
@@ -93,7 +89,7 @@ function test() {
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
         <a class="text-3xl font-[300] cursor-pointer" href="https://github.com/unplugin/unplugin-turbo-console" target="_blank">
-          Unplugin<span class="text-green-500"> Turbo Console</span>  Inspector
+          <span class="text-green-500 font-bold">Console</span> Inspector
         </a>
 
         <a
@@ -106,10 +102,6 @@ function test() {
 
       <HeaderInfo />
     </div>
-
-    <button @click="test">
-      test
-    </button>
 
     <div v-if="wsStatus === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
@@ -222,7 +214,7 @@ function test() {
         <ui-collapsible
           :expanded="expandAll"
           :collapsed="collapseAll"
-          :path="key"
+          :path="(key as string)"
         >
           <template #trigger="{ open }">
             <div class="flex items-center gap-2">
