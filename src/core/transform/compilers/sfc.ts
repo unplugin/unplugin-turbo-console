@@ -5,6 +5,7 @@ export async function sfcCompiler(context: Context): Promise<CompileResult> {
   try {
     const { code } = context
 
+    // eslint-disable-next-line regexp/no-super-linear-backtracking
     const scriptRegex = /<script\s*([^>]*)>([\s\S]*?)<\/script>/
 
     const match = scriptRegex.exec(code)
