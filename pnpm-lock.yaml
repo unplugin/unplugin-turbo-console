@@ -6,9 +6,6 @@ settings:
 
 catalogs:
   default:
-    nuxt:
-      specifier: ^3.16.2
-      version: 3.16.2
     vite:
       specifier: ^6.3.0
       version: 6.3.0
@@ -23,9 +20,6 @@ importers:
       '@farmfe/core':
         specifier: '>=1'
         version: 1.2.0
-      '@rollup/pluginutils':
-        specifier: ^5.1.4
-        version: 5.1.4(rollup@4.40.0)
       alien-signals:
         specifier: ^1.0.13
         version: 1.0.13
@@ -119,7 +113,7 @@ importers:
         version: 3.5.13(typescript@5.8.3)
       webpack:
         specifier: ^5.99.5
-        version: 5.99.5(esbuild@0.21.5)
+        version: 5.99.5
 
   client:
     devDependencies:
@@ -17791,7 +17785,7 @@ snapshots:
     dependencies:
       '@volar/language-core': 2.3.0
       path-browserify: 1.0.1
-      vscode-uri: 3.0.8
+      vscode-uri: 3.1.0
 
   '@vscode/emmet-helper@2.9.2':
     dependencies:
@@ -18381,10 +18375,10 @@ snapshots:
   '@vue/language-core@2.0.21(typescript@5.8.3)':
     dependencies:
       '@volar/language-core': 2.3.0
-      '@vue/compiler-dom': 3.4.21
-      '@vue/shared': 3.4.21
+      '@vue/compiler-dom': 3.5.13
+      '@vue/shared': 3.5.13
       computeds: 0.0.1
-      minimatch: 9.0.4
+      minimatch: 9.0.5
       path-browserify: 1.0.1
       vue-template-compiler: 2.7.15
     optionalDependencies:
@@ -22769,8 +22763,8 @@ snapshots:
 
   magicast@0.3.5:
     dependencies:
-      '@babel/parser': 7.26.3
-      '@babel/types': 7.26.3
+      '@babel/parser': 7.26.7
+      '@babel/types': 7.27.0
       source-map-js: 1.2.1
 
   make-dir@3.1.0:
@@ -26871,6 +26865,15 @@ snapshots:
     optionalDependencies:
       esbuild: 0.21.5
 
+  terser-webpack-plugin@5.3.14(webpack@5.99.5):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 4.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.39.0
+      webpack: 5.99.5
+
   terser-webpack-plugin@5.3.9(esbuild@0.21.5)(webpack@5.99.5(esbuild@0.21.5)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -28320,7 +28323,7 @@ snapshots:
     dependencies:
       '@volar/typescript': 2.3.0
       '@vue/language-core': 2.0.21(typescript@5.8.3)
-      semver: 7.6.0
+      semver: 7.7.1
       typescript: 5.8.3
     optional: true
 
@@ -28539,6 +28542,36 @@ snapshots:
   webpack-virtual-modules@0.4.6: {}
 
   webpack-virtual-modules@0.6.2: {}
+
+  webpack@5.99.5:
+    dependencies:
+      '@types/eslint-scope': 3.7.7
+      '@types/estree': 1.0.6
+      '@webassemblyjs/ast': 1.14.1
+      '@webassemblyjs/wasm-edit': 1.14.1
+      '@webassemblyjs/wasm-parser': 1.14.1
+      acorn: 8.14.1
+      browserslist: 4.24.4
+      chrome-trace-event: 1.0.3
+      enhanced-resolve: 5.18.1
+      es-module-lexer: 1.6.0
+      eslint-scope: 5.1.1
+      events: 3.3.0
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
+      json-parse-even-better-errors: 2.3.1
+      loader-runner: 4.3.0
+      mime-types: 2.1.35
+      neo-async: 2.6.2
+      schema-utils: 4.3.0
+      tapable: 2.2.1
+      terser-webpack-plugin: 5.3.14(webpack@5.99.5)
+      watchpack: 2.4.1
+      webpack-sources: 3.2.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
 
   webpack@5.99.5(esbuild@0.21.5):
     dependencies:

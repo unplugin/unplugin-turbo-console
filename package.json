@@ -98,7 +98,6 @@
     "build:client": "pnpm run --filter client build",
     "dev": "unbuild --watch",
     "dev:client": "pnpm run --filter client dev",
-    "build:fix": "tsx scripts/postbuild.ts",
     "lint": "eslint .",
     "play:vue3-cli": "pnpm run --filter vue3-cli serve",
     "play:svelte": "pnpm run --filter svelte dev",
@@ -114,7 +113,6 @@
     "docs:build": "pnpm run -C ./docs build",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
-    "start": "tsx src/index.ts",
     "test": "vitest"
   },
   "peerDependencies": {
@@ -158,7 +156,6 @@
     }
   },
   "dependencies": {
-    "@rollup/pluginutils": "^5.1.4",
     "alien-signals": "^1.0.13",
     "estree-walker": "^3.0.3",
     "get-port-please": "^3.1.2",

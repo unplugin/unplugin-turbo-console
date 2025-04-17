@@ -9,7 +9,7 @@ import { PLUGIN_NAME, VirtualModules } from './core/constants'
 import { resolveOptions } from './core/options'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
-import { filter, loadPkg, printInfo } from './core/utils'
+import { loadPkg, printInfo } from './core/utils'
 import { expressionsMapState } from './core/utils/state'
 import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
 
@@ -35,9 +35,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
   return {
     name: PLUGIN_NAME,
     enforce: 'pre',
-    transformInclude(id) {
-      return filter(id)
-    },
     resolveId(id) {
       if (Object.values(VirtualModules).includes(id)) {
         return `\0${id}`
@@ -61,20 +58,28 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         return themeDetectVirtualModule(env.NODE_ENV === 'production')
       }
     },
-    async transform(code, id) {
-      try {
-        const context: Context = {
-          code,
-          id,
-          options,
-        }
+    transform: {
+      filter: {
+        id: {
+          include: [/\.vue$/, /\.vue(\.[tj]sx?)?\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
+          exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
+        },
+      },
+      async handler(code, id) {
+        try {
+          const context: Context = {
+            code,
+            id,
+            options,
+          }
 
-        return await transform(context)
-      }
-      catch (error) {
-        console.error(`[${PLUGIN_NAME}]`, `Transform ${relative(cwd(), id)} error:`, error)
-        return code
-      }
+          return await transform(context)
+        }
+        catch (error) {
+          console.error(`[${PLUGIN_NAME}]`, `Transform ${relative(cwd(), id)} error:`, error)
+          return code
+        }
+      },
     },
     vite: {
       async configureServer(server) {

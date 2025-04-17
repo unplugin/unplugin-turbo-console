@@ -1,13 +1,7 @@
 import type { Comment } from 'oxc-parser'
 import type { Compiler, Options } from '../../types'
 import type { Node } from '../utils/walker'
-import { createFilter } from '@rollup/pluginutils'
 import { extname } from 'pathe'
-
-export const filter = createFilter(
-  [/\.vue$/, /\.vue(\.[tj]sx?)?\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
-  [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
-)
 
 export function printInfo(options: Options, spacing: string = '  ') {
   if (options.disableLaunchEditor || options.silent)
