@@ -13,8 +13,8 @@ import ws from './ws'
 
 export async function createServer(options: Options) {
   const { server, launchEditor, passLogs, inspector } = options
-  const { port, host } = server || { port: 3070, host: '127.0.0.1' }
-  const _port = Number(port) || 3070
+  const { port, host } = server!
+  const _port = Number(port)!
   const specifiedEditor = typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
   try {
     await fetch(`http://${host}:${_port}/health`)

@@ -1,4 +1,3 @@
-import type { Options } from './../../types'
 import { cwd } from 'node:process'
 import { defineEventHandler, getQuery } from 'h3'
 import launch from 'launch-editor'

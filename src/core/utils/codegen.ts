@@ -53,7 +53,7 @@ export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id, consoleMethod } = genContext
   let { argsName } = genContext
   const { prefix, suffix, launchEditor, server, highlight } = options
-  const { port, host } = server || { port: 3070, host: '127.0.0.1' }
+  const { port, host } = server!
   const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const _prefix = prefix ? `${prefix}\\n` : ''
   const _suffix = suffix ? `\\n${suffix}` : ''
