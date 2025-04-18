@@ -1,3 +1,4 @@
+import type { Peer } from 'crossws'
 import type { ExpressionMeta, ExpressionsMap } from '../../types'
 import { signal } from 'alien-signals'
 import { v4 as uuidv4 } from 'uuid'
@@ -25,3 +26,6 @@ export function addExpression(relativePath: string, expressionMeta: ExpressionMe
     expressionsMapState(newMap)
   }
 }
+
+export const serverState = signal(false)
+export const peersState = signal(new Set<Peer>())

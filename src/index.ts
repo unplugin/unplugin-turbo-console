@@ -10,7 +10,7 @@ import { resolveOptions } from './core/options'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
 import { loadPkg, printInfo } from './core/utils'
-import { expressionsMapState } from './core/utils/state'
+import { expressionsMapState, serverState } from './core/utils/state'
 import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
@@ -24,8 +24,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
   async function startTurboConsoleServer() {
     // Avoid start server multiple times
-    if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
-      globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
+    if (!serverState()) {
+      serverState(true)
       await detectPort()
       printInfo(options)
       createServer(options)
@@ -84,8 +84,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     vite: {
       async configureServer(server) {
         // Avoid start server multiple times
-        if (!globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER) {
-          globalThis.UNPLUGIN_TURBO_CONSOLE_LAUNCH_SERVER = true
+        if (!serverState()) {
+          serverState(true)
           await detectPort()
           createServer(options)
 

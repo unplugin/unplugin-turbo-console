@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 import { defineWebSocketHandler } from 'h3'
 import { PLUGIN_NAME } from '../constants'
-
-if (globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET === undefined) {
-  globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET = new Set<any>()
-}
+import { peersState } from '../utils/state'
 
 export default defineWebSocketHandler({
   open(peer) {
-    globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET!.add(peer)
+    const peers = peersState()
+    peers.add(peer)
+
+    peersState(peers)
   },
   message(_peer, message) {
     try {
