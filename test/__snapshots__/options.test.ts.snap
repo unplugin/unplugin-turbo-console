@@ -92,10 +92,10 @@ exports[`transform options > extended path option 1`] = `
 
 exports[`transform options > with prefix suffix 1`] = `
 {
-  "code": "console.log("-------\\n%c🚀 main.js·1%c🔦 http://127.1:3070#fgsss,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'hello javascript',"\\n-------")",
+  "code": "console.log("-------\\n",'hello javascript',"\\n-------")",
   "map": SourceMap {
     "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,qUAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,aAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,aAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,aAAC",
     "names": [],
     "sources": [
       "main.js",

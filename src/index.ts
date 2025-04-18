@@ -17,9 +17,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
   const options = resolveOptions(rawOptions)
 
   async function detectPort() {
-    const isAvailable = await checkPort(options.port!)
+    const isAvailable = await checkPort(options.server.port)
     if (!isAvailable)
-      options.port = await getRandomPort()
+      options.server.port = await getRandomPort()
   }
 
   async function startTurboConsoleServer() {
@@ -52,7 +52,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       id = id.slice(1)
 
       if (id === VirtualModules.Init) {
-        return initVirtualModulesGenerator(options.port!, env.NODE_ENV === 'production')
+        return initVirtualModulesGenerator(options.server.port, env.NODE_ENV === 'production')
       }
       else if (id === VirtualModules.ThemeDetect) {
         return themeDetectVirtualModule(env.NODE_ENV === 'production')

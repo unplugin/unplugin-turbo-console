@@ -94,8 +94,10 @@ export const INCLUDES_HIGHLIGHT: Context = {
   options: {
     prefix: '',
     suffix: '',
-    disableLaunchEditor: false,
-    port: 3070,
+    launchEditor: false,
+    server: {
+      port: 3070,
+    },
   },
   code: `console.log('%cLog Message', 'color: orange');`,
   id: '/home/runner/main.js',

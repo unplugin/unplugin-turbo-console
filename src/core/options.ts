@@ -1,34 +1,25 @@
 import type { Options } from '../types'
 import { env } from 'node:process'
 
-const DEFAULT_OPTIONS: Options = {
-  prefix: '',
-  suffix: '',
-  disableLaunchEditor: false,
-  disableHighlight: false,
-  disablePassLogs: false,
-  extendedPathFileNames: [],
-  port: 3070,
-  silent: false,
-}
-
-export const BUILD_OPTIONS: Options = {
-  disableLaunchEditor: true,
-  disableHighlight: true,
-  disablePassLogs: true,
-}
-
-export function resolveOptions(options: Options): Options {
-  let resolved = {
-    ...DEFAULT_OPTIONS,
-    ...options,
+export function resolveOptions(options: Partial<Options> = {}): Required<Options> {
+  const resolved = {
+    launchEditor: options.launchEditor ?? true,
+    highlight: options.highlight ?? true,
+    passLogs: options.passLogs ?? true,
+    inspector: options.inspector ?? { printUrl: true },
+    server: {
+      port: options.server?.port ?? 3070,
+      host: options.server?.host ?? '127.0.0.1',
+    },
+    prefix: options.prefix ?? '',
+    suffix: options.suffix ?? '',
   }
 
   if (env.NODE_ENV === 'production') {
-    resolved = {
-      ...resolved,
-      ...BUILD_OPTIONS,
-    }
+    resolved.launchEditor = false
+    resolved.highlight = false
+    resolved.passLogs = false
+    resolved.inspector = false
   }
 
   return resolved

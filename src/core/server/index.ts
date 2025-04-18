@@ -3,41 +3,44 @@ import { createServer as _createServer } from 'node:http'
 import { env } from 'node:process'
 import wsAdapter from 'crossws/adapters/node'
 import { createApp, toNodeListener } from 'h3'
-import inspector from './_ws/inspector'
+import inspectorHandler from './_ws/inspector'
 import filePathMap from './filePathMap'
 import health from './health'
-import { launchEditor } from './launchEditor'
+import { launchEditor as launchEditorHandler } from './launchEditor'
 import send from './send'
 import serveStatic from './serveStatic'
 import ws from './ws'
 
 export async function createServer(options: Options) {
-  const { port, specifiedEditor } = options
+  const { server, launchEditor, passLogs, inspector } = options
+  const { port, host } = server || { port: 3070, host: '127.0.0.1' }
   const _port = Number(port) || 3070
+  const specifiedEditor = typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
   try {
-    await fetch(`http://localhost:${_port}/health`)
+    await fetch(`http://${host}:${_port}/health`)
   }
   catch {
-    const app = createApp()
-
-    if (options.disablePassLogs === true && options.disableLaunchEditor === true)
+    if (launchEditor === false && passLogs === false && inspector === false)
       return false
+
+    const app = createApp()
 
     // health
     app.use('/health', health)
 
-    app.use('/_ws/inspector', inspector)
+    if (inspector)
+      app.use('/_ws/inspector', inspectorHandler)
 
-    if (!options.disablePassLogs) {
+    if (passLogs) {
     // Pass server log route
       app.use('/ws', ws)
         .use('/send', send)
     }
 
     // Launch Editor server
-    if (!options.disableLaunchEditor) {
+    if (launchEditor) {
       app.use('/filePathMap', filePathMap)
-        .use('/launchEditor', launchEditor(specifiedEditor))
+        .use('/launchEditor', launchEditorHandler(specifiedEditor))
         .use('/', serveStatic)
     }
 

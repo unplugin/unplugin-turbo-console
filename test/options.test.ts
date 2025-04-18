@@ -81,13 +81,17 @@ describe('resolve options', () => {
   it('empty', () => {
     expect(resolveOptions({})).toMatchInlineSnapshot(`
       {
-        "disableHighlight": false,
-        "disableLaunchEditor": false,
-        "disablePassLogs": false,
-        "extendedPathFileNames": [],
-        "port": 3070,
+        "highlight": true,
+        "inspector": {
+          "printUrl": true,
+        },
+        "launchEditor": true,
+        "passLogs": true,
         "prefix": "",
-        "silent": false,
+        "server": {
+          "host": "127.0.0.1",
+          "port": 3070,
+        },
         "suffix": "",
       }
     `)

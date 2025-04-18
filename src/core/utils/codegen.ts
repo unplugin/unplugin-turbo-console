@@ -52,7 +52,9 @@ export function setFilePathMap(filePath: string): string {
 export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id, consoleMethod } = genContext
   let { argsName } = genContext
-  const { prefix, suffix, disableLaunchEditor, port, disableHighlight, extendedPathFileNames } = options
+  const { prefix, suffix, launchEditor, server, highlight } = options
+  const { port, host } = server || { port: 3070, host: '127.0.0.1' }
+  const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const _prefix = prefix ? `${prefix}\\n` : ''
   const _suffix = suffix ? `\\n${suffix}` : ''
 
@@ -62,7 +64,7 @@ export function genConsoleString(genContext: GenContext) {
   const fileType = extname(filePath).slice(1) as FileExt
 
   const relativePath = relative(cwd(), filePath)
-  const filePathMapString = disableLaunchEditor ? '' : setFilePathMap(relativePath)
+  const filePathMapString = launchEditor === false ? '' : setFilePathMap(relativePath)
 
   const expressionMeta: ExpressionMeta = {
     code: argsName,
@@ -88,27 +90,27 @@ export function genConsoleString(genContext: GenContext) {
   const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
-  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://127.1:${port}#${codePosition}`
+  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : host}:${port}#${codePosition}`
 
   let consoleString = ''
   const lineWrap = `"\\n"`
 
-  if (!disableHighlight && !disableLaunchEditor) {
+  if (highlight && launchEditor) {
     consoleString = _prefix
       ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
       : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
   }
-  else if (disableHighlight && !disableLaunchEditor) {
+  else if (highlight === false && launchEditor) {
     consoleString = _prefix
       ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
       : `"${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
   }
-  else if (!disableHighlight && disableLaunchEditor) {
+  else if (highlight && launchEditor === false) {
     consoleString = _prefix
       ? `"${_prefix}${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
       : `"${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
   }
-  else if (disableHighlight && disableLaunchEditor) {
+  else if (highlight === false && launchEditor === false) {
     consoleString = _prefix
       ? `"${_prefix}",`
       : ''

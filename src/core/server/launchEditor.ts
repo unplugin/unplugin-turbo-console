@@ -1,13 +1,12 @@
 import type { Options } from './../../types'
 import { cwd } from 'node:process'
 import { defineEventHandler, getQuery } from 'h3'
-// @ts-expect-error missing types
 import launch from 'launch-editor'
 import { resolve } from 'pathe'
 import { version } from '../../../package.json'
 import { filePathMapState } from '../utils/state'
 
-export function launchEditor(specifiedEditor: Options['specifiedEditor']) {
+export function launchEditor(specifiedEditor?: string) {
   return defineEventHandler(async (event) => {
     try {
       const { position, path } = getQuery(event) as { position?: string, path?: string }
