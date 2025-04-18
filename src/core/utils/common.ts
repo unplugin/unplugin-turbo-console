@@ -13,7 +13,7 @@ export function printInfo(options: Options, spacing: string = '  ') {
   const { port, host } = options.server!
 
   // eslint-disable-next-line no-console
-  console.log(`  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host === '127.0.0.1' ? '127.1' : host}:${port}/inspector\x1B[24m\x1B[39m`)
+  console.log(`  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/inspector\x1B[24m\x1B[39m`)
 }
 
 export async function getCompiler(id: string): Promise<Compiler | undefined> {

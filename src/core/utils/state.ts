@@ -28,4 +28,4 @@ export function addExpression(relativePath: string, expressionMeta: ExpressionMe
 }
 
 export const serverState = signal(false)
-export const peersState = signal(new Set<Peer>())
+export const peersState = signal(new Set<Peer<any>>())
