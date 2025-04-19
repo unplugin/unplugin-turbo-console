@@ -2,8 +2,6 @@
 @custom-variant dark (&:where(.dark-mode, .dark-mode *));
 @config "../tailwind.config.mjs";
 
-:root {
-}
 
 html.dark-mode .shiki,
 html.dark-mode .shiki span {
