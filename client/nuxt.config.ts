@@ -25,6 +25,14 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@vueuse/nuxt',
   ],
+  icon: {
+    clientBundle: {
+      scan: true,
+    },
+  },
+  colorMode: {
+    preference: 'dark',
+  },
   vite: {
     plugins: [
       tailwindcss(),

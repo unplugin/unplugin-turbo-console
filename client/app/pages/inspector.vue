@@ -219,7 +219,11 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
           <template #trigger="{ open }">
             <div class="flex items-center gap-2">
               <Icon name="uil:angle-right-b" class="text-gray-500 text-[16px] transition-transform duration-300" :class="{ 'rotate-90': open }" />
-              <span class="opacity-50 leading-[25px]">{{ key }}</span>
+              <div class="flex items-center gap-1">
+                <FileIcon :name="key as string" />
+                <span class="opacity-50">{{ key }}</span>
+              </div>
+
               <ui-tooltip>
                 <template #trigger>
                   <div class="flex items-center">
