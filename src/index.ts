@@ -1,10 +1,10 @@
 import type { UnpluginFactory } from 'unplugin'
 import type { Context, Options } from './types'
+import { randomUUID } from 'node:crypto'
 import { cwd, env } from 'node:process'
 import { checkPort, getRandomPort } from 'get-port-please'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
-import { v4 as uuidv4 } from 'uuid'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
 import { resolveOptions } from './core/options'
 import { createServer } from './core/server/index'
@@ -52,7 +52,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       id = id.slice(1)
 
       if (id === VirtualModules.Init) {
-        return initVirtualModulesGenerator(options.server.port!, env.NODE_ENV === 'production')
+        return initVirtualModulesGenerator(options.server.host!, options.server.port!, env.NODE_ENV === 'production')
       }
       else if (id === VirtualModules.ThemeDetect) {
         return themeDetectVirtualModule(env.NODE_ENV === 'production')
@@ -138,7 +138,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         const currentMap = expressionsMapState()
         const newMap = new Map(currentMap)
         newMap.set(relativePath, {
-          id: uuidv4(),
+          id: randomUUID(),
           filePath: relativePath,
           expressions: [],
         })

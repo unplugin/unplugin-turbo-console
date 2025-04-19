@@ -1,10 +1,9 @@
-import type { Peer } from 'crossws'
 import { effect } from 'alien-signals'
 import { defineWebSocketHandler } from 'h3'
 import { version } from '../../../../package.json'
 import { expressionsMapState } from '../../utils/state'
 
-const connections = new Map<string, Peer>()
+const connections = new Map<string, any>()
 
 function formatedResponse(expressionsMap: any) {
   return {

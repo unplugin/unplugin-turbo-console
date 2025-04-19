@@ -3,13 +3,13 @@ import { createServer as _createServer } from 'node:http'
 import { env } from 'node:process'
 import wsAdapter from 'crossws/adapters/node'
 import { createApp, toNodeListener } from 'h3'
-import inspectorHandler from './_ws/inspector'
 import filePathMap from './filePathMap'
 import health from './health'
 import { launchEditor as launchEditorHandler } from './launchEditor'
 import send from './send'
 import serveStatic from './serveStatic'
-import ws from './ws'
+import inspectorHandler from './ws/inspector'
+import passLogsHandler from './ws/passLogs'
 
 export async function createServer(options: Options) {
   const { server, launchEditor, passLogs, inspector } = options
@@ -29,11 +29,11 @@ export async function createServer(options: Options) {
     app.use('/health', health)
 
     if (inspector)
-      app.use('/_ws/inspector', inspectorHandler)
+      app.use('/ws/inspector', inspectorHandler)
 
     if (passLogs) {
     // Pass server log route
-      app.use('/ws', ws)
+      app.use('/ws/passLogs', passLogsHandler)
         .use('/send', send)
     }
 
@@ -46,7 +46,7 @@ export async function createServer(options: Options) {
 
     const server = _createServer(toNodeListener(app))
 
-    const { handleUpgrade } = wsAdapter(app.websocket)
+    const { handleUpgrade } = wsAdapter(app.websocket as any)
 
     server.on('upgrade', handleUpgrade)
 

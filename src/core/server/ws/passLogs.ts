@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { defineWebSocketHandler } from 'h3'
-import { PLUGIN_NAME } from '../constants'
-import { peersState } from '../utils/state'
+import { PLUGIN_NAME } from '../../constants'
+import { peersState } from '../../utils/state'
 
 export default defineWebSocketHandler({
   open(peer) {

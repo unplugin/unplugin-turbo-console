@@ -91,7 +91,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "build": "unbuild && pnpm run build:client",
@@ -165,8 +165,7 @@
     "mrmime": "^2.0.1",
     "oxc-parser": "^0.63.0",
     "pathe": "^2.0.3",
-    "unplugin": "^2.3.2",
-    "uuid": "^11.1.0"
+    "unplugin": "^2.3.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",

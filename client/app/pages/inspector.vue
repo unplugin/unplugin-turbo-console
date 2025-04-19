@@ -14,7 +14,7 @@ const lastUpdate = computed(() => {
 
 function initWebSocket() {
   wsStatus.value = 'pending'
-  ws = new WebSocket(`ws://${window.location.host}/_ws/inspector`)
+  ws = new WebSocket(`ws://${window.location.host}/ws/inspector`)
   ws.onopen = () => {
     wsStatus.value = 'success'
   }
