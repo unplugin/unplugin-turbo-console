@@ -20,10 +20,11 @@ export const enUS = defineConfig({
       {
         text: 'Features',
         items: [
-          { text: 'Highlight Output', link: '/features/highlight' },
-          { text: 'Custom Prefix and Suffix', link: '/features/custom-prefix' },
-          { text: 'Launch Editor', link: '/features/launch-editor' },
-          { text: 'Pass Logs', link: '/features/pass-logs' },
+          { text: '🎨 Highlight Output', link: '/features/highlight' },
+          { text: '📝 Prefix & Suffix', link: '/features/custom-prefix' },
+          { text: '🔦 Launch Editor', link: '/features/launch-editor' },
+          { text: '🚚 Pass Logs', link: '/features/pass-logs' },
+          { text: '🔍 Console Inspector', link: '/features/inspector' },
         ],
       },
       {

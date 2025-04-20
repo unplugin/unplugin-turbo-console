@@ -2,8 +2,6 @@
 
 The feature allows you to pass logs between server and client.
 
-> You can disable this feature by setting `disablePassLogs: true`.
-
 ## Initialization
 
 Add `~console` to your project entry file.
@@ -106,3 +104,12 @@ function increment() {
 ::: tip For Nuxt User
 If you are using Nuxt, `client` and `server` is auto-imported. So you don't need to import them manually.
 :::
+
+## Options
+
+```js
+// Disable pass logs feature
+TurboConsole({
+  passLogs: false,
+})
+```

@@ -1,4 +1,4 @@
-import type { Options } from '../types'
+import type { Options } from './type'
 import { env } from 'node:process'
 
 export function resolveOptions(options: Partial<Options> = {}): Required<Options> {

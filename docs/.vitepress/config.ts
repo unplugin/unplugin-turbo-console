@@ -1,5 +1,7 @@
+import { resolve } from 'node:path'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import Unocss from 'unocss/vite'
+import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
 import { enUS } from './enUS'
@@ -61,6 +63,11 @@ export default defineConfig({
         },
       }),
       Unocss(),
+      Components({
+        dirs: [resolve(__dirname, './components')],
+        extensions: ['vue', 'md'],
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      }) as any,
     ],
   },
 })

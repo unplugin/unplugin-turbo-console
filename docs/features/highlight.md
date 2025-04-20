@@ -4,10 +4,6 @@ Highlight Console output based on file types (such as `.js(x)`, `.ts(x)`, `.vue`
 
 ![feature-highlight](/features/highlight.png)
 
-> You can disable this feature by setting `disableHighlight: true`.
->
-> This feature will be automatically disabled on build time.
-
 ## Expand path file name
 
 Consider having a project file directory as follows:
@@ -24,6 +20,22 @@ pages
 Additionally, in every `index.vue`, there is a console statement. By default, the highlighted output will have the filename as `index.vue`, which can reduce the readability of the output. By configuring `extendedPathFileNames: ['index']`, the output can include the path information:
 
 ![extend-name](/features/extend-name.png)
+
+## Options
+
+```js
+// Disable highlight feature
+TurboConsole({
+  highlight: false,
+})
+
+// Set extended path file names
+TurboConsole({
+  highlight: {
+    extendedPathFileNames: ['index'],
+  },
+})
+```
 
 ## Dark Mode
 

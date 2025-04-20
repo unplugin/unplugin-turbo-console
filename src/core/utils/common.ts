@@ -1,7 +1,8 @@
 import type { Comment } from 'oxc-parser'
-import type { Compiler, Options } from '../../types'
+import type { Compiler } from '../../types'
 import type { Node } from '../utils/walker'
 import { extname } from 'pathe'
+import type { Options } from '../options/type'
 
 export function printInfo(options: Options, spacing: string = '  ') {
   if (options.inspector === false)

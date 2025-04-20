@@ -1,17 +1,18 @@
 import type { UnpluginFactory } from 'unplugin'
-import type { Context, Options } from './types'
+import type { Context } from './types'
 import { randomUUID } from 'node:crypto'
 import { cwd, env } from 'node:process'
 import { checkPort, getRandomPort } from 'get-port-please'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
-import { resolveOptions } from './core/options'
+import { resolveOptions } from './core/options/resolve'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
 import { loadPkg, printInfo } from './core/utils'
 import { expressionsMapState, serverState } from './core/utils/state'
 import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
+import type { Options } from './core/options/type'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)

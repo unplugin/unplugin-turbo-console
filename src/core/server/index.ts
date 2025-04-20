@@ -1,4 +1,4 @@
-import type { Options } from '../../types'
+import type { Options } from '../options/type'
 import { createServer as _createServer } from 'node:http'
 import { env } from 'node:process'
 import wsAdapter from 'crossws/adapters/node'

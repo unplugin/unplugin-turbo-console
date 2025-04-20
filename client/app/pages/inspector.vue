@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { ExpressionsMap, ExpressionsMapResponse } from '~~/shared/types'
 
+useHead({
+  title: 'Console Inspector',
+})
+
 const data = ref<ExpressionsMapResponse>()
 const wsStatus = ref<'pending' | 'error' | 'success'>('pending')
 const wsError = ref<string>()

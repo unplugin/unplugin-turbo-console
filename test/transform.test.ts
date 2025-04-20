@@ -1,6 +1,6 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
-import { resolveOptions } from '../src/core/options'
+import { resolveOptions } from '../src/core/options/resolve'
 import { transform } from '../src/core/transform'
 import { filePathMapState } from '../src/core/utils/state'
 import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, VUE_SETUP_NO_LANG, WIN_PATH } from './fixtures/transform'
