@@ -21,7 +21,6 @@ export default defineNuxtConfig({
   modules: [
     'reka-ui/nuxt',
     '@nuxtjs/color-mode',
-    'unplugin-turbo-console/nuxt',
     '@nuxt/icon',
     '@vueuse/nuxt',
   ],

@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   ],
 
   turboConsole: {
+
   },
 
   compatibilityDate: '2025-04-16',

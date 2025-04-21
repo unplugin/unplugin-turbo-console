@@ -12,7 +12,7 @@ import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
 import { loadPkg, printInfo } from './core/utils'
 import { expressionsMapState, serverState } from './core/utils/state'
-import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
+import { initVirtualModulesGenerator, themeDetectVirtualModule, viteDevToolsVirtualModuleGenerator } from './core/utils/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -57,6 +57,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       }
       else if (id === VirtualModules.ThemeDetect) {
         return themeDetectVirtualModule(env.NODE_ENV === 'production')
+      }
+      else if (id === VirtualModules.VueDevTools) {
+        return viteDevToolsVirtualModuleGenerator(options.server.host!, options.server.port!, env.NODE_ENV === 'production')
       }
     },
     transform: {

@@ -22,6 +22,26 @@ export function initVirtualModulesGenerator(host: string, port: number, isProd: 
 `
 }
 
+export function viteDevToolsVirtualModuleGenerator(host: string, port: number, isProd: boolean) {
+  if (isProd)
+    return ''
+
+  return /* js */`
+  import { addCustomTab } from '@vue/devtools-api'
+
+  addCustomTab({
+    name: 'unplugin-turbo-console-inspector',
+    title: 'Console Inspector',
+    icon: 'baseline-terminal',
+    view: {
+      type: 'iframe',
+      src: 'http://${host}:${port}/inspector',
+    },
+    category: 'advanced',
+  })
+  `
+}
+
 export function themeDetectVirtualModule(isProd: boolean) {
   if (isProd)
     return ''

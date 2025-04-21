@@ -27,7 +27,6 @@
     "nuxt": "catalog:",
     "pnpm": "^10.7.0",
     "reka-ui": "^2.0.2",
-    "shiki": "^3.2.1",
-    "unplugin-turbo-console": "workspace:*"
+    "shiki": "^3.2.1"
   }
 }
