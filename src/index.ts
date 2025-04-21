@@ -1,4 +1,5 @@
 import type { UnpluginFactory } from 'unplugin'
+import type { Options } from './core/options/type'
 import type { Context } from './types'
 import { randomUUID } from 'node:crypto'
 import { cwd, env } from 'node:process'
@@ -12,7 +13,6 @@ import { transform } from './core/transform/index'
 import { loadPkg, printInfo } from './core/utils'
 import { expressionsMapState, serverState } from './core/utils/state'
 import { initVirtualModulesGenerator, themeDetectVirtualModule } from './core/utils/virtualModules'
-import type { Options } from './core/options/type'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)

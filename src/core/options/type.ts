@@ -38,7 +38,10 @@ export interface Options {
    * Enable inspector feature.
    *
    * @see https://utc.yuy1n.io/features/inspector.html
-   * @default { printUrl: true }
+   * @default
+   * {
+   *   printUrl: true
+   * }
    */
   inspector?: boolean | InspectorOption
   /**
@@ -72,6 +75,14 @@ interface HighlightOption {
    *
    */
   extendedPathFileNames?: string[]
+  /**
+   * Whether to detect the system theme and adjust the highlight color.
+   *
+   * @see https://utc.yuy1n.io/features/highlight.html#theme-detect
+   * @default false
+   *
+   */
+  themeDetect?: boolean
 }
 
 interface InspectorOption {

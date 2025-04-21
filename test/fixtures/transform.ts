@@ -123,3 +123,13 @@ export const UTF_8 = {
 console.log(a)`,
   id: '/home/runner/main.js',
 }
+
+export const THEME_DETECT = {
+  options: {
+    highlight: {
+      themeDetect: true,
+    },
+  },
+  code: `console.log('hello');`,
+  id: '/home/runner/main.js',
+}

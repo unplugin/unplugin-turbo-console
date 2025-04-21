@@ -23,7 +23,7 @@ Additionally, in every `index.vue`, there is a console statement. By default, th
 
 ## Options
 
-```js
+```ts
 // Disable highlight feature
 TurboConsole({
   highlight: false,
@@ -37,7 +37,7 @@ TurboConsole({
 })
 ```
 
-## Dark Mode
+## Theme Detect
 
 When the system is in dark mode, optimize the visual effect of the highlight output.
 
@@ -45,7 +45,17 @@ When the system is in dark mode, optimize the visual effect of the highlight out
 
 ### Setup
 
-Add `~console/theme-detect` to your project entry file. Example:
+#### Options
+
+```ts
+TurboConsole({
+  highlight: {
+    themeDetect: true,
+  },
+})
+```
+
+Introduce `~console/theme-detect` to your project entry file. Example:
 
 ::: code-group
 

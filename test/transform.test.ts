@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options/resolve'
 import { transform } from '../src/core/transform'
 import { filePathMapState } from '../src/core/utils/state'
-import { INCLUDES_HIGHLIGHT, SVELTE, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, VUE_SETUP_NO_LANG, WIN_PATH } from './fixtures/transform'
+import { INCLUDES_HIGHLIGHT, SVELTE, THEME_DETECT, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, VUE_SETUP_NO_LANG, WIN_PATH } from './fixtures/transform'
 
 vi.mock('node:process', () => {
   return {
@@ -75,5 +75,12 @@ describe('utf-8', () => {
   it('includes utf-8', async () => {
     UTF_8.options = resolveOptions(UTF_8.options)
     expect(await transform(UTF_8)).toMatchSnapshot()
+  })
+})
+
+describe('theme-detect', () => {
+  it('theme-detect', async () => {
+    const options = resolveOptions(THEME_DETECT.options)
+    expect(await transform({ ...THEME_DETECT, options })).toMatchSnapshot()
   })
 })
