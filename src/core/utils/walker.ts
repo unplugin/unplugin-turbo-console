@@ -2,9 +2,7 @@
 import type { Node as ESTreeNode, Program as ESTreeProgram } from 'estree'
 import type { SyncHandler } from 'estree-walker'
 
-import type { CatchClause, ClassBody, Declaration, ExportSpecifier, Expression, ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier, JSXAttributeItem, JSXChild, MethodDefinition, ModuleDeclaration, ObjectProperty, ParseResult, Pattern, PrivateIdentifier, Program, PropertyDefinition, SpreadElement, Statement, Super, SwitchCase, TemplateElement, VariableDeclarator } from 'oxc-parser'
-
-import { walk as _walk } from 'estree-walker'
+import type { CatchClause, ClassBody, Declaration, ExportSpecifier, Expression, ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier, JSXAttributeItem, JSXChild, MethodDefinition, ModuleDeclaration, ObjectProperty, Pattern, PrivateIdentifier, Program, PropertyDefinition, SpreadElement, Statement, Super, SwitchCase, TemplateElement, VariableDeclarator } from 'oxc-parser'
 
 /** estree also has AssignmentProperty, Identifier and Literal as possible node types */
 export type Node = Declaration | VariableDeclarator | Expression | ClassBody | CatchClause | MethodDefinition | ModuleDeclaration | ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier | ExportSpecifier | Pattern | PrivateIdentifier | Program | SpreadElement | Statement | Super | SwitchCase | TemplateElement | ObjectProperty | PropertyDefinition | JSXAttributeItem | JSXChild
@@ -69,7 +67,9 @@ interface WalkOptions {
  * @param input The AST to walk.
  * @param options The options to be used when walking the AST. Here you can specify the callbacks for entering and leaving nodes, as well as other options.
  */
-export function walk(input: Program | Node, options: Partial<WalkOptions>) {
+export async function walk(input: Program | Node, options: Partial<WalkOptions>) {
+  const { walk: _walk } = await import('estree-walker')
+
   return _walk(
     input as unknown as ESTreeProgram | ESTreeNode,
     {

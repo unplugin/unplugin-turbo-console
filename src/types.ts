@@ -1,4 +1,4 @@
-import { Options } from "./core/options/type"
+import type { Options } from './core/options/type'
 
 export interface GenContext {
   options: Options

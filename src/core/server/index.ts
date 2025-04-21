@@ -50,7 +50,6 @@ export async function createServer(options: Options) {
 
     server.on('upgrade', handleUpgrade)
 
-
     env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = _port.toString()
 
     server.listen(_port)
