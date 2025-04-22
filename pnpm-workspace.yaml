@@ -1,6 +1,8 @@
 packages:
   - examples/**
   - docs
+  - client
 catalog:
-  vite: ^6.0.11
-  vite-plugin-inspect: ^10.1.0
+  nuxt: ^3.16.2
+  vite: ^6.3.0
+  vite-plugin-inspect: ^11.0.0

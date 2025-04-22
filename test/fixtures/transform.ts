@@ -14,6 +14,20 @@ export const VUE_SCRIPT_SETUP = {
   id: '/home/runner/App.vue',
 }
 
+export const VUE_SETUP_NO_LANG = {
+  options: {},
+  code: `<template>
+  Hello World
+</template>
+
+<script setup>
+  const msg = "Hello World"
+  console.log(msg)
+</script>
+`,
+  id: '/home/runner/App.vue',
+}
+
 export const VUE_OPTIONS = {
   options: {},
   code: `<script>
@@ -80,8 +94,10 @@ export const INCLUDES_HIGHLIGHT: Context = {
   options: {
     prefix: '',
     suffix: '',
-    disableLaunchEditor: false,
-    port: 3070,
+    launchEditor: false,
+    server: {
+      port: 3070,
+    },
   },
   code: `console.log('%cLog Message', 'color: orange');`,
   id: '/home/runner/main.js',
@@ -105,5 +121,15 @@ export const UTF_8 = {
   options: {},
   code: `const a = '你好' 
 console.log(a)`,
+  id: '/home/runner/main.js',
+}
+
+export const THEME_DETECT = {
+  options: {
+    highlight: {
+      themeDetect: true,
+    },
+  },
+  code: `console.log('hello');`,
   id: '/home/runner/main.js',
 }

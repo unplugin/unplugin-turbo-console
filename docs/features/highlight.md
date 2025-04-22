@@ -4,10 +4,6 @@ Highlight Console output based on file types (such as `.js(x)`, `.ts(x)`, `.vue`
 
 ![feature-highlight](/features/highlight.png)
 
-> You can disable this feature by setting `disableHighlight: true`.
->
-> This feature will be automatically disabled on build time.
-
 ## Expand path file name
 
 Consider having a project file directory as follows:
@@ -25,15 +21,39 @@ Additionally, in every `index.vue`, there is a console statement. By default, th
 
 ![extend-name](/features/extend-name.png)
 
-## Dark Mode
+## Options
+
+```ts
+// Disable highlight feature
+TurboConsole({
+  highlight: false,
+})
+
+// Set extended path file names
+TurboConsole({
+  highlight: {
+    extendedPathFileNames: ['index'],
+  },
+})
+```
+
+## Theme Detect
 
 When the system is in dark mode, optimize the visual effect of the highlight output.
 
 ![dark](/features/highlight-dark.png)
 
-### Setup
+### Options
 
-Add `~console/theme-detect` to your project entry file. Example:
+```ts
+TurboConsole({
+  highlight: {
+    themeDetect: true,
+  },
+})
+```
+
+Introduce `~console/theme-detect` to your project entry file. Example:
 
 ::: code-group
 

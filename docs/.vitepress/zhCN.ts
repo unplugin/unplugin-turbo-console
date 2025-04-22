@@ -15,15 +15,17 @@ export const zhCN = defineConfig({
         items: [
           { text: '入门', link: '/zh-CN/guide/getting-started' },
           { text: '配置', link: '/zh-CN/guide/configurations' },
+          { text: '迁移', link: '/zh-CN/guide/migration' },
         ],
       },
       {
         text: '特性',
         items: [
-          { text: '高亮输出', link: '/zh-CN/features/highlight' },
-          { text: '自定义前后缀', link: '/zh-CN/features/custom-prefix' },
-          { text: '编辑器跳转', link: '/zh-CN/features/launch-editor' },
-          { text: '传递日志', link: '/zh-CN/features/pass-logs' },
+          { text: '🎨 高亮输出', link: '/zh-CN/features/highlight' },
+          { text: '📝 前后缀', link: '/zh-CN/features/custom-prefix' },
+          { text: '🔦 编辑器跳转', link: '/zh-CN/features/launch-editor' },
+          { text: '🚚 传递日志', link: '/zh-CN/features/pass-logs' },
+          { text: '🔍 Console 检查器', link: '/zh-CN/features/inspector' },
         ],
       },
       {

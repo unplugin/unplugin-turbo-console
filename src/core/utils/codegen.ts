@@ -1,8 +1,9 @@
-import type { GenContext } from '../../types'
+import type { ExpressionMeta, GenContext } from '../../types'
 import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
+import { addExpression, filePathMapState } from './state'
 import { builtInThemes, getStyleCode } from './themes'
 
 function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
@@ -25,18 +26,15 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
 }
 
 export function setFilePathMap(filePath: string): string {
-  let filePathMap = globalThis.TurboConsoleFilePathMap
+  // 获取文件路径映射
 
-  if (typeof filePathMap === 'undefined')
-    filePathMap = new Map<string, string>()
-
-  if (filePathMap.has(filePath))
-    return filePathMap.get(filePath)!
+  if (filePathMapState().has(filePath))
+    return filePathMapState().get(filePath)!
 
   function getRandomString() {
     const randomString = Math.random().toString(20).substring(2, 6)
 
-    for (const [_, value] of filePathMap) {
+    for (const [_, value] of filePathMapState()) {
       if (value === randomString)
         return getRandomString()
     }
@@ -45,16 +43,19 @@ export function setFilePathMap(filePath: string): string {
   }
 
   const randomString = getRandomString()
-  filePathMap.set(filePath, randomString)
-  globalThis.TurboConsoleFilePathMap = filePathMap
+
+  filePathMapState(filePathMapState().set(filePath, randomString))
 
   return randomString
 }
 
 export function genConsoleString(genContext: GenContext) {
-  const { options, originalColumn, originalLine, argType, id } = genContext
+  const { options, originalColumn, originalLine, argType, id, consoleMethod } = genContext
   let { argsName } = genContext
-  const { prefix, suffix, disableLaunchEditor, port, disableHighlight, extendedPathFileNames } = options
+  const { prefix, suffix, launchEditor, server, highlight } = options
+  const { port, host } = server!
+  const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
+  const themeDetect = typeof highlight === 'object' ? highlight.themeDetect : false
   const _prefix = prefix ? `${prefix}\\n` : ''
   const _suffix = suffix ? `\\n${suffix}` : ''
 
@@ -64,7 +65,16 @@ export function genConsoleString(genContext: GenContext) {
   const fileType = extname(filePath).slice(1) as FileExt
 
   const relativePath = relative(cwd(), filePath)
-  const filePathMapString = disableLaunchEditor ? '' : setFilePathMap(relativePath)
+  const filePathMapString = launchEditor === false ? '' : setFilePathMap(relativePath)
+
+  const expressionMeta: ExpressionMeta = {
+    code: argsName,
+    method: consoleMethod,
+    line: originalLine,
+    column: originalColumn,
+  }
+
+  addExpression(relativePath, expressionMeta)
 
   // Parsing escaped unicode symbols
   try {
@@ -81,27 +91,27 @@ export function genConsoleString(genContext: GenContext) {
   const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${argsName}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
-  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://127.1:${port}#${codePosition}`
+  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : host}:${port}#${codePosition}`
 
   let consoleString = ''
   const lineWrap = `"\\n"`
 
-  if (!disableHighlight && !disableLaunchEditor) {
+  if (highlight && launchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
-      : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType).highlight},${getStyleCode(fileType).launchEditor},${lineWrap},`
+      ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
+      : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
   }
-  else if (disableHighlight && !disableLaunchEditor) {
+  else if (highlight === false && launchEditor) {
     consoleString = _prefix
-      ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
-      : `"${launchEditorString}",${getStyleCode(fileType).launchEditor},${lineWrap},`
+      ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
+      : `"${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
   }
-  else if (!disableHighlight && disableLaunchEditor) {
+  else if (highlight && launchEditor === false) {
     consoleString = _prefix
-      ? `"${_prefix}${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
-      : `"${lineInfo}",${getStyleCode(fileType).highlight},${lineWrap},`
+      ? `"${_prefix}${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
+      : `"${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
   }
-  else if (disableHighlight && disableLaunchEditor) {
+  else if (highlight === false && launchEditor === false) {
     consoleString = _prefix
       ? `"${_prefix}",`
       : ''

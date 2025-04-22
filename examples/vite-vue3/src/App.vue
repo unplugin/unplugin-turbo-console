@@ -4,11 +4,13 @@ import { logTs } from './tsLog'
 import { server } from 'unplugin-turbo-console/helper'
 
 function logVue() {
-  console.log('from vue')
+  console.log('xxxx234324xxxx123')
+
+  console.info('asdasd')
 }
 
 function serverLog() {
-  server.log('from vue')
+  server.log('from vue23213')
 }
 </script>
 

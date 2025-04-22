@@ -26,12 +26,12 @@ exports[`edge case > win path 1`] = `
 
 <script setup lang="ts">
   const msg: string = "Hello World"
-  console.log("%c🚀 App.vue·7 ~ msg%c🔦 http://127.1:3070#appvue,7,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#4FC08D90;' : '#4FC08D;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
+  console.log("%c🚀 App.vue·7 ~ msg%c🔦 http://127.1:3070#appvue,7,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
 </script>
 ",
   "map": SourceMap {
     "file": "App.vue",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,gUAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6OAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
     "names": [],
     "sources": [
       "App.vue",
@@ -57,7 +57,7 @@ exports[`svelte transform > svelte 1`] = `
   "code": "<script lang="ts">
   // xxxx
   const a: string = 'Hello'
-  console.log("%c🚀 +page.svelte·4 ~ a%c🔦 http://127.1:3070#pagtsx,4,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#FF3E0090;' : '#FF3E00;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",a)
+  console.log("%c🚀 +page.svelte·4 ~ a%c🔦 http://127.1:3070#pagtsx,4,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#FF3E00;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",a)
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -66,7 +66,7 @@ exports[`svelte transform > svelte 1`] = `
 </p>",
   "map": SourceMap {
     "file": "+page.svelte",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACR,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,mUAAC,CAAC;AACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAER,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5B,CAAC,CAAC;AACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpF,CAAC,CAAC,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACR,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,gPAAC,CAAC;AACf,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAER,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5B,CAAC,CAAC;AACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpF,CAAC,CAAC,CAAC",
     "names": [],
     "sources": [
       "+page.svelte",
@@ -88,13 +88,31 @@ exports[`svelte transform > svelte 1`] = `
 }
 `;
 
+exports[`theme-detect > theme-detect 1`] = `
+{
+  "code": "console.log("%c🚀 main.js·1%c🔦 http://127.1:3070#mainjs,1,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",'hello');",
+  "map": SourceMap {
+    "file": "main.js",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6TAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
+    "names": [],
+    "sources": [
+      "main.js",
+    ],
+    "sourcesContent": [
+      "console.log('hello');",
+    ],
+    "version": 3,
+  },
+}
+`;
+
 exports[`utf-8 > includes utf-8 1`] = `
 {
   "code": "const a = '你好' 
-console.log("%c🚀 main.js·2 ~ a%c🔦 http://127.1:3070#mainjs,2,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#F7DF1E90;' : '#F7DF1E;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",a)",
+console.log("%c🚀 main.js·2 ~ a%c🔦 http://127.1:3070#mainjs,2,1",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#111827;background:#F7DF1E;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",a)",
   "map": SourceMap {
     "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACd,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,iUAAC,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACd,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,8OAAC,CAAC",
     "names": [],
     "sources": [
       "main.js",
@@ -113,9 +131,9 @@ exports[`vanilla transform > tsx 1`] = `
   "code": ""use client";
 
   export default function Home() {
-    console.log("%c🚀 page.tsx·4%c🔦 http://127.1:3070#svelte,4,5",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#3178C690;' : '#3178C6;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n","hello nextjs");
+    console.log("%c🚀 page.tsx·4%c🔦 http://127.1:3070#svelte,4,5",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#3178C6;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n","hello nextjs");
     function hello() {
-      console.log("%c🚀 page.tsx·6%c🔦 http://127.1:3070#svelte,6,7",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#3178C690;' : '#3178C6;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n","hello nextjs");
+      console.log("%c🚀 page.tsx·6%c🔦 http://127.1:3070#svelte,6,7",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#3178C6;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n","hello nextjs");
     }
   
     return <main>page.tsx</main>;
@@ -123,7 +141,7 @@ exports[`vanilla transform > tsx 1`] = `
   ",
   "map": SourceMap {
     "file": "page.tsx",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,2TAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,2TAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC;AACJ,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChC,CAAC,CAAC;AACF,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,wOAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,wOAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC;AACJ,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChC,CAAC,CAAC;AACF,CAAC",
     "names": [],
     "sources": [
       "page.tsx",
@@ -149,11 +167,11 @@ exports[`vanilla transform > tsx 1`] = `
 exports[`vanilla transform > typescript 1`] = `
 {
   "code": "const msg: string = "hello TypeScript"
-  console.log("%c🚀 main.ts·2 ~ msg%c🔦 http://127.1:3070#maints,2,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#3178C690;' : '#3178C6;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
+  console.log("%c🚀 main.ts·2 ~ msg%c🔦 http://127.1:3070#maints,2,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#3178C6;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
   ",
   "map": SourceMap {
     "file": "main.ts",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,gUAAC,CAAC,CAAC,CAAC;AACjB,CAAC",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6OAAC,CAAC,CAAC,CAAC;AACjB,CAAC",
     "names": [],
     "sources": [
       "main.ts",
@@ -179,7 +197,7 @@ exports[`vue transform > options 1`] = `
     },
     mounted() {
       const msg = "hello vue"
-      console.log("%c🚀 App.vue·10 ~ msg%c🔦 http://127.1:3070#appvue,10,7",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#4FC08D90;' : '#4FC08D;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
+      console.log("%c🚀 App.vue·10 ~ msg%c🔦 http://127.1:3070#appvue,10,7",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
     }
   }
   </script>
@@ -190,7 +208,7 @@ exports[`vue transform > options 1`] = `
 ",
   "map": SourceMap {
     "file": "App.vue",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACX,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACN,CAAC,CAAC,CAAC,CAAC,CAAC;AACL,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACd,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,kUAAC,CAAC,CAAC,CAAC;AACrB,CAAC,CAAC,CAAC,CAAC;AACJ,CAAC,CAAC;AACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACX,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACX,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACN,CAAC,CAAC,CAAC,CAAC,CAAC;AACL,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACd,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,+OAAC,CAAC,CAAC,CAAC;AACrB,CAAC,CAAC,CAAC,CAAC;AACJ,CAAC,CAAC;AACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC;AACD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACX,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
     "names": [],
     "sources": [
       "App.vue",
@@ -228,12 +246,12 @@ exports[`vue transform > script setup 1`] = `
 
 <script setup lang="ts">
   const msg: string = "Hello World"
-  console.log("%c🚀 App.vue·7 ~ msg%c🔦 http://127.1:3070#appvue,7,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '#4FC08D90;' : '#4FC08D;'}\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
+  console.log("%c🚀 App.vue·7 ~ msg%c🔦 http://127.1:3070#appvue,7,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
 </script>
 ",
   "map": SourceMap {
     "file": "App.vue",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,gUAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6OAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
     "names": [],
     "sources": [
       "App.vue",
@@ -245,6 +263,40 @@ exports[`vue transform > script setup 1`] = `
 
 <script setup lang="ts">
   const msg: string = "Hello World"
+  console.log(msg)
+</script>
+",
+    ],
+    "version": 3,
+  },
+}
+`;
+
+exports[`vue transform > script setup no lang 1`] = `
+{
+  "code": "<template>
+  Hello World
+</template>
+
+<script setup>
+  const msg = "Hello World"
+  console.log("%c🚀 App.vue·7 ~ msg%c🔦 http://127.1:3070#appvue,7,3",\`padding:2px 5px;border-radius:3px 0 0 3px;margin:0 0 5px 0;color:#fff;background:#4FC08D;\`,\`background:#00DC8250;padding:2px 5px;border-radius:0 3px 3px 0;margin:0 0 5px 0;\`,"\\n",msg)
+</script>
+",
+  "map": SourceMap {
+    "file": "App.vue",
+    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;AAEV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,6OAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;",
+    "names": [],
+    "sources": [
+      "App.vue",
+    ],
+    "sourcesContent": [
+      "<template>
+  Hello World
+</template>
+
+<script setup>
+  const msg = "Hello World"
   console.log(msg)
 </script>
 ",

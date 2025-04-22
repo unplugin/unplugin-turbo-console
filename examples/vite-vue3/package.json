@@ -23,6 +23,7 @@
     "unplugin-turbo-console": "workspace:*",
     "vite": "catalog:",
     "vite-plugin-inspect": "catalog:",
+    "vite-plugin-vue-devtools": "^7.7.5",
     "vue-tsc": "^2.0.21"
   }
 }

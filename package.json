@@ -2,6 +2,7 @@
   "name": "unplugin-turbo-console",
   "type": "module",
   "version": "1.11.3",
+  "packageManager": "pnpm@10.8.1",
   "description": "Improve the Developer Experience of console",
   "license": "MIT",
   "homepage": "https://utc.yuy1n.io",
@@ -89,15 +90,19 @@
     "client.d.ts",
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "build": "unbuild",
+    "build": "unbuild && pnpm run build:client",
+    "build:client": "pnpm run --filter client build",
     "dev": "unbuild --watch",
-    "build:fix": "tsx scripts/postbuild.ts",
+    "dev:client": "pnpm run --filter client dev",
     "lint": "eslint .",
+    "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
+    "play:nuxt": "pnpm run --filter nuxt-app dev",
     "play:vue3-cli": "pnpm run --filter vue3-cli serve",
     "play:svelte": "pnpm run --filter svelte dev",
-    "play:nuxt": "pnpm run --filter nuxt-app dev",
-    "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
     "play:next": "pnpm run --filter nextjs dev",
     "play:rspack": "pnpm run --filter rspack-vue dev",
     "play:astro": "pnpm run --filter astro dev",
@@ -108,7 +113,6 @@
     "docs:build": "pnpm run -C ./docs build",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
-    "start": "tsx src/index.ts",
     "test": "vitest"
   },
   "peerDependencies": {
@@ -119,8 +123,8 @@
     "esbuild": "*",
     "rollup": ">=3",
     "vite": ">=3",
-    "vue": ">=2.7 || >=3.2.13",
-    "webpack": "^4 || ^5"
+    "vue": ">=3",
+    "webpack": ">=5"
   },
   "peerDependenciesMeta": {
     "@farmfe/core": {
@@ -152,38 +156,45 @@
     }
   },
   "dependencies": {
-    "@rollup/pluginutils": "^5.1.4",
+    "@vue/devtools-api": "^7.7.5",
+    "alien-signals": "^1.0.13",
     "estree-walker": "^3.0.3",
     "get-port-please": "^3.1.2",
-    "h3": "1.12.0",
-    "launch-editor": "^2.9.1",
+    "h3": "^1.15.1",
+    "launch-editor": "^2.10.0",
     "magic-string": "^0.30.17",
-    "oxc-parser": "^0.48.1",
-    "pathe": "^2.0.2",
-    "unplugin": "^2.1.2"
+    "mrmime": "^2.0.1",
+    "oxc-parser": "^0.63.0",
+    "pathe": "^2.0.3",
+    "unplugin": "^2.3.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.1.0",
-    "@nuxt/kit": "^3.15.3",
-    "@nuxt/schema": "^3.15.3",
-    "@oxc-project/types": "^0.48.1",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.10.10",
-    "@vitest/ui": "^3.0.4",
-    "bumpp": "^10.0.1",
-    "chalk": "^5.4.1",
-    "eslint": "^9.19.0",
-    "fast-glob": "^3.3.3",
-    "fs-extra": "^11.3.0",
-    "rimraf": "^6.0.1",
-    "rollup": "^4.32.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3",
+    "@antfu/eslint-config": "^4.12.0",
+    "@nuxt/kit": "^3.16.2",
+    "@nuxt/schema": "^3.16.2",
+    "@oxc-project/types": "^0.63.0",
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/node": "^22.14.1",
+    "@vitest/ui": "^3.1.1",
+    "bumpp": "^10.1.0",
+    "eslint": "^9.24.0",
+    "rollup": "^4.40.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
     "unbuild": "3.3.1",
     "vite": "catalog:",
     "vite-plugin-inspect": "catalog:",
-    "vitest": "^3.0.4",
+    "vitest": "^3.1.1",
     "vue": "^3.5.13",
-    "webpack": "^5.97.1"
+    "webpack": "^5.99.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@sveltejs/kit",
+      "esbuild",
+      "sharp",
+      "vue-demi",
+      "svelte-preprocess"
+    ]
   }
 }

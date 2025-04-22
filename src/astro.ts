@@ -1,4 +1,4 @@
-import type { Options } from './types'
+import type { Options } from './core/options/type'
 import unplugin from '.'
 import { PLUGIN_NAME } from './core/constants'
 

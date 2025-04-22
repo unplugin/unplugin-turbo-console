@@ -1,46 +1,52 @@
-import type { Options } from '../../types'
+import type { Options } from '../options/type'
 import { createServer as _createServer } from 'node:http'
 import { env } from 'node:process'
 import wsAdapter from 'crossws/adapters/node'
 import { createApp, toNodeListener } from 'h3'
 import filePathMap from './filePathMap'
 import health from './health'
-import { launchEditor } from './launchEditor'
+import { launchEditor as launchEditorHandler } from './launchEditor'
 import send from './send'
 import serveStatic from './serveStatic'
-import ws from './ws'
+import inspectorHandler from './ws/inspector'
+import passLogsHandler from './ws/passLogs'
 
 export async function createServer(options: Options) {
-  const { port, specifiedEditor } = options
-  const _port = Number(port) || 3070
+  const { server, launchEditor, passLogs, inspector } = options
+  const { port, host } = server!
+  const _port = Number(port)!
+  const specifiedEditor = typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
   try {
-    await fetch(`http://localhost:${_port}/health`)
+    await fetch(`http://${host}:${_port}/health`)
   }
   catch {
-    const app = createApp()
-
-    if (options.disablePassLogs === true && options.disableLaunchEditor === true)
+    if (launchEditor === false && passLogs === false && inspector === false)
       return false
+
+    const app = createApp()
 
     // health
     app.use('/health', health)
 
-    if (!options.disablePassLogs) {
+    if (inspector)
+      app.use('/ws/inspector', inspectorHandler)
+
+    if (passLogs) {
     // Pass server log route
-      app.use('/ws', ws)
+      app.use('/ws/passLogs', passLogsHandler)
         .use('/send', send)
     }
 
     // Launch Editor server
-    if (!options.disableLaunchEditor) {
+    if (launchEditor) {
       app.use('/filePathMap', filePathMap)
-        .use('/launchEditor', launchEditor(specifiedEditor))
+        .use('/launchEditor', launchEditorHandler(specifiedEditor))
         .use('/', serveStatic)
     }
 
     const server = _createServer(toNodeListener(app))
 
-    const { handleUpgrade } = wsAdapter(app.websocket)
+    const { handleUpgrade } = wsAdapter(app.websocket as any)
 
     server.on('upgrade', handleUpgrade)
 

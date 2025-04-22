@@ -1,15 +1,14 @@
 /* eslint-disable no-console */
-import type { Peer } from 'crossws'
 import { defineWebSocketHandler } from 'h3'
-import { PLUGIN_NAME } from '../constants'
-
-if (globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET === undefined) {
-  globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET = new Set<Peer>()
-}
+import { PLUGIN_NAME } from '../../constants'
+import { peersState } from '../../utils/state'
 
 export default defineWebSocketHandler({
   open(peer) {
-    globalThis.UNPLUGIN_TURBO_CONSOLE_PEERS_SET!.add(peer)
+    const peers = peersState()
+    peers.add(peer)
+
+    peersState(peers)
   },
   message(_peer, message) {
     try {

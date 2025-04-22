@@ -1,7 +1,8 @@
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
-import { resolveOptions } from '../src/core/options'
+import { resolveOptions } from '../src/core/options/resolve'
 import { transform } from '../src/core/transform'
+import { filePathMapState } from '../src/core/utils/state'
 import { DISABLE_ALL, DISABLE_HIGHLIGHT, DISABLE_LAUNCH_EDITOR, EMPTY, EXTENDED_PATH, WITH_PREFIX } from './fixtures/option'
 
 vi.mock('node:process', () => {
@@ -17,7 +18,7 @@ const mockFilePathMap = new Map()
 mockFilePathMap.set('../../home/runner/main.js', 'fgsss')
 mockFilePathMap.set('../../home/runner/index.js', 'sfgha')
 
-globalThis.TurboConsoleFilePathMap = mockFilePathMap
+filePathMapState(mockFilePathMap)
 
 describe('transform options', () => {
   it('empty option', async () => {
@@ -80,13 +81,17 @@ describe('resolve options', () => {
   it('empty', () => {
     expect(resolveOptions({})).toMatchInlineSnapshot(`
       {
-        "disableHighlight": false,
-        "disableLaunchEditor": false,
-        "disablePassLogs": false,
-        "extendedPathFileNames": [],
-        "port": 3070,
+        "highlight": true,
+        "inspector": {
+          "printUrl": true,
+        },
+        "launchEditor": true,
+        "passLogs": true,
         "prefix": "",
-        "silent": false,
+        "server": {
+          "host": "127.0.0.1",
+          "port": 3070,
+        },
         "suffix": "",
       }
     `)
