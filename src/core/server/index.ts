@@ -28,6 +28,9 @@ export async function createServer(options: Options) {
     // health
     app.use('/health', health)
 
+    if (launchEditor || inspector)
+      app.use('/', serveStatic)
+
     if (inspector)
       app.use('/ws/inspector', inspectorHandler)
 
@@ -41,7 +44,6 @@ export async function createServer(options: Options) {
     if (launchEditor) {
       app.use('/filePathMap', filePathMap)
         .use('/launchEditor', launchEditorHandler(specifiedEditor))
-        .use('/', serveStatic)
     }
 
     const server = _createServer(toNodeListener(app))
