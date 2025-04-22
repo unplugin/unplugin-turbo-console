@@ -30,6 +30,30 @@ TurboConsole({
 
 如果你使用的是 [Vue Devtools](https://devtools.vuejs.org/)，你可以通过以下配置在 devtools 中查看 **Console Inspector**。
 
+1. 首先安装 `@vue/devtools-api`:
+
+:::code-group
+
+```shell [npm]
+npm install -D @vue/devtools-api
+```
+
+```shell [pnpm]
+pnpm install -D @vue/devtools-api
+```
+
+```shell [yarn]
+yarn add -D @vue/devtools-api
+```
+
+```shell [bun]
+bun install -D @vue/devtools-api
+```
+
+:::
+
+2. 在入口文件中添加以下代码:
+
 ```js [main.js]
 import '~console/vue-devtools'
 ```

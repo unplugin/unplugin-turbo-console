@@ -30,6 +30,30 @@ If you are using Nuxt, You can also view **Console Inspector** from `Nuxt devtoo
 
 If you are using [Vue Devtools](https://devtools.vuejs.org/), you can view **Console Inspector** on devtools by the following configuration:
 
+1. Install `@vue/devtools-api` first:
+
+:::code-group
+
+```shell [npm]
+npm install -D @vue/devtools-api
+```
+
+```shell [pnpm]
+pnpm install -D @vue/devtools-api
+```
+
+```shell [yarn]
+yarn add -D @vue/devtools-api
+```
+
+```shell [bun]
+bun install -D @vue/devtools-api
+```
+
+:::
+
+2. Add the following code to your entry file:
+
 ```js [main.js]
 import '~console/vue-devtools'
 ```
