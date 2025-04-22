@@ -15,6 +15,7 @@ export const enUS = defineConfig({
         items: [
           { text: 'Getting Started', link: '/guide/getting-started' },
           { text: 'Configurations', link: '/guide/configurations' },
+          { text: 'Migration', link: '/guide/migration' },
         ],
       },
       {

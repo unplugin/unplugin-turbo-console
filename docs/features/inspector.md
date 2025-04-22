@@ -1,6 +1,6 @@
 # Console Inspector
 
-The **Console Inspector** allows you to view console statements in your project in real-time and jump to the corresponding file by clicking.
+It enables real-time monitoring of console statements and allows one-click navigation to the relevant source code lines.
 
 ![console inspector](https://static.yuy1n.io/console-inspector.png)
 
@@ -28,7 +28,7 @@ If you are using Nuxt, You can also view **Console Inspector** from `Nuxt devtoo
 
 ## Vue Devtools
 
-If you are using [Vue Devtools](https://devtools.vuejs.org/), you can view **Console Inspector** by the following configuration on Vue project:
+If you are using [Vue Devtools](https://devtools.vuejs.org/), you can view **Console Inspector** on devtools by the following configuration:
 
 ```js [main.js]
 import '~console/vue-devtools'

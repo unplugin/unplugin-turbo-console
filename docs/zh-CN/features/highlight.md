@@ -4,10 +4,6 @@
 
 ![feature-highlight](/features/highlight.png)
 
-> 可以通过配置项 `disableHighlight: true` 来禁用此功能。
->
-> 此功能在打包时会自动被禁用。
-
 ## 拓展路径文件名
 
 考虑有一个项目的文件目录如下：
@@ -25,13 +21,37 @@ pages
 
 ![extend-name](/features/extend-name.png)
 
-## 黑暗模式
+## 配置项
+
+```ts
+// 禁用高亮输出
+TurboConsole({
+  highlight: false,
+})
+
+// 设置拓展路径文件名
+TurboConsole({
+  highlight: {
+    extendedPathFileNames: ['index'],
+  },
+})
+```
+
+## 主题适配
 
 当系统处于黑暗模式时，优化高亮输出的视觉效果。
 
 ![dark](/features/highlight-dark.png)
 
-### 设置
+### 配置项
+
+```ts
+TurboConsole({
+  highlight: {
+    themeDetect: true,
+  },
+})
+```
 
 在你应用的入口文件中引入 `~console/theme-detect`，示例：
 

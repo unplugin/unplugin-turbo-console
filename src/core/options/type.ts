@@ -47,7 +47,11 @@ export interface Options {
   /**
    * Custom server option.
    *
-   * @default { port: 3070, host: '127.0.0.1' }
+   * @default
+   * {
+   *   port: 3070,
+   *   host: '127.0.0.1'
+   * }
    */
   server?: {
     port?: number

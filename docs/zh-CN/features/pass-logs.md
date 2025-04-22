@@ -2,8 +2,6 @@
 
 此功能可以让你在服务端和客户端之间传递日志内容。
 
-> 可以通过配置项 `disablePassLogs: true` 来禁用此功能。
-
 ## 初始化
 
 在项目的入口文件中引入`~console`进行初始化，以下是在一些框架中的示例：
@@ -102,3 +100,12 @@ function increment() {
 ::: tip Nuxt 用户
 如果你在使用 Nuxt ，`client` 和 `server` 是自动导入的。因此，您无需手动导入它们。
 :::
+
+## 配置项
+
+```js
+// 禁用传递日志功能
+TurboConsole({
+  passLogs: false,
+})
+```

@@ -43,9 +43,7 @@ When the system is in dark mode, optimize the visual effect of the highlight out
 
 ![dark](/features/highlight-dark.png)
 
-### Setup
-
-#### Options
+### Options
 
 ```ts
 TurboConsole({
