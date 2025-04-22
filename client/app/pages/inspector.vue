@@ -93,7 +93,8 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
         <a class="text-3xl font-[300] cursor-pointer" href="https://github.com/unplugin/unplugin-turbo-console" target="_blank">
-          <span class="text-green-500 font-bold">Console</span> Inspector
+          <Icon name="ph:magnifying-glass-bold" class="text-2xl text-green-500 mr-1" />
+          <span>Console Inspector</span>
         </a>
 
         <a
