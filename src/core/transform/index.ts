@@ -54,7 +54,7 @@ export async function transform(context: Context) {
   await walk(program, {
     enter(node) {
       if (isConsoleExpression(node)) {
-        const originalExpression = magicString.slice(node.start, node.end)
+        const originalExpression = compileResult.script.slice(node.start, node.end)
 
         if (originalExpression.includes('%c'))
           return false
