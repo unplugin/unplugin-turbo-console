@@ -31,6 +31,7 @@ https://github.com/user-attachments/assets/767fd181-4122-49c8-8a01-72d3d43dbe94
 - 📝 Prefix and Suffix
 - 🔦 Launch Editor
 - 🚚 Pass Logs
+- 🔍 Console Inspector
 
 ## ❤️ Credits
 
