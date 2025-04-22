@@ -23,52 +23,52 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./farm": {
       "types": "./dist/farm.d.ts",
-      "import": "./dist/farm.mjs",
+      "import": "./dist/farm.js",
       "require": "./dist/farm.cjs"
     },
     "./astro": {
       "types": "./dist/astro.d.ts",
-      "import": "./dist/astro.mjs",
+      "import": "./dist/astro.js",
       "require": "./dist/astro.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
-      "import": "./dist/vite.mjs",
+      "import": "./dist/vite.js",
       "require": "./dist/vite.cjs"
     },
     "./webpack": {
       "types": "./dist/webpack.d.ts",
-      "import": "./dist/webpack.mjs",
+      "import": "./dist/webpack.js",
       "require": "./dist/webpack.cjs"
     },
     "./rspack": {
       "types": "./dist/rspack.d.ts",
-      "import": "./dist/rspack.mjs",
+      "import": "./dist/rspack.js",
       "require": "./dist/rspack.cjs"
     },
     "./rollup": {
       "types": "./dist/rollup.d.ts",
-      "import": "./dist/rollup.mjs",
+      "import": "./dist/rollup.js",
       "require": "./dist/rollup.cjs"
     },
     "./esbuild": {
       "types": "./dist/esbuild.d.ts",
-      "import": "./dist/esbuild.mjs",
+      "import": "./dist/esbuild.js",
       "require": "./dist/esbuild.cjs"
     },
     "./nuxt": {
       "types": "./dist/nuxt.d.ts",
-      "import": "./dist/nuxt.mjs",
+      "import": "./dist/nuxt.js",
       "require": "./dist/nuxt.cjs"
     },
     "./helper": {
       "types": "./dist/helper.d.ts",
-      "import": "./dist/helper.mjs",
+      "import": "./dist/helper.js",
       "require": "./dist/helper.cjs"
     },
     "./client": {
@@ -76,7 +76,7 @@
     }
   },
   "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -94,9 +94,9 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "unbuild && pnpm run build:client",
+    "build": "tsdown ",
     "build:client": "pnpm run --filter client build",
-    "dev": "unbuild --watch",
+    "dev": "tsdown --watch",
     "dev:client": "pnpm run --filter client dev",
     "lint": "eslint .",
     "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
@@ -179,9 +179,9 @@
     "bumpp": "^10.1.0",
     "eslint": "^9.24.0",
     "rollup": "^4.40.0",
+    "tsdown": "^0.9.3",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3",
-    "unbuild": "3.3.1",
     "vite": "catalog:",
     "vite-plugin-inspect": "catalog:",
     "vitest": "^3.1.1",
