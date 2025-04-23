@@ -156,7 +156,6 @@
     }
   },
   "dependencies": {
-    "@vue/devtools-api": "^7.7.5",
     "alien-signals": "^1.0.13",
     "estree-walker": "^3.0.3",
     "get-port-please": "^3.1.2",

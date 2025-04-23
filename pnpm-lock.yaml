@@ -20,9 +20,6 @@ importers:
       '@farmfe/core':
         specifier: '>=1'
         version: 1.2.0
-      '@vue/devtools-api':
-        specifier: ^7.7.5
-        version: 7.7.5
       alien-signals:
         specifier: ^1.0.13
         version: 1.0.13
