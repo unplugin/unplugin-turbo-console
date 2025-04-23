@@ -94,7 +94,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsdown ",
+    "build": "tsdown",
     "build:client": "pnpm run --filter client build",
     "dev": "tsdown --watch",
     "dev:client": "pnpm run --filter client dev",

@@ -1,4 +1,3 @@
-import { execSync } from 'node:child_process'
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
@@ -9,7 +8,5 @@ export default defineConfig({
   outputOptions: {
     exports: 'named',
   },
-  onSuccess: () => {
-    execSync('pnpm build:client', { stdio: 'inherit' })
-  },
+  onSuccess: 'pnpm build:client',
 })
