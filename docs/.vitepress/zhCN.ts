@@ -25,7 +25,7 @@ export const zhCN = defineConfig({
           { text: '📝 前后缀', link: '/zh-CN/features/custom-prefix' },
           { text: '🔦 编辑器跳转', link: '/zh-CN/features/launch-editor' },
           { text: '🚚 传递日志', link: '/zh-CN/features/pass-logs' },
-          { text: '🔍 Console 检查器', link: '/zh-CN/features/inspector' },
+          { text: '🔍 Console Inspector', link: '/zh-CN/features/inspector' },
         ],
       },
       {

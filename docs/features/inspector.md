@@ -1,8 +1,8 @@
 # Console Inspector
 
-It enables real-time monitoring of console statements and allows one-click navigation to the relevant source code lines.
+It enables real-time monitoring of console statements and with launch editor support.
 
-![console inspector](https://static.yuy1n.io/console-inspector.png)
+<video src="https://static.yuy1n.io/console-inspector.mp4" controls />
 
 ## Options
 

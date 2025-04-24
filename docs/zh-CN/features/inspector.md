@@ -1,8 +1,8 @@
 # Console Inspector
 
-它能够让你实时查看你的项目中的 console 语句，并通过点击跳转到对应文件的所在行。
+它能够让你实时查看你的项目中的 console 语句，并支持一键跳转至编辑器。
 
-![console inspector](https://static.yuy1n.io/console-inspector.png)
+<video src="https://static.yuy1n.io/console-inspector.mp4" controls />
 
 ## 配置项
 
