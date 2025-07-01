@@ -54,3 +54,10 @@ export function themeDetectVirtualModule(isProd: boolean) {
   })()
   `
 }
+
+export function serverInfoVirtualModule(host: string, port: number) {
+  return /* js */`
+  export const host = '${host}'
+  export const port = ${port}
+`
+}
