@@ -1,6 +1,6 @@
 import type { Options } from './core/options/type'
 import { addImports, addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
-import { checkPort, getRandomPort } from 'get-port-please'
+import { getPort } from 'get-port-please'
 import { NUXT_CONFIG_KEY, PLUGIN_NAME } from './core/constants'
 import vite from './vite'
 import webpack from './webpack'
@@ -31,9 +31,10 @@ export default defineNuxtModule<Options>({
       host: options.server?.host ?? '127.0.0.1',
     }
 
-    const isAvailable = await checkPort(options.server.port!)
-    if (!isAvailable)
-      options.server.port = await getRandomPort()
+    options.server.port = await getPort({
+      port: options.server.port!,
+      portRange: [3070, 6000],
+    })
 
     // @ts-expect-error missing type
     nuxt.hook('devtools:customTabs', (tabs: any) => {

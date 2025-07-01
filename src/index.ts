@@ -3,7 +3,7 @@ import type { Options } from './core/options/type'
 import type { Context } from './types'
 import { randomUUID } from 'node:crypto'
 import { cwd, env } from 'node:process'
-import { checkPort, getRandomPort } from 'get-port-please'
+import { getPort } from 'get-port-please'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
@@ -18,9 +18,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
   const options = resolveOptions(rawOptions)
 
   async function detectPort() {
-    const isAvailable = await checkPort(options.server.port!)
-    if (!isAvailable)
-      options.server.port = await getRandomPort()
+    options.server.port = await getPort({
+      port: options.server.port!,
+      portRange: [3070, 6000],
+    })
   }
 
   async function startTurboConsoleServer() {
