@@ -19,18 +19,34 @@ const launchEditorServerResponse = ref<LaunchEditorServerResponse>()
 async function init() {
   try {
     const position = window.location.hash.slice(1)
-    if (!position) {
-      throw new Error('No position provided')
+    const searchParams = new URLSearchParams(window.location.search)
+    const path = searchParams.get('path')
+    if (!position && !path) {
+      throw new Error('No position or path provided')
     }
-    const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?position=${(position)}`)
-    if (response.status !== 'success') {
-      throw new Error(response.message || 'Unknown error')
+
+    if (position) {
+      const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?position=${(position)}&path=${(path)}`)
+      if (response.status !== 'success') {
+        throw new Error(response.message || 'Unknown error')
+      }
+      launchEditorServerResponse.value = response
+      requestState.value.status = 'success'
+      requestState.value.version = response.version
+      window.close()
     }
-    launchEditorServerResponse.value = response
-    requestState.value.status = 'success'
-    requestState.value.version = response.version
-    window.close()
+    else if (path) {
+      const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?path=${(path)}`)
+      if (response.status !== 'success') {
+        throw new Error(response.message || 'Unknown error')
+      }
+      launchEditorServerResponse.value = response
+      requestState.value.status = 'success'
+      requestState.value.version = response.version
+      window.close()
+    }
   }
+
   catch (error: any) {
     console.error(error)
     requestState.value = {
