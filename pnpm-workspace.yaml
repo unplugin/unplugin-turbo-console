@@ -3,6 +3,6 @@ packages:
   - docs
   - client
 catalog:
-  nuxt: ^3.17.5
-  vite: ^7.0.0
-  vite-plugin-inspect: ^11.3.0
+  nuxt: ^4.0.3
+  vite: ^7.1.2
+  vite-plugin-inspect: ^11.3.2

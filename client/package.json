@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@10.5.2",
+  "packageManager": "pnpm@10.14.0",
   "description": "",
   "author": "",
   "license": "ISC",
@@ -14,19 +14,17 @@
     "build": "nuxi build"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.2.8",
-    "@iconify-json/catppuccin": "^1.2.10",
+    "@iconify-json/carbon": "^1.2.13",
+    "@iconify-json/catppuccin": "^1.2.15",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/uil": "^1.2.3",
-    "@nuxt/icon": "^1.11.0",
+    "@nuxt/icon": "^2.0.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@radix-ui/colors": "^3.0.0",
-    "@vueuse/core": "^13.0.0",
-    "@vueuse/nuxt": "^13.0.0",
-    "add": "^2.0.6",
+    "@vueuse/core": "^13.6.0",
+    "@vueuse/nuxt": "^13.6.0",
     "nuxt": "catalog:",
-    "pnpm": "^10.7.0",
-    "reka-ui": "^2.0.2",
-    "shiki": "^3.2.1"
+    "reka-ui": "^2.4.1",
+    "shiki": "^3.9.2"
   }
 }
