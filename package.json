@@ -1,7 +1,7 @@
 {
   "name": "unplugin-turbo-console",
   "type": "module",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "packageManager": "pnpm@10.14.0",
   "description": "Improve the Developer Experience of console",
   "license": "MIT",
