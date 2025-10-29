@@ -12,48 +12,69 @@ import inspectorHandler from './ws/inspector'
 import passLogsHandler from './ws/passLogs'
 
 export async function createServer(options: Options) {
-  const { server, launchEditor, passLogs, inspector } = options
-  const { port, host } = server!
-  const _port = Number(port)!
-  const specifiedEditor = typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
-  try {
-    await fetch(`http://${host}:${_port}/health`)
-  }
-  catch {
-    if (launchEditor === false && passLogs === false && inspector === false)
-      return false
+    const { server, launchEditor, passLogs, inspector } = options
+    const { port, host } = server!
+    let _port = Number(port)!
+    const specifiedEditor = typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
 
-    const app = createApp()
-
-    // health
-    app.use('/health', health)
-
-    if (inspector)
-      app.use('/ws/inspector', inspectorHandler)
-
-    if (passLogs) {
-    // Pass server log route
-      app.use('/ws/passLogs', passLogsHandler)
-        .use('/send', send)
+    // check port availability, if not available, try to find available port
+    const findAvailablePort = async (startPort: number): Promise<number> => {
+        let currentPort = startPort
+        // try 10 times to find available port
+        for (let i = 0; i < 10; i++) {
+            try {
+                await fetch(`http://${host}:${currentPort}/health`)
+                currentPort++
+            } catch {
+                // useable
+                return currentPort
+            }
+        }
+        return startPort
     }
 
-    // Launch Editor server
-    if (launchEditor) {
-      app.use('/filePathMap', filePathMap)
-        .use('/launchEditor', launchEditorHandler(specifiedEditor))
+     _port = await findAvailablePort(_port)
+
+    try {
+        await fetch(`http://${host}:${_port}/health`)
     }
+    catch {
+        if (launchEditor === false && passLogs === false && inspector === false)
+            return false
 
-    if (launchEditor || inspector)
-      app.use('/', serveStatic)
+        const app = createApp()
 
-    const server = _createServer(toNodeListener(app))
+        // health
+        app.use('/health', health)
 
-    const { handleUpgrade } = wsAdapter(app.websocket as any)
+        if (inspector)
+            app.use('/ws/inspector', inspectorHandler)
 
-    server.on('upgrade', handleUpgrade)
+        if (passLogs) {
+            // Pass server log route
+            app.use('/ws/passLogs', passLogsHandler)
+                .use('/send', send)
+        }
 
-    env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = _port.toString()
+        // Launch Editor server
+        if (launchEditor) {
+            app.use('/filePathMap', filePathMap)
+                .use('/launchEditor', launchEditorHandler(specifiedEditor))
+        }
 
-    server.listen(_port)
-  }
+        if (launchEditor || inspector)
+            app.use('/', serveStatic)
+
+        const server = _createServer(toNodeListener(app))
+
+        const { handleUpgrade } = wsAdapter(app.websocket as any)
+
+        server.on('upgrade', handleUpgrade)
+
+        env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = _port.toString()
+
+        server.listen(_port)
+
+        console.log(`[unplugin-turbo-console] Server running on http://${host}:${_port}`)
+    }
 }
