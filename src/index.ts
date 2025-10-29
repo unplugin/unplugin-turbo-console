@@ -22,8 +22,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     const serverState = globalStore.get<boolean>('serverState')
     if (!serverState) {
       globalStore.set('serverState', true)
-      await createServer(options)
-      printInfo(options)
+      await createServer(options, () => printInfo(options))
     }
   }
 
@@ -88,20 +87,20 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         const serverState = globalStore.get<boolean>('serverState')
         if (!serverState) {
           globalStore.set('serverState', true)
-          await createServer(options)
+          await createServer(options, async () => {
+            const _print = server.printUrls
 
-          const _print = server.printUrls
-
-          const NuxtKit = await loadPkg('@nuxt/kit')
-          if (NuxtKit) {
-            printInfo(options, ' ')
-          }
-          else {
-            server.printUrls = () => {
-              _print()
-              printInfo(options)
+            const NuxtKit = await loadPkg('@nuxt/kit')
+            if (NuxtKit) {
+              printInfo(options, ' ')
             }
-          }
+            else {
+              server.printUrls = () => {
+                _print()
+                printInfo(options)
+              }
+            }
+          })
         }
       },
     },

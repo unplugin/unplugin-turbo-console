@@ -14,7 +14,7 @@ import serveStatic from './serveStatic'
 import inspectorHandler from './ws/inspector'
 import passLogsHandler from './ws/passLogs'
 
-export async function createServer(options: Options) {
+export async function createServer(options: Options, printInfoFn: () => void) {
   const { server, launchEditor, passLogs, inspector } = options
   const { port, host } = server!
   const specifiedEditor = typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
@@ -77,6 +77,7 @@ export async function createServer(options: Options) {
       options.server!.port = currentPort
       globalStore.set('port', currentPort)
       env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = currentPort.toString()
+      printInfoFn()
     })
 
     server.listen(currentPort)
