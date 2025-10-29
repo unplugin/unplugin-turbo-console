@@ -1,14 +1,15 @@
 /* eslint-disable no-console */
 import { defineWebSocketHandler } from 'h3'
 import { PLUGIN_NAME } from '../../constants'
-import { peersState } from '../../utils/state'
+import globalStore from '../../utils/globalStore'
 
 export default defineWebSocketHandler({
   open(peer) {
-    const peers = peersState()
-    peers.add(peer)
-
-    peersState(peers)
+    const peers = globalStore.get<Set<any>>('peers')
+    if (peers) {
+      peers.add(peer)
+      globalStore.set('peers', peers)
+    }
   },
   message(_peer, message) {
     try {

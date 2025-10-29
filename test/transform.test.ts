@@ -2,7 +2,7 @@ import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options/resolve'
 import { transform } from '../src/core/transform'
-import { filePathMapState } from '../src/core/utils/state'
+import globalStore from '../src/core/utils/globalStore'
 import { INCLUDES_HIGHLIGHT, SVELTE, THEME_DETECT, TSX, TYPESCRIPT, UTF_8, VUE_OPTIONS, VUE_SCRIPT_SETUP, VUE_SETUP_NO_LANG, WIN_PATH } from './fixtures/transform'
 
 vi.mock('node:process', () => {
@@ -21,7 +21,8 @@ mockFilePathMap.set('../../home/runner/main.js', 'mainjs')
 mockFilePathMap.set('../../home/runner/+page.svelte', 'pagtsx')
 mockFilePathMap.set('../../home/runner/page.tsx', 'svelte')
 
-filePathMapState(mockFilePathMap)
+globalStore.set('port', 3070)
+globalStore.set('filePathMap', mockFilePathMap)
 
 describe('vue transform', () => {
   it ('script setup', async () => {

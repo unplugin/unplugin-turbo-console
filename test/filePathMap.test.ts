@@ -1,22 +1,22 @@
 import { describe, expect, it } from 'vitest'
 import { setFilePathMap } from '../src/core/utils'
-import { filePathMapState } from '../src/core/utils/state'
+import globalStore from '../src/core/utils/globalStore'
 
 describe('file path map', () => {
   it('should generation', () => {
     setFilePathMap('src/app.vue')
 
-    expect(filePathMapState().get('src/app.vue')).toBeTruthy()
+    expect(globalStore.get<Map<string, string>>('filePathMap')?.get('src/app.vue')).toBeTruthy()
   })
 
   it('avoid duplicate generation', () => {
     const mockFilePathMap = new Map()
     mockFilePathMap.set('/home/runner/main.ts', 'commsx')
 
-    filePathMapState(mockFilePathMap)
+    globalStore.set('filePathMap', mockFilePathMap)
 
     setFilePathMap('/home/runner/main.ts')
 
-    expect(filePathMapState().get('/home/runner/main.ts')).toBe('commsx')
+    expect(globalStore.get<Map<string, string>>('filePathMap')?.get('/home/runner/main.ts')).toBe('commsx')
   })
 })

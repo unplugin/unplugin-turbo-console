@@ -1,7 +1,7 @@
 import type { Options } from './core/options/type'
 import { addImports, addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
 import { getPort } from 'get-port-please'
-import { NUXT_CONFIG_KEY, PLUGIN_NAME } from './core/constants'
+import { NUXT_CONFIG_KEY, PLUGIN_NAME, PLUGIN_SERVER_DEFAULT_PORT, PLUGIN_SERVER_PORT_RANGE } from './core/constants'
 import vite from './vite'
 import webpack from './webpack'
 
@@ -27,13 +27,13 @@ export default defineNuxtModule<Options>({
     })
 
     options.server = {
-      port: options.server?.port ?? 3070,
+      port: options.server?.port ?? PLUGIN_SERVER_DEFAULT_PORT,
       host: options.server?.host ?? '127.0.0.1',
     }
 
     options.server.port = await getPort({
       port: options.server.port!,
-      portRange: [3070, 6000],
+      portRange: PLUGIN_SERVER_PORT_RANGE,
     })
 
     // @ts-expect-error missing type

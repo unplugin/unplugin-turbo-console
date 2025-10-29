@@ -3,14 +3,14 @@ import { defineEventHandler, getQuery } from 'h3'
 import launch from 'launch-editor'
 import { resolve } from 'pathe'
 import { version } from '../../../package.json'
-import { filePathMapState } from '../utils/state'
+import globalStore from '../utils/globalStore'
 
 export function launchEditor(specifiedEditor?: string) {
   return defineEventHandler(async (event) => {
     try {
       const { position, path } = getQuery(event) as { position?: string, path?: string }
       if (position) {
-        const filePathMap = filePathMapState()
+        const filePathMap = globalStore.get<Map<string, string>>('filePathMap')
 
         if (!filePathMap)
           throw new Error('filePathMap is undefined')

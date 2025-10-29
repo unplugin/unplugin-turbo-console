@@ -3,7 +3,6 @@ import type { Options } from './core/options/type'
 import type { Context } from './types'
 import { randomUUID } from 'node:crypto'
 import { cwd, env } from 'node:process'
-import { getPort } from 'get-port-please'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
@@ -11,26 +10,20 @@ import { resolveOptions } from './core/options/resolve'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
 import { loadPkg, printInfo } from './core/utils'
-import { expressionsMapState, serverState } from './core/utils/state'
+import globalStore from './core/utils/globalStore'
+import { expressionsMapState } from './core/utils/signal'
 import { initVirtualModulesGenerator, serverInfoVirtualModule, themeDetectVirtualModule, viteDevToolsVirtualModuleGenerator } from './core/utils/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
 
-  async function detectPort() {
-    options.server.port = await getPort({
-      port: options.server.port!,
-      portRange: [3070, 6000],
-    })
-  }
-
   async function startTurboConsoleServer() {
     // Avoid start server multiple times
-    if (!serverState()) {
-      serverState(true)
-      await detectPort()
+    const serverState = globalStore.get<boolean>('serverState')
+    if (!serverState) {
+      globalStore.set('serverState', true)
+      await createServer(options)
       printInfo(options)
-      createServer(options)
     }
   }
 
@@ -92,10 +85,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     vite: {
       async configureServer(server) {
         // Avoid start server multiple times
-        if (!serverState()) {
-          serverState(true)
-          await detectPort()
-          createServer(options)
+        const serverState = globalStore.get<boolean>('serverState')
+        if (!serverState) {
+          globalStore.set('serverState', true)
+          await createServer(options)
 
           const _print = server.printUrls
 

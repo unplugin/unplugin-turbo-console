@@ -3,7 +3,8 @@ import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
-import { addExpression, filePathMapState } from './state'
+import globalStore from './globalStore'
+import { addExpression } from './signal'
 import { builtInThemes, getStyleCode } from './themes'
 
 function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
@@ -27,14 +28,18 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
 
 export function setFilePathMap(filePath: string): string {
   // 获取文件路径映射
-
-  if (filePathMapState().has(filePath))
-    return filePathMapState().get(filePath)!
+  let filePathMap = globalStore.get<Map<string, string>>('filePathMap')
+  if (!filePathMap) {
+    filePathMap = new Map()
+    globalStore.set('filePathMap', filePathMap)
+  }
+  if (filePathMap.has(filePath))
+    return filePathMap.get(filePath)!
 
   function getRandomString() {
     const randomString = Math.random().toString(20).substring(2, 6)
 
-    for (const [_, value] of filePathMapState()) {
+    for (const [_, value] of filePathMap!) {
       if (value === randomString)
         return getRandomString()
     }
@@ -44,7 +49,8 @@ export function setFilePathMap(filePath: string): string {
 
   const randomString = getRandomString()
 
-  filePathMapState(filePathMapState().set(filePath, randomString))
+  filePathMap.set(filePath, randomString)
+  globalStore.set('filePathMap', filePathMap)
 
   return randomString
 }
@@ -53,7 +59,8 @@ export function genConsoleString(genContext: GenContext) {
   const { options, originalColumn, originalLine, argType, id, consoleMethod } = genContext
   let { argsName } = genContext
   const { prefix, suffix, launchEditor, server, highlight } = options
-  const { port, host } = server!
+  const { host } = server!
+  const port = globalStore.get<number>('port')
   const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const themeDetect = typeof highlight === 'object' ? highlight.themeDetect : false
   const _prefix = prefix ? `${prefix}\\n` : ''

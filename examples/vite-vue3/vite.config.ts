@@ -12,10 +12,7 @@ export default defineConfig({
     vueDevTools(),
     vue(),
     inspect(),
-    TurboConsole({
-      prefix: '🚀🚀🚀🚀🚀🚀',
-      suffix: '💡💡💡💡💡',
-    }),
+    TurboConsole(),
   ],
   resolve: {
     alias: {

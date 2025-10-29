@@ -1,7 +1,7 @@
 import { effect } from 'alien-signals'
 import { defineWebSocketHandler } from 'h3'
 import { version } from '../../../../package.json'
-import { expressionsMapState } from '../../utils/state'
+import { expressionsMapState } from '../../utils/signal'
 
 const connections = new Map<string, any>()
 

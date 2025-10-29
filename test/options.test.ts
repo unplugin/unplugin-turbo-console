@@ -2,7 +2,7 @@ import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vitest'
 import { resolveOptions } from '../src/core/options/resolve'
 import { transform } from '../src/core/transform'
-import { filePathMapState } from '../src/core/utils/state'
+import globalStore from '../src/core/utils/globalStore'
 import { DISABLE_ALL, DISABLE_HIGHLIGHT, DISABLE_LAUNCH_EDITOR, EMPTY, EXTENDED_PATH, WITH_PREFIX } from './fixtures/option'
 
 vi.mock('node:process', () => {
@@ -18,7 +18,8 @@ const mockFilePathMap = new Map()
 mockFilePathMap.set('../../home/runner/main.js', 'fgsss')
 mockFilePathMap.set('../../home/runner/index.js', 'sfgha')
 
-filePathMapState(mockFilePathMap)
+globalStore.set('port', 3070)
+globalStore.set('filePathMap', mockFilePathMap)
 
 describe('transform options', () => {
   it('empty option', async () => {

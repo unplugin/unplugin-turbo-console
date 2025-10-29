@@ -2,8 +2,6 @@ import type { ExpressionMeta, ExpressionsMap } from '../../types'
 import { randomUUID } from 'node:crypto'
 import { signal } from 'alien-signals'
 
-export const filePathMapState = signal(new Map<string, string>())
-
 export const expressionsMapState = signal(new Map<string, ExpressionsMap>())
 
 export function addExpression(relativePath: string, expressionMeta: ExpressionMeta) {
@@ -25,6 +23,3 @@ export function addExpression(relativePath: string, expressionMeta: ExpressionMe
     expressionsMapState(newMap)
   }
 }
-
-export const serverState = signal(false)
-export const peersState = signal(new Set<any>())
