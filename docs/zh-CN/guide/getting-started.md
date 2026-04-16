@@ -136,7 +136,7 @@ export default defineConfig({
 
 ::: code-group
 
-``` ts{4} [Nuxt]
+```ts{4} [Nuxt]
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: [

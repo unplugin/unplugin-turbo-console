@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import "~console";
-import '~console/theme-detect';
+import '~console'
+import '~console/theme-detect'
 
 function makeFetch() {
-  fetch("/api/test");
+  fetch('/api/test')
 }
 
 function vueLog() {
-  console.log("Hello Vue");
+  console.log('Hello Vue')
 }
 
 function clientToServer() {
-  server.log("Hello Client");
+  server.log('Hello Client')
 }
 </script>
 

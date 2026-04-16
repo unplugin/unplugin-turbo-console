@@ -1,13 +1,12 @@
 {
   "name": "client",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
   "description": "",
-  "author": "",
-  "license": "ISC",
   "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "nuxi dev",
@@ -26,5 +25,6 @@
     "nuxt": "catalog:",
     "reka-ui": "^2.4.1",
     "shiki": "^3.9.2"
-  }
+  },
+  "packageManager": "pnpm@10.14.0"
 }

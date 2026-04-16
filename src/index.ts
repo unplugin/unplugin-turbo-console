@@ -12,7 +12,12 @@ import { transform } from './core/transform/index'
 import { loadPkg, printInfo } from './core/utils'
 import globalStore from './core/utils/globalStore'
 import { expressionsMapState } from './core/utils/signal'
-import { initVirtualModulesGenerator, serverInfoVirtualModule, themeDetectVirtualModule, viteDevToolsVirtualModuleGenerator } from './core/utils/virtualModules'
+import {
+  initVirtualModulesGenerator,
+  serverInfoVirtualModule,
+  themeDetectVirtualModule,
+  viteDevToolsVirtualModuleGenerator,
+} from './core/utils/virtualModules'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
   const options = resolveOptions(rawOptions)
@@ -35,33 +40,46 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       }
     },
     loadInclude(id) {
-      if (!id.startsWith('\0'))
-        return false
+      if (!id.startsWith('\0')) return false
       id = id.slice(1)
       return Object.values(VirtualModules).includes(id)
     },
     load(id) {
-      if (!id.startsWith('\0'))
-        return
+      if (!id.startsWith('\0')) return
       id = id.slice(1)
 
       if (id === VirtualModules.Init) {
-        return initVirtualModulesGenerator(options.server.host!, options.server.port!, env.NODE_ENV === 'production')
-      }
-      else if (id === VirtualModules.ThemeDetect) {
+        return initVirtualModulesGenerator(
+          options.server.host!,
+          options.server.port!,
+          env.NODE_ENV === 'production',
+        )
+      } else if (id === VirtualModules.ThemeDetect) {
         return themeDetectVirtualModule(env.NODE_ENV === 'production')
-      }
-      else if (id === VirtualModules.VueDevTools) {
-        return viteDevToolsVirtualModuleGenerator(options.server.host!, options.server.port!, env.NODE_ENV === 'production')
-      }
-      else if (id === VirtualModules.ServerInfo) {
+      } else if (id === VirtualModules.VueDevTools) {
+        return viteDevToolsVirtualModuleGenerator(
+          options.server.host!,
+          options.server.port!,
+          env.NODE_ENV === 'production',
+        )
+      } else if (id === VirtualModules.ServerInfo) {
         return serverInfoVirtualModule(options.server.host!, options.server.port!)
       }
     },
     transform: {
       filter: {
         id: {
-          include: [/\.vue$/, /\.vue(\.[tj]sx?)?\?vue/, /\.vue\?v=/, /\.ts$/, /\.tsx$/, /\.js$/, /\.jsx$/, /\.svelte$/, /\.astro$/],
+          include: [
+            /\.vue$/,
+            /\.vue(\.[tj]sx?)?\?vue/,
+            /\.vue\?v=/,
+            /\.ts$/,
+            /\.tsx$/,
+            /\.js$/,
+            /\.jsx$/,
+            /\.svelte$/,
+            /\.astro$/,
+          ],
           exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
         },
       },
@@ -74,8 +92,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           }
 
           return await transform(context)
-        }
-        catch (error) {
+        } catch (error) {
           console.error(`[${PLUGIN_NAME}]`, `Transform ${relative(cwd(), id)} error:`, error)
           return code
         }
@@ -93,8 +110,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
             const NuxtKit = await loadPkg('@nuxt/kit')
             if (NuxtKit) {
               printInfo(options, ' ')
-            }
-            else {
+            } else {
               server.printUrls = () => {
                 _print()
                 printInfo(options)
@@ -111,9 +127,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     webpack(compiler) {
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
-          if (state.hasErrors())
-            return
+        compiler.hooks.done.tap(PLUGIN_NAME, async state => {
+          if (state.hasErrors()) return
 
           startTurboConsoleServer()
         })
@@ -121,9 +136,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     rspack(compiler) {
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tap(PLUGIN_NAME, async (state) => {
-          if (state.hasErrors())
-            return
+        compiler.hooks.done.tap(PLUGIN_NAME, async state => {
+          if (state.hasErrors()) return
 
           startTurboConsoleServer()
         })
@@ -143,8 +157,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           expressions: [],
         })
         expressionsMapState(newMap)
-      }
-      else if (change.event === 'delete') {
+      } else if (change.event === 'delete') {
         const currentMap = expressionsMapState()
         const newMap = new Map(currentMap)
         newMap.delete(relativePath)

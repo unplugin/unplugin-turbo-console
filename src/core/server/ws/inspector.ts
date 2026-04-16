@@ -15,7 +15,7 @@ function formatedResponse(expressionsMap: any) {
 
 effect(() => {
   const expressionsMap = expressionsMapState()
-  connections.forEach((peer) => {
+  connections.forEach(peer => {
     peer.send(formatedResponse(Object.fromEntries(expressionsMap)))
   })
 })

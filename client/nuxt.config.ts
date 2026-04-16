@@ -15,12 +15,7 @@ export default defineNuxtConfig({
       websocket: true,
     },
   },
-  modules: [
-    'reka-ui/nuxt',
-    '@nuxtjs/color-mode',
-    '@nuxt/icon',
-    '@vueuse/nuxt',
-  ],
+  modules: ['reka-ui/nuxt', '@nuxtjs/color-mode', '@nuxt/icon', '@vueuse/nuxt'],
   icon: {
     clientBundle: {
       scan: true,
@@ -30,9 +25,7 @@ export default defineNuxtConfig({
     preference: 'dark',
   },
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
   app: {
     head: {

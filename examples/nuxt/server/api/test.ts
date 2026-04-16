@@ -1,4 +1,4 @@
-export default defineEventHandler((event) => {
+export default defineEventHandler(() => {
   client.log('fff')
   return {
     test: 'test',

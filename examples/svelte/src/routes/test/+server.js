@@ -1,10 +1,10 @@
-import { json } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit'
 import { tConsole } from 'unplugin-turbo-console/helper'
 
 export function GET() {
-	const number = Math.floor(Math.random() * 6) + 1;
+  const number = Math.floor(Math.random() * 6) + 1
   tConsole.log({
-    number
+    number,
   })
-	return json(number);
+  return json(number)
 }

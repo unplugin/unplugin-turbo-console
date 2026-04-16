@@ -11,6 +11,6 @@ By configuring the `prefix` and `suffix` options, you can customize the prefix a
 ```js
 TurboConsole({
   prefix: '👇👇👇👇👇',
-  suffix: '👆👆👆👆👆'
+  suffix: '👆👆👆👆👆',
 })
 ```

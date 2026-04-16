@@ -17,10 +17,8 @@ function serverLog() {
 <template>
   <h1>Unplugin Turbo Console Playground(Vite + Vue3)</h1>
 
-  <h2>
-    Highlight Output
-  </h2>
-  <div style="display: flex; gap: 10px;">
+  <h2>Highlight Output</h2>
+  <div style="display: flex; gap: 10px">
     <button @click="logVue">logVue</button>
 
     <button @click="logJs">logJs</button>
@@ -28,11 +26,9 @@ function serverLog() {
     <button @click="logTs">logTs</button>
   </div>
 
-  <h2>
-    Pass Logs
-  </h2>
+  <h2>Pass Logs</h2>
 
-  <div style="display: flex; gap: 10px;">
+  <div style="display: flex; gap: 10px">
     <button @click="serverLog">Client -> Server</button>
   </div>
 </template>

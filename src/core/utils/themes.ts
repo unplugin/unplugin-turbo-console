@@ -76,17 +76,20 @@ export const builtInThemes: Themes = {
 export function getStyleCode(fileType: FileExt, themeDetect: boolean = false) {
   const theme = builtInThemes.highlight[fileType]!
 
-  const highlight = Object.entries(theme).map(([key, value]) => {
-    if (key === 'background' && themeDetect)
-      return `${key}:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '${value}90;' : '${value};'\}`
-    return `${key}:${value};`
-  }).join('')
-
-  const launchEditor = Object.entries(builtInThemes.launchEditor).map(([key, value]) => {
-    if (key !== 'icon')
+  const highlight = Object.entries(theme)
+    .map(([key, value]) => {
+      if (key === 'background' && themeDetect)
+        return `${key}:\${globalThis._UTC_DETECT_DARK && globalThis._UTC_DETECT_DARK() ? '${value}90;' : '${value};'}`
       return `${key}:${value};`
-    return ''
-  }).join('')
+    })
+    .join('')
+
+  const launchEditor = Object.entries(builtInThemes.launchEditor)
+    .map(([key, value]) => {
+      if (key !== 'icon') return `${key}:${value};`
+      return ''
+    })
+    .join('')
 
   return {
     launchEditor: `\`${launchEditor}\``,

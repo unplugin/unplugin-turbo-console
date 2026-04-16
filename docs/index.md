@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: "Unplugin Turbo Console"
-  tagline: "Improve the Developer Experience of Console"
+  name: 'Unplugin Turbo Console'
+  tagline: 'Improve the Developer Experience of Console'
   image:
     src: /logo.svg
     alt: Vue Macros

@@ -4,5 +4,20 @@ packages:
   - client
 catalog:
   nuxt: ^4.0.3
-  vite: ^7.1.2
-  vite-plugin-inspect: ^11.3.2
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite-plugin-inspect: ^11.3.3
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vite-plus: latest
+
+ignoreWorkspaceRootCheck: true
+shamefullyHoist: true
+overrides:
+  vite: 'catalog:'
+  vitest: 'catalog:'
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: '*'
+    vitest: '*'

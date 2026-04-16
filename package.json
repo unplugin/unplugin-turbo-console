@@ -1,25 +1,39 @@
 {
   "name": "unplugin-turbo-console",
-  "type": "module",
   "version": "2.3.0",
-  "packageManager": "pnpm@10.14.0",
   "description": "Improve the Developer Experience of console",
-  "license": "MIT",
+  "keywords": [
+    "rollup",
+    "transform",
+    "unplugin",
+    "vite",
+    "webpack"
+  ],
   "homepage": "https://utc.yuy1n.io",
+  "bugs": {
+    "url": "https://github.com/unplugin/unplugin-turbo-console/issues"
+  },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/unplugin/unplugin-turbo-console.git"
   },
-  "bugs": {
-    "url": "https://github.com/unplugin/unplugin-turbo-console/issues"
-  },
-  "keywords": [
-    "unplugin",
-    "vite",
-    "webpack",
-    "rollup",
-    "transform"
+  "files": [
+    "client.d.ts",
+    "dist"
   ],
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -75,30 +89,12 @@
       "types": "./client.d.ts"
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
-  "files": [
-    "client.d.ts",
-    "dist"
-  ],
-  "engines": {
-    "node": ">=20"
-  },
   "scripts": {
-    "build": "tsdown",
+    "build": "vp pack",
     "build:client": "pnpm run --filter client build",
-    "dev": "tsdown --watch",
+    "dev": "vp pack --watch",
     "dev:client": "pnpm run --filter client dev",
-    "lint": "eslint .",
+    "lint": "vp lint .",
     "play:vite-vue3": "pnpm run --filter vite-vue3 dev",
     "play:nuxt": "pnpm run --filter nuxt-app dev",
     "play:vue3-cli": "pnpm run --filter vue3-cli serve",
@@ -113,7 +109,37 @@
     "docs:build": "pnpm run -C ./docs build",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
-    "test": "vitest"
+    "test": "vp test",
+    "prepare": "vp config"
+  },
+  "dependencies": {
+    "alien-signals": "^2.0.6",
+    "estree-walker": "^3.0.3",
+    "get-port-please": "^3.2.0",
+    "h3": "^1.15.4",
+    "launch-editor": "^2.11.1",
+    "magic-string": "^0.30.17",
+    "mrmime": "^2.0.1",
+    "oxc-parser": "^0.82.1",
+    "pathe": "^2.0.3",
+    "unplugin": "^2.3.5"
+  },
+  "devDependencies": {
+    "@nuxt/kit": "^4.0.3",
+    "@nuxt/schema": "^4.0.3",
+    "@oxc-project/types": "^0.82.1",
+    "@tailwindcss/vite": "^4.1.12",
+    "@types/node": "^24.2.1",
+    "@vitest/ui": "^3.2.4",
+    "bumpp": "^10.2.3",
+    "rollup": "^4.46.2",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2",
+    "vite": "catalog:",
+    "vite-plugin-inspect": "catalog:",
+    "vite-plus": "catalog:",
+    "vue": "^3.5.18",
+    "webpack": "^5.101.2"
   },
   "peerDependencies": {
     "@farmfe/core": ">=1",
@@ -155,38 +181,10 @@
       "optional": true
     }
   },
-  "dependencies": {
-    "alien-signals": "^2.0.6",
-    "estree-walker": "^3.0.3",
-    "get-port-please": "^3.2.0",
-    "h3": "^1.15.4",
-    "launch-editor": "^2.11.1",
-    "magic-string": "^0.30.17",
-    "mrmime": "^2.0.1",
-    "oxc-parser": "^0.82.1",
-    "pathe": "^2.0.3",
-    "unplugin": "^2.3.5"
+  "engines": {
+    "node": ">=20"
   },
-  "devDependencies": {
-    "@antfu/eslint-config": "^5.2.1",
-    "@nuxt/kit": "^4.0.3",
-    "@nuxt/schema": "^4.0.3",
-    "@oxc-project/types": "^0.82.1",
-    "@tailwindcss/vite": "^4.1.12",
-    "@types/node": "^24.2.1",
-    "@vitest/ui": "^3.2.4",
-    "bumpp": "^10.2.3",
-    "eslint": "^9.33.0",
-    "rollup": "^4.46.2",
-    "tsdown": "^0.14.1",
-    "tsx": "^4.20.4",
-    "typescript": "^5.9.2",
-    "vite": "catalog:",
-    "vite-plugin-inspect": "catalog:",
-    "vitest": "^3.2.4",
-    "vue": "^3.5.18",
-    "webpack": "^5.101.2"
-  },
+  "packageManager": "pnpm@10.33.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@sveltejs/kit",

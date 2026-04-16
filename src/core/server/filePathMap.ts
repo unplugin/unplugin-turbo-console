@@ -11,8 +11,7 @@ export default defineEventHandler(async () => {
       filePathMap: filePathMap ? Object.fromEntries(filePathMap) : {},
       version,
     }
-  }
-  catch (error) {
+  } catch (error) {
     return {
       status: 'error',
       filePathMap: {},

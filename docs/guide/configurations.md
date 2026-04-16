@@ -11,9 +11,7 @@ There are two ways to configure the TypeScript type:
 ```json [tsconfig.json]
 {
   "compilerOptions": {
-    "types": [
-      "unplugin-turbo-console/client"
-    ]
+    "types": ["unplugin-turbo-console/client"]
   }
 }
 ```

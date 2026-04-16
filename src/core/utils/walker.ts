@@ -2,10 +2,57 @@
 import type { Node as ESTreeNode, Program as ESTreeProgram } from 'estree'
 import type { SyncHandler } from 'estree-walker'
 
-import type { CatchClause, ClassBody, Declaration, ExportSpecifier, Expression, ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier, JSXAttributeItem, JSXChild, MethodDefinition, ModuleDeclaration, ObjectProperty, Pattern, PrivateIdentifier, Program, PropertyDefinition, SpreadElement, Statement, Super, SwitchCase, TemplateElement, VariableDeclarator } from 'oxc-parser'
+import type {
+  CatchClause,
+  ClassBody,
+  Declaration,
+  ExportSpecifier,
+  Expression,
+  ImportDefaultSpecifier,
+  ImportNamespaceSpecifier,
+  ImportSpecifier,
+  JSXAttributeItem,
+  JSXChild,
+  MethodDefinition,
+  ModuleDeclaration,
+  ObjectProperty,
+  Pattern,
+  PrivateIdentifier,
+  Program,
+  PropertyDefinition,
+  SpreadElement,
+  Statement,
+  Super,
+  SwitchCase,
+  TemplateElement,
+  VariableDeclarator,
+} from 'oxc-parser'
 
 /** estree also has AssignmentProperty, Identifier and Literal as possible node types */
-export type Node = Declaration | VariableDeclarator | Expression | ClassBody | CatchClause | MethodDefinition | ModuleDeclaration | ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier | ExportSpecifier | Pattern | PrivateIdentifier | Program | SpreadElement | Statement | Super | SwitchCase | TemplateElement | ObjectProperty | PropertyDefinition | JSXAttributeItem | JSXChild
+export type Node =
+  | Declaration
+  | VariableDeclarator
+  | Expression
+  | ClassBody
+  | CatchClause
+  | MethodDefinition
+  | ModuleDeclaration
+  | ImportSpecifier
+  | ImportDefaultSpecifier
+  | ImportNamespaceSpecifier
+  | ExportSpecifier
+  | Pattern
+  | PrivateIdentifier
+  | Program
+  | SpreadElement
+  | Statement
+  | Super
+  | SwitchCase
+  | TemplateElement
+  | ObjectProperty
+  | PropertyDefinition
+  | JSXAttributeItem
+  | JSXChild
 
 interface WalkerCallbackContext {
   /**
@@ -49,7 +96,12 @@ interface WalkerCallbackContext {
   ast: Program | Node
 }
 
-type WalkerCallback = (this: ThisParameterType<SyncHandler>, node: Node, parent: Node | null, ctx: WalkerCallbackContext) => void
+type WalkerCallback = (
+  this: ThisParameterType<SyncHandler>,
+  node: Node,
+  parent: Node | null,
+  ctx: WalkerCallbackContext,
+) => void
 
 interface WalkOptions {
   /**
@@ -70,15 +122,12 @@ interface WalkOptions {
 export async function walk(input: Program | Node, options: Partial<WalkOptions>) {
   const { walk: _walk } = await import('estree-walker')
 
-  return _walk(
-    input as unknown as ESTreeProgram | ESTreeNode,
-    {
-      enter(node, parent, key, index) {
-        options.enter?.call(this, node as Node, parent as Node | null, { key, index, ast: input })
-      },
-      leave(node, parent, key, index) {
-        options.leave?.call(this, node as Node, parent as Node | null, { key, index, ast: input })
-      },
+  return _walk(input as unknown as ESTreeProgram | ESTreeNode, {
+    enter(node, parent, key, index) {
+      options.enter?.call(this, node as Node, parent as Node | null, { key, index, ast: input })
     },
-  ) as Program | Node | null
+    leave(node, parent, key, index) {
+      options.leave?.call(this, node as Node, parent as Node | null, { key, index, ast: input })
+    },
+  }) as Program | Node | null
 }

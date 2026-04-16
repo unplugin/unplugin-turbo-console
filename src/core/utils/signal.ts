@@ -8,12 +8,15 @@ export function addExpression(relativePath: string, expressionMeta: ExpressionMe
   const currentMap = expressionsMapState()
   const expressions = currentMap.get(relativePath)?.expressions || []
 
-  if (!expressions.some((item: ExpressionMeta) =>
-    item.code === expressionMeta.code
-    && item.method === expressionMeta.method
-    && item.line === expressionMeta.line
-    && item.column === expressionMeta.column,
-  )) {
+  if (
+    !expressions.some(
+      (item: ExpressionMeta) =>
+        item.code === expressionMeta.code &&
+        item.method === expressionMeta.method &&
+        item.line === expressionMeta.line &&
+        item.column === expressionMeta.column,
+    )
+  ) {
     const newMap = new Map(currentMap)
     newMap.set(relativePath, {
       id: randomUUID(),
