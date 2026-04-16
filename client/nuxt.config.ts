@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   ssr: false,
-  css: ['./app/assets/main.css'],
+  css: ['~/assets/main.css'],
   nitro: {
     preset: 'static',
     output: {
@@ -15,7 +15,15 @@ export default defineNuxtConfig({
       websocket: true,
     },
   },
-  modules: ['reka-ui/nuxt', '@nuxtjs/color-mode', '@nuxt/icon', '@vueuse/nuxt'],
+  hooks: {
+    'nitro:config'(nitroConfig) {
+      const imports = (nitroConfig as { imports?: { imports?: Array<{ name?: string }> } }).imports
+      if (!imports?.imports) {
+        return
+      }
+      imports.imports = imports.imports.filter(i => i?.name !== 'useAppConfig')
+    },
+  },
   icon: {
     clientBundle: {
       scan: true,
