@@ -5,19 +5,17 @@ async function generateFetchUrl(args: any[], method: TCMethod) {
   const { env } = await import('node:process')
   const port = env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT
 
-  if (!port)
-    console.warn(`[${PLUGIN_NAME}]: UNPLUGIN_TURBO_CONSOLE_SERVER_PORT env not found`)
+  if (!port) console.warn(`[${PLUGIN_NAME}]: UNPLUGIN_TURBO_CONSOLE_SERVER_PORT env not found`)
 
   return `http://localhost:${port || 3070}/send?m=${JSON.stringify(args)}&t=${method}`
 }
 
 async function handleClient(method: TCMethod, ...args: any[]) {
-  (console as any)[method](...args)
+  ;(console as any)[method](...args)
   const { env } = await import('node:process')
-  if (globalThis.window || env.NODE_ENV === 'production')
-    return
+  if (globalThis.window || env.NODE_ENV === 'production') return
 
-  generateFetchUrl(args, method).then((url) => {
+  generateFetchUrl(args, method).then(url => {
     fetch(url).catch(() => {})
   })
 }
@@ -32,8 +30,9 @@ export const client: TConsole = {
 }
 
 function handleServer(method: TCMethod, ...args: any[]) {
-  (console as any)[method](...args)
-  const socket: WebSocket | undefined = (globalThis?.window as any)?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
+  ;(console as any)[method](...args)
+  const socket: WebSocket | undefined = (globalThis?.window as any)
+    ?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
   if (socket && socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify({ m: JSON.stringify(args), t: method }))
   }

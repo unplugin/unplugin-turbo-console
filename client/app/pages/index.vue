@@ -26,7 +26,18 @@ async function init() {
     }
 
     if (position) {
-      const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?position=${(position)}&path=${(path)}`)
+      const response = await $fetch<LaunchEditorServerResponse>(
+        `/launchEditor?position=${position}&path=${path}`,
+      )
+      if (response.status !== 'success') {
+        throw new Error(response.message || 'Unknown error')
+      }
+      launchEditorServerResponse.value = response
+      requestState.value.status = 'success'
+      requestState.value.version = response.version
+      window.close()
+    } else if (path) {
+      const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?path=${path}`)
       if (response.status !== 'success') {
         throw new Error(response.message || 'Unknown error')
       }
@@ -35,19 +46,7 @@ async function init() {
       requestState.value.version = response.version
       window.close()
     }
-    else if (path) {
-      const response = await $fetch<LaunchEditorServerResponse>(`/launchEditor?path=${(path)}`)
-      if (response.status !== 'success') {
-        throw new Error(response.message || 'Unknown error')
-      }
-      launchEditorServerResponse.value = response
-      requestState.value.status = 'success'
-      requestState.value.version = response.version
-      window.close()
-    }
-  }
-
-  catch (error: any) {
+  } catch (error: any) {
     console.error(error)
     requestState.value = {
       status: 'error',
@@ -69,7 +68,9 @@ init()
       </div>
     </div>
     <div v-else-if="requestState.status === 'error'" class="flex pt-64 px-8">
-      <div class="text-red-500 dark:text-red-400 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 w-full">
+      <div
+        class="text-red-500 dark:text-red-400 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 w-full"
+      >
         <div class="flex items-center gap-2 mb-2">
           <Icon name="uil:exclamation-triangle" class="text-xl" />
           <span class="font-medium">Error</span>
@@ -80,14 +81,14 @@ init()
       </div>
     </div>
     <div v-else-if="requestState.status === 'success'">
-      <div class="text-green-500 dark:text-green-400 p-4 rounded-lg bg-green-50 dark:bg-green-900/20">
+      <div
+        class="text-green-500 dark:text-green-400 p-4 rounded-lg bg-green-50 dark:bg-green-900/20"
+      >
         <div class="flex items-center gap-2 mb-2">
           <Icon name="uil:check-circle" class="text-xl" />
           <span class="font-medium">Success</span>
         </div>
-        <div class="text-sm">
-          🎉 Launch to editor trigger success!
-        </div>
+        <div class="text-sm">🎉 Launch to editor trigger success!</div>
       </div>
     </div>
   </div>

@@ -8,9 +8,7 @@ defineProps<{
 <template>
   <div class="flex gap-4">
     <div class="flex items-center gap-2 my-2">
-      <div class="bg-[#4577c0] text-12px font-600 text-white px-2 rounded-md">
-        Type
-      </div>
+      <div class="bg-[#4577c0] text-12px font-600 text-white px-2 rounded-md">Type</div>
 
       <code>
         {{ type }}
@@ -18,9 +16,7 @@ defineProps<{
     </div>
 
     <div class="flex items-center gap-2 my-2">
-      <div class="bg-[#f59e0b] text-12px font-600 text-white px-2 rounded-md">
-        Default
-      </div>
+      <div class="bg-[#f59e0b] text-12px font-600 text-white px-2 rounded-md">Default</div>
 
       <code>
         {{ defaultValue }}

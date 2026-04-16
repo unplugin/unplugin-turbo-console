@@ -11,8 +11,6 @@ export function logTs() {
   // const jkl = '你4445jj5好'
   // console.log(jkl)
 
-        const mno = '你4445jj5好'
-        console.log(mno)
-  
-  
+  const mno = '你4445jj5好'
+  console.log(mno)
 }

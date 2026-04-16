@@ -27,8 +27,7 @@ export async function svelteCompiler(context: Context): Promise<CompileResult> {
       offset: 0,
       line: 0,
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(`${PLUGIN_NAME}:${error}`)
     return {
       script: '',

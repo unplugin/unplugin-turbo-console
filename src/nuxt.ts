@@ -1,7 +1,12 @@
 import type { Options } from './core/options/type'
 import { addImports, addVitePlugin, addWebpackPlugin, defineNuxtModule } from '@nuxt/kit'
 import { getPort } from 'get-port-please'
-import { NUXT_CONFIG_KEY, PLUGIN_NAME, PLUGIN_SERVER_DEFAULT_PORT, PLUGIN_SERVER_PORT_RANGE } from './core/constants'
+import {
+  NUXT_CONFIG_KEY,
+  PLUGIN_NAME,
+  PLUGIN_SERVER_DEFAULT_PORT,
+  PLUGIN_SERVER_PORT_RANGE,
+} from './core/constants'
 import vite from './vite'
 import webpack from './webpack'
 
@@ -17,7 +22,7 @@ export default defineNuxtModule<Options>({
       from: 'unplugin-turbo-console/helper',
     })
 
-    nuxt.hook('nitro:config', (config) => {
+    nuxt.hook('nitro:config', config => {
       config.imports = config.imports || {}
       config.imports.imports = config.imports.imports || []
       config.imports.imports.push({

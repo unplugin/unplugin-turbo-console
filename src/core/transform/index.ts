@@ -1,7 +1,13 @@
 import type { Context } from './../../types'
 import MagicString from 'magic-string'
 import { parseSync } from 'oxc-parser'
-import { genConsoleString, getCompiler, getLineAndColumn, isConsoleExpression, isPluginDisable } from '../utils'
+import {
+  genConsoleString,
+  getCompiler,
+  getLineAndColumn,
+  isConsoleExpression,
+  isPluginDisable,
+} from '../utils'
 import { walk } from '../utils/walker'
 import { compilers } from './compilers'
 
@@ -32,14 +38,16 @@ export async function transform(context: Context) {
 
   const { program, comments = [] } = oxcParsedResult
 
-  if (isPluginDisable({
-    comments,
-    originalLine: 1,
-    id,
-    type: 'top-file',
-    compiler,
-    script: compileResult.script,
-  })) {
+  if (
+    isPluginDisable({
+      comments,
+      originalLine: 1,
+      id,
+      type: 'top-file',
+      compiler,
+      script: compileResult.script,
+    })
+  ) {
     return {
       code: magicString.toString(),
       map: magicString.generateMap({
@@ -56,22 +64,23 @@ export async function transform(context: Context) {
       if (isConsoleExpression(node)) {
         const originalExpression = compileResult.script.slice(node.start, node.end)
 
-        if (originalExpression.includes('%c'))
-          return false
+        if (originalExpression.includes('%c')) return false
 
         const { line, column } = getLineAndColumn(compileResult.script, node.start)
 
         const originalLine = line + compileResult.line
         const originalColumn = column
 
-        if (isPluginDisable({
-          comments,
-          originalLine: line,
-          id,
-          type: 'inline-file',
-          compiler,
-          script: compileResult.script,
-        })) {
+        if (
+          isPluginDisable({
+            comments,
+            originalLine: line,
+            id,
+            type: 'inline-file',
+            compiler,
+            script: compileResult.script,
+          })
+        ) {
           return false
         }
 
@@ -82,7 +91,8 @@ export async function transform(context: Context) {
         const argsEnd = args[args.length - 1].end! + compileResult.offset
         const argType = args[0].type
 
-        const argsName = magicString.slice(argsStart, argsEnd)
+        const argsName = magicString
+          .slice(argsStart, argsEnd)
           .toString()
           .replace(/`/g, '')
           .replace(/\n/g, '')
@@ -98,10 +108,8 @@ export async function transform(context: Context) {
           id,
         })
 
-        if (consoleString)
-          magicString.appendLeft(argsStart, consoleString)
-        if (_suffix)
-          magicString.appendRight(argsEnd, `,"${_suffix}"`)
+        if (consoleString) magicString.appendLeft(argsStart, consoleString)
+        if (_suffix) magicString.appendRight(argsEnd, `,"${_suffix}"`)
       }
     },
   })

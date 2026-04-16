@@ -30,9 +30,7 @@ export const zhCN = defineConfig({
       },
       {
         text: '其他',
-        items: [
-          { text: '常见问题', link: '/zh-CN/troubleshooting' },
-        ],
+        items: [{ text: '常见问题', link: '/zh-CN/troubleshooting' }],
       },
     ],
     search: {
@@ -56,8 +54,7 @@ export const zhCN = defineConfig({
     },
     footer: {
       message: '用 ❤️ 发电',
-      copyright:
-        'MIT License © 2023-PRESENT <a href="https://github.com/yuyinws">yuyinws</a>',
+      copyright: 'MIT License © 2023-PRESENT <a href="https://github.com/yuyinws">yuyinws</a>',
     },
     docFooter: {
       prev: '上一页',

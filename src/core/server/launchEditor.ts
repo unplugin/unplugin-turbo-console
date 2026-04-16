@@ -6,14 +6,13 @@ import { version } from '../../../package.json'
 import globalStore from '../utils/globalStore'
 
 export function launchEditor(specifiedEditor?: string) {
-  return defineEventHandler(async (event) => {
+  return defineEventHandler(async event => {
     try {
-      const { position, path } = getQuery(event) as { position?: string, path?: string }
+      const { position, path } = getQuery(event) as { position?: string; path?: string }
       if (position) {
         const filePathMap = globalStore.get<Map<string, string>>('filePathMap')
 
-        if (!filePathMap)
-          throw new Error('filePathMap is undefined')
+        if (!filePathMap) throw new Error('filePathMap is undefined')
 
         const parsed = position.split(',')
         const filePathMapString = parsed[0]
@@ -29,22 +28,20 @@ export function launchEditor(specifiedEditor?: string) {
           }
         }
 
-        launch(resolve(cwd(), `${filePath}:${line}:${column}`), specifiedEditor, (fileName: any, errorMsg: any) => {
-          if (errorMsg)
-            throw new Error(errorMsg)
-          else if (fileName)
-            throw new Error(`Could not open ${fileName}`)
-        })
-      }
-      else if (path) {
+        launch(
+          resolve(cwd(), `${filePath}:${line}:${column}`),
+          specifiedEditor,
+          (fileName: any, errorMsg: any) => {
+            if (errorMsg) throw new Error(errorMsg)
+            else if (fileName) throw new Error(`Could not open ${fileName}`)
+          },
+        )
+      } else if (path) {
         launch(resolve(cwd(), path), specifiedEditor, (fileName: any, errorMsg: any) => {
-          if (errorMsg)
-            throw new Error(errorMsg)
-          else if (fileName)
-            throw new Error(`Could not open ${fileName}`)
+          if (errorMsg) throw new Error(errorMsg)
+          else if (fileName) throw new Error(`Could not open ${fileName}`)
         })
-      }
-      else {
+      } else {
         throw new Error('No position or path provided')
       }
 
@@ -52,8 +49,7 @@ export function launchEditor(specifiedEditor?: string) {
         status: 'success',
         version,
       }
-    }
-    catch (error: any) {
+    } catch (error: any) {
       return {
         status: 'error',
         version,

@@ -17,7 +17,12 @@ function toggleDark() {
     <Icon
       name="carbon:logo-github"
       class="opacity-50 text-xl cursor-pointer hover:opacity-70"
-      @click="navigateTo('https://github.com/unplugin/unplugin-turbo-console', { external: true, open: { target: '_blank' } })"
+      @click="
+        navigateTo('https://github.com/unplugin/unplugin-turbo-console', {
+          external: true,
+          open: { target: '_blank' },
+        })
+      "
     />
   </div>
 </template>

@@ -1,17 +1,23 @@
 import { join } from 'pathe'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vite-plus/test'
 import { resolveOptions } from '../src/core/options/resolve'
 import { transform } from '../src/core/transform'
 import globalStore from '../src/core/utils/globalStore'
-import { COMMENT_CURRENT_FILE_VUE, COMMENT_CURRENT_LINE, COMMENT_NEXT_LINE, COMMENT_TOP_FILE, COMMENT_TOP_FILE_SVELTE, COMMENT_TOP_FILE_VUE } from './fixtures/comments'
+import {
+  COMMENT_CURRENT_FILE_VUE,
+  COMMENT_CURRENT_LINE,
+  COMMENT_NEXT_LINE,
+  COMMENT_TOP_FILE,
+  COMMENT_TOP_FILE_SVELTE,
+  COMMENT_TOP_FILE_VUE,
+} from './fixtures/comments'
 
 vi.mock('node:process', () => {
   return {
-    cwd: vi.fn(() => join('/', 'mock', 'path')),
+    cwd: vi.fn<() => string>(() => join('/', 'mock', 'path')),
     env: {
       NODE_ENV: 'development',
     },
-
   }
 })
 
@@ -24,7 +30,7 @@ globalStore.set('port', 3070)
 globalStore.set('filePathMap', mockFilePathMap)
 
 describe('disable by comments', () => {
-  it ('on top of file', async () => {
+  it('on top of file', async () => {
     COMMENT_TOP_FILE.options = resolveOptions(COMMENT_TOP_FILE.options)
 
     expect(await transform(COMMENT_TOP_FILE)).toMatchSnapshot()

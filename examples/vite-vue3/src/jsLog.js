@@ -6,7 +6,4 @@ export function logJs() {
   console.error('from js')
 
   console.log('from js')
-  
-  
 }
-

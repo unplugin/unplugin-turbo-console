@@ -30,15 +30,12 @@ export const enUS = defineConfig({
       },
       {
         text: 'Others',
-        items: [
-          { text: 'Troubleshooting', link: '/troubleshooting' },
-        ],
+        items: [{ text: 'Troubleshooting', link: '/troubleshooting' }],
       },
     ],
     footer: {
       message: 'Made with ❤️',
-      copyright:
-        'MIT License © 2023-PRESENT <a href="https://github.com/yuyinws">yuyinws</a>',
+      copyright: 'MIT License © 2023-PRESENT <a href="https://github.com/yuyinws">yuyinws</a>',
     },
     search: {
       provider: 'local',

@@ -11,9 +11,7 @@
 ```json [tsconfig.json]
 {
   "compilerOptions": {
-    "types": [
-      "unplugin-turbo-console/client"
-    ]
+    "types": ["unplugin-turbo-console/client"]
   }
 }
 ```

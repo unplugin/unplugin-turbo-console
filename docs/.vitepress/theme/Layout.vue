@@ -8,8 +8,10 @@ import HomePage from '../components/HomePage.vue'
 const { isDark } = useData()
 
 function enableTransitions() {
-  return 'startViewTransition' in document
-    && window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  return (
+    'startViewTransition' in document &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+  )
 }
 
 provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
@@ -32,7 +34,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   }).ready
 
   document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
+    { clipPath: isDark.value ? clipPath.toReversed() : clipPath },
     {
       duration: 300,
       easing: 'ease-in',

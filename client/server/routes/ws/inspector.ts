@@ -5,19 +5,17 @@ const defaultMessage = {
       id: '1',
       filePath:
         '/Users/yuyin/Projects/github/unplugin/unplugin-turbo-console/examples/vite-vue3/src/App.vue',
-      expressions: [
-        { code: '\'from vue\'', method: 'log', line: 7, column: 2 },
-      ],
+      expressions: [{ code: "'from vue'", method: 'log', line: 7, column: 2 }],
     },
     'src/jsLog.js': {
       id: '2',
       filePath:
         '/Users/yuyin/Projects/github/unplugin/unplugin-turbo-console/examples/vite-vue3/src/jsLog.js',
       expressions: [
-        { code: '\'from js\'', method: 'info', line: 2, column: 2 },
-        { code: '\'from js\'', method: 'warn', line: 4, column: 2 },
-        { code: '\'from js\'', method: 'error', line: 6, column: 2 },
-        { code: '\'from js\'', method: 'log', line: 8, column: 2 },
+        { code: "'from js'", method: 'info', line: 2, column: 2 },
+        { code: "'from js'", method: 'warn', line: 4, column: 2 },
+        { code: "'from js'", method: 'error', line: 6, column: 2 },
+        { code: "'from js'", method: 'log', line: 8, column: 2 },
       ],
     },
     'src/tsLog.ts': {

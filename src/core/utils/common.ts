@@ -6,17 +6,17 @@ import { extname } from 'pathe'
 import globalStore from './globalStore'
 
 export function printInfo(options: Options, spacing: string = '  ') {
-  if (options.inspector === false)
-    return false
+  if (options.inspector === false) return false
 
-  if (typeof options.inspector === 'object' && options.inspector.printUrl === false)
-    return false
+  if (typeof options.inspector === 'object' && options.inspector.printUrl === false) return false
 
   const port = globalStore.get<number>('port')
   const { host } = options.server!
 
-  // eslint-disable-next-line no-console
-  console.log(`  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/inspector\x1B[24m\x1B[39m`)
+  // oxlint-disable-next-line no-console
+  console.log(
+    `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/inspector\x1B[24m\x1B[39m`,
+  )
 }
 
 export async function getCompiler(id: string): Promise<Compiler | undefined> {
@@ -51,8 +51,7 @@ export function getLineAndColumn(code: string, start: number) {
     if (code[i] === '\n') {
       line++
       column = 0
-    }
-    else {
+    } else {
       column++
     }
   }
@@ -70,51 +69,52 @@ export function isPluginDisable(meta: {
 }) {
   const { comments, originalLine, type, compiler, script } = meta
 
-  if (comments?.length === 0)
-    return false
+  if (comments?.length === 0) return false
 
   if (type === 'top-file') {
     const startLine = compiler === 'vanilla' ? 1 : 2
 
-    const disablePluginComment = comments?.find(comment => comment.value.includes('turbo-console-disable') && !comment.value.includes('turbo-console-disable-'))
+    const disablePluginComment = comments?.find(
+      comment =>
+        comment.value.includes('turbo-console-disable') &&
+        !comment.value.includes('turbo-console-disable-'),
+    )
 
     const disableLine = getLineAndColumn(script, disablePluginComment?.start || 0).line
-    if (disablePluginComment && disableLine <= startLine)
-      return true
-  }
-  else if (type === 'inline-file') {
-    const currentLineComment = comments?.find((comment) => {
+    if (disablePluginComment && disableLine <= startLine) return true
+  } else if (type === 'inline-file') {
+    const currentLineComment = comments?.find(comment => {
       const { line } = getLineAndColumn(script, comment.start)
       return comment.value.includes('turbo-console-disable-line') && line === originalLine
     })
-    const nextLineComment = comments?.find((comment) => {
+    const nextLineComment = comments?.find(comment => {
       const { line } = getLineAndColumn(script, comment.start)
       return comment.value.includes('turbo-console-disable-next-line') && line === originalLine - 1
     })
 
-    if (currentLineComment || nextLineComment)
-      return true
+    if (currentLineComment || nextLineComment) return true
   }
 
   return false
 }
 
 export function isConsoleExpression(node: Node) {
-  return node.type === 'CallExpression'
-    && node.callee.type === 'MemberExpression'
-    && node.callee.object.type === 'Identifier'
-    && node.callee.object.name === 'console'
-    && node.callee.property.type === 'Identifier'
-    && ['log', 'warn', 'error', 'info', 'debug'].includes(node.callee.property.name)
-    && node.arguments?.length > 0
+  return (
+    node.type === 'CallExpression' &&
+    node.callee.type === 'MemberExpression' &&
+    node.callee.object.type === 'Identifier' &&
+    node.callee.object.name === 'console' &&
+    node.callee.property.type === 'Identifier' &&
+    ['log', 'warn', 'error', 'info', 'debug'].includes(node.callee.property.name) &&
+    node.arguments?.length > 0
+  )
 }
 
 export async function loadPkg(pkg: string) {
   try {
     await import(pkg)
     return true
-  }
-  catch {
+  } catch {
     return false
   }
 }

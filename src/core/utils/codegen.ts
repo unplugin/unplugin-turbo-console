@@ -33,15 +33,13 @@ export function setFilePathMap(filePath: string): string {
     filePathMap = new Map()
     globalStore.set('filePathMap', filePathMap)
   }
-  if (filePathMap.has(filePath))
-    return filePathMap.get(filePath)!
+  if (filePathMap.has(filePath)) return filePathMap.get(filePath)!
 
   function getRandomString() {
     const randomString = Math.random().toString(20).substring(2, 6)
 
     for (const [_, value] of filePathMap!) {
-      if (value === randomString)
-        return getRandomString()
+      if (value === randomString) return getRandomString()
     }
 
     return randomString
@@ -86,13 +84,11 @@ export function genConsoleString(genContext: GenContext) {
   // Parsing escaped unicode symbols
   try {
     argsName = JSON.parse(`"${argsName}"`)
-  }
-  catch (error) {
+  } catch (error) {
     console.error(`${PLUGIN_NAME}:${error}`)
   }
 
-  if (argsName?.length > 30)
-    argsName = `${argsName.slice(0, 30)}...`
+  if (argsName?.length > 30) argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
   const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${argsName}`}`
@@ -107,21 +103,16 @@ export function genConsoleString(genContext: GenContext) {
     consoleString = _prefix
       ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
       : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
-  }
-  else if (highlight === false && launchEditor) {
+  } else if (highlight === false && launchEditor) {
     consoleString = _prefix
       ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
       : `"${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
-  }
-  else if (highlight && launchEditor === false) {
+  } else if (highlight && launchEditor === false) {
     consoleString = _prefix
       ? `"${_prefix}${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
       : `"${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
-  }
-  else if (highlight === false && launchEditor === false) {
-    consoleString = _prefix
-      ? `"${_prefix}",`
-      : ''
+  } else if (highlight === false && launchEditor === false) {
+    consoleString = _prefix ? `"${_prefix}",` : ''
   }
 
   return {

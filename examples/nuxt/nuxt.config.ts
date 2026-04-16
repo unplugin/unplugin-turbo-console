@@ -3,13 +3,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: [
-    'unplugin-turbo-console/nuxt',
-  ],
+  modules: ['unplugin-turbo-console/nuxt'],
 
-  turboConsole: {
-
-  },
+  turboConsole: {},
 
   compatibilityDate: '2025-04-16',
 })

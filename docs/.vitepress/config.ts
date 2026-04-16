@@ -3,7 +3,11 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import Unocss from 'unocss/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vitepress'
-import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepress-plugin-group-icons'
+import {
+  groupIconMdPlugin,
+  groupIconVitePlugin,
+  localIconLoader,
+} from 'vitepress-plugin-group-icons'
 import { enUS } from './enUS'
 import { zhCN } from './zhCN'
 
@@ -28,14 +32,10 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/unplugin/unplugin-turbo-console' },
-    ],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/unplugin/unplugin-turbo-console' }],
   },
   markdown: {
-    codeTransformers: [
-      transformerTwoslash(),
-    ],
+    codeTransformers: [transformerTwoslash()],
     image: {
       lazyLoading: true,
     },
@@ -45,7 +45,10 @@ export default defineConfig({
   },
   head: [
     ['meta', { property: 'og:title', content: 'Unplugin Turbo Console' }],
-    ['meta', { property: 'og:description', content: 'Improve the Developer Experience of console' }],
+    [
+      'meta',
+      { property: 'og:description', content: 'Improve the Developer Experience of console' },
+    ],
     ['meta', { property: 'og:image', content: `${docsLink}/og.png` }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:url', content: docsLink }],

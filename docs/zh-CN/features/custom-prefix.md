@@ -11,6 +11,6 @@
 ```ts
 TurboConsole({
   prefix: '👇👇👇👇👇',
-  suffix: '👆👆👆👆👆'
+  suffix: '👆👆👆👆👆',
 })
 ```

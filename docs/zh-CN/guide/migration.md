@@ -12,12 +12,12 @@
 
 点击 [这里](/zh-CN/guide/configurations#plugin-options) 查看所有插件配置项。
 
-| v1                      | v2                                             |
-| ----------------------- | ---------------------------------------------- |
+| v1                        | v2                                             |
+| ------------------------- | ---------------------------------------------- |
 | ~~disableLaunchEditor~~   | `launchEditor?: boolean \| LaunchEditorOption` |
 | ~~specifiedEditor~~       | `launchEditor?: boolean \| LaunchEditorOption` |
 | ~~disableHighlight~~      | `highlight?: boolean \| HighlightOption`       |
 | ~~port~~                  | `server: { port }`                             |
 | ~~extendedPathFileNames~~ | `highlight?: boolean \|HighlightOption`        |
 | ~~disablePassLogs~~       | `passLogs: boolean`                            |
-| ~~silent~~                | `inspector?: boolean \| InspectorOption`        |
+| ~~silent~~                | `inspector?: boolean \| InspectorOption`       |

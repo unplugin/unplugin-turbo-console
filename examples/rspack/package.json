@@ -1,8 +1,11 @@
 {
   "name": "rspack-vue",
   "version": "1.0.0",
-  "description": "",
   "private": true,
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
     "dev": "rspack serve",
@@ -16,8 +19,5 @@
     "@rspack/core": "0.7.4",
     "unplugin-turbo-console": "workspace:*",
     "vue-loader": "^17.4.2"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
