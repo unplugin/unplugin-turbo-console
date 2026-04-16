@@ -15,19 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 22.x
-
-      - name: Setup
-        run: npm i -g @antfu/ni
-
-      - name: Install
-        run: nci
+          node-version: 22
+          cache: true
 
       - name: Build
-        run: nr build
+        run: vp pack
 
-      - run: nlx pkg-pr-new publish
+      - run: vp dlx pkg-pr-new publish
