@@ -10,13 +10,13 @@
     "clean": "farm clean"
   },
   "dependencies": {
-    "vue": "^3.4.29"
+    "vue": "^3.5.32"
   },
   "devDependencies": {
-    "@farmfe/cli": "^1.0.2",
-    "@farmfe/core": "^1.2.0",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "core-js": "^3.37.1",
+    "@farmfe/cli": "^1.0.5",
+    "@farmfe/core": "^1.7.11",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "core-js": "^3.49.0",
     "unplugin-turbo-console": "workspace:*"
   }
 }
