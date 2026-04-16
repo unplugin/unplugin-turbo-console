@@ -12,7 +12,7 @@ export default defineConfig({
     outputOptions: {
       exports: 'named',
     },
-    onSuccess: 'pnpm build:client',
+    onSuccess: 'vp run build:client',
   },
   lint: {
     plugins: ['unicorn', 'typescript', 'oxc', 'vue', 'vitest'],
