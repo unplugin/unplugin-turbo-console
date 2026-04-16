@@ -1,6 +1,6 @@
 {
   "name": "unplugin-turbo-console",
-  "version": "2.3.0",
+  "version": "2.3.1-beta.1",
   "description": "Improve the Developer Experience of console",
   "keywords": [
     "rollup",
