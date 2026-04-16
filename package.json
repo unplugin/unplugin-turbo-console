@@ -157,7 +157,7 @@
     "docs:preview": "vp run --filter docs preview",
     "docs:build": "vp run --filter docs build",
     "prepublishOnly": "vp run build",
-    "release": "bumpp && npm publish",
+    "release": "bumpp",
     "test": "vp test",
     "prepare": "vp config"
   },

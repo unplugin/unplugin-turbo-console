@@ -1,5 +1,6 @@
 {
   "name": "solid-start",
+  "private": "true",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
