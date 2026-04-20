@@ -17,7 +17,7 @@
     "svelte": "^4.2.7",
     "svelte-check": "^4.4.6",
     "tslib": "^2.8.1",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "unplugin-turbo-console": "workspace:*",
     "vite": "catalog:",
     "vite-plus": "catalog:"

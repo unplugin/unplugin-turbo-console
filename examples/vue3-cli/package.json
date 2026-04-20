@@ -14,7 +14,7 @@
     "@vue/cli-plugin-babel": "~5.0.9",
     "@vue/cli-plugin-typescript": "~5.0.9",
     "@vue/cli-service": "~5.0.9",
-    "typescript": "~6.0.2",
+    "typescript": "~6.0.3",
     "unplugin-turbo-console": "workspace:*"
   }
 }
