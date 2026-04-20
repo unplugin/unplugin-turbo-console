@@ -1,25 +1,24 @@
 {
-  "name": "svelte",
+  "name": "svelte-kit",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
-    "preview": "vp preview",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^7.0.1",
-    "@sveltejs/kit": "^2.57.1",
+    "@sveltejs/kit": "^2.57.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
-    "svelte": "^4.2.7",
+    "svelte": "^5.55.2",
     "svelte-check": "^4.4.6",
-    "tslib": "^2.8.1",
-    "typescript": "^6.0.3",
+    "typescript": "^6.0.2",
     "unplugin-turbo-console": "workspace:*",
-    "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "vite": "^8.0.7"
   }
 }

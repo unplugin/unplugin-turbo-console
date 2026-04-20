@@ -148,7 +148,7 @@
     "play:vite-vue3": "vp run --filter vite-vue3 dev",
     "play:nuxt": "vp run --filter nuxt-app dev",
     "play:vue3-cli": "vp run --filter vue3-cli serve",
-    "play:svelte": "vp run --filter svelte dev",
+    "play:svelte": "vp run --filter svelte-kit dev",
     "play:rspack": "vp run --filter rspack-vue dev",
     "play:astro": "vp run --filter astro dev",
     "play:farm": "vp run --filter farm-vue dev",
