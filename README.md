@@ -3,10 +3,10 @@
 </p>
 
 <p align='center'>
-<a href="https://www.npmx.com/package/unplugin-turbo-console">
+<a href="https://npmx.dev/package/unplugin-turbo-console">
 <img src="https://npmx.dev/api/registry/badge/version/unplugin-turbo-console?labelColor=3f3f46&color=00C16A">
 </a>
-<a href="https://www.npmx.com/package/unplugin-turbo-console">
+<a href="https://npmx.dev/package/unplugin-turbo-console">
 <img src="https://npmx.dev/api/registry/badge/downloads-month/unplugin-turbo-console?labelColor=3f3f46&color=00C16A">
 </a>
 </p>
@@ -14,7 +14,7 @@
 <p align='center'>
 <a href="https://stackblitz.com/github/yuyinws/unplugin-turbo-console-online?file=src%2FApp.vue">
 <img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg">
-</a>
+</a> 
 </p>
 
 <p align='center'>
