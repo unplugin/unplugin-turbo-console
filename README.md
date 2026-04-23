@@ -3,11 +3,11 @@
 </p>
 
 <p align='center'>
-<a href="https://www.npmjs.com/package/unplugin-turbo-console">
-<img src="https://img.shields.io/npm/v/unplugin-turbo-console?style=flat&colorA=3f3f46&colorB=4FC08D">
+<a href="https://www.npmx.com/package/unplugin-turbo-console">
+<img src="https://npmx.dev/api/registry/badge/version/unplugin-turbo-console?labelColor=3f3f46&color=00C16A">
 </a>
-<a href="https://www.npmjs.com/package/unplugin-turbo-console">
-<img src="https://img.shields.io/npm/dm/unplugin-turbo-console?style=flat&colorA=3f3f46&colorB=4FC08D">
+<a href="https://www.npmx.com/package/unplugin-turbo-console">
+<img src="https://npmx.dev/api/registry/badge/downloads-month/unplugin-turbo-console?labelColor=3f3f46&color=00C16A">
 </a>
 </p>
 
