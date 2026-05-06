@@ -29,6 +29,7 @@ export default defineNuxtConfig({
       scan: true,
     },
   },
+  modules: ['reka-ui/nuxt', '@nuxtjs/color-mode', '@nuxt/icon', '@vueuse/nuxt'],
   colorMode: {
     preference: 'dark',
   },
