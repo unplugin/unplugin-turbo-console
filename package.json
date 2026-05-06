@@ -169,25 +169,24 @@
     "launch-editor": "^2.13.2",
     "magic-string": "^0.30.21",
     "mrmime": "^2.0.1",
-    "oxc-parser": "^0.126.0",
+    "oxc-parser": "^0.129.0",
     "pathe": "^2.0.3",
     "unplugin": "^3.0.0"
   },
   "devDependencies": {
-    "@nuxt/kit": "^4.4.2",
-    "@nuxt/schema": "^4.4.2",
-    "@oxc-project/types": "^0.126.0",
-    "@tailwindcss/vite": "^4.2.2",
+    "@nuxt/kit": "^4.4.4",
+    "@nuxt/schema": "^4.4.4",
+    "@oxc-project/types": "^0.129.0",
     "@types/node": "^25.6.0",
-    "@vitest/ui": "^4.1.4",
+    "@vitest/ui": "^4.1.5",
     "bumpp": "^11.0.1",
     "rollup": "^4.60.2",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.18",
+    "vite": "^8.0.10",
     "vite-plugin-inspect": "catalog:",
     "vite-plus": "catalog:",
-    "vue": "^3.5.32",
+    "vue": "^3.5.33",
     "webpack": "^5.106.2"
   },
   "peerDependencies": {
@@ -233,7 +232,7 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@10.33.3",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@sveltejs/kit",

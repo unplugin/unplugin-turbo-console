@@ -3,10 +3,10 @@ packages:
   - docs
   - client
 catalog:
-  nuxt: ^4.4.2
+  nuxt: ^4.4.4
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vite-plugin-inspect: ^11.3.3
-  vite-plus: ^0.1.18
+  vite-plus: ^0.1.20
   vitest: npm:@voidzero-dev/vite-plus-test@latest
 
 ignoreWorkspaceRootCheck: true
