@@ -54,7 +54,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
         return themeDetectVirtualModule(env.NODE_ENV === 'production')
       } else if (id === VirtualModules.VueDevTools) {
         return viteDevToolsVirtualModuleGenerator(
-          options.server.host!,
           options.server.port!,
           env.NODE_ENV === 'production',
         )

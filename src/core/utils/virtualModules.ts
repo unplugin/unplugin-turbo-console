@@ -22,7 +22,7 @@ export function initVirtualModulesGenerator(port: number, isProd: boolean) {
 `
 }
 
-export function viteDevToolsVirtualModuleGenerator(host: string, port: number, isProd: boolean) {
+export function viteDevToolsVirtualModuleGenerator(port: number, isProd: boolean) {
   if (isProd) return ''
 
   return /* js */ `
