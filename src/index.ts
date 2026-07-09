@@ -49,11 +49,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       id = id.slice(1)
 
       if (id === VirtualModules.Init) {
-        return initVirtualModulesGenerator(
-          options.server.host!,
-          options.server.port!,
-          env.NODE_ENV === 'production',
-        )
+        return initVirtualModulesGenerator(options.server.port!, env.NODE_ENV === 'production')
       } else if (id === VirtualModules.ThemeDetect) {
         return themeDetectVirtualModule(env.NODE_ENV === 'production')
       } else if (id === VirtualModules.VueDevTools) {

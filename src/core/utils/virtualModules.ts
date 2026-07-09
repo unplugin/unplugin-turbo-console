@@ -1,10 +1,11 @@
-export function initVirtualModulesGenerator(host: string, port: number, isProd: boolean) {
+export function initVirtualModulesGenerator(port: number, isProd: boolean) {
   if (isProd) return ''
 
   return /* js */ `
   ;(() => {
     if (globalThis.window) {
-      const socket = new WebSocket('ws://${host}:${port}/ws/passLogs')
+      const runtimeHost = globalThis.window.location.hostname
+      const socket = new WebSocket('ws://' + runtimeHost + ':${port}/ws/passLogs')
       globalThis.window.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET = socket
       socket.addEventListener('message', (event) => {
         try {
@@ -27,13 +28,15 @@ export function viteDevToolsVirtualModuleGenerator(host: string, port: number, i
   return /* js */ `
   import { addCustomTab } from '@vue/devtools-api'
 
+  const runtimeHost = globalThis.window.location.hostname
+
   addCustomTab({
     name: 'unplugin-turbo-console-inspector',
     title: 'Console Inspector',
     icon: 'baseline-terminal',
     view: {
       type: 'iframe',
-      src: 'http://${host}:${port}/inspector',
+      src: 'http://' + runtimeHost + ':${port}/inspector',
     },
     category: 'advanced',
   })
