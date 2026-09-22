@@ -114,6 +114,7 @@ export async function transform(context: Context) {
         if (consoleString) magicString.appendLeft(argsStart, consoleString)
         if (_suffix) magicString.appendRight(argsEnd, `,"${_suffix}"`)
       }
+      return undefined
     },
   })
 

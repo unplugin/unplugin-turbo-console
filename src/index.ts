@@ -84,6 +84,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       if (Object.values(VirtualModules).includes(id)) {
         return `\0${id}`
       }
+      return undefined
     },
     loadInclude(id) {
       if (!id.startsWith('\0')) return false
@@ -110,6 +111,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       } else if (id === VirtualModules.ServerInfo) {
         return serverInfoVirtualModule(options.server.host!, options.server.port!)
       }
+      return undefined
     },
     transform: {
       filter: {

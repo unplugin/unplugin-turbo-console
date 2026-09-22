@@ -16,6 +16,7 @@ export function printInfo(options: Options, spacing: string = '  ') {
   console.log(
     `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/inspector\x1B[24m\x1B[39m`,
   )
+  return undefined
 }
 
 export async function getCompiler(id: string): Promise<Compiler | undefined> {
