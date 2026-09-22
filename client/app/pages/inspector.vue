@@ -1,37 +1,42 @@
 <script setup lang="ts">
+import type { DevframeRpcClient } from 'devframe/client'
 import type { ExpressionsMap, ExpressionsMapResponse } from '~~/shared/types'
+import { useConsoleClient } from '../composables/useConsoleClient'
 
 useHead({
   title: 'Console Inspector',
 })
 
-const data = ref<ExpressionsMapResponse>()
-const wsStatus = ref<'pending' | 'error' | 'success'>('pending')
-const wsError = ref<string>()
-let ws: WebSocket | null = null
+const data = shallowRef<ExpressionsMapResponse>()
+const {
+  client,
+  status: wsStatus,
+  error: wsError,
+  authCode,
+  authenticate,
+  showError,
+} = useConsoleClient(subscribe)
+let disposed = false
+let unsubscribeState: (() => void) | undefined
 
 const lastUpdate = computed(() => {
   if (!data.value?.timestamp) return 'Never'
   return useTimeAgo(data.value.timestamp)
 })
 
-function initWebSocket() {
-  wsStatus.value = 'pending'
-  ws = new WebSocket(`ws://${window.location.host}/ws/inspector`)
-  ws.onopen = () => {
-    wsStatus.value = 'success'
-  }
-  ws.onerror = error => {
-    wsStatus.value = 'error'
-    wsError.value = String(error)
-  }
-  ws.onmessage = event => {
-    data.value = JSON.parse(event.data)
-  }
+async function subscribe(connection: DevframeRpcClient) {
+  if (unsubscribeState) return
+  const state = await connection.scope('turbo-console').rpc.sharedState('expressions')
+  if (disposed) return
+  data.value = state.value()
+  unsubscribeState = state.on('updated', value => {
+    data.value = value
+  })
 }
 
-onMounted(() => {
-  initWebSocket()
+onBeforeUnmount(() => {
+  disposed = true
+  unsubscribeState?.()
 })
 
 const totalConsoleCount = computed(() => {
@@ -41,12 +46,15 @@ const totalConsoleCount = computed(() => {
   )
 })
 
-function handleLaunchEditor(path: string, line?: number, column?: number) {
-  $fetch('/launchEditor', {
-    query: {
-      path: `${path}:${line || 1}:${column || 1}`,
-    },
-  })
+async function handleLaunchEditor(path: string, line = 1, column = 0) {
+  try {
+    const current = client.value
+    const open = current?.services.get('@devframes/service-open')
+    if (!open) throw new Error('Opening files is disabled.')
+    await open.rpc.call('open-in-editor', { path, line, column: column + 1 })
+  } catch (error) {
+    showError(error)
+  }
 }
 
 const expandAll = ref<boolean>()
@@ -127,6 +135,26 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
         <span class="text-gray-500 dark:text-gray-400">Loading...</span>
       </div>
     </div>
+
+    <form
+      v-else-if="wsStatus === 'unauthorized'"
+      class="py-4 flex flex-wrap items-center gap-2"
+      @submit.prevent="authenticate"
+    >
+      <label for="inspector-auth-code">Enter the code printed in your terminal:</label>
+      <input
+        id="inspector-auth-code"
+        v-model="authCode"
+        class="i-btn"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        pattern="[0-9]{6}"
+        maxlength="6"
+        required
+      />
+      <button class="i-btn" type="submit">Connect</button>
+      <span role="alert">{{ wsError }}</span>
+    </form>
 
     <div v-else-if="wsStatus === 'error'">
       <div
@@ -287,7 +315,7 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
                   v-for="item in items.expressions"
                   :key="item.line + item.column"
                   class="text-gray-500 dark:text-gray-400"
-                  @click="handleLaunchEditor(items.filePath)"
+                  @click="handleLaunchEditor(items.filePath, item.line, item.column)"
                 >
                   {{ item.line }}
                 </div>

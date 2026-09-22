@@ -162,11 +162,10 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "alien-signals": "^3.1.2",
+    "@devframes/service-open": "^1.0.0",
+    "devframe": "^1.0.0",
     "estree-walker": "^3.0.3",
     "get-port-please": "^3.2.0",
-    "h3": "^1.15.11",
-    "launch-editor": "^2.13.2",
     "magic-string": "^0.30.21",
     "mrmime": "^2.0.1",
     "oxc-parser": "^0.129.0",

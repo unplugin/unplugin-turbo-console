@@ -1,3 +1,4 @@
+import type { KnownEditor } from 'devframe/utils/launch-editor'
 export interface Options {
   /**
    * Add a string prefix to the console output.
@@ -67,7 +68,7 @@ interface LaunchEditorOption {
    * @default undefined
    *
    */
-  specifiedEditor?: string
+  specifiedEditor?: KnownEditor
 }
 
 interface HighlightOption {

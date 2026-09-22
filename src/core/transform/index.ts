@@ -100,6 +100,9 @@ export async function transform(context: Context) {
 
         const { consoleString, _suffix } = genConsoleString({
           options,
+          inspector: context.inspector,
+          filePaths: context.filePaths,
+          root: context.root,
           consoleMethod,
           originalLine,
           originalColumn,

@@ -23,6 +23,7 @@
     "@tailwindcss/vite": "^4.2.4",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
+    "h3": "^1.15.11",
     "nuxt": "catalog:",
     "reka-ui": "^2.9.7",
     "shiki": "^4.0.2"

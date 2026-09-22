@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite-plus'
 
 export default defineConfig({
+  test: {
+    server: { deps: { inline: ['@devframes/service-open'] } },
+  },
   staged: {
     '*': 'vp check --fix',
   },

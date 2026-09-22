@@ -1,82 +1,73 @@
+import type { Inspector } from '../inspector'
 import type { Options } from '../options/type'
-import { createServer as _createServer } from 'node:http'
-import { env } from 'node:process'
-import wsAdapter from 'crossws/adapters/node'
+import { randomUUID } from 'node:crypto'
+import { cwd, env } from 'node:process'
+import { createDevServer } from 'devframe/adapters/dev'
 import { getPort } from 'get-port-please'
-import { createApp, toNodeListener } from 'h3'
 import { PLUGIN_SERVER_DEFAULT_PORT, PLUGIN_SERVER_PORT_RANGE } from '../constants'
+import { INSPECTOR_BASE } from '../inspector'
 import globalStore from '../utils/globalStore'
-import filePathMap from './filePathMap'
-import health from './health'
-import { launchEditor as launchEditorHandler } from './launchEditor'
-import send from './send'
-import serveStatic from './serveStatic'
-import inspectorHandler from './ws/inspector'
-import passLogsHandler from './ws/passLogs'
+import { createConsoleDevframe } from './devframe'
 
-export async function createServer(options: Options, printInfoFn: () => void) {
-  const { server, launchEditor, passLogs, inspector } = options
+export async function createServer(
+  options: Options,
+  printInfoFn: () => void,
+  inspector?: Inspector,
+  root = cwd(),
+  filePaths = new Map<string, string>(),
+  logToken: string = randomUUID(),
+) {
+  const { server, launchEditor, passLogs } = options
+  if (launchEditor === false && passLogs === false && !inspector) return
+
   const { port, host } = server!
-  const specifiedEditor =
-    typeof launchEditor === 'object' ? launchEditor.specifiedEditor : undefined
-
-  const safePort = await getPort({
+  const definition = createConsoleDevframe(options, root, filePaths, inspector, logToken)
+  let currentPort = await getPort({
+    host,
     port: port || PLUGIN_SERVER_DEFAULT_PORT,
     portRange: PLUGIN_SERVER_PORT_RANGE,
   })
-
-  try {
-    await fetch(`http://${host}:${safePort}/health`)
-  } catch {
-    if (launchEditor === false && passLogs === false && inspector === false) return false
-
-    const app = createApp()
-
-    // health
-    app.use('/health', health)
-
-    if (inspector) app.use('/ws/inspector', inspectorHandler)
-
-    if (passLogs) {
-      // Pass server log route
-      app.use('/ws/passLogs', passLogsHandler).use('/send', send)
+  let started: Awaited<ReturnType<typeof createDevServer>>
+  for (;;) {
+    try {
+      started = await createDevServer(definition, {
+        host,
+        port: currentPort,
+        basePath: INSPECTOR_BASE,
+        mcp: false,
+        openBrowser: false,
+      })
+      break
+    } catch (error) {
+      const cause = error instanceof Error ? error.cause : undefined
+      if ((cause as NodeJS.ErrnoException)?.code !== 'EADDRINUSE') throw error
+      currentPort = await getPort({
+        host,
+        port: currentPort + 1,
+        portRange: PLUGIN_SERVER_PORT_RANGE,
+      })
     }
+  }
 
-    // Launch Editor server
-    if (launchEditor) {
-      app
-        .use('/filePathMap', filePathMap)
-        .use('/launchEditor', launchEditorHandler(specifiedEditor))
-    }
+  options.server!.port = currentPort
+  globalStore.set('port', currentPort)
+  env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = currentPort.toString()
+  if (passLogs) {
+    env.UNPLUGIN_TURBO_CONSOLE_LOG_URL = `${started.origin}${INSPECTOR_BASE}__sse`
+    env.UNPLUGIN_TURBO_CONSOLE_LOG_TOKEN = logToken
+  }
+  printInfoFn()
 
-    if (launchEditor || inspector) app.use('/', serveStatic)
-
-    const httpServer = _createServer(toNodeListener(app))
-
-    const { handleUpgrade } = wsAdapter(app.websocket as any)
-
-    httpServer.on('upgrade', handleUpgrade)
-
-    let currentPort = safePort
-
-    httpServer.on('error', async (error: any) => {
-      if (error && error.code === 'EADDRINUSE') {
-        currentPort = await getPort({
-          port: currentPort || PLUGIN_SERVER_DEFAULT_PORT,
-          portRange: PLUGIN_SERVER_PORT_RANGE,
-        })
-        httpServer.listen(currentPort)
+  return {
+    port: currentPort,
+    async close() {
+      await started.close()
+      if (env.UNPLUGIN_TURBO_CONSOLE_LOG_TOKEN === logToken) {
+        delete env.UNPLUGIN_TURBO_CONSOLE_LOG_URL
+        delete env.UNPLUGIN_TURBO_CONSOLE_LOG_TOKEN
       }
-    })
-
-    httpServer.on('listening', () => {
-      // sync final bound port back to options and globals
-      options.server!.port = currentPort
-      globalStore.set('port', currentPort)
-      env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT = currentPort.toString()
-      printInfoFn()
-    })
-
-    httpServer.listen(currentPort)
+      inspector?.clear()
+      filePaths.clear()
+    },
   }
 }

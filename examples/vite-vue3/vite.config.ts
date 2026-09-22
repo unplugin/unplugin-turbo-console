@@ -8,7 +8,16 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vueDevTools(), vue(), inspect(), TurboConsole()],
+  plugins: [
+    vueDevTools(),
+    vue(),
+    inspect(),
+    TurboConsole({
+      launchEditor: {
+        specifiedEditor: 'codium',
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
