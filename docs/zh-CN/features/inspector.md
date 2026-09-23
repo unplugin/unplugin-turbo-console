@@ -4,6 +4,8 @@
 
 <video src="https://static.yuy1n.io/console-inspector.mp4" controls />
 
+首次打开 Console Inspector 时，需要完成 Devframe 的一次性验证码（OTP）验证。在运行开发服务器的终端中找到 `auth code`，输入页面上的验证框；也可以直接打开终端打印的 `or open` 链接完成验证。
+
 ## 配置项
 
 ```js

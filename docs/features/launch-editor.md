@@ -4,6 +4,8 @@ By clicking the links in the log output, you can automatically open the code edi
 
 ![launch-editor](https://static.yuy1n.io/launch-editor.gif)
 
+The first time you open a link from `console` output, Devframe requires a one-time passcode (OTP). Enter the `auth code` shown in the terminal running your dev server to continue opening the editor. Alternatively, open the `or open` link printed in the terminal to verify, then click the original `console` link again.
+
 ## Options
 
 ```js

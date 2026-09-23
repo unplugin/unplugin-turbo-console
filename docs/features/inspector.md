@@ -4,6 +4,8 @@ It enables real-time monitoring of console statements and with launch editor sup
 
 <video src="https://static.yuy1n.io/console-inspector.mp4" controls />
 
+When you open Console Inspector for the first time, Devframe requires a one-time passcode (OTP). Enter the `auth code` shown in the terminal running your dev server, or open the `or open` link printed there to verify.
+
 ## Options
 
 ```js
