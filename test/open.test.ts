@@ -6,6 +6,7 @@ import { initDevframe } from 'devframe/initiate'
 import { createRpcClient } from 'devframe/rpc/client'
 import { createSseRpcChannel } from 'devframe/rpc/transports/sse-client'
 import { describe, expect, it } from 'vite-plus/test'
+import { normalize } from 'pathe'
 import { createConsoleDevframe } from '../src/core/server/devframe'
 import { resolveOptions } from '../src/core/options/resolve'
 import { INSPECTOR_BASE } from '../src/core/inspector'
@@ -31,8 +32,8 @@ describe('Devframe Open', () => {
       expect((await ctx.rpc.sharedState.get('devframe:services')).value()).toHaveProperty(
         '@devframes/service-open',
       )
-      expect(await ctx.rpc.invokeLocal('turbo-console:resolve-file', 'abcd')).toBe(
-        join(root, 'main.ts'),
+      expect(normalize(await ctx.rpc.invokeLocal('turbo-console:resolve-file', 'abcd'))).toBe(
+        normalize(join(root, 'main.ts')),
       )
       await expect(ctx.rpc.invokeLocal('turbo-console:resolve-file', 'missing')).rejects.toThrow(
         'Unknown file',
