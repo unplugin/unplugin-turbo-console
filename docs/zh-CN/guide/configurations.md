@@ -6,18 +6,19 @@
 
 ## 局域网访问
 
-通过局域网 IP 访问时，将浏览器页面的来源（协议、主机和端口）加入 `server.allowedOrigins`：
+通过局域网 IP 访问时，将 `server.host` 设为开发机的局域网 IP，并将浏览器页面的来源（协议、主机和端口）加入 `server.allowedOrigins`：
 
 ```ts
 TurboConsole({
   server: {
-    host: '0.0.0.0',
-    allowedOrigins: ['http://192.168.1.10:5173', 'http://192.168.1.10:3070'],
+    host: '192.168.1.10',
+    allowedOrigins: [
+      'http://192.168.1.20:5173', // 应用页面，引入 ~console 传递日志时才需要
+      'http://192.168.1.10:3070', // Inspector 页面
+    ],
   },
 })
 ```
-
-第一个地址是应用页面，第二个是 Inspector 页面；请替换为实际地址和端口。来源精确匹配，未列出的非本机来源仍被拒绝，身份验证保持启用。
 
 ## TypeScript
 

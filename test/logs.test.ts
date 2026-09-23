@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { createServer as createHttpServer } from 'node:http'
 import { initDevframe } from 'devframe/initiate'
 import type { DevframeRpcServerFunctions, DevframeRpcClientFunctions } from 'devframe'
@@ -8,7 +9,10 @@ import { createConsoleDevframe } from '../src/core/server/devframe'
 import { createServer } from '../src/core/server'
 import { resolveOptions } from '../src/core/options/resolve'
 import { client, connectLogs, server } from '../src/helper'
-import { initVirtualModulesGenerator } from '../src/core/utils/virtualModules'
+import {
+  initVirtualModulesGenerator,
+  viteDevToolsVirtualModuleGenerator,
+} from '../src/core/utils/virtualModules'
 
 afterEach(() => {
   vi.restoreAllMocks()
@@ -149,8 +153,8 @@ it('falls back when the port is occupied, forwards helper logs both ways, and re
 })
 
 it('does not inject the log connection when passLogs is disabled or in production', async () => {
-  expect(initVirtualModulesGenerator(3070, true, 'token')).toBe('')
-  expect(initVirtualModulesGenerator(3070, false)).toBe('')
+  expect(initVirtualModulesGenerator('127.0.0.1', 3070, true, 'token')).toBe('')
+  expect(initVirtualModulesGenerator('127.0.0.1', 3070, false)).toBe('')
   const instance = initDevframe(
     createConsoleDevframe(
       resolveOptions({ passLogs: false, launchEditor: false }),
@@ -167,4 +171,13 @@ it('does not inject the log connection when passLogs is disabled or in productio
   } finally {
     await instance.close()
   }
+})
+
+it('connects an app page to the configured server host', () => {
+  const code = initVirtualModulesGenerator('192.168.1.10', 3070, false, 'token')
+  expect(code).toContain('http://192.168.1.10:3070/__sse')
+  expect(code).not.toContain('window.location')
+  expect(viteDevToolsVirtualModuleGenerator('192.168.1.10', 3070, false)).toContain(
+    'http://192.168.1.10:3070/inspector',
+  )
 })

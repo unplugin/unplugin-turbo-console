@@ -1,18 +1,18 @@
-export function initVirtualModulesGenerator(port: number, isProd: boolean, token?: string) {
+export function initVirtualModulesGenerator(
+  host: string,
+  port: number,
+  isProd: boolean,
+  token?: string,
+) {
   if (isProd || !token) return ''
 
   return /* js */ `
   import { connectLogs } from 'unplugin-turbo-console/helper'
 
   if (typeof window !== 'undefined') {
-    const url = new URL(window.location.href)
-    url.protocol = 'http:'
-    url.port = '${port}'
-    url.pathname = '/__sse'
-    url.search = ''
-    url.hash = ''
+    const url = ${JSON.stringify(`http://${host.includes(':') ? `[${host}]` : host}:${port}/__sse`)}
     window.UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT?.close()
-    const connection = connectLogs(url.href, ${JSON.stringify(token)}, (method, message) => {
+    const connection = connectLogs(url, ${JSON.stringify(token)}, (method, message) => {
       console[method]('%cServer Log', 'padding:3px 5px;border-radius:5px;background:#64748b;font-weight:600;color:white', ...JSON.parse(message))
     })
     window.UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT = connection
@@ -23,13 +23,11 @@ export function initVirtualModulesGenerator(port: number, isProd: boolean, token
 `
 }
 
-export function viteDevToolsVirtualModuleGenerator(port: number, isProd: boolean) {
+export function viteDevToolsVirtualModuleGenerator(host: string, port: number, isProd: boolean) {
   if (isProd) return ''
 
   return /* js */ `
   import { addCustomTab } from '@vue/devtools-api'
-
-  const runtimeHost = globalThis.window.location.hostname
 
   addCustomTab({
     name: 'unplugin-turbo-console-inspector',
@@ -37,7 +35,7 @@ export function viteDevToolsVirtualModuleGenerator(port: number, isProd: boolean
     icon: 'baseline-terminal',
     view: {
       type: 'iframe',
-      src: 'http://' + runtimeHost + ':${port}/inspector',
+      src: ${JSON.stringify(`http://${host.includes(':') ? `[${host}]` : host}:${port}/inspector`)},
     },
     category: 'advanced',
   })
