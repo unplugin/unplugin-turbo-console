@@ -57,7 +57,7 @@ export interface Options {
   server?: {
     port?: number
     host?: string
-    /** 允许访问服务的额外来源，须包含协议、主机和端口，例如 http://192.168.1.10:5173。 */
+    /** Additional origins allowed to access the server (scheme, host, and port), e.g. http://192.168.1.10:5173. */
     allowedOrigins?: string[]
   }
 }
@@ -66,7 +66,7 @@ interface LaunchEditorOption {
   /**
    * The specific editor to launch.
    *
-   * @see https://github.com/yyx990803/launch-editor#supported-editors
+   * @see https://devfra.me/add-ons/services/open
    * @default undefined
    *
    */
