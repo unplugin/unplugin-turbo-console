@@ -3,20 +3,20 @@ import type { Compiler } from '../../types'
 import type { Options } from '../options/type'
 import type { Node } from '../utils/walker'
 import { extname } from 'pathe'
-import globalStore from './globalStore'
 
 export function printInfo(options: Options, spacing: string = '  ') {
   if (options.inspector === false) return false
 
   if (typeof options.inspector === 'object' && options.inspector.printUrl === false) return false
 
-  const port = globalStore.get<number>('port')
+  const port = options.server!.port
   const { host } = options.server!
 
   // oxlint-disable-next-line no-console
   console.log(
     `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/inspector\x1B[24m\x1B[39m`,
   )
+  return undefined
 }
 
 export async function getCompiler(id: string): Promise<Compiler | undefined> {

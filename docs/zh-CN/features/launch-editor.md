@@ -4,6 +4,8 @@
 
 ![launch-editor](https://static.yuy1n.io/launch-editor.gif)
 
+首次通过 `console` 链接打开跳转页面时，需要完成 Devframe 的一次性验证码（OTP）验证。可在页面中输入运行开发服务器的终端显示的 `auth code`，验证后会继续打开编辑器；也可打开终端打印的 `or open` 链接完成验证，然后重新点击原 `console` 链接。
+
 ## 配置项
 
 ```js

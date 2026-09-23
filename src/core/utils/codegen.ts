@@ -4,7 +4,6 @@ import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
 import globalStore from './globalStore'
-import { addExpression } from './signal'
 import { builtInThemes, getStyleCode } from './themes'
 
 function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
@@ -26,9 +25,9 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
   return basename
 }
 
-export function setFilePathMap(filePath: string): string {
+export function setFilePathMap(filePath: string, filePaths?: Map<string, string>): string {
   // 获取文件路径映射
-  let filePathMap = globalStore.get<Map<string, string>>('filePathMap')
+  let filePathMap = filePaths ?? globalStore.get<Map<string, string>>('filePathMap')
   if (!filePathMap) {
     filePathMap = new Map()
     globalStore.set('filePathMap', filePathMap)
@@ -48,7 +47,7 @@ export function setFilePathMap(filePath: string): string {
   const randomString = getRandomString()
 
   filePathMap.set(filePath, randomString)
-  globalStore.set('filePathMap', filePathMap)
+  if (!filePaths) globalStore.set('filePathMap', filePathMap)
 
   return randomString
 }
@@ -58,7 +57,7 @@ export function genConsoleString(genContext: GenContext) {
   let { argsName } = genContext
   const { prefix, suffix, launchEditor, server, highlight } = options
   const { host } = server!
-  const port = globalStore.get<number>('port')
+  const port = options.server!.port
   const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const themeDetect = typeof highlight === 'object' ? highlight.themeDetect : false
   const _prefix = prefix ? `${prefix}\\n` : ''
@@ -69,8 +68,9 @@ export function genConsoleString(genContext: GenContext) {
   const fileName = getExtendedPath(filePath, extendedPathFileNames)
   const fileType = extname(filePath).slice(1) as FileExt
 
-  const relativePath = relative(cwd(), filePath)
-  const filePathMapString = launchEditor === false ? '' : setFilePathMap(relativePath)
+  const relativePath = relative(genContext.root ?? cwd(), filePath)
+  const filePathMapString =
+    launchEditor === false ? '' : setFilePathMap(relativePath, genContext.filePaths)
 
   const expressionMeta: ExpressionMeta = {
     code: argsName,
@@ -79,7 +79,7 @@ export function genConsoleString(genContext: GenContext) {
     column: originalColumn,
   }
 
-  addExpression(relativePath, expressionMeta)
+  if (options.inspector !== false) genContext.inspector?.addExpression(relativePath, expressionMeta)
 
   // Parsing escaped unicode symbols
   try {

@@ -1,20 +1,5 @@
-export interface ExpressionItem {
-  code: string
-  method: string
-  line: number
-  column: number
-}
+import type { Immutable } from 'devframe/utils/shared-state'
+import type { InspectorState } from '../../src/types'
 
-export interface ExpressionsMap {
-  [key: string]: {
-    id: string
-    filePath: string
-    expressions: ExpressionItem[]
-  }
-}
-export interface ExpressionsMapResponse {
-  timestamp: number
-  status: 'success' | 'error'
-  expressionsMap: ExpressionsMap
-  version: string
-}
+export type ExpressionsMapResponse = Immutable<InspectorState>
+export type ExpressionsMap = Record<string, ExpressionsMapResponse['expressionsMap'][string]>

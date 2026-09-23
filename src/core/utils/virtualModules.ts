@@ -1,34 +1,33 @@
-export function initVirtualModulesGenerator(port: number, isProd: boolean) {
-  if (isProd) return ''
+export function initVirtualModulesGenerator(
+  host: string,
+  port: number,
+  isProd: boolean,
+  token?: string,
+) {
+  if (isProd || !token) return ''
 
   return /* js */ `
-  ;(() => {
-    if (globalThis.window) {
-      const runtimeHost = globalThis.window.location.hostname
-      const socket = new WebSocket('ws://' + runtimeHost + ':${port}/ws/passLogs')
-      globalThis.window.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET = socket
-      socket.addEventListener('message', (event) => {
-        try {
-          const { m, t } = JSON.parse(event.data)
-  
-          console[t]('%cServer Log', 'padding:3px 5px;border-radius:5px;background:#64748b;font-weight:600;color:white', ...JSON.parse(m))
-        }
-        catch (error) {
-          console.log(error)
-        }
-      })
-    }
-  })()
+  import { connectLogs } from 'unplugin-turbo-console/helper'
+
+  if (typeof window !== 'undefined') {
+    const url = ${JSON.stringify(`http://${host.includes(':') ? `[${host}]` : host}:${port}/__sse`)}
+    window.UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT?.close()
+    const connection = connectLogs(url, ${JSON.stringify(token)}, (method, message) => {
+      console[method]('%cServer Log', 'padding:3px 5px;border-radius:5px;background:#64748b;font-weight:600;color:white', ...JSON.parse(message))
+    })
+    window.UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT = connection
+    void connection.ready.catch(() => connection.close())
+    window.addEventListener('pagehide', () => connection.close(), { once: true })
+    if (import.meta.hot) import.meta.hot.dispose(() => connection.close())
+  }
 `
 }
 
-export function viteDevToolsVirtualModuleGenerator(port: number, isProd: boolean) {
+export function viteDevToolsVirtualModuleGenerator(host: string, port: number, isProd: boolean) {
   if (isProd) return ''
 
   return /* js */ `
   import { addCustomTab } from '@vue/devtools-api'
-
-  const runtimeHost = globalThis.window.location.hostname
 
   addCustomTab({
     name: 'unplugin-turbo-console-inspector',
@@ -36,7 +35,7 @@ export function viteDevToolsVirtualModuleGenerator(port: number, isProd: boolean
     icon: 'baseline-terminal',
     view: {
       type: 'iframe',
-      src: 'http://' + runtimeHost + ':${port}/inspector',
+      src: ${JSON.stringify(`http://${host.includes(':') ? `[${host}]` : host}:${port}/inspector`)},
     },
     category: 'advanced',
   })

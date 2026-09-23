@@ -1,23 +1,48 @@
 import type { TCMethod, TConsole } from './types'
-import { PLUGIN_NAME } from './core/constants'
+import type { DevframeRpcServerFunctions, DevframeRpcClientFunctions } from 'devframe'
+import { createRpcClient } from 'devframe/rpc/client'
+import { createSseRpcChannel } from 'devframe/rpc/transports/sse-client'
 
-async function generateFetchUrl(args: any[], method: TCMethod) {
-  const { env } = await import('node:process')
-  const port = env.UNPLUGIN_TURBO_CONSOLE_SERVER_PORT
-
-  if (!port) console.warn(`[${PLUGIN_NAME}]: UNPLUGIN_TURBO_CONSOLE_SERVER_PORT env not found`)
-
-  return `http://localhost:${port || 3070}/send?m=${JSON.stringify(args)}&t=${method}`
+export function connectLogs(
+  url: string,
+  token: string,
+  receive?: (method: TCMethod, message: string) => void,
+) {
+  const channel = createSseRpcChannel({ url })
+  const rpc = createRpcClient<DevframeRpcServerFunctions, Partial<DevframeRpcClientFunctions>>(
+    receive ? { 'turbo-console:log': receive } : {},
+    { channel, rpcOptions: { timeout: 3000 } },
+  )
+  const ready = receive
+    ? rpc.$call('anonymous:turbo-console:subscribe-logs', token)
+    : Promise.resolve()
+  return {
+    ready,
+    close: () => channel.close(),
+    async send(target: 'client' | 'server', method: TCMethod, args: any[]) {
+      await ready
+      await rpc.$call('anonymous:turbo-console:log', token, target, method, JSON.stringify(args))
+    },
+  }
 }
 
 async function handleClient(method: TCMethod, ...args: any[]) {
   ;(console as any)[method](...args)
+  if (typeof window !== 'undefined') return
   const { env } = await import('node:process')
-  if (globalThis.window || env.NODE_ENV === 'production') return
-
-  generateFetchUrl(args, method).then(url => {
-    fetch(url).catch(() => {})
-  })
+  if (env.NODE_ENV === 'production') return
+  const url = env.UNPLUGIN_TURBO_CONSOLE_LOG_URL
+  const token = env.UNPLUGIN_TURBO_CONSOLE_LOG_TOKEN
+  if (!url || !token) return
+  // ponytail: 每次转发使用短连接；高频日志需要时再复用连接并增加空闲回收。
+  const connection = connectLogs(url, token)
+  try {
+    await connection.send('client', method, args)
+  } catch {
+    // 转发失败时，本地日志仍然保留。
+  } finally {
+    connection.close()
+  }
 }
 
 export const client: TConsole = {
@@ -31,11 +56,9 @@ export const client: TConsole = {
 
 function handleServer(method: TCMethod, ...args: any[]) {
   ;(console as any)[method](...args)
-  const socket: WebSocket | undefined = (globalThis?.window as any)
-    ?.UNPLUGIN_TURBO_CONSOLE_CLIENT_SOCKET
-  if (socket && socket.readyState === WebSocket.OPEN) {
-    socket.send(JSON.stringify({ m: JSON.stringify(args), t: method }))
-  }
+  const connection: ReturnType<typeof connectLogs> | undefined = (globalThis.window as any)
+    ?.UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT
+  void connection?.send('server', method, args).catch(() => {})
 }
 
 export const server: TConsole = {
