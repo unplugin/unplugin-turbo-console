@@ -1,4 +1,5 @@
-import { fileURLToPath } from 'node:url'
+import { cwd } from 'node:process'
+import { resolve } from 'pathe'
 import { createConsoleDevframe } from '../../../src/core/server/devframe'
 import { resolveOptions } from '../../../src/core/options/resolve'
 import { initDevframe } from 'devframe/initiate'
@@ -43,7 +44,7 @@ let devframe: ReturnType<typeof initDevframe> | undefined
 export default defineEventHandler(event => {
   if (!event.path.startsWith(PREVIEW_BASE)) return
   if (!devframe) {
-    const root = fileURLToPath(new URL('../../../examples/vite-vue3/', import.meta.url))
+    const root = resolve(cwd(), '../examples/vite-vue3')
     const inspector = createInspector(root)
     for (const [path, file] of Object.entries(defaultMessage.expressionsMap)) {
       for (const expression of file.expressions) inspector.addExpression(path, expression)
