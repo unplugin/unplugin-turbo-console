@@ -5,7 +5,7 @@ import { KNOWN_EDITORS } from 'devframe/utils/launch-editor'
 import { s } from 'devframe/utils/simple-schema'
 import { description, homepage, name, version } from '../../../package.json'
 import { resolve } from 'pathe'
-import { CLIENT_DIR } from '../dir'
+import { getClientDir } from '../dir'
 import { registerLogs } from './logs'
 
 export function createConsoleDevframe(
@@ -28,7 +28,7 @@ export function createConsoleDevframe(
     importMetaUrl: import.meta.url,
     homepage,
     description,
-    clientAssets: CLIENT_DIR,
+    clientAssets: getClientDir(),
     services:
       options.launchEditor === false
         ? []
