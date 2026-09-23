@@ -9,6 +9,7 @@ export function resolveOptions(options: Partial<Options> = {}): Required<Options
     passLogs: options.passLogs ?? true,
     inspector: options.inspector ?? { printUrl: true },
     server: {
+      ...options.server,
       port: options.server?.port ?? PLUGIN_SERVER_DEFAULT_PORT,
       host: options.server?.host ?? '127.0.0.1',
     },

@@ -162,6 +162,9 @@ describe('Inspector Shared State', () => {
       const filePaths = calls[0][4]!
       expect(filePaths).not.toBe(calls[1][4])
       await first.transform.handler('console.log(value)', '/project-a/src/main.ts')
+      expect(inspector.state.value().expressionsMap['src/main.ts'].filePath).toBe(
+        '/project-a/src/main.ts',
+      )
       expect(inspector.state.value().expressionsMap['src/main.ts'].expressions).toEqual([
         expression,
       ])

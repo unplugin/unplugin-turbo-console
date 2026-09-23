@@ -1,5 +1,7 @@
 import type { ExpressionMeta, InspectorState } from '../types'
 import { randomUUID } from 'node:crypto'
+import { cwd } from 'node:process'
+import { resolve } from 'pathe'
 import { defineDevframe } from 'devframe'
 import { createSharedState } from 'devframe/utils/shared-state'
 import { description, homepage, name, version } from '../../package.json'
@@ -7,7 +9,7 @@ import { description, homepage, name, version } from '../../package.json'
 export const INSPECTOR_BASE = '/'
 export const INSPECTOR_STATE = 'turbo-console:expressions'
 
-export function createInspector() {
+export function createInspector(root = cwd()) {
   const state = createSharedState<InspectorState>({
     initialValue: { timestamp: 0, version, expressionsMap: {} },
   })
@@ -49,7 +51,11 @@ export function createInspector() {
         )
           return
 
-        const file = entry ?? { id: randomUUID(), filePath, expressions: [] }
+        const file = entry ?? {
+          id: randomUUID(),
+          filePath: resolve(root, filePath),
+          expressions: [],
+        }
         file.expressions.push(expression)
         draft.expressionsMap[filePath] = file
         draft.timestamp = Date.now()

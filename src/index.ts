@@ -47,7 +47,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
 
   function getInspector() {
     if (options.inspector === false) return undefined
-    return (getProject().inspector ??= createInspector())
+    return (getProject().inspector ??= createInspector(root))
   }
 
   async function startTurboConsoleServer(print = () => printInfo(options)) {

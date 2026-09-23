@@ -32,6 +32,7 @@ export async function createServer(
     try {
       started = await createDevServer(definition, {
         host,
+        allowedOrigins: server!.allowedOrigins,
         port: currentPort,
         basePath: INSPECTOR_BASE,
         mcp: false,

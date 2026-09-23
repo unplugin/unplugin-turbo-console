@@ -43,20 +43,16 @@ let devframe: ReturnType<typeof initDevframe> | undefined
 export default defineEventHandler(event => {
   if (!event.path.startsWith(PREVIEW_BASE)) return
   if (!devframe) {
-    const inspector = createInspector()
-    inspector.state.mutate(draft => {
-      draft.expressionsMap = defaultMessage.expressionsMap
-      draft.timestamp = Date.now()
+    const root = fileURLToPath(new URL('../../../examples/vite-vue3/', import.meta.url))
+    const inspector = createInspector(root)
+    for (const [path, file] of Object.entries(defaultMessage.expressionsMap)) {
+      for (const expression of file.expressions) inspector.addExpression(path, expression)
+    }
+    devframe = initDevframe(createConsoleDevframe(resolveOptions({}), root, new Map(), inspector), {
+      base: PREVIEW_BASE,
+      ws: false,
+      mcp: false,
     })
-    devframe = initDevframe(
-      createConsoleDevframe(
-        resolveOptions({}),
-        fileURLToPath(new URL('../../../examples/vite-vue3/', import.meta.url)),
-        new Map(),
-        inspector,
-      ),
-      { base: PREVIEW_BASE, ws: false, mcp: false },
-    )
     useNitroApp().hooks.hook('close', async () => {
       await devframe?.close()
       inspector.clear()

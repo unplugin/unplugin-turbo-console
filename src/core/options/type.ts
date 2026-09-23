@@ -57,6 +57,8 @@ export interface Options {
   server?: {
     port?: number
     host?: string
+    /** 允许访问服务的额外来源，须包含协议、主机和端口，例如 http://192.168.1.10:5173。 */
+    allowedOrigins?: string[]
   }
 }
 

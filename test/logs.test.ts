@@ -78,13 +78,13 @@ it('falls back when the port is occupied, forwards helper logs both ways, and re
   const occupied = createHttpServer()
   await new Promise<void>((resolve, reject) => {
     occupied.once('error', reject)
-    occupied.listen(0, '127.0.0.1', resolve)
+    occupied.listen(0, '::1', resolve)
   })
   const port = (occupied.address() as { port: number }).port
   const options = resolveOptions({
     inspector: false,
     launchEditor: false,
-    server: { host: '127.0.0.1', port },
+    server: { host: '::1', port, allowedOrigins: ['http://192.168.1.10:5173'] },
   })
   let instance: Awaited<ReturnType<typeof createServer>>
   let browser: ReturnType<typeof connectLogs> | undefined
@@ -103,6 +103,20 @@ it('falls back when the port is occupied, forwards helper logs both ways, and re
     })
     expect(preflight.status).toBe(204)
     expect(preflight.headers.get('access-control-allow-origin')).toBe('http://localhost:5173')
+    for (const [origin, status] of [
+      ['http://192.168.1.10:5173', 204],
+      ['http://192.168.1.10:5174', 403],
+      ['https://untrusted.example', 403],
+    ] as const) {
+      const response = await fetch(url, {
+        method: 'OPTIONS',
+        headers: { origin, 'access-control-request-method': 'POST' },
+      })
+      expect(response.status).toBe(status)
+      expect(response.headers.get('access-control-allow-origin')).toBe(
+        status === 204 ? origin : null,
+      )
+    }
     const receive = vi.fn<(method: string, message: string) => void>()
     browser = connectLogs(url, token, receive)
     await browser.ready
@@ -114,10 +128,19 @@ it('falls back when the port is occupied, forwards helper logs both ways, and re
     await vi.waitFor(() =>
       expect(info).toHaveBeenCalledWith(expect.stringContaining('Client Log'), 'browser message'),
     )
+    const releasedPort = instance!.port
     await instance!.close()
     instance = undefined
     expect(process.env.UNPLUGIN_TURBO_CONSOLE_LOG_TOKEN).toBeUndefined()
-    await expect(fetch(url)).rejects.toThrow(/fetch|connect/i)
+    const rebound = createHttpServer()
+    try {
+      await new Promise<void>((resolve, reject) => {
+        rebound.once('error', reject)
+        rebound.listen(releasedPort, '::1', resolve)
+      })
+    } finally {
+      await new Promise<void>(resolve => rebound.close(() => resolve()))
+    }
   } finally {
     browser?.close()
     await instance?.close()
