@@ -145,7 +145,7 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
 </script>
 
 <template>
-  <div class="w-screen p-8">
+  <div>
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
         <a

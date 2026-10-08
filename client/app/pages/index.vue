@@ -44,7 +44,7 @@ const { status, error, authCode, authenticate } = useConsoleClient(async client 
 </script>
 
 <template>
-  <div class="w-screen p-8">
+  <div>
     <div v-if="status === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
         <UIcon name="i-uil-spinner" class="size-6 animate-spin" />
