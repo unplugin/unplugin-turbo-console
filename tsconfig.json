@@ -17,6 +17,6 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
-  "include": ["**/*d.ts", "docs/.vitepress/**/*"],
+  "include": ["src/**/*", "**/*d.ts", "docs/.vitepress/**/*"],
   "exclude": ["node_modules", "dist", "playground", "examples"]
 }

@@ -166,27 +166,27 @@
     "devframe": "^1.0.0",
     "estree-walker": "^3.0.3",
     "get-port-please": "^3.2.0",
-    "magic-string": "^0.30.21",
+    "magic-string": "^1.4.1",
     "mrmime": "^2.0.1",
-    "oxc-parser": "^0.129.0",
+    "oxc-parser": "^0.151.0",
     "pathe": "^2.0.3",
-    "unplugin": "^3.0.0"
+    "unplugin": "^3.4.0"
   },
   "devDependencies": {
-    "@nuxt/kit": "^4.4.4",
-    "@nuxt/schema": "^4.4.4",
-    "@oxc-project/types": "^0.129.0",
-    "@types/node": "^25.6.0",
-    "@vitest/ui": "^4.1.5",
-    "bumpp": "^11.0.1",
-    "rollup": "^4.60.2",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0.3",
-    "vite": "^8.0.10",
+    "@nuxt/kit": "^4.5.2",
+    "@nuxt/schema": "^4.5.2",
+    "@oxc-project/types": "^0.151.0",
+    "@types/node": "^26.6.2",
+    "@vitest/ui": "^5.0.1",
+    "bumpp": "^12.3.0",
+    "rollup": "^4.63.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
     "vite-plugin-inspect": "catalog:",
-    "vite-plus": "catalog:",
-    "vue": "^3.5.33",
-    "webpack": "^5.106.2"
+    "vite-plus": "catalog:vite-plus",
+    "vue": "^3.5.43",
+    "webpack": "^5.111.1"
   },
   "peerDependencies": {
     "@farmfe/core": ">=1",
@@ -231,14 +231,5 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@10.33.3",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@sveltejs/kit",
-      "esbuild",
-      "sharp",
-      "vue-demi",
-      "svelte-preprocess"
-    ]
-  }
+  "packageManager": "pnpm@11.27.1"
 }

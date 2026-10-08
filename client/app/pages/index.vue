@@ -2,6 +2,10 @@
 import type { OpenInEditorInput } from '@devframes/service-open'
 import { useConsoleClient } from '../composables/useConsoleClient'
 
+onMounted(() => {
+  if (import.meta.dev) void navigateTo('/inspector')
+})
+
 let opened = false
 const { status, error, authCode, authenticate } = useConsoleClient(async client => {
   if (opened) return

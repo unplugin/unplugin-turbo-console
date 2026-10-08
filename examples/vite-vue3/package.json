@@ -24,10 +24,10 @@
     "npm-run-all2": "^8.0.4",
     "typescript": "~6.0.3",
     "unplugin-turbo-console": "workspace:*",
-    "vite": "catalog:",
+    "vite": "catalog:vite-plus",
     "vite-plugin-inspect": "catalog:",
     "vite-plugin-vue-devtools": "^8.1.1",
-    "vite-plus": "catalog:",
+    "vite-plus": "catalog:vite-plus",
     "vue-tsc": "^3.2.7"
   }
 }
