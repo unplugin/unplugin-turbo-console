@@ -2,8 +2,7 @@
 const colorMode = useColorMode()
 
 function toggleDark() {
-  const mutableColorMode = colorMode as { value: string }
-  mutableColorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 </script>
 

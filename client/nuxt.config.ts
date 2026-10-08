@@ -19,6 +19,7 @@ export default defineNuxtConfig({
   modules: ['reka-ui/nuxt', '@nuxtjs/color-mode', '@nuxt/icon', '@vueuse/nuxt'],
   colorMode: {
     preference: 'dark',
+    classSuffix: '-mode',
   },
   vite: {
     plugins: [tailwindcss()],
