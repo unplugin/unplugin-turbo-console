@@ -15,16 +15,14 @@
   "devDependencies": {
     "@iconify-json/carbon": "^1.2.20",
     "@iconify-json/catppuccin": "^1.2.17",
+    "@iconify-json/lucide": "^1.2.140",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/uil": "^1.2.3",
-    "@nuxt/icon": "^2.2.2",
-    "@nuxtjs/color-mode": "^4.0.0",
-    "@radix-ui/colors": "^3.0.0",
-    "@tailwindcss/vite": "^4.2.4",
+    "@nuxt/ui": "^4.11.3",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
     "nuxt": "catalog:",
-    "reka-ui": "^2.9.7",
-    "shiki": "^4.0.2"
+    "shiki": "^4.0.2",
+    "tailwindcss": "^4.3.3"
   }
 }

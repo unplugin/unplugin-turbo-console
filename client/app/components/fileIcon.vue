@@ -27,5 +27,5 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <Icon :name="icon" class="text-[14px] relative top-[1px]" />
+  <UIcon :name="icon" class="size-3.5 relative top-px" />
 </template>
