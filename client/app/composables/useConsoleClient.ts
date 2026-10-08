@@ -55,9 +55,10 @@ export function useConsoleClient(onConnected: (client: DevframeRpcClient) => Pro
   }
 
   onMounted(async () => {
+    if (import.meta.dev) return
     try {
       const current = await connectDevframe({
-        baseURL: import.meta.dev ? '/__turbo_console/' : '/',
+        baseURL: '/',
       })
       if (disposed) {
         current.close?.()

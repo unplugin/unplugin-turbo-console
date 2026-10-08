@@ -7,15 +7,47 @@ useHead({
   title: 'Console Inspector',
 })
 
-const data = shallowRef<ExpressionsMapResponse>()
+const isPreview = import.meta.dev
+const previewData: ExpressionsMapResponse = {
+  timestamp: Date.now(),
+  version: '1.11.3',
+  expressionsMap: {
+    'src/App.vue': {
+      id: '1',
+      filePath: 'src/App.vue',
+      expressions: [{ code: "'from vue'", method: 'log', line: 7, column: 2 }],
+    },
+    'src/jsLog.js': {
+      id: '2',
+      filePath: 'src/jsLog.js',
+      expressions: [
+        { code: "'from js'", method: 'info', line: 2, column: 2 },
+        { code: "'from js'", method: 'warn', line: 4, column: 2 },
+        { code: "'from js'", method: 'error', line: 6, column: 2 },
+        { code: "'from js'", method: 'log', line: 8, column: 2 },
+      ],
+    },
+    'src/tsLog.ts': {
+      id: '3',
+      filePath: 'src/tsLog.ts',
+      expressions: [
+        { code: 'abc', method: 'log', line: 3, column: 2 },
+        { code: 'def', method: 'log', line: 6, column: 2 },
+        { code: 'mno', method: 'log', line: 15, column: 8 },
+      ],
+    },
+  },
+}
+const data = shallowRef<ExpressionsMapResponse | undefined>(isPreview ? previewData : undefined)
 const {
   client,
-  status: wsStatus,
+  status: connectionStatus,
   error: wsError,
   authCode,
   authenticate,
   showError,
 } = useConsoleClient(subscribe)
+const wsStatus = computed(() => (isPreview ? 'success' : connectionStatus.value))
 let disposed = false
 let unsubscribeState: (() => void) | undefined
 
@@ -47,6 +79,7 @@ const totalConsoleCount = computed(() => {
 })
 
 async function handleLaunchEditor(path: string, line = 1, column = 0) {
+  if (isPreview) return
   try {
     const current = client.value
     const open = current?.services.get('@devframes/service-open')
@@ -295,7 +328,7 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
                 <span class="opacity-50">{{ key }}</span>
               </div>
 
-              <ui-tooltip>
+              <ui-tooltip v-if="!isPreview">
                 <template #trigger>
                   <div class="flex items-center">
                     <Icon
@@ -336,7 +369,7 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
                   class="flex items-center"
                 >
                   <div class="relative top-[2px]">
-                    <ui-tooltip>
+                    <ui-tooltip v-if="!isPreview">
                       <template #trigger>
                         <Icon
                           name="carbon:launch"
