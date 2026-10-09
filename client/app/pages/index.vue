@@ -44,11 +44,11 @@ const { status, error, authCode, authenticate } = useConsoleClient(async client 
 </script>
 
 <template>
-  <div class="w-screen p-8">
+  <div>
     <div v-if="status === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
-        <Icon name="uil:spinner" class="text-2xl animate-spin" />
-        <span class="text-gray-500 dark:text-gray-400">Loading...</span>
+        <UIcon name="i-uil-spinner" class="size-6 animate-spin" />
+        <span class="text-muted">Loading...</span>
       </div>
     </div>
     <form
@@ -57,46 +57,39 @@ const { status, error, authCode, authenticate } = useConsoleClient(async client 
       @submit.prevent="authenticate"
     >
       <label for="editor-auth-code">Enter the code printed in your terminal:</label>
-      <input
+      <UInput
         id="editor-auth-code"
         v-model="authCode"
-        class="i-btn"
         inputmode="numeric"
         autocomplete="one-time-code"
         pattern="[0-9]{6}"
         maxlength="6"
         required
       />
-      <button class="i-btn" type="submit">Connect</button>
-      <span role="alert">{{ error }}</span>
+      <UButton type="submit" label="Connect" />
+      <UAlert v-if="error" role="alert" color="error" variant="soft" :description="error" />
     </form>
     <div v-else-if="status === 'error'" class="flex pt-64 px-8">
-      <div
-        class="text-red-500 dark:text-red-400 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 w-full"
-      >
-        <div class="flex items-center gap-2 mb-2">
-          <Icon name="uil:exclamation-triangle" class="text-xl" />
-          <span class="font-medium">Error</span>
-        </div>
-        <div class="text-sm">
-          {{ error }}
-        </div>
-      </div>
+      <UAlert
+        role="alert"
+        color="error"
+        variant="soft"
+        icon="i-uil-exclamation-triangle"
+        title="Error"
+        :description="error"
+      />
     </div>
     <div v-else-if="status === 'success'">
-      <div
-        class="text-green-500 dark:text-green-400 p-4 rounded-lg bg-green-50 dark:bg-green-900/20"
-      >
-        <div class="flex items-center gap-2 mb-2">
-          <Icon name="uil:check-circle" class="text-xl" />
-          <span class="font-medium">Success</span>
-        </div>
-        <div class="text-sm">
-          {{
-            opened ? 'Editor launch requested.' : 'Connected. You can return to your application.'
-          }}
-        </div>
-      </div>
+      <UAlert
+        role="status"
+        color="success"
+        variant="soft"
+        icon="i-uil-check-circle"
+        title="Success"
+        :description="
+          opened ? 'Editor launch requested.' : 'Connected. You can return to your application.'
+        "
+      />
     </div>
   </div>
 </template>

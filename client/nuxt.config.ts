@@ -1,5 +1,3 @@
-import tailwindcss from '@tailwindcss/vite'
-
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
@@ -16,13 +14,9 @@ export default defineNuxtConfig({
       scan: true,
     },
   },
-  modules: ['reka-ui/nuxt', '@nuxtjs/color-mode', '@nuxt/icon', '@vueuse/nuxt'],
+  modules: ['@nuxt/ui', '@vueuse/nuxt'],
   colorMode: {
     preference: 'dark',
-    classSuffix: '-mode',
-  },
-  vite: {
-    plugins: [tailwindcss()],
   },
   app: {
     head: {

@@ -93,6 +93,13 @@ async function handleLaunchEditor(path: string, line = 1, column = 0) {
 const expandAll = ref<boolean>()
 const collapseAll = ref<boolean>()
 
+const consoleMethods = [
+  { method: 'info', icon: 'i-ph-info', color: 'info' },
+  { method: 'log', icon: 'i-ph-terminal-window-light', color: 'success' },
+  { method: 'warn', icon: 'i-ph-warning', color: 'warning' },
+  { method: 'error', icon: 'i-ph-x', color: 'error' },
+] as const
+
 const activeConsoleMethod = ref<Array<'info' | 'log' | 'warn' | 'error'>>([
   'info',
   'log',
@@ -138,7 +145,7 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
 </script>
 
 <template>
-  <div class="w-screen p-8">
+  <div>
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
         <a
@@ -146,14 +153,14 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
           href="https://github.com/unplugin/unplugin-turbo-console"
           target="_blank"
         >
-          <Icon name="ph:magnifying-glass-bold" class="text-2xl text-green-500 mr-1" />
+          <UIcon name="i-ph-magnifying-glass-bold" class="size-6 mr-1" />
           <span>Console Inspector</span>
         </a>
 
         <a
           :href="`https://github.com/unplugin/unplugin-turbo-console/releases/tag/v${data?.version}`"
           target="_blank"
-          class="-translate-y-[16px] font-mono text-[16px] text-gray-400 inline-block"
+          class="-translate-y-[16px] font-mono text-[16px] text-muted inline-block"
         >
           v{{ data?.version }}
         </a>
@@ -164,8 +171,8 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
 
     <div v-if="wsStatus === 'pending'" class="flex h-full justify-center">
       <div class="flex flex-col items-center gap-2">
-        <Icon name="uil:spinner" class="text-2xl animate-spin" />
-        <span class="text-gray-500 dark:text-gray-400">Loading...</span>
+        <UIcon name="i-uil-spinner" class="size-6 animate-spin" />
+        <span class="text-muted">Loading...</span>
       </div>
     </div>
 
@@ -175,120 +182,69 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
       @submit.prevent="authenticate"
     >
       <label for="inspector-auth-code">Enter the code printed in your terminal:</label>
-      <input
+      <UInput
         id="inspector-auth-code"
         v-model="authCode"
-        class="i-btn"
         inputmode="numeric"
         autocomplete="one-time-code"
         pattern="[0-9]{6}"
         maxlength="6"
         required
       />
-      <button class="i-btn" type="submit">Connect</button>
-      <span role="alert">{{ wsError }}</span>
+      <UButton type="submit" label="Connect" />
+      <UAlert v-if="wsError" role="alert" color="error" variant="soft" :description="wsError" />
     </form>
 
     <div v-else-if="wsStatus === 'error'">
-      <div
-        class="text-red-500 dark:text-red-400 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 w-full"
-      >
-        <div class="flex items-center gap-2 mb-2">
-          <Icon name="uil:exclamation-triangle" class="text-xl" />
-          <span class="font-medium">Error</span>
-          {{ wsError }}
-        </div>
-      </div>
+      <UAlert
+        role="alert"
+        color="error"
+        variant="soft"
+        icon="i-uil-exclamation-triangle"
+        title="Error"
+        :description="wsError"
+      />
     </div>
 
     <div v-else-if="wsStatus === 'success'" class="py-4">
       <div class="text-sm">
-        <span class="text-gray-400 dark:text-gray-400">
-          Find <span class="text-gray-600 dark:text-gray-300">{{ totalConsoleCount }}</span> console
-          statements, updated <span class="text-gray-600 dark:text-gray-300">{{ lastUpdate }}</span>
+        <span class="text-muted">
+          Find <span class="text-toned">{{ totalConsoleCount }}</span> console statements, updated
+          <span class="text-toned">{{ lastUpdate }}</span>
         </span>
       </div>
 
-      <div class="relative">
-        <input
-          v-model="searchKeyword"
-          placeholder="Search by file name or console statement"
-          type="text"
-          class="font-mono w-full rounded-full mt-[10px] p-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex items-center gap-1 cursor-input pl-10 focus:outline-none"
-        />
-        <Icon
-          name="ph:magnifying-glass-duotone"
-          class="text-xl text-gray-500 dark:text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"
-        />
-      </div>
+      <UInput
+        v-model="searchKeyword"
+        placeholder="Search by file name or console statement"
+        aria-label="Search by file name or console statement"
+        icon="i-ph-magnifying-glass-duotone"
+        class="font-mono w-full mt-2.5"
+        size="lg"
+      />
 
       <div class="flex items-center gap-4">
-        <div class="opacity-50 text-sm">Methods</div>
+        <div class="text-muted text-sm">Methods</div>
 
-        <div class="flex gap-2 my-4">
-          <button
-            class="i-filter-btn"
-            :class="[activeConsoleMethod.includes('info') ? 'i-filter-btn-active' : '']"
-            @click="handleActiveConsoleMethod('info')"
-          >
-            <Icon
-              name="ph:info"
-              class="text-gray-500 dark:text-gray-400 text-[16px]"
-              :class="{
-                'text-blue-500! dark:text-blue-400!': activeConsoleMethod.includes('info'),
-              }"
-            />
-            info
-          </button>
-
-          <button
-            class="i-filter-btn"
-            :class="[activeConsoleMethod.includes('log') ? 'i-filter-btn-active' : '']"
-            @click="handleActiveConsoleMethod('log')"
-          >
-            <Icon
-              name="ph:terminal-window-light"
-              class="text-gray-500 dark:text-gray-400 text-[16px]"
-              :class="{
-                'text-emerald-500! dark:text-emerald-400!': activeConsoleMethod.includes('log'),
-              }"
-            />
-            log
-          </button>
-
-          <button
-            class="i-filter-btn"
-            :class="[activeConsoleMethod.includes('warn') ? 'i-filter-btn-active' : '']"
-            @click="handleActiveConsoleMethod('warn')"
-          >
-            <Icon
-              name="ph:warning"
-              class="text-gray-500 dark:text-gray-400 text-[16px]"
-              :class="{
-                'text-yellow-500! dark:text-yellow-400!': activeConsoleMethod.includes('warn'),
-              }"
-            />
-            warn
-          </button>
-
-          <button
-            class="i-filter-btn"
-            :class="[activeConsoleMethod.includes('error') ? 'i-filter-btn-active' : '']"
-            @click="handleActiveConsoleMethod('error')"
-          >
-            <Icon
-              name="ph:x"
-              class="text-gray-500 dark:text-gray-400 text-[16px]"
-              :class="{ 'text-red-500! dark:text-red-400!': activeConsoleMethod.includes('error') }"
-            />
-            error
-          </button>
+        <div class="flex flex-wrap gap-2 my-4">
+          <UButton
+            v-for="{ method, icon, color } in consoleMethods"
+            :key="method"
+            :label="method"
+            :icon="icon"
+            :color="activeConsoleMethod.includes(method) ? color : 'neutral'"
+            :variant="activeConsoleMethod.includes(method) ? 'soft' : 'outline'"
+            :aria-pressed="activeConsoleMethod.includes(method)"
+            size="sm"
+            @click="handleActiveConsoleMethod(method)"
+          />
         </div>
       </div>
 
       <div class="flex justify-end gap-2 my-4">
-        <button
-          class="i-btn"
+        <UButton
+          color="neutral"
+          variant="outline"
           @click="
             async () => {
               expandAll = true
@@ -298,10 +254,11 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
           "
         >
           Expand All
-        </button>
+        </UButton>
 
-        <button
-          class="i-btn"
+        <UButton
+          color="neutral"
+          variant="outline"
           @click="
             async () => {
               collapseAll = true
@@ -311,74 +268,73 @@ function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
           "
         >
           Collapse All
-        </button>
+        </UButton>
       </div>
 
       <div v-for="(items, key) in filterExpression" :key="items.id">
         <ui-collapsible :expanded="expandAll" :collapsed="collapseAll" :path="key as string">
           <template #trigger="{ open }">
             <div class="flex items-center gap-2">
-              <Icon
-                name="uil:angle-right-b"
-                class="text-gray-500 text-[16px] transition-transform duration-300"
+              <UIcon
+                name="i-uil-angle-right-b"
+                class="text-muted size-4 transition-transform duration-300"
                 :class="{ 'rotate-90': open }"
               />
               <div class="flex items-center gap-1">
                 <FileIcon :name="key as string" />
-                <span class="opacity-50">{{ key }}</span>
+                <span class="text-toned font-mono">{{ key }}</span>
               </div>
-
-              <ui-tooltip v-if="!isPreview">
-                <template #trigger>
-                  <div class="flex items-center">
-                    <Icon
-                      name="carbon:launch"
-                      class="opacity-50 hover:opacity-70 text-[16px] cursor-pointer"
-                      @click.stop="handleLaunchEditor(items.filePath)"
-                    />
-                  </div>
-                </template>
-              </ui-tooltip>
             </div>
+          </template>
+          <template #actions>
+            <UTooltip text="Open in Editor" :content="{ side: 'top', sideOffset: 5 }">
+              <UButton
+                icon="i-carbon-launch"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                class="text-muted"
+                :aria-label="`Open ${key} in Editor`"
+                @click.stop="handleLaunchEditor(items.filePath)"
+              />
+            </UTooltip>
           </template>
           <template #content>
             <div class="flex gap-4 h-full px-4 overflow-x-auto">
               <div class="py-4 flex flex-col gap-2">
-                <div
+                <UButton
                   v-for="item in items.expressions"
                   :key="item.line + item.column"
-                  class="text-gray-500 dark:text-gray-400"
+                  color="neutral"
+                  variant="link"
+                  class="font-mono p-0 justify-end"
+                  :aria-label="`Open ${key} at line ${item.line} in Editor`"
                   @click="handleLaunchEditor(items.filePath, item.line, item.column)"
                 >
                   {{ item.line }}
-                </div>
+                </UButton>
               </div>
 
-              <div class="min-h-full flex-shrink-0 w-[1px] bg-gray-200 dark:bg-gray-700" />
-
-              <div class="py-4 flex flex-col gap-2">
-                <div v-for="item in items.expressions" :key="item.line + item.column" class="flex">
-                  <shiki :code="`console.${item.method}(${item.code})`" />
-                </div>
-              </div>
+              <div class="min-h-full flex-shrink-0 w-px bg-accented" />
 
               <div class="py-4 flex flex-col gap-2">
                 <div
                   v-for="item in items.expressions"
                   :key="item.line + item.column"
-                  class="flex items-center"
+                  class="flex items-center gap-4"
                 >
-                  <div class="relative top-[2px]">
-                    <ui-tooltip v-if="!isPreview">
-                      <template #trigger>
-                        <Icon
-                          name="carbon:launch"
-                          class="opacity-50 hover:opacity-70 text-[16px] cursor-pointer"
-                          @click.stop="handleLaunchEditor(items.filePath, item.line, item.column)"
-                        />
-                      </template>
-                    </ui-tooltip>
-                  </div>
+                  <shiki :code="`console.${item.method}(${item.code})`" />
+                  <UTooltip text="Open in Editor" :content="{ side: 'top', sideOffset: 5 }">
+                    <UButton
+                      icon="i-carbon-launch"
+                      color="neutral"
+                      variant="ghost"
+                      size="xs"
+                      class="text-muted p-0"
+                      :aria-label="`Open ${key} at line ${item.line} in Editor`"
+                      @click="handleLaunchEditor(items.filePath, item.line, item.column)"
+                    />
+                  </UTooltip>
                 </div>
               </div>
             </div>

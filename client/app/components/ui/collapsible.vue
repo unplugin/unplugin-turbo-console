@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useSessionStorage } from '@vueuse/core'
-import { CollapsibleContent, CollapsibleRoot } from 'reka-ui'
 
 const { expanded, collapsed, path } = defineProps<{
   expanded?: boolean
@@ -9,6 +8,7 @@ const { expanded, collapsed, path } = defineProps<{
 }>()
 
 const openState = useSessionStorage<boolean>(`utc-${path}-open-state`, false)
+const contentId = useId()
 
 watch(
   () => expanded,
@@ -30,20 +30,31 @@ watch(
 </script>
 
 <template>
-  <CollapsibleRoot v-model:open="openState" class="text-sm" :unmount-on-hide="false">
-    <CollapsibleTrigger
-      class="w-full rounded-md mt-[10px] p-2 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 flex items-center gap-1 cursor-pointer"
-      :class="{ 'rounded-b-none border-b-0': openState }"
+  <div class="mt-2.5 text-sm">
+    <div
+      class="flex items-center gap-1 rounded-lg border border-default bg-elevated p-0.5"
+      :class="{ 'rounded-b-none': openState }"
+      @click="openState = !openState"
     >
-      <slot name="trigger" :open="openState" />
-    </CollapsibleTrigger>
-
-    <CollapsibleContent>
-      <div
-        class="w-full border border-gray-200 dark:border-gray-700 rounded-t-none rounded-b-md border-t-0"
+      <UButton
+        color="neutral"
+        variant="ghost"
+        class="justify-start min-w-0"
+        :aria-expanded="openState"
+        :aria-controls="contentId"
+        @click.stop="openState = !openState"
       >
-        <slot name="content" />
-      </div>
-    </CollapsibleContent>
-  </CollapsibleRoot>
+        <slot name="trigger" :open="openState" />
+      </UButton>
+      <slot name="actions" />
+    </div>
+
+    <UCollapsible v-model:open="openState" :unmount-on-hide="false">
+      <template #content>
+        <div :id="contentId" class="w-full border border-default rounded-b-lg border-t-0">
+          <slot name="content" />
+        </div>
+      </template>
+    </UCollapsible>
+  </div>
 </template>

@@ -85,3 +85,4 @@ docs/.vitepress/cache
 .vercel
 
 .output
+.svelte-kit

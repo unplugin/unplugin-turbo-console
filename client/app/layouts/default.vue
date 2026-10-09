@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <UContainer as="main" class="max-w-5xl py-8">
     <slot />
-  </main>
+  </UContainer>
 </template>
