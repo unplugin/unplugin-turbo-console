@@ -15,9 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1
+        uses: voidzero-dev/setup-vp@v1.21.1
         with:
-          node-version: 'lts/*'
+          node-version: '24.21.0'
           cache: true
 
       - name: Check
@@ -28,14 +28,14 @@ jobs:
 
     strategy:
       matrix:
-        node: ['lts/*']
+        node: ['24.21.0']
         os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
       - name: Setup Vite+ ${{ matrix.node }}
-        uses: voidzero-dev/setup-vp@v1
+        uses: voidzero-dev/setup-vp@v1.21.1
         with:
           node-version: ${{ matrix.node }}
           cache: true

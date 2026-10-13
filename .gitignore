@@ -86,3 +86,4 @@ docs/.vitepress/cache
 
 .output
 .svelte-kit
+.vitest/
