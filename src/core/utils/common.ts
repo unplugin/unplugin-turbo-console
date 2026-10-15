@@ -4,6 +4,11 @@ import type { Options } from '../options/type'
 import type { Node } from '../utils/walker'
 import { extname, normalize } from 'pathe'
 
+// IPv6 hosts must be bracketed in URLs.
+export function formatHost(host: string) {
+  return host.includes(':') ? `[${host}]` : host
+}
+
 export function printInfo(options: Options, spacing: string = '  ') {
   if (options.inspector === false) return false
 
@@ -14,7 +19,7 @@ export function printInfo(options: Options, spacing: string = '  ') {
 
   // oxlint-disable-next-line no-console
   console.log(
-    `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/inspector\x1B[24m\x1B[39m`,
+    `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mConsole Inspector\x1B[22m: \x1B[36m\x1B[4mhttp://${formatHost(host!)}:${port}/inspector\x1B[24m\x1B[39m`,
   )
   return undefined
 }

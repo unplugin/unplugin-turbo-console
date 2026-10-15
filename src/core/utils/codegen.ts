@@ -3,7 +3,7 @@ import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
-import { getFilePath } from './common'
+import { formatHost, getFilePath } from './common'
 import globalStore from './globalStore'
 import { builtInThemes, getStyleCode } from './themes'
 
@@ -99,7 +99,7 @@ export function genConsoleString(genContext: GenContext) {
   const lineInfo = `%c${builtInThemes.highlight.icon} ${escapeString(fileName)}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${escapeString(argsName)}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
-  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : host}:${port}#${codePosition}`
+  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : formatHost(host!)}:${port}#${codePosition}`
 
   let consoleString = ''
   const lineWrap = `"\\n"`
