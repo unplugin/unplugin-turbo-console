@@ -9,7 +9,7 @@ import { PLUGIN_NAME, VirtualModules } from './core/constants'
 import { resolveOptions } from './core/options/resolve'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
-import { loadPkg, printInfo } from './core/utils'
+import { getFilePath, loadPkg, printInfo } from './core/utils'
 import { createInspector } from './core/inspector'
 import {
   initVirtualModulesGenerator,
@@ -215,9 +215,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     watchChange(id, change) {
       const inspector = project?.inspector
       if (options.inspector === false || !inspector) return
-      const filePath = new URL(id, 'file://').pathname
       if (change.event === 'update' || change.event === 'delete') {
-        inspector.invalidate(relative(root, filePath))
+        inspector.invalidate(relative(root, getFilePath(id)))
       }
     },
   }

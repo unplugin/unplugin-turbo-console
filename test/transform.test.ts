@@ -83,6 +83,30 @@ describe('edge case', () => {
     expect(await transform(WIN_PATH)).matchSnapshot()
   })
 
+  it('keeps non-ASCII, space and Windows paths unencoded', async () => {
+    const cases = [
+      {
+        root: '/Users/张三/my app',
+        id: '/Users/张三/my app/src/组件/a b.ts',
+        path: 'src/组件/a b.ts',
+      },
+      { root: 'C:\\Users\\me\\proj', id: 'C:\\Users\\me\\proj\\src\\win.ts', path: 'src/win.ts' },
+      { root: 'C:/Users/me/proj', id: 'C:/Users/me/proj/src/win.ts?v=1', path: 'src/win.ts' },
+    ]
+    for (const item of cases) {
+      const filePaths = new Map<string, string>()
+      const { code } = await transform({
+        code: 'console.log(a)',
+        id: item.id,
+        root: item.root,
+        filePaths,
+        options: resolveOptions({}),
+      })
+      expect([...filePaths.keys()]).toEqual([item.path])
+      expect(code).toContain(`${item.path.split('/').pop()}\u00B71`)
+    }
+  })
+
   it('escapes special characters in the generated string', async () => {
     const cases = [
       { code: String.raw`console.log(a, '\n')`, options: {} },

@@ -3,6 +3,7 @@ import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
+import { getFilePath } from './common'
 import globalStore from './globalStore'
 import { builtInThemes, getStyleCode } from './themes'
 
@@ -68,8 +69,7 @@ export function genConsoleString(genContext: GenContext) {
   const _prefix = prefix ? `${escapeString(prefix)}\\n` : ''
   const _suffix = suffix ? `\\n${escapeString(suffix)}` : ''
 
-  const urlObject = new URL(id, 'file://')
-  const filePath = urlObject.pathname
+  const filePath = getFilePath(id)
   const fileName = getExtendedPath(filePath, extendedPathFileNames)
   const fileType = extname(filePath).slice(1) as FileExt
 

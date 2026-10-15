@@ -2,7 +2,7 @@ import type { Comment } from 'oxc-parser'
 import type { Compiler } from '../../types'
 import type { Options } from '../options/type'
 import type { Node } from '../utils/walker'
-import { extname } from 'pathe'
+import { extname, normalize } from 'pathe'
 
 export function printInfo(options: Options, spacing: string = '  ') {
   if (options.inspector === false) return false
@@ -19,9 +19,13 @@ export function printInfo(options: Options, spacing: string = '  ') {
   return undefined
 }
 
+// Strip the query and normalize separators; unlike URL#pathname this keeps the path unencoded.
+export function getFilePath(id: string) {
+  return normalize(id.split('?')[0]!)
+}
+
 export async function getCompiler(id: string): Promise<Compiler | undefined> {
-  const urlObject = new URL(id, 'file://')
-  const fileType = extname(urlObject.pathname)
+  const fileType = extname(getFilePath(id))
 
   switch (fileType) {
     case '.vue':
