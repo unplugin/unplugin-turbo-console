@@ -93,7 +93,7 @@ export async function transform(context: Context) {
             .replace(/\n/g, '')
             .replace(/"/g, '')
 
-          const { consoleString, _suffix } = genConsoleString({
+          const { consoleString, suffixString } = genConsoleString({
             options,
             inspector: context.inspector,
             filePaths: context.filePaths,
@@ -107,7 +107,7 @@ export async function transform(context: Context) {
           })
 
           if (consoleString) magicString.appendLeft(argsStart, consoleString)
-          if (_suffix) magicString.appendRight(argsEnd, `,"${_suffix}"`)
+          if (suffixString) magicString.appendRight(argsEnd, `,"${suffixString}"`)
         }
       },
     })

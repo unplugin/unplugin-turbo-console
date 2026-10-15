@@ -66,8 +66,8 @@ export function genConsoleString(genContext: GenContext) {
   const port = options.server!.port
   const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const themeDetect = typeof highlight === 'object' ? highlight.themeDetect : false
-  const _prefix = prefix ? `${escapeString(prefix)}\\n` : ''
-  const _suffix = suffix ? `\\n${escapeString(suffix)}` : ''
+  const prefixString = prefix ? `${escapeString(prefix)}\\n` : ''
+  const suffixString = suffix ? `\\n${escapeString(suffix)}` : ''
 
   const filePath = getFilePath(id)
   const fileName = getExtendedPath(filePath, extendedPathFileNames)
@@ -105,23 +105,23 @@ export function genConsoleString(genContext: GenContext) {
   const lineWrap = `"\\n"`
 
   if (highlight && launchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
+    consoleString = prefixString
+      ? `"${prefixString}${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
       : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
   } else if (highlight === false && launchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
+    consoleString = prefixString
+      ? `"${prefixString}${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
       : `"${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
   } else if (highlight && launchEditor === false) {
-    consoleString = _prefix
-      ? `"${_prefix}${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
+    consoleString = prefixString
+      ? `"${prefixString}${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
       : `"${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
   } else if (highlight === false && launchEditor === false) {
-    consoleString = _prefix ? `"${_prefix}",` : ''
+    consoleString = prefixString ? `"${prefixString}",` : ''
   }
 
   return {
     consoleString,
-    _suffix,
+    suffixString,
   }
 }
