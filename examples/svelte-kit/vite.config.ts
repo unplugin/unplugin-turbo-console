@@ -1,5 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite-plus'
 import TurboConsole from 'unplugin-turbo-console/vite'
 
 export default defineConfig({
