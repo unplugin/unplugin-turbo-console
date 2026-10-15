@@ -193,10 +193,17 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       if (compiler.options.mode !== 'development') disableDevFeatures(options)
       compiler.hooks.shutdown.tapPromise(PLUGIN_NAME, closeServer)
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tapPromise(PLUGIN_NAME, async state => {
+        // Start before compiling so generated links use the bound port; print after a successful build.
+        let print: (() => void) | undefined
+        compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, () =>
+          startTurboConsoleServer(() => {
+            print = () => printInfo(options)
+          }),
+        )
+        compiler.hooks.done.tap(PLUGIN_NAME, state => {
           if (state.hasErrors()) return
-
-          await startTurboConsoleServer()
+          print?.()
+          print = undefined
         })
       }
     },
@@ -205,10 +212,17 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       if (compiler.options.mode !== 'development') disableDevFeatures(options)
       compiler.hooks.shutdown.tapPromise(PLUGIN_NAME, closeServer)
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tapPromise(PLUGIN_NAME, async state => {
+        // Start before compiling so generated links use the bound port; print after a successful build.
+        let print: (() => void) | undefined
+        compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, () =>
+          startTurboConsoleServer(() => {
+            print = () => printInfo(options)
+          }),
+        )
+        compiler.hooks.done.tap(PLUGIN_NAME, state => {
           if (state.hasErrors()) return
-
-          await startTurboConsoleServer()
+          print?.()
+          print = undefined
         })
       }
     },
