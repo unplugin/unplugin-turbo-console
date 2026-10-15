@@ -1,11 +1,6 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
-@theme {
-  --font-sans: 'Geist', sans-serif;
-  --font-mono: 'Geist Mono', monospace;
-}
-
 :root {
   --ui-radius: 0.5rem;
   --ui-primary: black;

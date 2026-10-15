@@ -15,6 +15,9 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@nuxt/ui', '@vueuse/nuxt'],
+  ui: {
+    fonts: false,
+  },
   colorMode: {
     preference: 'dark',
   },
