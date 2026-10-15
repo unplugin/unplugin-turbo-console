@@ -67,7 +67,11 @@ export async function transform(context: Context) {
         if (isConsoleExpression(node)) {
           const originalExpression = compileResult.script.slice(node.start, node.end)
 
-          if (originalExpression.includes('%c')) return false
+          // Skip the whole call, including console calls nested in its arguments.
+          if (originalExpression.includes('%c')) {
+            this.skip()
+            return
+          }
 
           const { line, column } = getLineAndColumn(compileResult.script, node.start)
 
@@ -84,7 +88,8 @@ export async function transform(context: Context) {
               script: compileResult.script,
             })
           ) {
-            return false
+            this.skip()
+            return
           }
 
           const consoleMethod = (node as any).callee.property.name
@@ -117,7 +122,6 @@ export async function transform(context: Context) {
           if (consoleString) magicString.appendLeft(argsStart, consoleString)
           if (_suffix) magicString.appendRight(argsEnd, `,"${_suffix}"`)
         }
-        return undefined
       },
     })
   }

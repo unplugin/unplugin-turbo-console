@@ -160,6 +160,28 @@ describe('edge case', () => {
       expect(parseSync('escape.ts', code).errors).toEqual([])
     }
   })
+
+  it('skips console calls nested in a styled or disabled console', async () => {
+    const cases = [
+      `console.log('%cstyled', 'color: red', list.map(item => {
+  console.log(item)
+}))`,
+      `// turbo-console-disable-next-line
+console.log(list.map(item => {
+  console.log(item)
+}))`,
+    ]
+    for (const code of cases) {
+      const result = await transform({
+        code,
+        id: '/home/runner/nested.ts',
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions({}),
+      })
+      expect(result.code).toBe(code)
+    }
+  })
 })
 
 describe('utf-8', () => {
