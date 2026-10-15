@@ -30,8 +30,16 @@ const projects = new Map<
   }
 >()
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
+// 仅这些集成会启动服务；其他打包器中依赖服务的功能只会生成无效链接。
+const SERVER_FRAMEWORKS = new Set(['vite', 'webpack', 'rspack', 'farm'])
+
+export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}, meta) => {
   const options = resolveOptions(rawOptions)
+  if (!SERVER_FRAMEWORKS.has(meta.framework)) {
+    options.launchEditor = false
+    options.passLogs = false
+    options.inspector = false
+  }
 
   let root = cwd()
   let project: ReturnType<typeof projects.get>

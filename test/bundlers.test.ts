@@ -65,3 +65,16 @@ describe('webpack-like bundlers', () => {
     },
   )
 })
+
+describe('bundlers without a dev server', () => {
+  it.each(['rollup', 'rolldown', 'esbuild'] as const)(
+    '%s keeps highlight but skips server features',
+    async framework => {
+      const plugin = unpluginFactory({}, { framework }) as any
+      const { code } = await plugin.transform.handler('console.log(value)', '/project/src/main.ts')
+      expect(code).toContain('%c🚀 main.ts·1 ~ value')
+      expect(code).not.toContain('http://')
+      expect(plugin.load('\0~console')).toBe('')
+    },
+  )
+})
