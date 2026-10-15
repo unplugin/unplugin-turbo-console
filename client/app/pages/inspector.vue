@@ -25,6 +25,7 @@ const previewData: ExpressionsMapResponse = {
         { code: "'from js'", method: 'warn', line: 4, column: 2 },
         { code: "'from js'", method: 'error', line: 6, column: 2 },
         { code: "'from js'", method: 'log', line: 8, column: 2 },
+        { code: "'from js'", method: 'debug', line: 10, column: 2 },
       ],
     },
     'src/tsLog.ts': {
@@ -98,14 +99,12 @@ const consoleMethods = [
   { method: 'log', icon: 'i-ph-terminal-window-light', color: 'success' },
   { method: 'warn', icon: 'i-ph-warning', color: 'warning' },
   { method: 'error', icon: 'i-ph-x', color: 'error' },
+  { method: 'debug', icon: 'i-ph-bug', color: 'secondary' },
 ] as const
 
-const activeConsoleMethod = ref<Array<'info' | 'log' | 'warn' | 'error'>>([
-  'info',
-  'log',
-  'warn',
-  'error',
-])
+type ConsoleMethod = (typeof consoleMethods)[number]['method']
+
+const activeConsoleMethod = ref<ConsoleMethod[]>(consoleMethods.map(({ method }) => method))
 
 const searchKeyword = ref('')
 
@@ -116,7 +115,7 @@ const filterExpression = computed(() => {
 
   Object.entries(data.value.expressionsMap).forEach(([key, value]) => {
     const filteredExpressions = value.expressions.filter(item => {
-      const method = item.method as 'info' | 'log' | 'warn' | 'error'
+      const method = item.method as ConsoleMethod
       return (
         activeConsoleMethod.value.includes(method) &&
         (item.code.includes(searchKeyword.value) || key.includes(searchKeyword.value))
@@ -134,7 +133,7 @@ const filterExpression = computed(() => {
   return filteredMap
 })
 
-function handleActiveConsoleMethod(method: 'info' | 'log' | 'warn' | 'error') {
+function handleActiveConsoleMethod(method: ConsoleMethod) {
   const index = activeConsoleMethod.value.indexOf(method)
   if (index === -1) {
     activeConsoleMethod.value.push(method)
