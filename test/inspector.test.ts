@@ -18,6 +18,12 @@ vi.mock('../src/core/server/index', () => ({
 
 const expression = { code: 'value', method: 'log', line: 1, column: 0 }
 
+function plugin(root: string, enabled = true) {
+  const result = vite({ inspector: enabled }) as any
+  result.configResolved({ root, command: 'serve' })
+  return result
+}
+
 describe('Inspector Shared State', () => {
   it('syncs the initial snapshot, deduplicates and invalidates files, and isolates projects', async () => {
     const inspector = createInspector()
@@ -139,11 +145,6 @@ describe('Inspector Shared State', () => {
   })
 
   it('reuses services per project, releases them after the last compiler closes, and skips disabled Inspector setup', async () => {
-    function plugin(root: string, enabled = true) {
-      const result = vite({ inspector: enabled }) as any
-      result.configResolved({ root, command: 'serve' })
-      return result
-    }
     const first = plugin('/project-a')
     const second = plugin('/project-a')
     const other = plugin('/project-b')

@@ -1,22 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`transform options > disable all 1`] = `
-{
-  "code": "console.log('hello javascript')",
-  "map": SourceMap {
-    "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
-    "names": [],
-    "sources": [
-      "main.js",
-    ],
-    "sourcesContent": [
-      "console.log('hello javascript')",
-    ],
-    "version": 3,
-  },
-}
-`;
+exports[`transform options > disable all 1`] = `undefined`;
 
 exports[`transform options > disable highlight 1`] = `
 {

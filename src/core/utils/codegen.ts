@@ -3,6 +3,7 @@ import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
 import { PLUGIN_NAME } from '../constants'
+import { formatHost, getFilePath } from './common'
 import globalStore from './globalStore'
 import { builtInThemes, getStyleCode } from './themes'
 
@@ -23,6 +24,11 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
     }
   }
   return basename
+}
+
+// Escape text embedded in the generated double-quoted string literal
+function escapeString(value: string) {
+  return JSON.stringify(value).slice(1, -1)
 }
 
 export function setFilePathMap(filePath: string, filePaths?: Map<string, string>): string {
@@ -60,11 +66,10 @@ export function genConsoleString(genContext: GenContext) {
   const port = options.server!.port
   const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const themeDetect = typeof highlight === 'object' ? highlight.themeDetect : false
-  const _prefix = prefix ? `${prefix}\\n` : ''
-  const _suffix = suffix ? `\\n${suffix}` : ''
+  const prefixString = prefix ? `${escapeString(prefix)}\\n` : ''
+  const suffixString = suffix ? `\\n${escapeString(suffix)}` : ''
 
-  const urlObject = new URL(id, 'file://')
-  const filePath = urlObject.pathname
+  const filePath = getFilePath(id)
   const fileName = getExtendedPath(filePath, extendedPathFileNames)
   const fileType = extname(filePath).slice(1) as FileExt
 
@@ -91,32 +96,32 @@ export function genConsoleString(genContext: GenContext) {
   if (argsName?.length > 30) argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
-  const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${argsName}`}`
+  const lineInfo = `%c${builtInThemes.highlight.icon} ${escapeString(fileName)}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${escapeString(argsName)}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
-  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : host}:${port}#${codePosition}`
+  const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : formatHost(host!)}:${port}#${codePosition}`
 
   let consoleString = ''
   const lineWrap = `"\\n"`
 
   if (highlight && launchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
+    consoleString = prefixString
+      ? `"${prefixString}${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
       : `"${lineInfo}${launchEditorString}",${getStyleCode(fileType, themeDetect).highlight},${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
   } else if (highlight === false && launchEditor) {
-    consoleString = _prefix
-      ? `"${_prefix}${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
+    consoleString = prefixString
+      ? `"${prefixString}${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
       : `"${launchEditorString}",${getStyleCode(fileType, themeDetect).launchEditor},${lineWrap},`
   } else if (highlight && launchEditor === false) {
-    consoleString = _prefix
-      ? `"${_prefix}${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
+    consoleString = prefixString
+      ? `"${prefixString}${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
       : `"${lineInfo}",${getStyleCode(fileType, themeDetect).highlight},${lineWrap},`
   } else if (highlight === false && launchEditor === false) {
-    consoleString = _prefix ? `"${_prefix}",` : ''
+    consoleString = prefixString ? `"${prefixString}",` : ''
   }
 
   return {
     consoleString,
-    _suffix,
+    suffixString,
   }
 }

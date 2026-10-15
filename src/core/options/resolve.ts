@@ -17,12 +17,15 @@ export function resolveOptions(options: Partial<Options> = {}): Required<Options
     suffix: options.suffix ?? '',
   }
 
-  if (env.NODE_ENV === 'production') {
-    resolved.launchEditor = false
-    resolved.highlight = false
-    resolved.passLogs = false
-    resolved.inspector = false
-  }
+  if (env.NODE_ENV === 'production') disableDevFeatures(resolved)
 
   return resolved
+}
+
+// Production output only keeps the prefix and suffix.
+export function disableDevFeatures(options: Required<Options>) {
+  options.launchEditor = false
+  options.highlight = false
+  options.passLogs = false
+  options.inspector = false
 }

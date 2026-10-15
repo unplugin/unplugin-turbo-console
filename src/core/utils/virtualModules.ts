@@ -1,3 +1,5 @@
+import { formatHost } from './common'
+
 export function initVirtualModulesGenerator(
   host: string,
   port: number,
@@ -10,7 +12,7 @@ export function initVirtualModulesGenerator(
   import { connectLogs } from 'unplugin-turbo-console/helper'
 
   if (typeof window !== 'undefined') {
-    const url = ${JSON.stringify(`http://${host.includes(':') ? `[${host}]` : host}:${port}/__sse`)}
+    const url = ${JSON.stringify(`http://${formatHost(host)}:${port}/__sse`)}
     window.UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT?.close()
     const connection = connectLogs(url, ${JSON.stringify(token)}, (method, message) => {
       console[method]('%cServer Log', 'padding:3px 5px;border-radius:5px;background:#64748b;font-weight:600;color:white', ...JSON.parse(message))
@@ -35,7 +37,7 @@ export function viteDevToolsVirtualModuleGenerator(host: string, port: number, i
     icon: 'baseline-terminal',
     view: {
       type: 'iframe',
-      src: ${JSON.stringify(`http://${host.includes(':') ? `[${host}]` : host}:${port}/inspector`)},
+      src: ${JSON.stringify(`http://${formatHost(host)}:${port}/inspector`)},
     },
     category: 'advanced',
   })

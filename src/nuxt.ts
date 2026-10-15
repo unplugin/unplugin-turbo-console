@@ -7,6 +7,7 @@ import {
   PLUGIN_SERVER_DEFAULT_PORT,
   PLUGIN_SERVER_PORT_RANGE,
 } from './core/constants'
+import { formatHost } from './core/utils/common'
 import vite from './vite'
 import webpack from './webpack'
 
@@ -50,7 +51,7 @@ export default defineNuxtModule<Options>({
         icon: 'mdi:console',
         view: {
           type: 'iframe',
-          src: `http://${options.server!.host}:${options.server!.port}/inspector`,
+          src: `http://${formatHost(options.server!.host!)}:${options.server!.port}/inspector`,
         },
       })
     })

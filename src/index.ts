@@ -6,10 +6,10 @@ import { randomUUID } from 'node:crypto'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
-import { resolveOptions } from './core/options/resolve'
+import { disableDevFeatures, resolveOptions } from './core/options/resolve'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
-import { loadPkg, printInfo } from './core/utils'
+import { getFilePath, loadPkg, printInfo } from './core/utils'
 import { createInspector } from './core/inspector'
 import {
   initVirtualModulesGenerator,
@@ -30,8 +30,16 @@ const projects = new Map<
   }
 >()
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}) => {
+// 仅这些集成会启动服务；其他打包器中依赖服务的功能只会生成无效链接。
+const SERVER_FRAMEWORKS = new Set(['vite', 'webpack', 'rspack', 'farm'])
+
+export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions = {}, meta) => {
   const options = resolveOptions(rawOptions)
+  if (!SERVER_FRAMEWORKS.has(meta.framework)) {
+    options.launchEditor = false
+    options.passLogs = false
+    options.inspector = false
+  }
 
   let root = cwd()
   let project: ReturnType<typeof projects.get>
@@ -190,34 +198,47 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     webpack(compiler) {
       root = compiler.context
-      if (compiler.options.mode !== 'development') options.inspector = false
+      if (compiler.options.mode !== 'development') disableDevFeatures(options)
       compiler.hooks.shutdown.tapPromise(PLUGIN_NAME, closeServer)
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tapPromise(PLUGIN_NAME, async state => {
+        // Start before compiling so generated links use the bound port; print after a successful build.
+        let print: (() => void) | undefined
+        compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, () =>
+          startTurboConsoleServer(() => {
+            print = () => printInfo(options)
+          }),
+        )
+        compiler.hooks.done.tap(PLUGIN_NAME, state => {
           if (state.hasErrors()) return
-
-          await startTurboConsoleServer()
+          print?.()
+          print = undefined
         })
       }
     },
     rspack(compiler) {
       root = compiler.context
-      if (compiler.options.mode !== 'development') options.inspector = false
+      if (compiler.options.mode !== 'development') disableDevFeatures(options)
       compiler.hooks.shutdown.tapPromise(PLUGIN_NAME, closeServer)
       if (compiler.options.mode === 'development') {
-        compiler.hooks.done.tapPromise(PLUGIN_NAME, async state => {
+        // Start before compiling so generated links use the bound port; print after a successful build.
+        let print: (() => void) | undefined
+        compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, () =>
+          startTurboConsoleServer(() => {
+            print = () => printInfo(options)
+          }),
+        )
+        compiler.hooks.done.tap(PLUGIN_NAME, state => {
           if (state.hasErrors()) return
-
-          await startTurboConsoleServer()
+          print?.()
+          print = undefined
         })
       }
     },
     watchChange(id, change) {
       const inspector = project?.inspector
       if (options.inspector === false || !inspector) return
-      const filePath = new URL(id, 'file://').pathname
       if (change.event === 'update' || change.event === 'delete') {
-        inspector.invalidate(relative(root, filePath))
+        inspector.invalidate(relative(root, getFilePath(id)))
       }
     },
   }
