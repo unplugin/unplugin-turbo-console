@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto'
 import { relative } from 'pathe'
 import { createUnplugin } from 'unplugin'
 import { PLUGIN_NAME, VirtualModules } from './core/constants'
-import { resolveOptions } from './core/options/resolve'
+import { disableDevFeatures, resolveOptions } from './core/options/resolve'
 import { createServer } from './core/server/index'
 import { transform } from './core/transform/index'
 import { getFilePath, loadPkg, printInfo } from './core/utils'
@@ -190,7 +190,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     webpack(compiler) {
       root = compiler.context
-      if (compiler.options.mode !== 'development') options.inspector = false
+      if (compiler.options.mode !== 'development') disableDevFeatures(options)
       compiler.hooks.shutdown.tapPromise(PLUGIN_NAME, closeServer)
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tapPromise(PLUGIN_NAME, async state => {
@@ -202,7 +202,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
     },
     rspack(compiler) {
       root = compiler.context
-      if (compiler.options.mode !== 'development') options.inspector = false
+      if (compiler.options.mode !== 'development') disableDevFeatures(options)
       compiler.hooks.shutdown.tapPromise(PLUGIN_NAME, closeServer)
       if (compiler.options.mode === 'development') {
         compiler.hooks.done.tapPromise(PLUGIN_NAME, async state => {
