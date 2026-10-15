@@ -51,6 +51,23 @@ describe('vue transform', () => {
     VUE_SETUP_NO_LANG.options = resolveOptions(VUE_SETUP_NO_LANG.options)
     expect(await transform(VUE_SETUP_NO_LANG)).matchSnapshot()
   })
+
+  it('transforms every script block', async () => {
+    const code = `<script lang="ts">
+export default { name: 'X' }
+</script>
+
+<script setup lang="ts">
+console.log(foo)
+</script>
+`
+    const options = resolveOptions({})
+    const context = { code, id: '/home/runner/X.vue', root: '/home/runner', options }
+    expect((await transform(context)).code).toContain('console.log("%c🚀 X.vue·6 ~ foo')
+
+    const disabled = code.replace("export default { name: 'X' }", '// turbo-console-disable')
+    expect((await transform({ ...context, code: disabled })).code).toBe(disabled)
+  })
 })
 
 describe('vanilla transform', () => {
@@ -69,6 +86,24 @@ describe('svelte transform', () => {
   it('svelte', async () => {
     SVELTE.options = resolveOptions(SVELTE.options)
     expect(await transform(SVELTE)).matchSnapshot()
+  })
+
+  it('transforms the instance script after a module script', async () => {
+    const { code } = await transform({
+      code: `<script module>
+  export const x = 1
+</script>
+
+<script>
+  console.log(bar)
+</script>
+`,
+      id: '/home/runner/Y.svelte',
+      root: '/home/runner',
+      options: resolveOptions({}),
+    })
+    expect(code).toContain('console.log("%c🚀 Y.svelte·6 ~ bar')
+    expect(code).toContain(',6,3"')
   })
 })
 
