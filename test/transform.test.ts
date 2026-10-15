@@ -1,3 +1,4 @@
+import { parseSync } from 'oxc-parser'
 import { join } from 'pathe'
 import { describe, expect, it, vi } from 'vite-plus/test'
 import { resolveOptions } from '../src/core/options/resolve'
@@ -80,6 +81,25 @@ describe('edge case', () => {
   it('win path', async () => {
     WIN_PATH.options = resolveOptions(WIN_PATH.options)
     expect(await transform(WIN_PATH)).matchSnapshot()
+  })
+
+  it('escapes special characters in the generated string', async () => {
+    const cases = [
+      { code: String.raw`console.log(a, '\n')`, options: {} },
+      { code: 'console.log(`${a}\\n`)', options: {} },
+      { code: String.raw`console.log(a, "\\")`, options: { launchEditor: false } },
+      { code: 'console.log(a)', options: { prefix: '"\n', suffix: '\\' } },
+    ]
+    for (const item of cases) {
+      const { code } = await transform({
+        code: item.code,
+        id: '/home/runner/escape.ts',
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions(item.options),
+      })
+      expect(parseSync('escape.ts', code).errors).toEqual([])
+    }
   })
 })
 

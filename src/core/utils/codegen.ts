@@ -25,6 +25,11 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
   return basename
 }
 
+// Escape text embedded in the generated double-quoted string literal
+function escapeString(value: string) {
+  return JSON.stringify(value).slice(1, -1)
+}
+
 export function setFilePathMap(filePath: string, filePaths?: Map<string, string>): string {
   // 获取文件路径映射
   let filePathMap = filePaths ?? globalStore.get<Map<string, string>>('filePathMap')
@@ -60,8 +65,8 @@ export function genConsoleString(genContext: GenContext) {
   const port = options.server!.port
   const extendedPathFileNames = typeof highlight === 'object' ? highlight.extendedPathFileNames : []
   const themeDetect = typeof highlight === 'object' ? highlight.themeDetect : false
-  const _prefix = prefix ? `${prefix}\\n` : ''
-  const _suffix = suffix ? `\\n${suffix}` : ''
+  const _prefix = prefix ? `${escapeString(prefix)}\\n` : ''
+  const _suffix = suffix ? `\\n${escapeString(suffix)}` : ''
 
   const urlObject = new URL(id, 'file://')
   const filePath = urlObject.pathname
@@ -91,7 +96,7 @@ export function genConsoleString(genContext: GenContext) {
   if (argsName?.length > 30) argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
-  const lineInfo = `%c${builtInThemes.highlight.icon} ${fileName}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${argsName}`}`
+  const lineInfo = `%c${builtInThemes.highlight.icon} ${escapeString(fileName)}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${escapeString(argsName)}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : host}:${port}#${codePosition}`
