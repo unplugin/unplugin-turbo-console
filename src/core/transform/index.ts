@@ -5,6 +5,7 @@ import {
   genConsoleString,
   getCompiler,
   getLineAndColumn,
+  getLineStarts,
   isConsoleExpression,
   isPluginDisable,
 } from '../utils'
@@ -28,26 +29,26 @@ export async function transform(context: Context) {
       lang: (compileResult.lang || 'js') as 'js' | 'jsx' | 'ts' | 'tsx' | undefined,
       sourceType: 'module',
     })
-    return { compileResult, program, comments }
+    return { compileResult, program, comments, lineStarts: getLineStarts(compileResult.script) }
   })
 
   // A disable comment at the top of any script block disables the whole file.
   if (
-    blocks.some(({ compileResult, comments }) =>
+    blocks.some(({ comments, lineStarts }) =>
       isPluginDisable({
         comments,
         originalLine: 1,
         id,
         type: 'top-file',
         compiler,
-        script: compileResult.script,
+        lineStarts,
       }),
     )
   ) {
     return undefined
   }
 
-  for (const { compileResult, program, comments } of blocks) {
+  for (const { compileResult, program, comments, lineStarts } of blocks) {
     await walk(program, {
       enter(node) {
         if (isConsoleExpression(node)) {
@@ -59,7 +60,7 @@ export async function transform(context: Context) {
             return
           }
 
-          const { line, column } = getLineAndColumn(compileResult.script, node.start)
+          const { line, column } = getLineAndColumn(lineStarts, node.start)
 
           const originalLine = line + compileResult.line
           const originalColumn = column
@@ -71,7 +72,7 @@ export async function transform(context: Context) {
               id,
               type: 'inline-file',
               compiler,
-              script: compileResult.script,
+              lineStarts,
             })
           ) {
             this.skip()
