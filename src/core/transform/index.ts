@@ -13,21 +13,15 @@ import { compilers } from './compilers'
 
 export async function transform(context: Context) {
   const { code, id, options } = context
-  const magicString = new MagicString(code)
+
+  // Not `console.`: `console?.log()` and `console\n.log()` are transformed too.
+  if (!code.includes('console')) return undefined
 
   const compiler = await getCompiler(id)
 
-  if (!compiler) {
-    return {
-      code: magicString.toString(),
-      map: magicString.generateMap({
-        source: id,
-        file: id,
-        includeContent: true,
-        hires: true,
-      }),
-    }
-  }
+  if (!compiler) return undefined
+
+  const magicString = new MagicString(code)
 
   const blocks = (await compilers[compiler](context)).map(compileResult => {
     const { program, comments = [] } = parseSync(id, compileResult.script, {
@@ -50,15 +44,7 @@ export async function transform(context: Context) {
       }),
     )
   ) {
-    return {
-      code: magicString.toString(),
-      map: magicString.generateMap({
-        source: id,
-        file: id,
-        includeContent: true,
-        hires: true,
-      }),
-    }
+    return undefined
   }
 
   for (const { compileResult, program, comments } of blocks) {
@@ -125,6 +111,8 @@ export async function transform(context: Context) {
       },
     })
   }
+
+  if (!magicString.hasChanged()) return undefined
 
   return {
     code: magicString.toString(),

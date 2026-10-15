@@ -63,10 +63,10 @@ console.log(foo)
 `
     const options = resolveOptions({})
     const context = { code, id: '/home/runner/X.vue', root: '/home/runner', options }
-    expect((await transform(context)).code).toContain('console.log("%c🚀 X.vue·6 ~ foo')
+    expect((await transform(context))?.code).toContain('console.log("%c🚀 X.vue·6 ~ foo')
 
     const disabled = code.replace("export default { name: 'X' }", '// turbo-console-disable')
-    expect((await transform({ ...context, code: disabled })).code).toBe(disabled)
+    expect(await transform({ ...context, code: disabled })).toBeUndefined()
   })
 })
 
@@ -89,7 +89,7 @@ describe('svelte transform', () => {
   })
 
   it('transforms the instance script after a module script', async () => {
-    const { code } = await transform({
+    const { code } = (await transform({
       code: `<script module>
   export const x = 1
 </script>
@@ -101,7 +101,7 @@ describe('svelte transform', () => {
       id: '/home/runner/Y.svelte',
       root: '/home/runner',
       options: resolveOptions({}),
-    })
+    }))!
     expect(code).toContain('console.log("%c🚀 Y.svelte·6 ~ bar')
     expect(code).toContain(',6,3"')
   })
@@ -130,13 +130,13 @@ describe('edge case', () => {
     ]
     for (const item of cases) {
       const filePaths = new Map<string, string>()
-      const { code } = await transform({
+      const { code } = (await transform({
         code: 'console.log(a)',
         id: item.id,
         root: item.root,
         filePaths,
         options: resolveOptions({}),
-      })
+      }))!
       expect([...filePaths.keys()]).toEqual([item.path])
       expect(code).toContain(`${item.path.split('/').pop()}\u00B71`)
     }
@@ -150,13 +150,13 @@ describe('edge case', () => {
       { code: 'console.log(a)', options: { prefix: '"\n', suffix: '\\' } },
     ]
     for (const item of cases) {
-      const { code } = await transform({
+      const { code } = (await transform({
         code: item.code,
         id: '/home/runner/escape.ts',
         root: '/home/runner',
         filePaths: new Map(),
         options: resolveOptions(item.options),
-      })
+      }))!
       expect(parseSync('escape.ts', code).errors).toEqual([])
     }
   })
@@ -179,7 +179,43 @@ console.log(list.map(item => {
         filePaths: new Map(),
         options: resolveOptions({}),
       })
-      expect(result.code).toBe(code)
+      expect(result).toBeUndefined()
+    }
+  })
+
+  it('returns undefined when nothing is transformed', async () => {
+    const cases = [
+      { code: 'const a = 1', id: '/home/runner/none.ts', options: {} },
+      { code: 'console.log(a)', id: '/home/runner/style.css', options: {} },
+      { code: 'console.table(a)', id: '/home/runner/table.ts', options: {} },
+      {
+        code: 'console.log(a)',
+        id: '/home/runner/off.ts',
+        options: { highlight: false, launchEditor: false },
+      },
+    ]
+    for (const item of cases) {
+      const result = await transform({
+        code: item.code,
+        id: item.id,
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions(item.options),
+      })
+      expect(result).toBeUndefined()
+    }
+  })
+
+  it('transforms console calls written without a plain `console.`', async () => {
+    for (const code of ['console?.log(a)', 'console\n  .log(a)']) {
+      const result = await transform({
+        code,
+        id: '/home/runner/chain.ts',
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions({}),
+      })
+      expect(result?.code).toContain('chain.ts·1 ~ a')
     }
   })
 })

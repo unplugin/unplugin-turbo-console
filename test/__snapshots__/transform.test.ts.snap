@@ -1,22 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`edge case > includes highlight 1`] = `
-{
-  "code": "console.log('%cLog Message', 'color: orange');",
-  "map": SourceMap {
-    "file": "main.js",
-    "mappings": "AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC",
-    "names": [],
-    "sources": [
-      "main.js",
-    ],
-    "sourcesContent": [
-      "console.log('%cLog Message', 'color: orange');",
-    ],
-    "version": 3,
-  },
-}
-`;
+exports[`edge case > includes highlight 1`] = `undefined`;
 
 exports[`edge case > win path 1`] = `
 {
