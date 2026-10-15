@@ -1,5 +1,5 @@
 import type { Context } from './../../types'
-import MagicString from 'magic-string'
+import { MagicString } from 'magic-string'
 import { parseSync } from 'oxc-parser'
 import {
   genConsoleString,
