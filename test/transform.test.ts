@@ -206,6 +206,99 @@ console.log(list.map(item => {
     }
   })
 
+  it('transforms a Vue script whose attributes contain `>`', async () => {
+    const code = `<script setup lang="ts" generic="T extends Record<string, Array<number>>">
+console.log(props)
+</script>
+`
+    const result = await transform({
+      code,
+      id: '/home/runner/Generic.vue',
+      root: '/home/runner',
+      filePaths: new Map(),
+      options: resolveOptions({}),
+    })
+    expect(result?.code).toContain('console.log("%c🚀 Generic.vue·2 ~ props')
+    expect(result?.code).toContain(',2,1"')
+    expect(result?.code.startsWith(code.split('\n')[0])).toBe(true)
+  })
+
+  it('transforms JSX in a `.js` file', async () => {
+    const result = await transform({
+      code: 'const A = () => {\n  console.log(x)\n  return <div />\n}',
+      id: '/home/runner/jsx.js',
+      root: '/home/runner',
+      filePaths: new Map(),
+      options: resolveOptions({}),
+    })
+    expect(result?.code).toContain('jsx.js·2 ~ x')
+  })
+
+  it('handles backslashes and CRLF in arguments without reporting errors', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const cases = [
+      { code: String.raw`console.log(/\d+/.test(x))`, label: String.raw`~ /\\d+/.test(x)` },
+      { code: 'console.log({\r\n  a,\r\n})', label: '~ {  a,}' },
+      { code: String.raw`console.log(a, '你好')`, label: "~ a, '你好'" },
+    ]
+    for (const item of cases) {
+      const { code } = (await transform({
+        code: item.code,
+        id: '/home/runner/escape.ts',
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions({}),
+      }))!
+      expect(code).toContain(item.label)
+      expect(parseSync('escape.ts', code).errors).toEqual([])
+    }
+    expect(error).not.toHaveBeenCalled()
+    error.mockRestore()
+  })
+
+  it('leaves calls whose first argument is a format string untouched', async () => {
+    const cases = [
+      "console.log('%s is %d', name, age)",
+      'console.info(`%o`, value)',
+      "console.log('%s', list.map(item => {\n  console.log(item)\n}))",
+    ]
+    for (const code of cases) {
+      const result = await transform({
+        code,
+        id: '/home/runner/format.ts',
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions({}),
+      })
+      expect(result).toBeUndefined()
+    }
+  })
+
+  it('escapes `%` in the generated format string', async () => {
+    const cases = [
+      { code: 'console.log(a%o)', id: '/home/runner/mod.ts', label: 'mod.ts·1 ~ a%%o%c' },
+      {
+        code: 'console.log(`${a%seconds}`)',
+        id: '/home/runner/tpl.ts',
+        label: '~ ${a%%seconds}%c',
+      },
+      { code: 'console.log(a)', id: '/home/runner/100%s.ts', label: '100%%s.ts·1 ~ a%c' },
+    ]
+    for (const item of cases) {
+      const result = await transform({
+        code: item.code,
+        id: item.id,
+        root: '/home/runner',
+        filePaths: new Map(),
+        options: resolveOptions({}),
+      })
+      expect(result?.code).toContain(item.label)
+      // 生成的格式串中只应保留插件自己的两个 `%c`。
+      const format = result!.code.slice(0, result!.code.indexOf('",`'))
+      expect(format.replace(/%%/g, '').match(/%./g)).toEqual(['%c', '%c'])
+    }
+  })
+
   it('transforms console calls written without a plain `console.`', async () => {
     for (const code of ['console?.log(a)', 'console\n  .log(a)']) {
       const result = await transform({

@@ -2,7 +2,6 @@ import type { ExpressionMeta, GenContext } from '../../types'
 import type { FileExt } from './themes'
 import { cwd } from 'node:process'
 import { extname, relative } from 'pathe'
-import { PLUGIN_NAME } from '../constants'
 import { formatHost, getFilePath } from './common'
 import globalStore from './globalStore'
 import { builtInThemes, getStyleCode } from './themes'
@@ -29,6 +28,11 @@ function getExtendedPath(filePath: string, extendedPathFileNames?: string[]) {
 // Escape text embedded in the generated double-quoted string literal
 function escapeString(value: string) {
   return JSON.stringify(value).slice(1, -1)
+}
+
+// Text embedded in the console format string: a literal `%` must not start a format specifier
+function escapeFormat(value: string) {
+  return escapeString(value).replace(/%/g, '%%')
 }
 
 export function setFilePathMap(filePath: string, filePaths?: Map<string, string>): string {
@@ -86,17 +90,15 @@ export function genConsoleString(genContext: GenContext) {
 
   if (options.inspector !== false) genContext.inspector?.addExpression(relativePath, expressionMeta)
 
-  // Parsing escaped unicode symbols
-  try {
-    argsName = JSON.parse(`"${argsName}"`)
-  } catch (error) {
-    console.error(`${PLUGIN_NAME}:${error}`)
-  }
+  // Decode escaped unicode symbols (e.g. emitted by an earlier transform) so the label stays readable
+  argsName = argsName.replace(/\\u([0-9a-f]{4})/gi, (_, hex: string) =>
+    String.fromCharCode(Number.parseInt(hex, 16)),
+  )
 
   if (argsName?.length > 30) argsName = `${argsName.slice(0, 30)}...`
 
   // not output when argtype is string or number
-  const lineInfo = `%c${builtInThemes.highlight.icon} ${escapeString(fileName)}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${escapeString(argsName)}`}`
+  const lineInfo = `%c${builtInThemes.highlight.icon} ${escapeFormat(fileName)}\u00B7${originalLine}${['Literal'].includes(argType) ? '' : ` ~ ${escapeFormat(argsName)}`}`
   const codePosition = `${filePathMapString},${originalLine},${(originalColumn || 0) + 1}`
 
   const launchEditorString = `%c${builtInThemes.launchEditor.icon} http://${host === '127.0.0.1' ? '127.1' : formatHost(host!)}:${port}#${codePosition}`

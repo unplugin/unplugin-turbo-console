@@ -12,6 +12,19 @@ import {
 import { walk } from '../utils/walker'
 import { compilers } from './compilers'
 
+// Format specifiers handled by browsers and Node.js: https://console.spec.whatwg.org/#formatter
+const FORMAT_SPECIFIER = /%[sdifoOcj]/
+
+function isFormatString(node: any) {
+  if (node.type === 'Literal') {
+    return typeof node.value === 'string' && FORMAT_SPECIFIER.test(node.value)
+  }
+  if (node.type === 'TemplateLiteral') {
+    return node.quasis.some((quasi: any) => FORMAT_SPECIFIER.test(quasi.value.raw))
+  }
+  return false
+}
+
 export async function transform(context: Context) {
   const { code, id, options } = context
 
@@ -25,8 +38,10 @@ export async function transform(context: Context) {
   const magicString = new MagicString(code)
 
   const blocks = (await compilers[compiler](context)).map(compileResult => {
-    const { program, comments = [] } = parseSync(id, compileResult.script, {
-      lang: (compileResult.lang || 'js') as 'js' | 'jsx' | 'ts' | 'tsx' | undefined,
+    // JSX is a superset of JS, and `.js` files may contain it (e.g. React projects).
+    const lang = !compileResult.lang || compileResult.lang === 'js' ? 'jsx' : compileResult.lang
+    const { program, comments } = parseSync(id, compileResult.script, {
+      lang,
       sourceType: 'module',
     })
     return { compileResult, program, comments, lineStarts: getLineStarts(compileResult.script) }
@@ -53,9 +68,11 @@ export async function transform(context: Context) {
       enter(node) {
         if (isConsoleExpression(node)) {
           const originalExpression = compileResult.script.slice(node.start, node.end)
+          const args = (node as any).arguments
 
+          // A format string only works as the first argument, so such calls are left untouched.
           // Skip the whole call, including console calls nested in its arguments.
-          if (originalExpression.includes('%c')) {
+          if (originalExpression.includes('%c') || isFormatString(args[0])) {
             this.skip()
             return
           }
@@ -80,7 +97,6 @@ export async function transform(context: Context) {
           }
 
           const consoleMethod = (node as any).callee.property.name
-          const args = (node as any).arguments
 
           const argsStart = args[0].start! + compileResult.offset
           const argsEnd = args[args.length - 1].end! + compileResult.offset
@@ -88,9 +104,8 @@ export async function transform(context: Context) {
 
           const argsName = magicString
             .slice(argsStart, argsEnd)
-            .toString()
             .replace(/`/g, '')
-            .replace(/\n/g, '')
+            .replace(/[\r\n]/g, '')
             .replace(/"/g, '')
 
           const { consoleString, suffixString } = genConsoleString({
