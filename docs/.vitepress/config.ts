@@ -35,11 +35,13 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/unplugin/unplugin-turbo-console' }],
   },
   markdown: {
+    // @ts-expect-error @shikijs/vitepress-twoslash targets Shiki 4, VitePress 1 bundles the Shiki 2 types
     codeTransformers: [transformerTwoslash()],
     image: {
       lazyLoading: true,
     },
     config(md) {
+      // @ts-expect-error the plugin targets newer markdown-it types than the ones bundled by VitePress 1
       md.use(groupIconMdPlugin)
     },
   },

@@ -19,6 +19,10 @@ jobs:
         with:
           cache: true
 
+      # The examples import the built package, which the type check needs to resolve.
+      - name: Build
+        run: vp pack
+
       - name: Check
         run: vp check
 

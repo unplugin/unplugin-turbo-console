@@ -19,6 +19,10 @@ export default defineConfig({
   },
   lint: {
     plugins: ['unicorn', 'typescript', 'oxc', 'vue', 'vitest'],
+    options: {
+      typeAware: true,
+      typeCheck: true,
+    },
     categories: {
       correctness: 'error',
       suspicious: 'warn',
