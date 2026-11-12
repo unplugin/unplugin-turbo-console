@@ -19,6 +19,10 @@ jobs:
         with:
           cache: true
 
+      # Building the client generates the Nuxt types (`client/.nuxt`) its type check relies on.
+      - name: Build
+        run: vp pack
+
       - name: Check
         run: vp check
 

@@ -26,7 +26,7 @@ export function printInfo(options: Options, spacing: string = '  ') {
 
 // Strip the query and normalize separators; unlike URL#pathname this keeps the path unencoded.
 export function getFilePath(id: string) {
-  return normalize(id.split('?')[0]!)
+  return normalize(id.split('?')[0])
 }
 
 export async function getCompiler(id: string): Promise<Compiler | undefined> {
@@ -67,11 +67,11 @@ export function getLineAndColumn(lineStarts: number[], offset: number) {
 
   while (low < high) {
     const mid = (low + high + 1) >> 1
-    if (lineStarts[mid]! <= offset) low = mid
+    if (lineStarts[mid] <= offset) low = mid
     else high = mid - 1
   }
 
-  return { line: low + 1, column: offset - lineStarts[low]! }
+  return { line: low + 1, column: offset - lineStarts[low] }
 }
 
 export function isPluginDisable(meta: {

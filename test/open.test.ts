@@ -2,6 +2,8 @@ import { mkdtemp, rm, writeFile, symlink } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { DevframeRpcServerFunctions, DevframeRpcClientFunctions } from 'devframe'
+// Registers the `devframes:service:open:*` RPC types.
+import type {} from '@devframes/service-open'
 import { initDevframe } from 'devframe/initiate'
 import { createRpcClient } from 'devframe/rpc/client'
 import { createSseRpcChannel } from 'devframe/rpc/transports/sse-client'

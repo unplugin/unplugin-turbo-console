@@ -125,7 +125,7 @@ it('falls back when the port is occupied, forwards helper logs both ways, and re
     browser = connectLogs(url, token, receive)
     await browser.ready
     const info = vi.spyOn(console, 'info').mockImplementation(() => {})
-    await client.info('hello & # Chinese')
+    client.info('hello & # Chinese')
     await vi.waitFor(() => expect(receive).toHaveBeenCalledWith('info', '["hello & # Chinese"]'))
     vi.stubGlobal('window', { UNPLUGIN_TURBO_CONSOLE_LOG_CLIENT: browser })
     server.info('browser message')

@@ -23,7 +23,8 @@ export default defineNuxtModule<Options>({
       from: 'unplugin-turbo-console/helper',
     })
 
-    nuxt.hook('nitro:config', config => {
+    // @ts-expect-error missing type
+    nuxt.hook('nitro:config', (config: any) => {
       config.imports = config.imports || {}
       config.imports.imports = config.imports.imports || []
       config.imports.imports.push({

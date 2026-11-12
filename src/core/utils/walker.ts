@@ -15,8 +15,8 @@ import type {
   JSXChild,
   MethodDefinition,
   ModuleDeclaration,
+  BindingPattern,
   ObjectProperty,
-  Pattern,
   PrivateIdentifier,
   Program,
   PropertyDefinition,
@@ -41,7 +41,7 @@ export type Node =
   | ImportDefaultSpecifier
   | ImportNamespaceSpecifier
   | ExportSpecifier
-  | Pattern
+  | BindingPattern
   | PrivateIdentifier
   | Program
   | SpreadElement

@@ -100,7 +100,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
       return Object.values(VirtualModules).includes(id)
     },
     load(id) {
-      if (!id.startsWith('\0')) return
+      if (!id.startsWith('\0')) return undefined
       id = id.slice(1)
 
       if (id === VirtualModules.Init) {
@@ -169,7 +169,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (rawOptions
           void closeServer()
         })
         await startTurboConsoleServer(() => {
-          const printUrls = viteServer.printUrls
+          const printUrls = viteServer.printUrls.bind(viteServer)
           void loadPkg('@nuxt/kit').then(hasNuxt => {
             if (hasNuxt) printInfo(options, ' ')
             else

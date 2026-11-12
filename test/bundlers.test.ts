@@ -1,3 +1,4 @@
+import type { UnpluginContextMeta } from 'unplugin'
 import type { createServer } from '../src/core/server/index'
 import { describe, expect, it, vi } from 'vite-plus/test'
 import { unpluginFactory } from '../src'
@@ -10,6 +11,9 @@ vi.mock('../src/core/server/index', () => ({
 }))
 
 type Tap = (...args: any[]) => any
+
+// The factory only reads `framework`; the other meta fields are irrelevant here.
+const meta = (framework: string) => ({ framework }) as UnpluginContextMeta
 
 function createCompiler(mode: string) {
   const taps: Record<string, Tap> = {}
@@ -29,7 +33,7 @@ describe('webpack-like bundlers', () => {
   it.each(['webpack', 'rspack'] as const)(
     '%s production builds only keep the prefix and suffix',
     async framework => {
-      const plugin = unpluginFactory({ prefix: 'P' }, { framework }) as any
+      const plugin = unpluginFactory({ prefix: 'P' }, meta(framework)) as any
       const { compiler, taps } = createCompiler('production')
       plugin[framework](compiler)
       const { code } = await plugin.transform.handler('console.log(value)', '/project/src/main.ts')
@@ -42,7 +46,7 @@ describe('webpack-like bundlers', () => {
     '%s dev builds use the bound server port and print it after a successful build',
     async framework => {
       const log = vi.spyOn(console, 'log').mockImplementation(() => {})
-      const plugin = unpluginFactory({}, { framework }) as any
+      const plugin = unpluginFactory({}, meta(framework)) as any
       const { compiler, taps } = createCompiler('development')
       plugin[framework](compiler)
       try {
@@ -57,7 +61,7 @@ describe('webpack-like bundlers', () => {
         taps.done({ hasErrors: () => false })
         taps.done({ hasErrors: () => false })
         expect(log).toHaveBeenCalledOnce()
-        expect(log.mock.calls[0]![0]).toContain(':41731/inspector')
+        expect(log.mock.calls[0][0]).toContain(':41731/inspector')
       } finally {
         await taps.shutdown()
         log.mockRestore()
@@ -70,7 +74,7 @@ describe('bundlers without a dev server', () => {
   it.each(['rollup', 'rolldown', 'esbuild'] as const)(
     '%s keeps highlight but skips server features',
     async framework => {
-      const plugin = unpluginFactory({}, { framework }) as any
+      const plugin = unpluginFactory({}, meta(framework)) as any
       const { code } = await plugin.transform.handler('console.log(value)', '/project/src/main.ts')
       expect(code).toContain('%c🚀 main.ts·1 ~ value')
       expect(code).not.toContain('http://')

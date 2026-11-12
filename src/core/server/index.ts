@@ -18,7 +18,7 @@ export async function createServer(
   logToken: string = randomUUID(),
 ) {
   const { server, launchEditor, passLogs } = options
-  if (launchEditor === false && passLogs === false && !inspector) return
+  if (launchEditor === false && passLogs === false && !inspector) return undefined
 
   const { port, host } = server!
   const definition = createConsoleDevframe(options, root, filePaths, inspector, logToken)
